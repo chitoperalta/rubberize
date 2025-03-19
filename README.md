@@ -2,7 +2,7 @@
 
 **Turn Python calculations into well-formatted, math-rich documents.**
 
-![image](examples/example.png "Example Rubberize usage in a notebook environment")
+![image](https://raw.githubusercontent.com/chitoperalta/rubberize/main/docs/examples/example.png "Example Rubberize usage in a notebook environment")
 
 ## Installation
 
@@ -40,7 +40,7 @@ playwright install
  
  Then, on the next Code cell, use `%%tap`. Your code within the cell will be displayed as math notation, along with substitutions, results, and comments.
 
- See the [example](/docs/examples/example.ipynb) notebook for an in-depth look.
+ Download the [example](/docs/examples/example.ipynb) notebook for an in-depth look. *(GitHub doesn't render it correctly, so you need to download it.)*
 
 ### In Modules
 
