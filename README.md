@@ -2,6 +2,8 @@
 
 **Turn Python calculations into well-formatted, math-rich documents.**
 
+![image](https://raw.githubusercontent.com/chitoperalta/rubberize/main/docs/examples/example.png "Example Rubberize usage in a notebook environment")
+
 ## Installation
 
 Install Rubberize with `pip`:
@@ -14,13 +16,35 @@ Rubberize is primarily built for Jupyter. To enable notebook magics:
 
 ```bash
 pip install rubberize[notebook]
+# The dependency `playwright` also needs to be installed:
+playwright install
+```
+
+To set up a development environment, install the supported dependencies:
+
+```bash
+pip install rubberize[dev]
+playwright install
 ```
 
 ## Basic Usage
 
+### In Notebooks
+
+ Assuming `rubberize[notebooks]` is installed, load the IPython extension after importing:
+
+ ```python
+ import rubberize
+ %load_ext rubberize
+ ```
+ 
+ Then, on the next Code cell, use `%%tap`. Your code within the cell will be displayed as math notation, along with substitutions, results, and comments.
+
+ Download the [example](/docs/examples/example.ipynb) notebook for an in-depth look. *(GitHub doesn't render it correctly, so you need to download it.)*
+
 ### In Modules
 
-Here's a quick example of how to use Rubberize:
+You can use `latexer()` to generate LaTeX for your Python statements, and use the returned list of `StmtLatex` instances in your own typesetting code.
 
 ```python
 import rubberize
@@ -34,21 +58,13 @@ namespace = {"a": 1, "b": 2}
 stmts_latex = rubberize.latexer(source, namespace)
 ```
 
-`stmts_latex` will be a list of `StmtLatex` objects that contain LaTeX representations of each statement.
+A `StmtLatex` instance contains the LaTeX representation of a Python statement, including substitutions, results, and comments.
 
-### In Notebooks
+## Why Rubberize and `%%tap`?
 
-Rubberize is more impressive in notebooks (assuming `rubberize[notebooks]` is installed). In a Code cell, use `%%tap` and your code in the cell will be displayed as math notation, along with substitutions, results, and comments.
-
-## Contributing
-
-To set up a development environment, install the supported dependencies:
-
-```bash
-pip install rubberize[dev]
-```
+The name *Rubberize* is inspired by the process of tapping rubber trees for latex. In the same way, this library taps into the **abstract syntax tree (AST)** of a Python code to extract LaTeX. The `%%tap` magic command acts as the tap, drawing out structured mathematical representations—just like latex flowing from a tree!
 
 ## License
 
-MIT License © 2025 [Chito Peralta](mailto:chitoangeloperalta@gmail.com)
+[MIT License](LICENSE) © 2025 Chito Peralta
 
