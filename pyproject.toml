@@ -28,6 +28,10 @@ dev = [
     "numpy>=2.2.4,<3.0.0",
 ]
 
+[project.urls]
+repository = "https://github.com/chitoperalta/rubberize"
+homepage = "https://github.com/chitoperalta/rubberize"
+
 [build-system]
 requires = ["setuptools", "wheel"]
 build-backend = "setuptools.build_meta"
