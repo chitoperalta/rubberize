@@ -36,5 +36,8 @@ homepage = "https://github.com/chitoperalta/rubberize"
 requires = ["setuptools", "wheel"]
 build-backend = "setuptools.build_meta"
 
+[tool.setuptools]
+include-package-data = true
+
 [tool.setuptools.packages.find]
 include = ["rubberize", "rubberize.*"]

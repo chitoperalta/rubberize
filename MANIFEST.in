@@ -1,0 +1,5 @@
+# Include all files in the rubberize package directory
+recursive-include rubberize *
+
+# Exclude unnecessary files (optional, to keep the package clean)
+global-exclude __pycache__ *.py[cod] .DS_Store
