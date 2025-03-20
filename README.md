@@ -14,12 +14,11 @@ into beautifully typeset mathematical expressions using LaTeX, making engineerin
 and scientific computations easier to read and review. Simply use the `%%tap`
 magic command to render your code as math-rich output.
 
-<figure>
+<picture>
     <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/chitoperalta/rubberize/main/docs/assets/notebook_example_dark.png">
     <source media="(prefers-color-scheme: light)" srcset="https://raw.githubusercontent.com/chitoperalta/rubberize/main/docs/assets/notebook_example.png">
     <img alt="Screenshot of a Jupyter Notebook using Rubberize" src="https://raw.githubusercontent.com/chitoperalta/rubberize/main/docs/assets/notebook_example.png">
-    <figcaption>Sample usage in a Jupyter Notebook</figcaption>
-</figure>
+</picture>
 
 **As an API:** Developers can use Rubberize's API to generate LaTeX representations
 of Python code. These LaTeX outputs can then be integrated into custom typesetting
@@ -82,11 +81,6 @@ playwright install
  b = 4
  c = math.sqrt(a**2 + b**2)
  ```
-$ \displaystyle a = 3 $
-
-$ \displaystyle b = 4 $
-
-$ \displaystyle c = \sqrt{a^{2} + b^{2}} = \sqrt{3^{2} + 4^{2}} = 5.00 $
 
 There are a lot of customization options available, such as controlling the display
 of substitutions and results, formatting the output, and integrating Rubberize with
