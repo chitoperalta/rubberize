@@ -1,6 +1,6 @@
 [project]
 name = "rubberize"
-version = "0.1.0"
+version = "0.1.1"
 description = "Turn Python calculations into well-formatted, math-rich documents."
 authors = [
     {name = "Chito Peralta", email = "chitoangeloperalta@gmail.com"}
@@ -36,5 +36,5 @@ homepage = "https://github.com/chitoperalta/rubberize"
 requires = ["setuptools", "wheel"]
 build-backend = "setuptools.build_meta"
 
-[tool.setuptools]
-packages = ["rubberize"]
+[tool.setuptools.packages.find]
+include = ["rubberize", "rubberize.*"]
