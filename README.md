@@ -1,7 +1,7 @@
 <picture>
-    <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/chitoperalta/rubberize/main/docs/assets/banner_dark.png">
-    <source media="(prefers-color-scheme: light)" srcset="https://raw.githubusercontent.com/chitoperalta/rubberize/main/docs/assets/banner.png">
-    <img alt="Rubberize Banner" title="Turn Python calculations into well-formatted, math-rich documents." src="https://raw.githubusercontent.com/chitoperalta/rubberize/main/docs/assets/banner.png">
+    <source media="(prefers-color-scheme: dark)" srcset="docs/assets/banner_dark.png">
+    <source media="(prefers-color-scheme: light)" srcset="docs/assets/banner.png">
+    <img alt="Rubberize Banner" title="Turn Python calculations into well-formatted, math-rich documents." src="docs/assets/banner.png">
 </picture>
 
 # Rubberize
@@ -15,9 +15,9 @@ and scientific computations easier to read and review. Simply use the `%%tap`
 magic command to render your code as math-rich output.
 
 <picture>
-    <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/chitoperalta/rubberize/main/docs/assets/notebook_example_dark.png">
-    <source media="(prefers-color-scheme: light)" srcset="https://raw.githubusercontent.com/chitoperalta/rubberize/main/docs/assets/notebook_example.png">
-    <img alt="Screenshot of a Jupyter Notebook using Rubberize" src="https://raw.githubusercontent.com/chitoperalta/rubberize/main/docs/assets/notebook_example.png">
+    <source media="(prefers-color-scheme: dark)" srcset="docs/assets/notebook_example_dark.png">
+    <source media="(prefers-color-scheme: light)" srcset="docs/assets/notebook_example.png">
+    <img alt="Screenshot of a Jupyter Notebook using Rubberize" src="docs/assets/notebook_example.png">
 </picture>
 
 **As an API:** Developers can use Rubberize's API to generate LaTeX representations
@@ -62,25 +62,30 @@ playwright install
 
 ### In Jupyter Notebooks
 
- Rubberize must be installed with `pip install rubberize[notebooks]`. Load the
- extension after importing:
+Rubberize must be installed with `pip install rubberize[notebooks]`. Load the
+extension after importing:
 
- ```python
- import rubberize
- %load_ext rubberize
- ```
+```python
+import rubberize
+%load_ext rubberize
+```
+
+Then, on the next code cell, use the `%%tap` magic command. Your code within the
+cell will be rendered in math notation, along with substitutions, results, and
+comments:
+
+```python
+%%tap
+import math
+a = 3
+b = 4
+c = math.sqrt(a**2 + b**2)
+```
+&emsp; $\displaystyle a = 3$
+
+&emsp; $\displaystyle b = 4$
  
- Then, on the next code cell, use the `%%tap` magic command. Your code within the
- cell will be rendered in math notation, along with substitutions, results, and
- comments:
-
- ```python
- %%tap
- import math
- a = 3
- b = 4
- c = math.sqrt(a**2 + b**2)
- ```
+&emsp; $\displaystyle c = \sqrt{a^{2} + b^{2}} = \sqrt{3^{2} + 4^{2}} = 5.00$
 
 There are a lot of customization options available, such as controlling the display
 of substitutions and results, formatting the output, and integrating Rubberize with
@@ -107,6 +112,9 @@ namespace = {"a": 3, "b": 4, "c": 5.0}
 
 stmts_latex = rubberize.latexer(source, namespace)
 ```
+
+Please refer to the [API reference](docs/api_reference.md) section of the Rubberize
+Documentation for more information.
 
 ## Why Those Names?
 
