@@ -153,6 +153,7 @@ def get_mult_infix(node: ast.BinOp, left_latex: str, right_latex: str) -> str:
     return BIN_OPS[ast.Mult].infix
 
 
+# pylint: disable=too-many-return-statements
 def get_operand_type(
     node: ast.expr, latex: str, pos: Literal["l", "r"]
 ) -> Literal["n", "a", "m", "w", "f", "b", "u"]:
@@ -183,6 +184,9 @@ def get_operand_type(
         "r": re.compile(r"^\\mathrm\{[^ ]+\}(_\{.*?\})?($| )"),  # at start
         "l": re.compile(r"(^| )\\mathrm\{[^ ]+\}(_\{.*?\})?$"),  # at end
     }
+
+    if latex == r"\mathrm{i}":
+        return "m"
 
     if isinstance(node, ast.Call):
         return "f"
