@@ -36,6 +36,7 @@ class _ConfigDefaults:  # pylint: disable=too-many-instance-attributes
     num_format_e_not: bool = False
     thousands_separator: Literal["", " ", ",", ".", "'"] = " "
     decimal_marker: Literal[".", ","] = "."
+    zero_float_threshold: float = 1e-12
 
     use_polar: bool = False
     use_polar_deg: bool = True

@@ -2,7 +2,7 @@
 
 from decimal import Decimal
 from fractions import Fraction
-from math import floor, log10, isnan, isinf, copysign, degrees
+from math import floor, log10, isnan, isinf, copysign, degrees, isclose
 from cmath import polar
 from typing import Any, Optional
 
@@ -63,6 +63,9 @@ def convert_num(obj: float | Decimal) -> ExprLatex:
     the rank for a multiplication operation.
     """
 
+    if isinstance(obj, float):
+        obj = _normalize_zero_float(obj)
+
     special = _convert_special_num(obj)
     if special is not None:
         return special
@@ -70,8 +73,8 @@ def convert_num(obj: float | Decimal) -> ExprLatex:
     if config.num_format == "FIX" and (
         abs(obj) >= 10**config.num_format_max_digits
         or (
-            abs(obj) < 10 ** (-config.num_format_prec)
-            and round(obj, config.num_format_prec) == 0
+            0.0 < abs(obj) < 10 ** (-config.num_format_prec)
+            and round(obj, config.num_format_prec) == 0.0
         )
     ):
         num_format = "SCI"
@@ -109,6 +112,26 @@ def convert_num(obj: float | Decimal) -> ExprLatex:
     return ExprLatex(result)
 
 
+def _normalize_zero_float(num: float) -> float:
+    """
+    Replace `floats` that are theoretically zero with `0.0`.
+
+    Due to floating-point precision limitations, mathematical operations
+    can produce extremely small numbers that should theoretically be
+    0 (e.g., `math.cos(math.pi / 2)` returns `6.123233995736766e-17`).
+    This function checks if a `float` is close to zero within a
+    configurable absolute tolerance and replaces it with 0.0.
+
+    This is necessary to avoid theoretical zeros to be displayed in
+    scientific notation, but allow number types that have controlled
+    precision like `Decimal` to be displayed properly.
+    """
+
+    if isclose(num, 0.0, abs_tol=config.zero_float_threshold):
+        return 0.0
+    return num
+
+
 def _convert_special_num(obj: float | Decimal) -> ExprLatex | None:
     """Detect and convert exceptional values. Returns `None` if the
     number is not special.
@@ -119,7 +142,7 @@ def _convert_special_num(obj: float | Decimal) -> ExprLatex | None:
     if isnan(obj):
         return ExprLatex(r"\text{NaN}")
     if copysign(1, obj) < 0.0 and obj == 0.0:
-        return convert_num(0)
+        return convert_num(0.0)
     return None
 
 
@@ -148,22 +171,29 @@ def _complex(obj: complex) -> ExprLatex:
         return ExprLatex(rf"{r_latex} \angle {phi_latex}", BELOW_POW_RANK)
 
     if not obj.real:
+        if isclose(obj.imag, 1.0):
+            return ExprLatex(r"\mathrm{i}")
+
+        if _normalize_zero_float(obj.imag) == 0.0:
+            return convert_num(0.0)
+
         imag = convert_num(obj.imag)
         if imag.rank <= BELOW_MULT_RANK:
             imag.latex = format_delims(imag.latex, (r"\left(", r"\right)"))
-        return ExprLatex(imag.latex + r"\,\mathrm{i}", BELOW_MULT_RANK)
+
+        return ExprLatex(rf"{imag.latex}\,\mathrm{{i}}", BELOW_MULT_RANK)
 
     real = convert_num(obj.real)
+    imag_sign = "+" if obj.imag >= 0.0 else "-"
 
-    imag_sign = " + " if obj.imag >= 0 else " - "
+    imag_abs = convert_num(abs(obj.imag))
+    if imag_abs.rank <= BELOW_MULT_RANK:
+        imag_abs.latex = format_delims(imag_abs.latex, (r"\left(", r"\right)"))
 
-    abs_imag = convert_num(abs(obj.imag))
-    if abs_imag.rank <= BELOW_MULT_RANK:
-        abs_imag.latex = format_delims(abs_imag.latex, (r"\left(", r"\right)"))
-
-    latex = real.latex + imag_sign + abs_imag.latex + r"\,\mathrm{i}"
-
-    return ExprLatex(latex, BELOW_ADD_RANK)
+    return ExprLatex(
+        rf"{real.latex} {imag_sign} {imag_abs.latex}\,\mathrm{{i}}",
+        BELOW_ADD_RANK,
+    )
 
 
 def _iters(obj: list | str | set) -> Optional[ExprLatex]:
