@@ -2,7 +2,7 @@
 
 from decimal import Decimal
 from fractions import Fraction
-from math import floor, log10, isnan, isinf, copysign, degrees
+from math import floor, log10, isnan, isinf, copysign, degrees, isclose
 from cmath import polar
 from typing import Any, Optional
 
@@ -63,6 +63,9 @@ def convert_num(obj: float | Decimal) -> ExprLatex:
     the rank for a multiplication operation.
     """
 
+    if isinstance(obj, float):
+        obj = _normalize_zero_float(obj)
+
     special = _convert_special_num(obj)
     if special is not None:
         return special
@@ -70,8 +73,8 @@ def convert_num(obj: float | Decimal) -> ExprLatex:
     if config.num_format == "FIX" and (
         abs(obj) >= 10**config.num_format_max_digits
         or (
-            abs(obj) < 10 ** (-config.num_format_prec)
-            and round(obj, config.num_format_prec) == 0
+            0.0 < abs(obj) < 10 ** (-config.num_format_prec)
+            and round(obj, config.num_format_prec) == 0.0
         )
     ):
         num_format = "SCI"
@@ -107,6 +110,26 @@ def convert_num(obj: float | Decimal) -> ExprLatex:
         return ExprLatex(result, BELOW_MULT_RANK)
 
     return ExprLatex(result)
+
+
+def _normalize_zero_float(num: float) -> float:
+    """
+    Replace `floats` that are theoretically zero with `0.0`.
+
+    Due to floating-point precision limitations, mathematical operations
+    can produce extremely small numbers that should theoretically be
+    0 (e.g., `math.cos(math.pi / 2)` returns `6.123233995736766e-17`).
+    This function checks if a `float` is close to zero within a
+    configurable absolute tolerance and replaces it with 0.0.
+
+    This is necessary to avoid theoretical zeros to be displayed in
+    scientific notation, but allow number types that have controlled
+    precision like `Decimal` to be displayed properly.
+    """
+
+    if isclose(num, 0.0, abs_tol=config.zero_float_threshold):
+        return 0.0
+    return num
 
 
 def _convert_special_num(obj: float | Decimal) -> ExprLatex | None:
