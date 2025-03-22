@@ -53,6 +53,9 @@ class _ConfigDefaults:  # pylint: disable=too-many-instance-attributes
     hidden_modules: set[str] = field(
         default_factory=lambda: {"math", "sp", "np", "ureg"}
     )
+    math_constants: set[str] = field(
+        default_factory=lambda: {"e", "pi", "varphi"}
+    )
     show_list_as_col: bool = True
     show_tuple_as_col: bool = False
     show_set_as_col: bool = False
@@ -76,9 +79,11 @@ class _Config(_ConfigDefaults):
             if not hasattr(self, key):
                 raise AttributeError(f"Invalid config key: {key}")
 
-            if key == "hidden_modules":
+            if key in ("hidden_modules", "math_constants"):
                 if not isinstance(value, (set, list, tuple)):
-                    raise TypeError(f"Invalid {key} type: {type(value)}")
+                    raise exceptions.RubberizeTypeError(
+                        f"Invalid {key} type: {type(value)}"
+                    )
                 value = set(value)
 
             setattr(self, key, value)
@@ -117,6 +122,7 @@ class _Config(_ConfigDefaults):
 
         config_dict = asdict(self)
         config_dict["hidden_modules"] = list(config_dict["hidden_modules"])
+        config_dict["math_constants"] = list(config_dict["math_constants"])
 
         path = Path(path)
         path.parent.mkdir(parents=True, exist_ok=True)
@@ -133,6 +139,16 @@ class _Config(_ConfigDefaults):
         """Remove one or more modules from `hidden_modules`."""
 
         self.hidden_modules.difference_update(modules)
+
+    def add_math_constant(self, *constant: str) -> None:
+        """Add one or more constant to `math_constants`."""
+
+        self.math_constants.update(constant)
+
+    def remove_math_constant(self, *constant: str) -> None:
+        """Remove one or more constant from `math_constants`."""
+
+        self.math_constants.difference_update(constant)
 
     @contextmanager
     def override(self, **kwargs: bool | int | Iterable[str]):
