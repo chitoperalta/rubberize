@@ -142,7 +142,7 @@ def _convert_special_num(obj: float | Decimal) -> ExprLatex | None:
     if isnan(obj):
         return ExprLatex(r"\text{NaN}")
     if copysign(1, obj) < 0.0 and obj == 0.0:
-        return convert_num(0)
+        return convert_num(0.0)
     return None
 
 
@@ -171,22 +171,29 @@ def _complex(obj: complex) -> ExprLatex:
         return ExprLatex(rf"{r_latex} \angle {phi_latex}", BELOW_POW_RANK)
 
     if not obj.real:
+        if isclose(obj.imag, 1.0):
+            return ExprLatex(r"\mathrm{i}")
+
+        if _normalize_zero_float(obj.imag) == 0.0:
+            return convert_num(0.0)
+
         imag = convert_num(obj.imag)
         if imag.rank <= BELOW_MULT_RANK:
             imag.latex = format_delims(imag.latex, (r"\left(", r"\right)"))
-        return ExprLatex(imag.latex + r"\,\mathrm{i}", BELOW_MULT_RANK)
+
+        return ExprLatex(rf"{imag.latex}\,\mathrm{{i}}", BELOW_MULT_RANK)
 
     real = convert_num(obj.real)
+    imag_sign = "+" if obj.imag >= 0.0 else "-"
 
-    imag_sign = " + " if obj.imag >= 0 else " - "
+    imag_abs = convert_num(abs(obj.imag))
+    if imag_abs.rank <= BELOW_MULT_RANK:
+        imag_abs.latex = format_delims(imag_abs.latex, (r"\left(", r"\right)"))
 
-    abs_imag = convert_num(abs(obj.imag))
-    if abs_imag.rank <= BELOW_MULT_RANK:
-        abs_imag.latex = format_delims(abs_imag.latex, (r"\left(", r"\right)"))
-
-    latex = real.latex + imag_sign + abs_imag.latex + r"\,\mathrm{i}"
-
-    return ExprLatex(latex, BELOW_ADD_RANK)
+    return ExprLatex(
+        rf"{real.latex} {imag_sign} {imag_abs.latex}\,\mathrm{{i}}",
+        BELOW_ADD_RANK,
+    )
 
 
 def _iters(obj: list | str | set) -> Optional[ExprLatex]:
