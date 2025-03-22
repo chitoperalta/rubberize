@@ -300,8 +300,10 @@ class ExprVisitor(ast.NodeVisitor):
 
         rank = get_rank(node)
 
-        if (self.namespace and self.is_subst and not call) or (
-            self.namespace and is_unit(node, self.namespace)
+        if (
+            self.namespace
+            and node.attr not in config.math_constants
+            and ((self.is_subst and not call) or is_unit(node, self.namespace))
         ):
             obj = get_object(node, self.namespace)
             obj_latex = convert_object(obj) if obj is not None else None
@@ -366,8 +368,10 @@ class ExprVisitor(ast.NodeVisitor):
 
         rank = get_rank(node)
 
-        if (self.namespace and self.is_subst) or (
-            self.namespace and is_unit(node, self.namespace)
+        if (
+            self.namespace
+            and node.id not in config.math_constants
+            and (self.is_subst or is_unit(node, self.namespace))
         ):
             obj = get_object(node, self.namespace)
             obj_latex = convert_object(obj) if obj is not None else None
