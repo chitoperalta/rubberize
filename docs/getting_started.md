@@ -286,6 +286,32 @@ There are four ways to apply configuration options and keywords:
     <img alt="Screenshot of adding config arguments to line comments" src="assets/getting_started/config_line_comment.png">
     </picture>
 
+## Exporting to PDF
+
+Rubberize allows you to export your Jupyter Notebook to a PDF file for technical reports. The exported PDF preserves rendered math and annotations for a polished presentation.
+
+To export a single notebook to PDF, use the `export_notebook_to_pdf()` function in a module or a new notebook:
+
+```python
+from rubberize import export_notebook_to_pdf
+
+export_notebook_to_pdf("path/to/notebook.ipynb")
+```
+
+This will generate a PDF file in the same directory as the notebook. You can specify an output file by passing `output=path/to/output/` as a function argument.
+
+By default, input cells are excluded in the PDF. To include them, pass `no_input=False` as a function argument.
+
+### Exporting Multiple Notebooks
+
+If you have a directory containing multiple notebooks, you can export all of them to PDF as once:
+
+```python
+export_notebook_to_pdf("path/to/notebooks_directory")
+```
+
+The PDFs will be saved in a new directory named `<directory_name>_pdf` in the same location as the input directory.
+
 ## What's Next?
 
 - [Expression and Statement Rendering](rendering.md): Read about what various Python expressions and statements look like when transformed by Rubberize.
