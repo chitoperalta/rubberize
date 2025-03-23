@@ -1,15 +1,6 @@
 # Rubberize Documentation
 
-Welcome to the documentation for **Rubberize**. This documentation provides an
-in-depth guidance on using Rubberize, including advanced examples, customization
-options, and API references.
-
-## Table of Contents
-
-1. [Getting Started](#getting-started)
-2. [Config Reference](#config-reference)
-3. [API Reference](#api-reference)
-4. [Examples](#examples)
+This documentation provides an in-depth guidance on using Rubberize, including advanced examples, customization options, and API references.
 
 ## Getting Started
 
@@ -18,9 +9,21 @@ Notebook, and exporting to PDF. Start here if you're new to Rubberize.
 
 See: [Getting Started](getting_started.md)
 
-### Config Reference
+### Expression and Statement Rendering
 
-Learn about all the configuration options Rubberize has to suit your needs.
+Read about what various Python expressions and statements look like when transformed by Rubberize.
+
+See: [Expression and Statement Rendering](rendering.md)
+
+### Advanced Formatting
+
+Learn more about advanced formatting options for annotations.
+
+See: [Advanced Formatting](advanced_formatting.md)
+
+## Config Reference
+
+Learn about all the configuration options and keywords Rubberize has to suit your needs.
 
 See: [Config Reference](config_reference.md)
 
@@ -28,7 +31,7 @@ See: [Config Reference](config_reference.md)
 
 A detailed reference for Rubberize's API.
 
-See: TODO
+See: [API Reference](api_reference.md)
 
 ## Examples
 

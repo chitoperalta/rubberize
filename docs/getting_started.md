@@ -1,10 +1,9 @@
 # Getting Started
 
-Welcome to **Rubberize**! This guide will help you get started with using Rubberize
-in Jupyter Notebooks to render your calculations as beautifully typeset math.
+Welcome to **Rubberize**! This guide will help you get started with using Rubberize in Jupyter Notebooks to render your calculations as beautifully typeset math.
 
-If you plan to use Rubberize's functions only in your scripts, consider heading
-directly to the [API Reference](api_reference.md).
+> [!TIP]
+> If you only plan to use Rubberize's functions in your scripts, you might want to go straight to the [API Reference](api_reference.md).
 
 ## Installation
 
@@ -14,11 +13,10 @@ To install Rubberize for Jupyter Notebooks, run the following command:
 pip install rubberize[notebook]
 ```
 
-Additionally, you need to install [Playwright](https://playwright.dev) dependencies
-which are required for the PDF export functionality:
+Additionally, you need to install [Playwright](https://playwright.dev)'s headless Chromium dependency, which is required for the PDF export functionality:
 
 ```bash
-playwright install
+playwright install chromium
 ```
 
 ## Before You Begin
@@ -29,7 +27,7 @@ Rubberize is designed for Jupyter Notebooks. To follow along with this guide:
 2. Copy and paste the provided code examples into **separate** code cells.
 3. Run each cell to see the results.
 
-## Loading the Rubberize Extension
+## Loading Rubberize
 
 To load Rubberize in your notebook, import it and use the `%load_ext` line magic:
 
@@ -38,139 +36,258 @@ import rubberize
 %load_ext rubberize
 ```
 
-Rubberize loads its *cell magic* commands and CSS stylesheet, enabling you to use it
-in subsequent cells. You only need to do this once per notebook session.
+Rubberize loads its *cell magic* commands and CSS stylesheet, enabling you to use it in subsequent cells. **You only need to do this once per notebook session.**
 
 ## Rendering Python Calculations
 
-Use the `%%tap` cell magic command **at the first line** of a code cell to render the
-entire cell as typeset math. For example, paste the following into a cell and run it:
+Use the `%%tap` cell magic command **at the first line** of a code cell to render the entire cell as typeset math. For example, paste the following into a cell and run it:
 
 ```python
 %%tap
 import math
-a = 3
-b = 4
-c = math.sqrt(a**2 + b**2)
+
+# **The Pythagorean theorem**
+a = 3  # Length of first leg
+b = 4  # Length of second leg
+c = math.sqrt(a**2 + b**2)  # Length of the hypotenuse
 ```
 
-The cell output will display lines of math. Note that Rubberize ignores the `import`
-statement. The last rendered statement will look like this:
+<picture>
+    <source media="(prefers-color-scheme: dark)" srcset="assets/getting_started/rendering_python_calculations_dark.png">
+    <source media="(prefers-color-scheme: light)" srcset="assets/getting_started/rendering_python_calculations.png">
+    <img alt="Screenshot of code cell with %%tap being used" src="assets/getting_started/rendering_python_calculations_dark.png">
+</picture>
 
-$ \displaystyle c = \sqrt{a^{2} + b^{2}} = \sqrt{3^{2} + 4^{2}} = 5.00 $
 
-As shown, Rubberize not only *translates* a calculation line into math notation but
-also displays the substitution of known values and the final result.
+From the screenshot above, you can see the following:
 
-## Expression Display Modes
+- `import` statements are ignored.
+- Comments are rendered as text, allowing you to add annotations or explanations directly in your code.
+- The expression `math.sqrt(a**2 + b**2)` is displayed in mathematical notation, with the substitution of known values and the final result shown.
 
-Rubberize renders a full math expression in three ways:
+Rubberize can render different types of Python expressions and statements into beautifully formatted math and text. Whether you're working with mathematical formulas, loops, or conditionals, Rubberize ensures your code is presented clearly and effectively.
 
-| Display Mode     | Description                                                                            | Rendered Output                        |
-|------------------|----------------------------------------------------------------------------------------|----------------------------------------|
-| **Definition**   | The base form of the expression, before substituting specific values.                  | $ \displaystyle \sqrt{x^{2} + y^{2}} $ |
-| **Substitution** | The expression after substituting numerical values for variables.                      | $ \displaystyle \sqrt{3^{2} + 4^{2}} $ |
-| **Result**       | The final calculated value of the expression after all operations are performed.       | $ \displaystyle 5.00 $                 |
+To see how Rubberize handles specific types of expressions and statements, see the [Expression and Statement Rendering](rendering.md) guide.
 
-By default, Rubberize generates **all three display modes**, arranging them as
-equalities on a single line.
+## Formatting Annotations
 
-## Managing the Display Modes
-
-You can configure which display modes are included during rendering using either
-the following `config` option or *keyword*:
-
-| Display Mode     | Config Option             | Keyword to show<br>only the mode | Keyword to hide<br>only the mode |
-|------------------|---------------------------|----------------------------------|----------------------------------|
-| **Definition**   | `@show_definition=True`   | `@def`                           | `@nodef`                         |
-| **Substitution** | `@show_substitution=True` | `@sub`                           | `@nosub`                         |
-| **Result**       | `@show_result=True`       | `@res`                           | `@nores`                         |
-
-Additionally, the keyword `@none` hides all display modes, while `@all` shows all
-display modes.
-
-You can apply this in three ways.
-
-> [!note]
-> These three methods are how you configure all settings.
-
-- **Method 1:** Passing as an Argument to `%%tap`
-    ```python
-    %%tap  @show_substitution=False
-    c = math.sqrt(a**2 + b**2)
-    d = a - b
-     ```
-    or
-
-    ```python
-    %%tap  @nosub
-    c = math.sqrt(a**2 + b**2)
-    d = a - b
-     ```
-- **Method 2:** As a line comment. If done this way, the configuration will apply
-    to all subsequent lines until the next line comment is encountered:
-    ```python
-    %%tap
-    a * b
-    # @def
-    a + b
-    a - b
-    # @res
-    a / b
-    ```
-- **Method 3:** As an inline comment. If done this way, the configuration will apply
-    to the commented line only.
-    ```python
-    %%tap
-    a + b
-    a - b  # @nosub
-    ```
-
-## Annotations
-
-You can add annotations to your calculations using Python comments. Since comments
-in Python are ignored during execution, they provide a natural way to document
-calculations without affecting the results.
-
-Annotations that are typed in as **inline comments** are rendered beside the
-corresponding math statements, so that explanations stay closely linked visually
-to the calculations they describe. Meanwhile, comments placed **on their own lines**
-remain separate when rendered, preserving their distinction as standalone annotations.
+Rubberize supports [Markdown](https://www.markdownguide.org/basic-syntax/) in comments. Markdown allows you to format annotations directly within your code. Rubberize also provides these additional formatting syntaxes:
 
 ```python
 %%tap
-# This is a standalone annotation
-x = 50.25  # This is an inline annotation.
-y = x + 120.23
-z = x ** 2 + 3 / y  # This is another annotation. The previous line doesn't have one!
-```
-
-### Formatting Annotations
-
-Annotations can be formatted using the standard Markdown syntax, with a few additions:
-
-- `^...^`: Makes the enclosed text appear smaller.
-- `\\`: Forces a line break within a line, which is useful for breaking inline comments.
-- `> [!NOTE]` for a blockquote-style alert box, similar to GitHub's.
-
-### Rubberize in Annotations
-
-Annotations can contain Python code inline, within `{{ ... }}` delimiters.
-**Rubberize** will render these expressions to math notation as well. Wow!
-
-```python
-%%tap
-# ### Rubberize in Annotations
-# Annotations can contain Python code inline, within `{{ }}` delimiters.
-# **Rubberize** will render these expressions to math notation as well. Wow!
+# ## Formatting Annotations
 #
-# For example, we know {{ z }}, so twice of it is {{ 2 * z }}.
+# - Markdown can be used to add **bold**, *italic*, <del>deleted</del> text, etc.
+# - Use carets for ^smaller text^
+# - Use double backslackes to \\ break a text into lines.
+# - Use double braces {{ 6 + (4 * 2**3 -10) / 2 }} to Rubberize code within comments
 ```
 
-<!--
-    TODO:
-        - Variable naming
-        - Other features and stylistic choices
-        - Integrating with pint units
-        - `CalcSheet` and `Table` classes
--->
+<picture>
+    <source media="(prefers-color-scheme: dark)" srcset="assets/getting_started/formatting_annotations_dark.png">
+    <source media="(prefers-color-scheme: light)" srcset="assets/getting_started/formatting_annotations.png">
+    <img alt="Screenshot of code cell with annotation formatting" src="assets/getting_started/formatting_annotations.png">
+</picture>
+
+Rubberize also supports alert boxes similar to GitHub's implementation and syntax to mark or highlight the rendered math expressions. See [Advanced Formatting](advanced_formatting.md) guide to learn about them.
+
+## Units
+
+Scientists and engineers often work with physical quantites, which have *units*. Rubberize simplifies unit-aware calculations by integrating with [Pint](https://github.com/hgrecco/pint), which keeps track of physical quantities for you.
+
+> [!NOTE]
+> Pint is not a core dependency of `rubberize[notebook]`. If you want to work with units, you have to install it with:
+> ```bash
+> pip install pint
+> ```
+
+```python
+%%tap
+import numpy as np
+
+# **The Pythagorean theorem**
+a = 3.0 * ureg.cm  # Length of first leg
+b = 4.0 * ureg.cm  # Length of second leg
+c = np.sqrt(a**2 + b**2)  # Length of the hypotenuse
+```
+
+<picture>
+    <source media="(prefers-color-scheme: dark)" srcset="assets/getting_started/units_dark.png">
+    <source media="(prefers-color-scheme: light)" srcset="assets/getting_started/units.png">
+    <img alt="Screenshot of Pint being used with Rubberize" src="assets/getting_started/units.png">
+</picture>
+
+## Calculation Sheets
+
+In engineering reports, computed values are often compared against allowable limits to determine if a design is safe. Rubberize provides the `CalcSheet` class to aid users in creating reports by managing these comparisons, keeping the metadata for the calculation, and providing a formatted title heading.
+
+When starting a calculation for a component analysis, instantiate a `CalcSheet` with at least a name and section number. Adding `%%tap` with the instantiation will transform it into a calculation sheet heading:
+
+```python
+%%tap
+sheet = rubberize.CalcSheet(
+    "1.01",
+    "beam",
+    project="ACME Building, Baguio City",
+    system="General Framing System",
+    calc_type="load capacity analysis",
+    material="aluminum",
+    references=[
+        "ANSI/AISC 360-16. *Specification for Structural Steel Buildings*.",
+    ]
+)
+```
+
+<picture>
+    <source media="(prefers-color-scheme: dark)" srcset="assets/getting_started/calc_sheet_dark.png">
+    <source media="(prefers-color-scheme: light)" srcset="assets/getting_started/calc_sheet.png">
+    <img alt="Screenshot of CalcSheet instantiation" src="assets/getting_started/calc_sheet.png">
+</picture>
+
+In subsequent cells, when you need to record a comparison, use the `check()` method of the `CalcSheet` object. This allows you to log a labeled comparison between computed and allowable values.
+
+```
+%%tap
+phi_b = 0.90 # Resistance factor
+M_n  # Nominal flexural strength
+M_r  # Required flexural strength
+sheet.check("flexural strength", M_r, phi_b * M_n)
+```
+
+<picture>
+    <source media="(prefers-color-scheme: dark)" srcset="assets/getting_started/calc_sheet_check_dark.png">
+    <source media="(prefers-color-scheme: light)" srcset="assets/getting_started/calc_sheet_check.png">
+    <img alt="Screenshot of CalcSheet check" src="assets/getting_started/calc_sheet_check.png">
+</picture>
+
+Finally, when you're ready to determine whether the component being analyzed is safe, call the `conclude()` method. This automatically updates the conclusion based on all recorded comparisons.
+
+```
+%%tap
+sheet.conclude(each_check=True)
+```
+
+<picture>
+    <source media="(prefers-color-scheme: dark)" srcset="assets/getting_started/calc_sheet_conclude_dark.png">
+    <source media="(prefers-color-scheme: light)" srcset="assets/getting_started/calc_sheet_conclude.png">
+    <img alt="Screenshot of CalcSheet conclude" src="assets/getting_started/calc_sheet_conclude.png">
+</picture>
+
+## Tables
+
+Normally, you would use a Pandas dataframe or another method to manipulate and present large tabular data in Rubberize.
+
+If you want to renders within a cell with `%%tap` activated, you can use the `Table` class:
+
+```python
+%%tap
+al__strengths = rubberize.Table(
+    al__strengths_data,
+    col_headers = [
+        r"$F_{\mathrm{tu}}$",
+        r"$F_{\mathrm{ty}}$",
+        r"$F_{\mathrm{tuw}}$",
+        r"$F_{\mathrm{tyw}}$",
+    ],
+    row_headers = ["6061-T6", "6063-T5", "6063-T6"]
+)
+```
+
+<picture>
+    <source media="(prefers-color-scheme: dark)" srcset="assets/getting_started/table_dark.png">
+    <source media="(prefers-color-scheme: light)" srcset="assets/getting_started/table.png">
+    <img alt="Screenshot of CalcSheet conclude" src="assets/getting_started/table.png">
+</picture>
+
+## Customizing Rubberize
+
+Rubberize allows you to customize how your code should be rendered by providing *`config` options* and *keywords* prefixed by `@`.
+
+- **`config` Options** take values to provide detailed control over Rubberize's behavior. For example:
+
+    | `config` Option    | Type   | Purpose                                                                       |
+    |--------------------|--------|-------------------------------------------------------------------------------|
+    | `@use_symbols`     | `bool` | Whether to convert whole words as math symbols (e.g., `beta` &rarr; $\beta$). |
+    | `@num_format_prec` | `int`  | Sets the display precision of numbers.                                        |
+
+- **Keywords**: These are single names that are shorthand for one or more configuration options. For example:
+
+    | Keyword  | Purpose                                                                                                                                                                        |
+    |----------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+    | `@3`     | The number of decimal places to display for numeric results. Same as `@num_format_prec=3`.                                                                                     |
+    | `@nosub` | Hides *substitution* and enables the display of *definition* and *results* of an expression. Shorthand for `@show_definition=True @show_substitution=False @show_result=True`. |
+
+In general, use **configuration options** for detailed control, and **keywords** for quick adjustments.
+
+See the [Config Reference](config_reference.md) to learn more about all available configuration.
+
+### Changing the Configuration
+
+There are four ways to apply configuration options and keywords:
+
+1. **By calling `config.set()`:** The method allows you to change the configuration **for the entire session**. This method can only take *`config` options* without an `@` prefix:
+
+    ```python
+    import rubberize
+
+    rubberize.config.set(multiline=True, wrap_indices=False)
+    ```
+
+    To reset the modified `config` option:
+
+    ```python
+    rubberize.config.reset("show_substitution")
+    ```
+
+2. **By passing the configuration as an argument to `%%tap`:** This approach allows you to change the configure **for all lines in the cell**.
+
+    ```python
+    %%tap  @use_symbols=False
+    omega_b = 1.67
+    ```
+
+    <picture>
+    <source media="(prefers-color-scheme: dark)" srcset="assets/getting_started/config_tap_argument_dark.png">
+    <source media="(prefers-color-scheme: light)" srcset="assets/getting_started/config_tap_argument.png">
+    <img alt="Screenshot of passing config arguments to %%tap" src="assets/getting_started/config_tap_argument.png">
+    </picture>
+
+3. **By adding to an inline comment:** This approach allows you to change the configuration **for the the line of code only**. Other lines will not be affected.
+
+    ```python
+    %%tap
+    apples__total = 104
+    n_b = 12  # @0 Number of students in class
+    apples_b = apples__total // n_b  # Number of apples per student
+    ```
+
+    <picture>
+    <source media="(prefers-color-scheme: dark)" srcset="assets/getting_started/config_inline_comment_dark.png">
+    <source media="(prefers-color-scheme: light)" srcset="assets/getting_started/config_inline_comment.png">
+    <img alt="Screenshot of adding config arguments to inline comment" src="assets/getting_started/config_inline_comment.png">
+    </picture>
+
+4. **By adding to a line comment:** The configuration set using this method will apply **to all subsequent lines**, until the next line comment is encountered.
+
+    ```python
+    %%tap
+    # @use_subscripts=False Variables are not subscripted
+    p_a = 1
+    p_b = (2, 3)
+
+    # Config is reset after a new line comment
+    p_c = [4, 5, 6]
+    p_d = 7
+    ```
+
+    <picture>
+    <source media="(prefers-color-scheme: dark)" srcset="assets/getting_started/config_line_comment_dark.png">
+    <source media="(prefers-color-scheme: light)" srcset="assets/getting_started/config_line_comment.png">
+    <img alt="Screenshot of adding config arguments to line comments" src="assets/getting_started/config_line_comment.png">
+    </picture>
+
+## What's Next?
+
+- [Expression and Statement Rendering](rendering.md): Read about what various Python expressions and statements look like when transformed by Rubberize.
+- [Advanced Formatting](advanced_formatting.md): Learn more about formatting options for annotations.
+- [Config Reference](config_reference.md): See all available configuration options and keywords.
