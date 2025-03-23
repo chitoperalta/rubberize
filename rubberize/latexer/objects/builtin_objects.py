@@ -152,7 +152,7 @@ def _convert_fraction(obj: Fraction) -> ExprLatex:
     numerator = convert_int(obj.numerator)
     denominator = convert_int(obj.denominator)
     return ExprLatex(
-        r"\frac{" + numerator.latex + "}{" + denominator.latex + "}", DIV_RANK
+        r"\dfrac{" + numerator.latex + "}{" + denominator.latex + "}", DIV_RANK
     )
 
 

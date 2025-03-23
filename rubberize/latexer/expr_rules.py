@@ -176,7 +176,7 @@ BIN_OPS: dict[type[ast.operator], _BinOpRule] = {
     ast.Mult: _BinOpRule("", r" \cdot ", ""),
     ast.MatMult: _BinOpRule("", r" \cdot ", ""),
     # pylint: disable-next=line-too-long
-    ast.Div: _BinOpRule(r"\frac{", "}{", "}", left=_BinOpdRule(wrap=False), right=_BinOpdRule(wrap=False)),
+    ast.Div: _BinOpRule(r"\dfrac{", "}{", "}", left=_BinOpdRule(wrap=False), right=_BinOpdRule(wrap=False)),
     ast.Mod: _BinOpRule("", r" \mathbin{\%} ", "", right=_BinOpdRule(non_assoc=True)),
     # pylint: disable-next=line-too-long
     ast.Pow: _BinOpRule("", "^{", "}", left=_BinOpdRule(non_assoc=True), right=_BinOpdRule(wrap=False)),
@@ -186,7 +186,7 @@ BIN_OPS: dict[type[ast.operator], _BinOpRule] = {
     ast.BitXor: _BinOpRule("", r" \oplus ", ""),
     ast.BitAnd: _BinOpRule("", r" \mathbin{\&} ", ""),
     # pylint: disable-next=line-too-long
-    ast.FloorDiv: _BinOpRule(r"\left\lfloor\frac{", "}{", r"}\right\rfloor", left=_BinOpdRule(wrap=False), right=_BinOpdRule(wrap=False), is_wrapped=True),
+    ast.FloorDiv: _BinOpRule(r"\left\lfloor\dfrac{", "}{", r"}\right\rfloor", left=_BinOpdRule(wrap=False), right=_BinOpdRule(wrap=False), is_wrapped=True),
 }
 # fmt: on
 
