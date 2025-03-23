@@ -69,7 +69,7 @@ def is_units_latex(latex: str) -> bool:
         r"(?:\\mathrm{[^}]+}(?:\^{-?\d+})?(?:\s*(?:\\,|\\cdot)\s*)?)+"
     )
 
-    frac_match = re.fullmatch(r"\\frac{(.+?)}{(.+?)}", latex)
+    frac_match = re.fullmatch(r"\\(?:d)?frac{(.+?)}{(.+?)}", latex)
     if frac_match:
         num, den = frac_match.groups()
         return re.fullmatch(units_pattern, den) is not None and (
