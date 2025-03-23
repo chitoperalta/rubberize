@@ -79,7 +79,7 @@ Rubberize supports [Markdown](https://www.markdownguide.org/basic-syntax/) in co
 #
 # - Markdown can be used to add **bold**, *italic*, <del>deleted</del> text, etc.
 # - Use carets for ^smaller text^
-# - Use double backslackes to \\ break a text into lines.
+# - Use double backslashes to \\ break a text into lines.
 # - Use double braces {{ 6 + (4 * 2**3 -10) / 2 }} to Rubberize code within comments
 ```
 
@@ -93,7 +93,7 @@ Rubberize also supports alert boxes similar to GitHub's implementation and synta
 
 ## Units
 
-Scientists and engineers often work with physical quantites, which have *units*. Rubberize simplifies unit-aware calculations by integrating with [Pint](https://github.com/hgrecco/pint), which keeps track of physical quantities for you.
+Scientists and engineers often work with physical quantities, which have *units*. Rubberize simplifies unit-aware calculations by integrating with [Pint](https://github.com/hgrecco/pint), which keeps track of physical quantities for you.
 
 > [!NOTE]
 > Pint is not a core dependency of `rubberize[notebook]`. If you want to work with units, you have to install it with:
