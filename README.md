@@ -9,7 +9,7 @@
 Rubberize is a Python library designed to enhance the presentation of
 calculations in Jupyter notebooks and Python scripts.
 
-**In Jupyter Notebooks:** Rubberize transforms code cells containning calculations
+**In Jupyter Notebooks:** Rubberize transforms code cells containing calculations
 into beautifully typeset mathematical expressions using LaTeX, making engineering
 and scientific computations easier to read and review. Simply use the `%%tap`
 magic command to render your code as math-rich output.
