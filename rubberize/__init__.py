@@ -2,7 +2,7 @@
 documents.
 """
 
-__version__ = "0.1.1.post1"
+__version__ = "0.2.0"
 
 from rubberize.config import config
 
