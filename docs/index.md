@@ -9,9 +9,21 @@ Notebook, and exporting to PDF. Start here if you're new to Rubberize.
 
 See: [Getting Started](getting_started.md)
 
+### Expression and Statement Rendering
+
+Read about what various Python expressions and statements look like when transformed by Rubberize.
+
+See: [Expression and Statement Rendering](rendering.md)
+
+### Advanced Formatting
+
+Learn more about advanced formatting options for annotations.
+
+See: [Advanced Formatting](advanced_formatting.md)
+
 ## Config Reference
 
-Learn about all the configuration options Rubberize has to suit your needs.
+Learn about all the configuration options and keywords Rubberize has to suit your needs.
 
 See: [Config Reference](config_reference.md)
 
