@@ -13,7 +13,7 @@ See: [Getting Started](getting_started.md)
 
 Read about what various Python expressions and statements look like when transformed by Rubberize.
 
-See: [Expression and Statement Rendering](rendering.md)
+See: [Expression and Statement Rendering](rendering/index.md)
 
 ### Advanced Formatting
 

@@ -67,7 +67,7 @@ From the screenshot above, you can see the following:
 
 Rubberize can render different types of Python expressions and statements into beautifully formatted math and text. Whether you're working with mathematical formulas, loops, or conditionals, Rubberize ensures your code is presented clearly and effectively.
 
-To see how Rubberize handles specific types of expressions and statements, see the [Expression and Statement Rendering](rendering.md) guide.
+To see how Rubberize handles specific types of expressions and statements, see the [Expression and Statement Rendering](rendering/index.md) guide.
 
 ### Dead Cells
 
@@ -331,6 +331,6 @@ The PDFs will be saved in a new directory named `<directory_name>_pdf` in the sa
 
 ## What's Next?
 
-- [Expression and Statement Rendering](rendering.md): Read about what various Python expressions and statements look like when transformed by Rubberize.
+- [Expression and Statement Rendering](rendering/index.md): Read about what various Python expressions and statements look like when transformed by Rubberize.
 - [Advanced Formatting](advanced_formatting.md): Learn more about formatting options for annotations.
 - [Config Reference](config_reference.md): See all available configuration options and keywords.
