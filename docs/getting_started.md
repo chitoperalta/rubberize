@@ -69,6 +69,23 @@ Rubberize can render different types of Python expressions and statements into b
 
 To see how Rubberize handles specific types of expressions and statements, see the [Expression and Statement Rendering](rendering.md) guide.
 
+### Dead Cells
+
+Use the `%%tap --dead` option to mark a cell as non-executable. Dead cells are rendered **but not executed**, allowing you to transform any valid syntax (but not necessarily runnable code) into an equation.
+
+```python
+%%tap --dead
+y = m * x + b  # Slope-intercept form of a linear equation
+```
+
+<picture>
+    <source media="(prefers-color-scheme: dark)" srcset="assets/getting_started/dead_cell_dark.png">
+    <source media="(prefers-color-scheme: light)" srcset="assets/getting_started/dead_cell.png">
+    <img alt="Screenshot of a dead %%tap cell" src="assets/getting_started/dead_cell_dark.png">
+</picture>
+
+This is particularly useful for presenting theoretical concepts, incomplete code snippets, or equations that don't require execution.
+
 ## Formatting Annotations
 
 Rubberize supports [Markdown](https://www.markdownguide.org/basic-syntax/) in comments. Markdown allows you to format annotations directly within your code. Rubberize also provides these additional formatting syntaxes:
