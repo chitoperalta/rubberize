@@ -67,7 +67,24 @@ From the screenshot above, you can see the following:
 
 Rubberize can render different types of Python expressions and statements into beautifully formatted math and text. Whether you're working with mathematical formulas, loops, or conditionals, Rubberize ensures your code is presented clearly and effectively.
 
-To see how Rubberize handles specific types of expressions and statements, see the [Expression and Statement Rendering](rendering.md) guide.
+To see how Rubberize handles specific types of expressions and statements, see the [Expression and Statement Rendering](rendering/index.md) guide.
+
+### Dead Cells
+
+Use the `%%tap --dead` option to mark a cell as non-executable. Dead cells are rendered **but not executed**, allowing you to transform any valid syntax (but not necessarily runnable code) into an equation.
+
+```python
+%%tap --dead
+y = m * x + b  # Slope-intercept form of a linear equation
+```
+
+<picture>
+    <source media="(prefers-color-scheme: dark)" srcset="assets/getting_started/dead_cell_dark.png">
+    <source media="(prefers-color-scheme: light)" srcset="assets/getting_started/dead_cell.png">
+    <img alt="Screenshot of a dead %%tap cell" src="assets/getting_started/dead_cell_dark.png">
+</picture>
+
+This is particularly useful for presenting theoretical concepts, incomplete code snippets, or equations that don't require execution.
 
 ## Formatting Annotations
 
@@ -177,7 +194,7 @@ sheet.conclude(each_check=True)
 
 Normally, you would use a Pandas dataframe or another method to manipulate and present large tabular data in Rubberize.
 
-If you want to renders within a cell with `%%tap` activated, you can use the `Table` class:
+If you want to render a table within a cell with `%%tap` activated, you can use the `Table` class:
 
 ```python
 %%tap
@@ -314,6 +331,6 @@ The PDFs will be saved in a new directory named `<directory_name>_pdf` in the sa
 
 ## What's Next?
 
-- [Expression and Statement Rendering](rendering.md): Read about what various Python expressions and statements look like when transformed by Rubberize.
+- [Expression and Statement Rendering](rendering/index.md): Read about what various Python expressions and statements look like when transformed by Rubberize.
 - [Advanced Formatting](advanced_formatting.md): Learn more about formatting options for annotations.
 - [Config Reference](config_reference.md): See all available configuration options and keywords.
