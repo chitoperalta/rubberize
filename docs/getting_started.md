@@ -177,7 +177,7 @@ sheet.conclude(each_check=True)
 
 Normally, you would use a Pandas dataframe or another method to manipulate and present large tabular data in Rubberize.
 
-If you want to renders within a cell with `%%tap` activated, you can use the `Table` class:
+If you want to render a table within a cell with `%%tap` activated, you can use the `Table` class:
 
 ```python
 %%tap
