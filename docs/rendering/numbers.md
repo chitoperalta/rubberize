@@ -26,9 +26,9 @@ You can change the grouping separator by setting the `@thousands_separator` conf
 | Separator            | `@thousands_separator=` | Rendered as      |
 |----------------------|-------------------------|------------------|
 | None                 | `""`                    | $525600$         |
-| Thin space (default) | `" "`                   | $525\,600$       |
+| Thin space (default) | `" "`                   | $525\ 600$       |
 | Comma                | `","`                   | $525{,}600$      |
-| Dot                  | `"."`                   | $525{.}600$      |
+| Dot                  | `"."`                   | $525.600$        |
 | Apostrophe           | `"'"`                   | $525\text{’}600$ |
 
 ## Real Numbers
@@ -58,7 +58,7 @@ For `float` and `Decimal` types, you can format the appearance of values using t
 
 | Number Format                  | Explanation                                                                                | `@num_format=` | Rendered as<br>(with `@num_format_prec=3`) |
 |--------------------------------|--------------------------------------------------------------------------------------------|----------------|--------------------------------------------|
-| Fixed-point notation (default) | Displays the number as-is with a fixed number of decimals.                                 | `"FIX"`        | $69\,420.134$                              |
+| Fixed-point notation (default) | Displays the number as-is with a fixed number of decimals.                                 | `"FIX"`        | $69\ 420.134$                              |
 | General notation               | Automatically switches between fixed-point and scientific notation based on value size.    | `"GEN"`        | $6.94 \times 10^{4}$                       |
 | Scientific notation            | Represents the number in scientific notation with a single digit before the decimal point. | `"SCI"`        | $6.942 \times 10^{4}$                      |
 | Engineering notation           | Similar to scientific notation but uses exponents that are multiples of three.             | `"ENG"`        | $69.420 \times 10^{3}$                     |
@@ -104,8 +104,8 @@ The config option `@decimal_marker` (a `str`, default is `"."`), can be used to 
 
 | Decimal Marker | `@decimal_marker=` | Rendered as      |
 |----------------|--------------------|------------------|
-| Dot (default)  | `"."`              | $1\,069.42$      |
-| Comma          | `","`              | $1\,069{,}42$    |
+| Dot (default)  | `"."`              | $1\ 069.42$      |
+| Comma          | `","`              | $1\ 069{,}42$    |
 
 ### Large and Small Numbers
 
