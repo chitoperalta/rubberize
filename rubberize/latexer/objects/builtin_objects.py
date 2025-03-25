@@ -229,6 +229,9 @@ def _dict(obj: dict) -> Optional[ExprLatex]:
             return None
         obj_latex[key.latex] = value.latex
 
+    if not obj_latex:
+        return ExprLatex(r"\left\{\right\}", COLLECTIONS_RANK)
+
     if config.show_dict_as_col:
         elts = [rf"{k} &\to {v}" for k, v in obj_latex.items()]
         syntax = COLLECTIONS_COL[dict]
