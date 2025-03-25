@@ -48,11 +48,14 @@ When `@use_symbols=True`, Greek letters, accents, and modifier keywords are rend
 
 ### Greek Letters
 
-Python variable names that match Greek or Hebrew letter names are replaced with their corresponding symbols. For example, `alpha` becomes $\alpha$, and `Omega` becomes $\Omega$. Note that capital Greek letters resembling Latin letters (e.g., $\Alpha$) are excluded to avoid ambiguity.
+Python variable name parts that match Greek or Hebrew letter names are replaced with their corresponding symbols. For example, `alpha` becomes $\alpha$, and `Omega` becomes $\Omega$. Note that capital Greek letters resembling Latin letters (e.g., $\Alpha$) are excluded to avoid ambiguity.
+
+**(New in 0.2.1)** Base name parts that start with a Greek letter, such as `DeltaT` or `phiR_n` will have the Greek letter be rendered (e.g. $\Delta T$ or $\phi R_n$).
+
 
 ```python
 %%tap --dead -g
-x_gamma; Omega_b_o; delta_max
+x_gamma; Omega_b_o; delta_max; phiR_n
 ```
 
 <picture>
@@ -79,6 +82,8 @@ digamma; aleph; beth; gimel
     <source media="(prefers-color-scheme: light)" srcset="../assets/rendering/variables/greek_letters_all.png">
     <img alt="Screenshot of all greek letters in Rubberize" src="../assets/rendering/variables/greek_letters_all.png">
 </picture>
+
+**(New in 0.2.1)** Note that due to name conflict with the Python `lambda` statement, `lambda_` can also be used to render a standalone $\lambda$. 
 
 ### Accents and Modifiers
 
