@@ -38,12 +38,17 @@ _private; __very__private; __double__underscore__; __base_subscript__
     <img alt="Screenshot of subscript treatment of Rubberize" src="../assets/rendering/variables/subscripts.png">
 </picture>
 
-## Greek Letters
+### Disabling Subscripts
 
-When `@use_symbols=True`, the following rules apply for Python variables:
+When `@use_subscripts=False`, all underscores are shown as literal underscores, and variables will be rendered exactly as they are typed but using a Roman font.
 
-- **Greek and Hebrew letters** are rendered when their corresponding names are used. They can be used as bases or subscripts of a variable name.
-- **Capital Greek letters that appear to have the same form as Latin letters are excluded**. This is to avoid cases where different variables appear similar when rendered (e.g., $\Alpha$ and $A$ might be indistinguishable).
+## Math Symbols
+
+When `@use_symbols=True`, Greek letters, accents, and modifier keywords are rendered with their proper math symbols. This includes:
+
+### Greek Letters
+
+Python variable names that match Greek or Hebrew letter names are replaced with their corresponding symbols. For example, `alpha` becomes $\alpha$, and `Omega` becomes $\Omega$. Note that capital Greek letters resembling Latin letters (e.g., $\Alpha$) are excluded to avoid ambiguity.
 
 ```python
 %%tap --dead -g
@@ -69,11 +74,15 @@ Phi, phi, varphi; chi; Psi, psi; Omega, omega
 digamma; aleph; beth; gimel
 ```
 
-## Diacritics, Accents, and Modifiers
+<picture>
+    <source media="(prefers-color-scheme: dark)" srcset="../assets/rendering/variables/greek_letters_all_dark.png">
+    <source media="(prefers-color-scheme: light)" srcset="../assets/rendering/variables/greek_letters_all.png">
+    <img alt="Screenshot of all greek letters in Rubberize" src="../assets/rendering/variables/greek_letters_all.png">
+</picture>
 
-When `@use_symbols=True`, the following rules also apply for Python variables:
+### Accents and Modifiers
 
-- **Diacritics, accents and modifiers** are rendered when their corresponding names are used as after an underscore (`_`) and the name to be accented or modified.
+Variable names with specific keywords after an underscore (e.g., `_hat`, `_bar`) are rendered with the corresponding accent or modifier. For instance, `x_hat` becomes $\hat{x}$, `S_star` becomes $S^{*}$ and `f_prime` becomes $f'$.
 
 ```python
 %%tap --dead -g
@@ -96,8 +105,18 @@ foo_acute; foo_grave; foo_ring; foo_mat; foo_vec; foo_vec2; foo_widevec2;
 foo_prime; foo_star;
 ```
 
+<picture>
+    <source media="(prefers-color-scheme: dark)" srcset="../assets/rendering/variables/accents_and_modifiers_all_dark.png">
+    <source media="(prefers-color-scheme: light)" srcset="../assets/rendering/variables/accents_and_modifiers_all.png">
+    <img alt="Screenshot of all accents and modifiers in Rubberize" src="../assets/rendering/variables/accents_and_modifiers_all.png">
+</picture>
+
 > [!Warning]
-> `..._mat` and `..._vec` render similarly. They are not recommended to be used together in a single notebook, for clarity.
+> `..._mat` and `..._vec` render similarly. They are not recommended to be used together in a single notebook, to avoid confusion.
+
+### Disabling Symbols
+
+When `@use_symbols=False`, all greek, accent, and modifier keywords will be rendered exactly as they are typed but using a Roman font.
 
 ## What's Next?
 
