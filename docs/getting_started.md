@@ -148,7 +148,7 @@ sheet = rubberize.CalcSheet(
     project="ACME Building, Baguio City",
     system="General Framing System",
     calc_type="load capacity analysis",
-    material="aluminum",
+    material="steel",
     references=[
         "ANSI/AISC 360-16. *Specification for Structural Steel Buildings*.",
     ]
