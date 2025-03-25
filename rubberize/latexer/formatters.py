@@ -40,6 +40,11 @@ def format_name(name: str, *, call: bool = False) -> str:
     """
 
     if config.use_symbols:
+        if name == "lambda_":
+            # Special case: a name "lambda" conflicts with Python lambda
+            return _wrap_name(r"\lambda", call)
+
+        name = _replace_greek_start(name)
         name = _replace_greeks(name)
         name = _replace_accents(name)
         name = _replace_modifiers(name)
@@ -58,6 +63,19 @@ def format_name(name: str, *, call: bool = False) -> str:
         return f"{leading}{base}{trailing}_{{{', '.join(subs)}}}"
 
     return _wrap_name(name.replace("_", r"\_"), call)
+
+
+def _replace_greek_start(name: str) -> str:
+    """If the beginning of the name is a Greek letter, replace it and
+    add space. e.g., Deltat -> \\Delta t."""
+
+    base, *_ = name.split("_", 1)
+
+    for greek in GREEK:
+        if base.startswith(greek) and base.replace(greek, "", 1):
+            return rf"\{greek} {name[len(greek):]}"
+
+    return name
 
 
 def _replace_greeks(name: str) -> str:
