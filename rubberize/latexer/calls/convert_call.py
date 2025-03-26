@@ -24,7 +24,6 @@ from rubberize.config import config
 from rubberize.latexer.expr_latex import ExprLatex
 from rubberize.latexer.formatters import format_name, format_elts
 from rubberize.latexer.node_helpers import get_id
-from rubberize.latexer.ranks import get_rank
 
 if TYPE_CHECKING:
     from rubberize.latexer.node_visitors import ExprVisitor
@@ -94,4 +93,4 @@ def convert_call(visitor: "ExprVisitor", call: ast.Call) -> ExprLatex:
     elts_latex = [visitor.visit(a).latex for a in call.args]
     args_latex = format_elts(elts_latex, r",\, ", (r"\left(", r"\right)"))
 
-    return ExprLatex(name_latex + " " + args_latex, get_rank(call))
+    return ExprLatex(name_latex + " " + args_latex)
