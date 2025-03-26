@@ -22,16 +22,16 @@ import pint
 ureg = pint.UnitRegistry()
 ```
 
-In the subsequent cells using `%%tap`, you can simply use `ureg` to assign units to your variables. Rubberize heuristically recognizes when you intend to apply units, making the process seamless.
+In the subsequent cells using `%%tap`, you can simply use the `UnitRegistry` instance to assign units to your variables. Rubberize heuristically recognizes when you intend to apply units, making the process seamless.
 
 ```python
 %%tap
 v_1 = 0.0  # Final velocity of the car
 v_0 = 25.0 * (ureg.m / ureg.s)  # Initial velocity of the car
 t = 0.2 * ureg.s  # Time for the change in velocity
-a = (v_0 - v_1) / t  # Deceleration of the car
+a = (v_1 - v_o) / t  # Deceleration of the car
 m = 1_500.0 * ureg.kg  # Mass of the car
-F = m * a  # Average force experienced by the car in the crash
+F = (m * a).to(ureg.kN)  # Average force experienced by the car in the crash
 ```
 
 <picture>
@@ -44,17 +44,19 @@ Unit assignments are rendered with a small space (`\ ` in LaTeX) between the qua
 
 When quantities are multiplied, they are wrapped in parentheses, following one of the recommendations of the SI Brochure.[^2]
 
+### Converting to Other Units
+
+As shown in the last line of the example above, a `Quantity` object's `to()` or `ito()` methods calls are hidden by Rubberize, allowing you to present unit conversions as an equality.
+
 ## Units Rendering Enhancements
 
 Rubberize enhances the default LaTeX rendering provided by Pint, offering improved formatting:
 
-- Units are multiplied implicitly (using a thin space) instead of using a center dot to match the rules for normal expressions. This setting is controlled by `@use_contextual_mult` config option for all, including normal expression multiplication operations.
+- Units are multiplied implicitly (using a thin space) instead of using a center dot to match Rubberize rules for multiplication of expressions. This setting is controlled by `@use_contextual_mult` config option (a `bool`, default is `True`) for all, including normal expression multiplication operations.
 
-- Fractions are rendered as inline units using a solidus ($a/b$) instead of a fraction ($\frac{a}{b}$) for a more compact but readable appearance. This setting can be turned off by setting `@use_inline_units` to `False`.
+- Fractions are rendered as inline units using a solidus ($a/b$) instead of a fraction ($\frac{a}{b}$) for a more compact but readable appearance. If the fraction has multiple denominator terms, negative exponents will be used instead of a solidus. This setting can be turned off by setting `@use_inline_units` config option (a `bool`, default is `True`) to `False`.
 
-- If the fraction has multiple denominator terms, negative exponents will be used instead of a solidus.
-
-- Angular degrees are rendered as $45.00^{\circ}$ instead of $45.00\ \deg$.
+- Angular degree units are rendered as $45.00^{\circ}$ instead of $45.00\ \deg$.
 
 ## Foot-Inch-Fraction (FIF) Units
 
@@ -73,15 +75,27 @@ When enabled:
 height = 8.41 * ureg.ft
 width = 42.1875 * ureg.inch
 ```
+
 <picture>
     <source media="(prefers-color-scheme: dark)" srcset="../assets/rendering/pint/fif_dark.png">
     <source media="(prefers-color-scheme: light)" srcset="../assets/rendering/pint/fif.png">
-    <img alt="Screenshot of pint in Rubberize" src="../assets/rendering/pint/fif.png">
+    <img alt="Screenshot of pint foot-inch-fraction units in Rubberize" src="../assets/rendering/pint/fif.png">
 </picture>
 
 ## Degree-Minute-Second (DMS) Units
 
-Similar to FIF format, Rubberize supports rendering angle measurements as degree-minute-second (FIF) format. To enable this feature, set the `@use_dms_units` config option to `True`.
+Similar to FIF format, Rubberize supports rendering angle measurements as degree-minute-second (DMS) format. To enable this feature, set the `@use_dms_units` config option to `True`.
+
+```python
+%%tap @use_dms_units=True
+42.6969 * ureg.deg
+```
+
+<picture>
+    <source media="(prefers-color-scheme: dark)" srcset="../assets/rendering/pint/dms_dark.png">
+    <source media="(prefers-color-scheme: light)" srcset="../assets/rendering/pint/dms.png">
+    <img alt="Screenshot of pint foot-inch-fraction units in Rubberize" src="../assets/rendering/pint/dms.png">
+</picture>
 
 ## Custom Unit LaTeX
 
@@ -96,9 +110,27 @@ from rubberize import register_units_latex
 register_units_latex(r"\mathrm{N} \cdot \mathrm{m}", meter=1, newton=1)
 ```
 
-In the function above, the units are specified as keyword arguments, where keys are unit names and values are their corresponding exponents.
+In the function above, the units are specified as keyword arguments, where keys are unit names and values are their corresponding exponents. Once registered, Rubberize will automatically use this representation when rendering quantities with the specified unit combination.
 
-Once registered, Rubberize will automatically use this representation when rendering quantities with the specified unit combination.
+The same process can be done for defining LaTeX representations of custom units:
+
+```python
+ureg.define("boop = 3 newton")
+rubberize.register_units_latex(r"\mathrm{_{b}oO^{P}!}", boop=1)
+```
+
+```python
+%%tap
+a = 84.42 * ureg.boop
+a.to(ureg.N)
+```
+
+
+<picture>
+    <source media="(prefers-color-scheme: dark)" srcset="../assets/rendering/pint/custom_latex_dark.png">
+    <source media="(prefers-color-scheme: light)" srcset="../assets/rendering/pint/custom_latex.png">
+    <img alt="Screenshot of pint custom units in Rubberize" src="../assets/rendering/pint/custom_latex.png">
+</picture>
 
 ## What's Next?
 
