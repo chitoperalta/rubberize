@@ -25,14 +25,13 @@ if TYPE_CHECKING:
     from rubberize.latexer.node_visitors import ExprVisitor
 
 
-def eval_and_convert(
+def get_result_and_convert(
     visitor: "ExprVisitor", call: ast.Call
 ) -> Optional[ExprLatex]:
-    """Common converter that unparses the call node, evaluates it, and
-    then converts the resulting object to latex."""
+    """Common converter that gets the resulting object of a call node's
+    call, and then converts the resulting object to latex."""
 
-    # pylint: disable-next=eval-used
-    obj = eval(ast.unparse(call), visitor.namespace)
+    obj = get_object(call, visitor.namespace)
     return convert_object(obj)
 
 
@@ -268,15 +267,15 @@ def _sum_prod(visitor: "ExprVisitor", call: ast.Call) -> Optional[ExprLatex]:
 
 # fmt: off
 # pylint: disable=line-too-long
-register_call_converter("int", eval_and_convert)
-register_call_converter("float", eval_and_convert)
-register_call_converter("Decimal", eval_and_convert)
-register_call_converter("Fraction", eval_and_convert)
-register_call_converter("complex", eval_and_convert)
-register_call_converter("list", eval_and_convert)
-register_call_converter("tuple", eval_and_convert)
-register_call_converter("set", eval_and_convert)
-register_call_converter("dict", eval_and_convert)
+register_call_converter("int", get_result_and_convert)
+register_call_converter("float", get_result_and_convert)
+register_call_converter("Decimal", get_result_and_convert)
+register_call_converter("Fraction", get_result_and_convert)
+register_call_converter("complex", get_result_and_convert)
+register_call_converter("list", get_result_and_convert)
+register_call_converter("tuple", get_result_and_convert)
+register_call_converter("set", get_result_and_convert)
+register_call_converter("dict", get_result_and_convert)
 register_call_converter("range", _range)
 register_call_converter("abs", lambda v, c: wrap(v, c, r"\left|", r"\right|"))
 register_call_converter("fabs", lambda v, c: wrap(v, c, r"\left|", r"\right|"))
