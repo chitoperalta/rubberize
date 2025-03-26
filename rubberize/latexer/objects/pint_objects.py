@@ -91,7 +91,7 @@ def _reformat_units(units_latex: str) -> str:
     if not config.use_inline_units:
         return units_latex
 
-    match = re.match(r"\\(?:d)?frac{(.*)}{(.*)}", units_latex)
+    match = re.match(r"\\frac{(.*)}{(.*)}", units_latex)
     if not match:
         return units_latex
 
