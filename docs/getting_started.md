@@ -58,7 +58,6 @@ c = math.sqrt(a**2 + b**2)  # Length of the hypotenuse
     <img alt="Screenshot of code cell with %%tap being used" src="assets/getting_started/rendering_python_calculations_dark.png">
 </picture>
 
-
 From the screenshot above, you can see the following:
 
 - `import` statements are ignored.
@@ -68,6 +67,22 @@ From the screenshot above, you can see the following:
 Rubberize can render different types of Python expressions and statements into beautifully formatted math and text. Whether you're working with mathematical formulas, loops, or conditionals, Rubberize ensures your code is presented clearly and effectively.
 
 To see how Rubberize handles specific types of expressions and statements, see the [Expression and Statement Rendering](rendering/index.md) guide.
+
+### Grid
+
+Use the `%%tap --grid` option to align statements in a N&times;4 grid. Note that annotations are ignored using this mode.
+
+```python
+%%tap --grid
+w = 0; x = 1; y = 2; z = 3
+a = 4; b = 5; c = 6; d = 7
+```
+
+<picture>
+    <source media="(prefers-color-scheme: dark)" srcset="assets/getting_started/grid_cell_dark.png">
+    <source media="(prefers-color-scheme: light)" srcset="assets/getting_started/grid_cell.png">
+    <img alt="Screenshot of a grid %%tap cell" src="assets/getting_started/grid_cell_dark.png">
+</picture>
 
 ### Dead Cells
 
@@ -85,6 +100,10 @@ y = m * x + b  # Slope-intercept form of a linear equation
 </picture>
 
 This is particularly useful for presenting theoretical concepts, incomplete code snippets, or equations that don't require execution.
+
+### Getting the Output Source
+
+Use the `%%tap --html` option to get the HTML source of the cell output.
 
 ## Formatting Annotations
 
