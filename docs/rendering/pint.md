@@ -9,14 +9,10 @@ Unit-aware calculations help ensure accuracy and consistency in computations by 
 
 ## Rendering Quantities
 
-You would typically import Pint and instantiate a `UnitRegistry` in the same cell where you load Rubberize.
+To use Pint, import it and instantiate a `UnitRegistry`:
 
 ```python
-import rubberize
 import pint
-
-# Load Rubberize extension
-%load_ext rubberize
 
 # Instantiate a UnitRegistry
 ureg = pint.UnitRegistry()
