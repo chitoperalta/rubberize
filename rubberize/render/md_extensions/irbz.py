@@ -30,7 +30,7 @@ class IrbzProcessor(InlineProcessor):
 
         text_str = ""
         if text_latex.latex:
-            text_str += r"\( " + text_latex.latex + r" \)"
+            text_str += r"\( \displaystyle " + text_latex.latex + r" \)"
         if text_latex.desc:
             text_str += " (" + text_latex.desc.strip() + ")"
         return text_str, m.start(0), m.end(0)
