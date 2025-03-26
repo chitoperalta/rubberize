@@ -19,7 +19,7 @@ Lists are rendered as an array.
     <img alt="Screenshot of lists in Rubberize" src="../assets/rendering/collections/lists.png">
 </picture>
 
-### Render as Row Array
+### Rendering Lists as Row Arrays
 
 By default, lists are displayed as a column array.
 
@@ -57,7 +57,7 @@ Tuples are rendered as a comma-separated listing of elements.
     <img alt="Screenshot of tuples in Rubberize" src="../assets/rendering/collections/tuples.png">
 </picture>
 
-### Align vertically
+### Align Tuples Vertically
 
 By default, tuple elements are comma-separated and aligned horizontally.
 
@@ -93,7 +93,7 @@ set()
     <img alt="Screenshot of sets in Rubberize" src="../assets/rendering/collections/sets.png">
 </picture>
 
-### Align vertically
+### Aligning Sets Vertically
 
 By default, sets items are comma-separated and aligned horizontally.
 
@@ -129,7 +129,7 @@ Dictionaries are shown as key-value pairs enclosed within a set braces.
     <img alt="Screenshot of dictionaries in Rubberize" src="../assets/rendering/collections/dicts.png">
 </picture>
 
-### Align horizontally
+### Arranging Dictionaries in a Line
 
 By default, dictionary key-value pairs are aligned vertically.
 
@@ -179,6 +179,72 @@ You can customize the rendering of nested collections by combining the config op
     <source media="(prefers-color-scheme: light)" srcset="../assets/rendering/collections/nested_custom.png">
     <img alt="Screenshot of customized nested collections in Rubberize" src="../assets/rendering/collections/nested_custom.png">
 </picture>
+
+## Accessing Collection Elements
+
+Rubberize allows you to visualize element access within collections.
+
+### Accessing Elements of Lists and Tuples
+
+You can access elements in a `list` or `tuple` using their index.
+
+```python
+%%tap
+# **Lists**
+v_list = [1, 2, 3, 4]  # @show_list_as_col=False
+v_list[0]  # Single element access
+v_list[:2]  # Slice access
+
+# **Tuples**
+v_tuple = (10, 20, 30, 40)
+v_tuple[-1]  # Single element access \\ ^`-1` is the last element^
+v_tuple[1:3]  # Slice access
+```
+
+<picture>
+    <source media="(prefers-color-scheme: dark)" srcset="../assets/rendering/collections/list_tuple_access_dark.png">
+    <source media="(prefers-color-scheme: light)" srcset="../assets/rendering/collections/list_tuple_access.png">
+    <img alt="Screenshot of list element access in Rubberize" src="../assets/rendering/collections/list_tuple_access.png">
+</picture>
+
+Element access subscripts are enclosed in parentheses by default. If you prefer to render it without parentheses, turn the feature off with `@wrap_indices=False`:
+
+```python
+%%tap @wrap_indices=False
+# **Lists**
+v_list = [1, 2, 3, 4]  # @show_list_as_col=False
+v_list[0]  # Single element access
+v_list[:2]  # Slice access
+
+# **Tuples**
+v_tuple = (10, 20, 30, 40)
+v_tuple[-1]  # Single element access \\ ^`-1` is the last element^
+v_tuple[1:3]  # Slice access
+```
+
+<picture>
+    <source media="(prefers-color-scheme: dark)" srcset="../assets/rendering/collections/list_tuple_access_unwrapped_dark.png">
+    <source media="(prefers-color-scheme: light)" srcset="../assets/rendering/collections/list_tuple_access_unwrapped.png">
+    <img alt="Screenshot of list element access with @wrap_indices=False in Rubberize" src="../assets/rendering/collections/list_tuple_access_unwrapped.png">
+</picture>
+
+### Accessing Dictionary Values
+
+For dictionaries, you can access values using their keys.
+
+```python
+%%tap
+dct = {"a": 1, "b": 2, "c": 3}
+dct["a"]
+```
+
+<picture>
+    <source media="(prefers-color-scheme: dark)" srcset="../assets/rendering/collections/dict_access_dark.png">
+    <source media="(prefers-color-scheme: light)" srcset="../assets/rendering/collections/dict_access.png">
+    <img alt="Screenshot of dictionary element access in Rubberize" src="../assets/rendering/collections/dict_access.png">
+</picture>
+
+Similarly, dictionary key access subscripts are enclosed in parentheses by default. If you prefer to render it without parentheses, turn the feature off with `@wrap_indices=False`
 
 ## What's Next?
 
