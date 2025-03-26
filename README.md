@@ -1,7 +1,7 @@
 <picture>
-    <source media="(prefers-color-scheme: dark)" srcset="docs/assets/banner_dark.png">
-    <source media="(prefers-color-scheme: light)" srcset="docs/assets/banner.png">
-    <img alt="Rubberize Banner" title="Turn Python calculations into well-formatted, math-rich documents." src="docs/assets/banner.png">
+    <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/chitoperalta/rubberize/main/docs/assets/banner_dark.png">
+    <source media="(prefers-color-scheme: light)" srcset="https://raw.githubusercontent.com/chitoperalta/rubberize/main/docs/assets/banner.png">
+    <img alt="Rubberize Banner" title="Turn Python calculations into well-formatted, math-rich documents." src="https://raw.githubusercontent.com/chitoperalta/rubberize/main/docs/assets/banner.png">
 </picture>
 
 # Rubberize
@@ -15,9 +15,9 @@ and scientific computations easier to read and review. Simply use the `%%tap`
 magic command to render your code as math-rich output.
 
 <picture>
-    <source media="(prefers-color-scheme: dark)" srcset="docs/assets/notebook_example_dark.png">
-    <source media="(prefers-color-scheme: light)" srcset="docs/assets/notebook_example.png">
-    <img alt="Screenshot of a Jupyter Notebook using Rubberize" src="docs/assets/notebook_example.png">
+    <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/chitoperalta/rubberize/main/docs/assets/notebook_example_dark.png">
+    <source media="(prefers-color-scheme: light)" srcset="https://raw.githubusercontent.com/chitoperalta/rubberize/main/docs/assets/notebook_example.png">
+    <img alt="Screenshot of a Jupyter Notebook using Rubberize" src="https://raw.githubusercontent.com/chitoperalta/rubberize/main/docs/assets/notebook_example.png">
 </picture>
 
 **As an API:** Developers can use Rubberize's API to generate LaTeX representations
@@ -54,8 +54,8 @@ Rubberize is primarily built for Jupyter. To enable notebook magics:
 
 ```bash
 pip install rubberize[notebook]
-# The dependency `playwright` also needs to be installed:
-playwright install
+# The headless chromium dependency of `playwright` also needs to be installed:
+playwright install chromium
 ```
 
 ## Basic Usage

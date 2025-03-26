@@ -1,6 +1,6 @@
 [project]
 name = "rubberize"
-version = "0.2.0"
+version = "0.2.1"
 description = "Turn Python calculations into well-formatted, math-rich documents."
 authors = [
     {name = "Chito Peralta", email = "chitoangeloperalta@gmail.com"}
