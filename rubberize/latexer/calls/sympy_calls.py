@@ -112,7 +112,7 @@ def _diff(visitor: "ExprVisitor", call: ast.Call) -> Optional[ExprLatex]:
 
     opd = visitor.visit_opd(func_value, rank)
     diffs_latex = [
-        r"\dfrac{\mathrm{d}}{\mathrm{d}" + visitor.visit(a).latex + "}"
+        r"\frac{\mathrm{d}}{\mathrm{d}" + visitor.visit(a).latex + "}"
         for a in args
     ]
     diffs_latex.reverse()
