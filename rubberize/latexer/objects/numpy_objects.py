@@ -36,4 +36,13 @@ def _ndarray(obj: np.ndarray) -> Optional[ExprLatex]:
     return ExprLatex(format_array(processed_data))
 
 
+def _generic(obj: np.generic) -> Optional[ExprLatex]:
+    """Converter for `numpy.generic` type object, which is the base
+    class for all numpy scalars.
+    """
+
+    return convert_object(obj.item())
+
+
 register_object_converter(np.ndarray, _ndarray)
+register_object_converter(np.generic, _generic)
