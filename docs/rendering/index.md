@@ -9,8 +9,8 @@ This guide provides an overview of how Rubberize renders various Python expressi
 - [Numbers](numbers.md)
 - [Collections](collections.md)
 - [Physical Quantities (Pint)](pint.md)
+- [Arrays (NumPy)](numpy.md)
 <!--
-- [Arrays](numpy.md)
 - [Algebraic Expressions](sympy.md)
 - [Other Types](other_builtins.md)
 - [Mathematical Operations](operations.md)
