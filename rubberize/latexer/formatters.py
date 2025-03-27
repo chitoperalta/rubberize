@@ -71,7 +71,7 @@ def _replace_greek_start(name: str) -> str:
 
     base, *_ = name.split("_", 1)
 
-    for greek in GREEK:
+    for greek in config.greek_starts:
         if base.startswith(greek) and base.replace(greek, "", 1):
             return rf"\{greek} {name[len(greek):]}"
 
