@@ -38,7 +38,21 @@ To render them as row arrays, you can set the config option `@show_list_as_col` 
     <img alt="Screenshot of lists rendered as a row array in Rubberize" src="../assets/rendering/collections/lists_row.png">
 </picture>
 
+### List Comprehension
 
+List comprehensions are rendered like so:
+
+```python
+%%tap
+a = [1, 2, 3, 4]
+[x for x in a if x % 2 == 0]  # @nosub You would probably want to turn off substitution
+```
+
+<picture>
+    <source media="(prefers-color-scheme: dark)" srcset="../assets/rendering/collections/list_comprehension_dark.png">
+    <source media="(prefers-color-scheme: light)" srcset="../assets/rendering/collections/list_comprehension.png">
+    <img alt="Screenshot of list comprehension in Rubberize" src="../assets/rendering/collections/list_comprehension.png">
+</picture>
 
 ## Tuples
 
@@ -112,6 +126,22 @@ set()
     <img alt="Screenshot of sets rendered as columns in Rubberize" src="../assets/rendering/collections/sets_col.png">
 </picture>
 
+### Set Comprehension
+
+Set comprehensions are rendered like so:
+
+```python
+%%tap
+a = (1, 2, 3, 4)
+{x for x in a if x % 2 == 0}  # @nosub
+```
+
+<picture>
+    <source media="(prefers-color-scheme: dark)" srcset="../assets/rendering/collections/set_comprehension_dark.png">
+    <source media="(prefers-color-scheme: light)" srcset="../assets/rendering/collections/set_comprehension.png">
+    <img alt="Screenshot of set comprehension in Rubberize" src="../assets/rendering/collections/set_comprehension.png">
+</picture>
+
 ## Dictionaries
 
 Dictionaries are shown as key-value pairs enclosed within a set braces.
@@ -146,6 +176,22 @@ You can arrange dictionary key-value pairs horizontally by setting the `@show_di
     <source media="(prefers-color-scheme: dark)" srcset="../assets/rendering/collections/dicts_row_dark.png">
     <source media="(prefers-color-scheme: light)" srcset="../assets/rendering/collections/dicts_row.png">
     <img alt="Screenshot of dictionaries rendered as rows in Rubberize" src="../assets/rendering/collections/dicts_row.png">
+</picture>
+
+### Dictionary Comprehension
+
+Dictionary comprehensions are rendered like so:
+
+```python
+%%tap
+a = (1, 2, 3, 4)
+{x: x**2 for x in a if x % 2 == 0}  # @nosub
+```
+
+<picture>
+    <source media="(prefers-color-scheme: dark)" srcset="../assets/rendering/collections/dict_comprehension_dark.png">
+    <source media="(prefers-color-scheme: light)" srcset="../assets/rendering/collections/dict_comprehension.png">
+    <img alt="Screenshot of dictionary comprehension in Rubberize" src="../assets/rendering/collections/dict_comprehension.png">
 </picture>
 
 ## Nesting Collections
