@@ -5,10 +5,8 @@ node types.
 import ast
 import copy
 import re
-import types
+from types import ModuleType
 from typing import Literal, Any, Optional, TypeVar
-
-from asteval import Interpreter
 
 from rubberize.config import parse_modifiers
 from rubberize.latexer.expr_rules import BIN_OPS
@@ -84,7 +82,11 @@ def get_object(
     node: ast.expr, namespace: Optional[dict[str, Any]]
 ) -> Optional[Any]:
     """Get the object of the expression node directly from a namespace
-    or by `eval()` using the namespace as globals.
+    or by `eval()` using the namespace as globals and a deepcopy of
+    referenced names as locals.
+
+    Deepcopy is needed to prevent changing mutable types when `eval()`
+    is run.
 
     Args:
         node: The expression node to lookup in the namespace or to be
@@ -106,19 +108,36 @@ def get_object(
             return obj
     if isinstance(node, ast.Constant):
         return node.value
-    try:
-        # Deepcopy referenced names to prevent changing mutable types
-        ref_names = {n.id for n in ast.walk(node) if isinstance(n, ast.Name)}
-        namespace_copy = namespace.copy() if namespace else {}
-        for name in ref_names:
-            if name in namespace_copy and not isinstance(
-                namespace_copy[name], types.ModuleType
-            ):
-                namespace_copy[name] = copy.deepcopy(namespace_copy[name])
 
-        aeval = Interpreter()
-        aeval.symtable.update(namespace_copy)
-        return aeval.eval(ast.unparse(node))
+    try:
+        if namespace is None:
+            return eval(ast.unparse(node))  # pylint: disable=eval-used
+
+        ref_names = {n.id for n in ast.walk(node) if isinstance(n, ast.Name)}
+
+        namespace_copy = {}
+        for name in ref_names:
+            if name not in namespace:
+                continue
+
+            name_obj = namespace[name]
+            if isinstance(name_obj, ModuleType):
+                continue
+
+            try:
+                import pint  # pylint: disable=import-outside-toplevel
+
+                if isinstance(name_obj, (pint.UnitRegistry, pint.Quantity)):
+                    # Pint quantities must always use the same unit registry
+                    continue
+            except ImportError:
+                pass
+
+            # Deepcopy referenced names to prevent changing mutable types
+            namespace_copy[name] = copy.deepcopy(name_obj)
+
+        # pylint: disable-next=eval-used
+        return eval(ast.unparse(node), namespace, namespace_copy)
     except NameError:
         return None
 
