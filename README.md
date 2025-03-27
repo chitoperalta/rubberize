@@ -60,6 +60,9 @@ playwright install chromium
 
 ## Basic Usage
 
+> [!WARNING]
+> **Use of `eval()`**: This project uses Python's built-in `eval()` to evaluate some expressions. Since it executes code already present in the input source (e.g., a Jupyter cell or script), it poses no additional risk in such environments. However, be cautious when handling untrusted inputs outside controlled settings.
+
 ### In Jupyter Notebooks
 
 Rubberize must be installed with `pip install rubberize[notebooks]`. Load the
