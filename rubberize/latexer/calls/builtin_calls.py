@@ -18,33 +18,34 @@ from rubberize.latexer.ranks import (
     BELOW_POW_RANK,
     BELOW_MULT_RANK,
     BELOW_ADD_RANK,
+    VALUE_RANK,
 )
 
 if TYPE_CHECKING:
     from rubberize.latexer.node_visitors import ExprVisitor
 
 
-def eval_and_convert(
+def get_result_and_convert(
     visitor: "ExprVisitor", call: ast.Call
 ) -> Optional[ExprLatex]:
-    """Common converter that unparses the call node, evaluates it, and
-    then converts the resulting object to latex."""
+    """Common converter that gets the resulting object of a call node's
+    call, and then converts the resulting object to latex."""
 
-    # pylint: disable-next=eval-used
-    obj = eval(ast.unparse(call), visitor.namespace)
+    obj = get_object(call, visitor.namespace)
     return convert_object(obj)
 
 
+# pylint: disable-next=too-many-arguments
 def wrap(
     visitor: "ExprVisitor",
     call: ast.Call,
     prefix: str,
     suffix: str,
     sep: str = r",\, ",
+    *,
+    rank: int = VALUE_RANK,
 ) -> ExprLatex:
     """Common converter that adds prefix and suffix to args."""
-
-    rank = get_rank(call)
 
     args_latex = [visitor.visit(a).latex for a in call.args]
     latex = format_elts(args_latex, sep, (prefix, suffix))
@@ -52,10 +53,10 @@ def wrap(
     return ExprLatex(latex, rank)
 
 
-def rename(visitor: "ExprVisitor", call: ast.Call, name: str) -> ExprLatex:
+def rename(
+    visitor: "ExprVisitor", call: ast.Call, name: str, *, rank: int = VALUE_RANK
+) -> ExprLatex:
     """Common converter that only changes the operator name."""
-
-    rank = get_rank(call)
 
     args_latex = [visitor.visit(a).latex for a in call.args]
     latex = name + format_elts(args_latex, r",\, ", (r"\left(", r"\right)"))
@@ -181,17 +182,18 @@ def _get_range_args(call: ast.Call) -> tuple[ast.expr, ast.expr, ast.expr]:
     return call.args[0], call.args[1], call.args[2]
 
 
-def _exp(visitor: "ExprVisitor", call: ast.Call) -> ExprLatex:
+def _exp(visitor: "ExprVisitor", call: ast.Call) -> Optional[ExprLatex]:
     """Convert an `exp` call."""
 
+    rank = BELOW_POW_RANK
     assert get_id(call.func) == "exp"
 
     if isinstance(call.args[0], ast.BinOp) and isinstance(
         call.args[0].op, ast.Div
     ):
-        return unary(visitor, call, r"\exp ")
+        return rename(visitor, call, r"\exp ")
 
-    return wrap(visitor, call, "e^{", "}")
+    return wrap(visitor, call, "e^{", "}", rank=rank)
 
 
 def _log(visitor: "ExprVisitor", call: ast.Call) -> ExprLatex:
@@ -265,11 +267,15 @@ def _sum_prod(visitor: "ExprVisitor", call: ast.Call) -> Optional[ExprLatex]:
 
 # fmt: off
 # pylint: disable=line-too-long
-register_call_converter("int", eval_and_convert)
-register_call_converter("float", eval_and_convert)
-register_call_converter("Decimal", eval_and_convert)
-register_call_converter("Fraction", eval_and_convert)
-register_call_converter("complex", eval_and_convert)
+register_call_converter("int", get_result_and_convert)
+register_call_converter("float", get_result_and_convert)
+register_call_converter("Decimal", get_result_and_convert)
+register_call_converter("Fraction", get_result_and_convert)
+register_call_converter("complex", get_result_and_convert)
+register_call_converter("list", get_result_and_convert)
+register_call_converter("tuple", get_result_and_convert)
+register_call_converter("set", get_result_and_convert)
+register_call_converter("dict", get_result_and_convert)
 register_call_converter("range", _range)
 register_call_converter("abs", lambda v, c: wrap(v, c, r"\left|", r"\right|"))
 register_call_converter("fabs", lambda v, c: wrap(v, c, r"\left|", r"\right|"))
@@ -284,8 +290,8 @@ register_call_converter("log", _log)
 register_call_converter("log10", lambda v, c: unary(v, c, r"\log"))
 register_call_converter("log1p", lambda v, c: wrap(v, c, r"\ln \left(1 +", r"\right)"))
 register_call_converter("log2", lambda v, c: unary(v, c, r"\log_{2} "))
-register_call_converter("sqrt", lambda v, c: wrap(v, c, r"\sqrt{", "}"))
-register_call_converter("cbrt", lambda v, c: wrap(v, c, r"\sqrt[3]{", "}"))
+register_call_converter("sqrt", lambda v, c: wrap(v, c, r"\sqrt{", "}", rank=BELOW_POW_RANK))
+register_call_converter("cbrt", lambda v, c: wrap(v, c, r"\sqrt[3]{", "}", rank=BELOW_POW_RANK))
 register_call_converter("sum", _sum_prod)
 register_call_converter("fsum", _sum_prod)
 register_call_converter("prod", _sum_prod)

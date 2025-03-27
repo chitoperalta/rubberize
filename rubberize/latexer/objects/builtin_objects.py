@@ -152,7 +152,7 @@ def _convert_fraction(obj: Fraction) -> ExprLatex:
     numerator = convert_int(obj.numerator)
     denominator = convert_int(obj.denominator)
     return ExprLatex(
-        r"\dfrac{" + numerator.latex + "}{" + denominator.latex + "}", DIV_RANK
+        r"\frac{" + numerator.latex + "}{" + denominator.latex + "}", DIV_RANK
     )
 
 
@@ -229,6 +229,9 @@ def _dict(obj: dict) -> Optional[ExprLatex]:
             return None
         obj_latex[key.latex] = value.latex
 
+    if not obj_latex:
+        return ExprLatex(r"\left\{\right\}", COLLECTIONS_RANK)
+
     if config.show_dict_as_col:
         elts = [rf"{k} &\to {v}" for k, v in obj_latex.items()]
         syntax = COLLECTIONS_COL[dict]
@@ -271,6 +274,6 @@ register_object_converter(Fraction, _convert_fraction)
 register_object_converter(complex, _complex)
 register_object_converter(list, _iters)
 register_object_converter(tuple, _iters)
-register_object_converter(set, lambda o: _iters(sorted(o)))
+register_object_converter(set, lambda o: _iters(set(sorted(o))))
 register_object_converter(dict, _dict)
 register_object_converter(range, _range)

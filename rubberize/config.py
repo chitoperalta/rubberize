@@ -20,6 +20,9 @@ class _ConfigDefaults:  # pylint: disable=too-many-instance-attributes
     # Name
     use_subscripts: bool = True
     use_symbols: bool = True
+    greek_starts: set[str] = field(
+        default_factory=lambda: {"Delta", "gamma", "phi", "psi"}
+    )
 
     # Display modes
     show_definition: bool = True
@@ -79,7 +82,7 @@ class _Config(_ConfigDefaults):
             if not hasattr(self, key):
                 raise AttributeError(f"Invalid config key: {key}")
 
-            if key in ("hidden_modules", "math_constants"):
+            if key in ("greek_starts", "hidden_modules", "math_constants"):
                 if not isinstance(value, (set, list, tuple)):
                     raise exceptions.RubberizeTypeError(
                         f"Invalid {key} type: {type(value)}"
@@ -121,6 +124,7 @@ class _Config(_ConfigDefaults):
         """Save the current config to a JSON file."""
 
         config_dict = asdict(self)
+        config_dict["greek_starts"] = list(config_dict["greek_starts"])
         config_dict["hidden_modules"] = list(config_dict["hidden_modules"])
         config_dict["math_constants"] = list(config_dict["math_constants"])
 
@@ -129,6 +133,16 @@ class _Config(_ConfigDefaults):
 
         with path.open("w", encoding="utf-8") as f:
             json.dump(config_dict, f, indent=4)
+
+    def add_greek_start(self, *modules: str) -> None:
+        """Add one or more modules to `greek_starts`."""
+
+        self.greek_starts.update(modules)
+
+    def remove_greek_start(self, *modules: str) -> None:
+        """Remove one or more modules from `greek_starts`."""
+
+        self.greek_starts.difference_update(modules)
 
     def add_hidden_module(self, *modules: str) -> None:
         """Add one or more modules to `hidden_modules`."""

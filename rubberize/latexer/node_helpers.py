@@ -5,7 +5,10 @@ node types.
 import ast
 import copy
 import re
+import types
 from typing import Literal, Any, Optional, TypeVar
+
+from asteval import Interpreter
 
 from rubberize.config import parse_modifiers
 from rubberize.latexer.expr_rules import BIN_OPS
@@ -104,8 +107,18 @@ def get_object(
     if isinstance(node, ast.Constant):
         return node.value
     try:
-        # pylint: disable-next=eval-used
-        return eval(ast.unparse(node), namespace)
+        # Deepcopy referenced names to prevent changing mutable types
+        ref_names = {n.id for n in ast.walk(node) if isinstance(n, ast.Name)}
+        namespace_copy = namespace.copy() if namespace else {}
+        for name in ref_names:
+            if name in namespace_copy and not isinstance(
+                namespace_copy[name], types.ModuleType
+            ):
+                namespace_copy[name] = copy.deepcopy(namespace_copy[name])
+
+        aeval = Interpreter()
+        aeval.symtable.update(namespace_copy)
+        return aeval.eval(ast.unparse(node))
     except NameError:
         return None
 
