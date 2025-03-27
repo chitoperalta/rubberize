@@ -1,7 +1,8 @@
 """Converters for Numpy calls"""
 
 import ast
-from typing import TYPE_CHECKING
+import copy
+from typing import Optional, TYPE_CHECKING
 
 import numpy as np  # pylint: disable=unused-import
 
@@ -48,30 +49,128 @@ def _cross(visitor: "ExprVisitor", call: ast.Call) -> ExprLatex:
     return ExprLatex(latex, rank)
 
 
+def _format_dims(visitor: "ExprVisitor", shape: ast.expr) -> Optional[str]:
+    """Format array dimensions from a node representing the shape
+    of the array.
+    """
+
+    if isinstance(shape, ast.Tuple):
+        dims_latex = [visitor.visit(e).latex for e in shape.elts]
+    else:
+        dims_latex = [visitor.visit(shape).latex]
+
+    if not dims_latex:
+        return None
+    if len(dims_latex) == 1:
+        dims_latex = ["1", dims_latex[0]]
+
+    return r" \times ".join(dims_latex)
+
+
+def _ones(visitor: "ExprVisitor", call: ast.Call) -> ExprLatex:
+    """Convert a `ones()` function call."""
+
+    assert get_id(call.func) == "ones"
+    dims_latex = _format_dims(visitor, call.args[0])
+    return ExprLatex(rf"\mathbf{{1}}_{{{dims_latex}}}")
+
+
+def _ones_like(visitor: "ExprVisitor", call: ast.Call) -> ExprLatex:
+    """Convert a `ones_like()` function call."""
+
+    assert get_id(call.func) == "ones_like"
+
+    if visitor.namespace is not None:
+        # Prevent substitution
+        visitor = copy.copy(visitor)
+        visitor.namespace = None
+
+    return ExprLatex(rf"\mathbf{{1}}_{{{visitor.visit(call.args[0]).latex}}}")
+
+
 def _zeros(visitor: "ExprVisitor", call: ast.Call) -> ExprLatex:
     """Convert a `zeros()` function call."""
 
     assert get_id(call.func) == "zeros"
+    dims_latex = _format_dims(visitor, call.args[0])
+    return ExprLatex(rf"\mathbf{{0}}_{{{dims_latex}}}")
 
-    if isinstance(call.args[0], ast.Tuple):
-        dims_latex = [visitor.visit(e).latex for e in call.args[0].elts]
-        if not dims_latex:
-            return ExprLatex("0")
-        if len(dims_latex) == 1:
-            dims_latex = ["1", dims_latex[0]]
 
-        return ExprLatex(r"\mathbf{0}_{" + r" \times ".join(dims_latex) + "}")
+def _zeros_like(visitor: "ExprVisitor", call: ast.Call) -> ExprLatex:
+    """Convert a `zeros_like()` function call."""
 
-    return ExprLatex(
-        r"\mathbf{0}_{1 \times " + visitor.visit(call.args[0]).latex + "}"
-    )
+    assert get_id(call.func) == "zeros_like"
+
+    if visitor.namespace is not None:
+        # Prevent substitution
+        visitor = copy.copy(visitor)
+        visitor.namespace = None
+
+    return ExprLatex(rf"\mathbf{{0}}_{{{visitor.visit(call.args[0]).latex}}}")
+
+
+def _eye(visitor: "ExprVisitor", call: ast.Call) -> ExprLatex:
+    """Convert an `eye()` function call."""
+
+    assert get_id(call.func) == "eye"
+
+    n_latex = visitor.visit(call.args[0]).latex
+    if len(call.args) == 2:
+        m_latex = visitor.visit(call.args[1]).latex
+        k_latex = None
+    elif len(call.args) >= 3:
+        m_latex = visitor.visit(call.args[1]).latex
+        k_latex = visitor.visit(call.args[2]).latex
+    else:
+        m_latex = None
+        k_latex = None
+
+    latex = r"\mathbf{I}_{" + n_latex
+    if m_latex is not None:
+        latex += rf" \times {m_latex}"
+    if k_latex is not None:
+        latex += rf"}}^{{\left( {k_latex} \right)"
+    latex += "}"
+
+    return ExprLatex(latex, BELOW_POW_RANK)
 
 
 def _identity(visitor: "ExprVisitor", call: ast.Call) -> ExprLatex:
-    """Convert an `identity()` or `eye()` function call."""
+    """Convert an `identity()` function call."""
 
-    assert get_id(call.func) in ("identity", "eye")
+    assert get_id(call.func) == "identity"
     return ExprLatex(r"\mathbf{I}_{" + visitor.visit(call.args[0]).latex + "}")
+
+
+def _full(visitor: "ExprVisitor", call: ast.Call) -> ExprLatex:
+    """Convert a `full()` function call."""
+
+    assert get_id(call.func) == "full"
+    rank = BELOW_MULT_RANK
+
+    dims_latex = _format_dims(visitor, call.args[0])
+    fill_latex = visitor.visit_opd(call.args[1], rank).latex
+    return ExprLatex(rf"{fill_latex} \cdot \mathbf{{1}}_{{{dims_latex}}}", rank)
+
+
+def _full_like(visitor: "ExprVisitor", call: ast.Call) -> ExprLatex:
+    """Convert a `full_like()` function call."""
+
+    assert get_id(call.func) == "full_like"
+    rank = BELOW_MULT_RANK
+
+    if visitor.namespace is not None:
+        # Prevent substitution
+        visitor = copy.copy(visitor)
+        visitor.namespace = None
+
+    fill_latex = visitor.visit_opd(call.args[1], rank).latex
+
+    return ExprLatex(
+        rf"{fill_latex} \cdot "
+        rf"\mathbf{{1}}_{{{visitor.visit(call.args[0]).latex}}}",
+        rank,
+    )
 
 
 def _transpose(visitor: "ExprVisitor", call: ast.Call) -> ExprLatex:
@@ -146,9 +245,14 @@ def _solve(visitor: "ExprVisitor", call: ast.Call) -> ExprLatex:
 # fmt: off
 register_call_converter("array", _array)
 register_call_converter("cross", _cross)
+register_call_converter("ones", _ones)
+register_call_converter("ones_like", _ones_like)
 register_call_converter("zeros", _zeros)
+register_call_converter("zeros_like", _zeros_like)
+register_call_converter("eye", _eye)
 register_call_converter("identity", _identity)
-register_call_converter("eye", _identity)
+register_call_converter("full", _full)
+register_call_converter("full_like", _full_like)
 register_call_converter("transpose", _transpose)
 register_call_converter("det", lambda v, c: unary(v, c, r"\det "))
 register_call_converter("matrix_rank", lambda v, c: unary(v, c, r"\operatorname{rank} "))

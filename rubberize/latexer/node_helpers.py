@@ -100,7 +100,7 @@ def get_object(
 
     if namespace and isinstance(node, ast.Attribute):
         module = get_object(node.value, namespace)
-        if module:
+        if module is not None:
             return getattr(module, node.attr)
     if namespace and isinstance(node, ast.Name):
         obj = namespace.get(node.id)
