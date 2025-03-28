@@ -52,6 +52,24 @@ Fraction("1/42")  # `Fraction`
     <img alt="Screenshot of real numbers in Rubberize" src="../assets/rendering/numbers/real_numbers.png">
 </picture>
 
+### Infinity and NaN
+
+Infinity and Not a Number values are rendered:
+
+```python
+%%tap
+a = 1e308 * 2  # Overflow result
+
+-a
+a * 0
+```
+
+<picture>
+    <source media="(prefers-color-scheme: dark)" srcset="../assets/rendering/numbers/special_values_dark.png">
+    <source media="(prefers-color-scheme: light)" srcset="../assets/rendering/numbers/special_values.png">
+    <img alt="Screenshot of special values in Rubberize" src="../assets/rendering/numbers/special_values.png">
+</picture>
+
 ### Number Formats
 
 For `float` and `Decimal` types, you can format the appearance of values using the `@num_format` config option (a `str`, default is `"FIX"`), to any of these values:
