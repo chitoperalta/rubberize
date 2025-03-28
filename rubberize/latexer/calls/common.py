@@ -33,9 +33,32 @@ def wrap(
     *,
     rank: int = VALUE_RANK,
 ) -> ExprLatex:
-    """Common converter that adds prefix and suffix to args."""
+    """Common converter that adds prefix, suffix, and separator to args."""
 
     args_latex = [visitor.visit(a).latex for a in call.args]
+    latex = format_elts(args_latex, sep, (prefix, suffix))
+
+    return ExprLatex(latex, rank)
+
+
+# pylint: disable-next=too-many-arguments
+def wrap_method(
+    visitor: "ExprVisitor",
+    call: ast.Call,
+    prefix: str,
+    suffix: str,
+    sep: str = r",\, ",
+    *,
+    rank: int = VALUE_RANK,
+) -> ExprLatex:
+    """Common converter that adds prefix, suffix, and separator to
+    attribute value and args."""
+
+    assert isinstance(call.func, ast.Attribute)
+
+    args_latex = [visitor.visit(call.func.value).latex]
+    for arg in call.args:
+        args_latex.append(visitor.visit(arg).latex)
     latex = format_elts(args_latex, sep, (prefix, suffix))
 
     return ExprLatex(latex, rank)
