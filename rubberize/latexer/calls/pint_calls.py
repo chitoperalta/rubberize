@@ -2,11 +2,8 @@
 
 import pint
 
+from rubberize.latexer.calls.common import get_result_and_convert, hide_method
 from rubberize.latexer.calls.convert_call import register_call_converter
-from rubberize.latexer.calls.builtin_calls import (
-    get_result_and_convert,
-    hide_method,
-)
 
 # fmt: off
 register_call_converter("Quantity", get_result_and_convert)
