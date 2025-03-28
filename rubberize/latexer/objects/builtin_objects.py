@@ -4,7 +4,7 @@ from decimal import Decimal
 from fractions import Fraction
 from math import floor, log10, isnan, isinf, copysign, degrees, isclose
 from cmath import polar
-from typing import Any, Optional
+from typing import Optional
 
 from rubberize import exceptions
 from rubberize.config import config
@@ -27,18 +27,6 @@ from rubberize.latexer.ranks import (
     BELOW_POW_RANK,
     DIV_RANK,
 )
-
-
-def get_repr_latex(obj: Any) -> ExprLatex:
-    """Common converter to get _repr_latex_() of the object."""
-
-    assert hasattr(obj, "_repr_latex_")
-    return ExprLatex(
-        # pylint: disable-next=protected-access
-        obj._repr_latex_()
-        .strip("$")
-        .replace(r"\displaystyle ", "")
-    )
 
 
 def convert_str(obj: str) -> ExprLatex:
