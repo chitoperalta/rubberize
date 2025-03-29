@@ -5,7 +5,7 @@ This guide demonstrates how Rubberize renders variables, with customizable optio
 Python variables are rendered considering the following rules:
 
 - **Single letters** are rendered in italics
-- **Multiple-letter chain** (i.e., words) appear roman.
+- **Multiple letter chain** (i.e., words) appear roman.
 
 ```python
 %%tap --dead --grid
@@ -53,9 +53,6 @@ When `@use_symbols=True`, Greek letters, accents, and modifier keywords are rend
 
 Python variable name parts that match Greek or Hebrew letter names are replaced with their corresponding symbols. For example, `alpha` becomes $\alpha$, and `Omega` becomes $\Omega$. Note that capital Greek letters resembling Latin letters (e.g., $\Alpha$) are excluded to avoid ambiguity.
 
-**(New in 0.2.1)** Base name parts that start with a Greek letter, such as `DeltaT` or `phiR_n` will have the Greek letter be rendered (e.g. $\Delta T$ or $\phi R_n$).
-
-
 ```python
 %%tap --dead -g
 x_gamma; Omega_b_o; delta_max; phiR_n
@@ -86,7 +83,13 @@ digamma; aleph; beth; gimel
     <img alt="Screenshot of all greek letters in Rubberize" src="../assets/rendering/variables/greek_letters_all.png">
 </picture>
 
-**(New in 0.2.1)** Note that due to name conflict with the Python `lambda` statement, `lambda_` can also be used to render a standalone $\lambda$. 
+Note that due to name conflict with the Python `lambda` statement, `lambda_` can also be used to render a standalone $\lambda$.
+
+### Variables with Starting Greek Letter
+
+Base name parts that start with `Delta`, `gamma`, `phi`, and `psi` will have the Greek letter be rendered (e.g., `DeltaT` becomes $\Delta T$).
+
+This is controlled by the `@greek_starts` config option (a `set`, default is `{"Delta", "gamma", "phi", "psi"}`). To add or remove Greek letters that should be rendered when it appears in the beginning of the base name part, use the functions `config.add_greek_start()` or `config.remove_greek_start()`, respectively.
 
 ### Accents and Modifiers
 
