@@ -57,7 +57,7 @@ class _ConfigDefaults:  # pylint: disable=too-many-instance-attributes
         default_factory=lambda: {"math", "sp", "np", "ureg"}
     )
     math_constants: set[str] = field(
-        default_factory=lambda: {"e", "pi", "varphi"}
+        default_factory=lambda: {"e", "pi", "phi", "varphi"}
     )
     show_list_as_col: bool = True
     show_tuple_as_col: bool = False
