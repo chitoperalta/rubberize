@@ -159,17 +159,20 @@ class StmtVisitor(ast.NodeVisitor):
             return StmtLatex(None, description)
 
         with config.override(**override):
+            lhs = definition(node.target, self.namespace)
             if node.value:
-                lhs = definition(node.target, self.namespace)
                 rhs = all_modes(node.value, self.namespace, node.target)
+            elif self.namespace:
+                rhs = result(node.target, self.namespace)
             else:
-                lhs, *rhs = all_modes(node.target, self.namespace)
+                rhs = None
             stmt_latex = StmtLatex(format_equation(lhs, rhs))
 
         if description:
             stmt_latex.desc = description
         return stmt_latex
 
+    # pylint: disable-next=too-many-return-statements
     def visit_If(self, node: ast.If) -> StmtLatex:
         """Visit an `if` statement."""
 
@@ -284,8 +287,12 @@ class StmtVisitor(ast.NodeVisitor):
                 if is_class(node.value, Table, self.namespace):
                     return convert_table(node.value, self.namespace)
 
-            lhs, *rhs = all_modes(node.value, self.namespace)
-            stmt_latex = StmtLatex(format_equation(lhs, rhs))
+            display_modes = all_modes(node.value, self.namespace)
+            if display_modes:
+                lhs, *rhs = all_modes(node.value, self.namespace)
+                stmt_latex = StmtLatex(format_equation(lhs, rhs))
+            else:
+                stmt_latex = StmtLatex(None)
 
         if description:
             stmt_latex.desc = description
