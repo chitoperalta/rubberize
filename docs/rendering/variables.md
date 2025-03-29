@@ -1,4 +1,7 @@
 # Variables
+
+This guide demonstrates how Rubberize renders variables, with customizable options on rendering subscripts, greek letters, accents and modifiers.
+
 Python variables are rendered considering the following rules:
 
 - **Single letters** are rendered in italics
