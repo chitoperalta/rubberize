@@ -8,7 +8,7 @@ import numpy as np  # pylint: disable=unused-import
 
 from rubberize.latexer.expr_latex import ExprLatex
 from rubberize.latexer.formatters import format_array
-from rubberize.latexer.calls.builtin_calls import unary
+from rubberize.latexer.calls.common import unary
 from rubberize.latexer.calls.convert_call import register_call_converter
 from rubberize.latexer.node_helpers import get_id, is_method
 from rubberize.latexer.ranks import BELOW_MULT_RANK, BELOW_POW_RANK

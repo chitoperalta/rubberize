@@ -10,6 +10,8 @@ from rubberize.latexer import (
     latexer,
     CalcSheet,
     Table,
+    ExprLatex,
+    StmtLatex,
     register_call_converter,
     register_object_converter,
 )
