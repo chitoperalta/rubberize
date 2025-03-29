@@ -9,11 +9,11 @@ This guide provides an overview of how Rubberize renders various Python expressi
 - [Numbers](numbers.md)
 - [Collections](collections.md)
 - [Other Built-in Types](builtins.md)
+- [Calls](calls.md)
+- [Custom Types and Calls](custom_types.md)
 - [Physical Quantities (Pint)](pint.md)
 - [Arrays (NumPy)](numpy.md)
 <!-- - [Algebraic Expressions](sympy.md) -->
-<!-- - [Calls](calls.md) -->
-- [Custom Types and Calls](custom_types.md)
 <!--
 - [Mathematical Operations](operations.md)
 
