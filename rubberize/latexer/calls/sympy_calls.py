@@ -7,7 +7,7 @@ import sympy as sp
 
 from rubberize import exceptions
 from rubberize.latexer.expr_latex import ExprLatex
-from rubberize.latexer.calls.builtin_calls import hide_method
+from rubberize.latexer.calls.common import hide_method
 from rubberize.latexer.calls.convert_call import register_call_converter
 from rubberize.latexer.node_helpers import get_id, is_method, is_class
 from rubberize.latexer.ranks import BELOW_MULT_RANK

@@ -4,7 +4,7 @@ from decimal import Decimal
 from fractions import Fraction
 from math import floor, log10, isnan, isinf, copysign, degrees, isclose
 from cmath import polar
-from typing import Any, Optional
+from typing import Optional
 
 from rubberize import exceptions
 from rubberize.config import config
@@ -27,18 +27,6 @@ from rubberize.latexer.ranks import (
     BELOW_POW_RANK,
     DIV_RANK,
 )
-
-
-def get_repr_latex(obj: Any) -> ExprLatex:
-    """Common converter to get _repr_latex_() of the object."""
-
-    assert hasattr(obj, "_repr_latex_")
-    return ExprLatex(
-        # pylint: disable-next=protected-access
-        obj._repr_latex_()
-        .strip("$")
-        .replace(r"\displaystyle ", "")
-    )
 
 
 def convert_str(obj: str) -> ExprLatex:
@@ -146,7 +134,7 @@ def _convert_special_num(obj: float | Decimal) -> ExprLatex | None:
     return None
 
 
-def _convert_fraction(obj: Fraction) -> ExprLatex:
+def _fraction(obj: Fraction) -> ExprLatex:
     """Converter for `Fraction` type object."""
 
     numerator = convert_int(obj.numerator)
@@ -270,7 +258,7 @@ register_object_converter(str, convert_str)
 register_object_converter(int, convert_int)
 register_object_converter(float, convert_num)
 register_object_converter(Decimal, convert_num)
-register_object_converter(Fraction, _convert_fraction)
+register_object_converter(Fraction, _fraction)
 register_object_converter(complex, _complex)
 register_object_converter(list, _iters)
 register_object_converter(tuple, _iters)
