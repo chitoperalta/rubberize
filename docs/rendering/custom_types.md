@@ -81,7 +81,7 @@ When creating an `ExprLatex` instance, you can specify a **rank** to indicate th
 A **rank** is actually an integer value, but `rubberize.latexer.ranks` provide self-explanatory helper constants for the assignment:
 
 | Helper Constant    | Rank Value | Helper Constant   | Rank Value |
-| ------------------ | ---------- | ----------------- | ---------- |
+|--------------------|------------|-------------------|------------|
 | `VALUE_RANK`       | `9_001`    | `DIV_RANK`        | `130`      |
 | `COLLECTIONS_RANK` | `180`      | `BELOW_MULT_RANK` | `129`      |
 | `POW_RANK`         | `150`      | `ADD_RANK`        | `120`      |
@@ -121,12 +121,12 @@ The register function takes **two arguments**:
 Rubberize has several ready-made call converter functions, all of which are available in `rubberize.latexer.calls.common`:
 
 | Converter                | Args in addition to<br>`visitor` and `call`        | Purpose                                                                                                                                                  |
-| ------------------------ | -------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------- |
+|--------------------------|----------------------------------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------|
 | `get_result_and_convert` | None                                               | Gets the resulting object of a call node's call, and then renders the resulting object.                                                                  |
 | `wrap`                   | `prefix, suffix[, sep=",\, ", *, rank=VALUE_RANK]` | Adds prefix (`prefix`), suffix (`suffix`), and optional separator (`sep`) to arguments. Can also be assigned a precedence rank (`rank`).                 |
 | `wrap_method`            | `prefix, suffix[, sep=",\, ", *, rank=VALUE_RANK]` | Same as `wrap`, but treats the attribute value as the first argument.                                                                                    |
 | `rename`                 | `name[, *, rank=VALUE_RANK]`                       | Changes the operator name to a specified one (`name`). Can also be assigned a precedence rank (`rank`).                                                  |
-| `unary`                  | `prefix[, suffix=""]`                              | Create an unary function using a prefix (`prefix`) and optional suffix (`suffix`) to render something like $\cos x$ instead of $\operatorname {cos}(x)$. |
+| `unary`                  | `prefix[, suffix=""]`                              | Create an unary function using a prefix (`prefix`) and optional suffix (`suffix`) to render something like $\cos x$ instead of $\cos(x)$.                |
 | `first_arg`              | None                                               | Returns only the first argument of the call, effectively hiding the call on the first arg.                                                               |
 | `hide_method`            | `cls`                                              | Renders the parent object of a method call if the parent matches `cls` and hides the method call and its arguments.                                      |
 
