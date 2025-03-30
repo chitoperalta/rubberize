@@ -95,7 +95,7 @@ of substitutions and results, formatting the output, and integrating Rubberize w
 other libraries such as [Pint](https://github.com/hgrecco/pint).
 
 For more detailed examples and advanced usage, please refer to the
-[Rubberize Documentation](docs/index.md).
+[Rubberize Documentation](https://github.com/chitoperalta/rubberize/blob/main/docs/index.md).
 
 ### As an API
 
@@ -116,7 +116,7 @@ namespace = {"a": 3, "b": 4, "c": 5.0}
 stmts_latex = rubberize.latexer(source, namespace)
 ```
 
-Please refer to the [API reference](docs/api_reference.md) section of the Rubberize
+Please refer to the [API reference](https://github.com/chitoperalta/rubberize/blob/main/docs/api_reference.md) (TODO) section of the Rubberize
 Documentation for more information.
 
 ## Why Those Names?

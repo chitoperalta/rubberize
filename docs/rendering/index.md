@@ -14,13 +14,11 @@ This guide provides an overview of how Rubberize renders various Python expressi
 - [Physical Quantities (Pint)](pint.md)
 - [Arrays (NumPy)](numpy.md)
 - [Operators and Expressions](expressions.md)
-<!-- - [Symbolic Expressions (SymPy)](sympy.md) -->
+- TODO [Symbolic Expressions (SymPy)](sympy.md)
 
-<!--
 ### Statements
-- [Assignments](assignments.md)
-- [Conditionals](conditionals.md)
-- [Function Definitions](funcdef.md)
-- [Calc Sheet Component](calcsheet_component.md)
-- [Table Component](table_component.md)
--->
+- TODO [Assignments](assignments.md)
+- TODO [Conditionals](conditionals.md)
+- TODO [Function Definitions](funcdef.md)
+- TODO [Calc Sheet Component](calcsheet_component.md)
+- TODO [Table Component](table_component.md)
