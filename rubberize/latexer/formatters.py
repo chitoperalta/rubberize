@@ -21,6 +21,9 @@ def format_name(name: str, *, call: bool = False) -> str:
     name according to LaTeX conventions, including symbol replacements,
     subscript handling, and function call formatting.
 
+    If symbols are enabled and the name starts in a specified allowed
+    starting greek letter, it gets rendered.
+
     If subscripts are enabled, underscores within the name are
     interpreted as subscripts, except for consecutive underscores
     (`__`), which are escaped as `\\_`. If subscripts are disabled, all
@@ -39,18 +42,21 @@ def format_name(name: str, *, call: bool = False) -> str:
         The formatted LaTeX string.
     """
 
-    if config.use_symbols:
-        if name == "lambda_":
-            # Special case: a name "lambda" conflicts with Python lambda
-            return _wrap_name(r"\lambda", call)
+    if config.use_symbols and name == "lambda_":
+        # Special case: a name "lambda" conflicts with Python lambda
+        return _wrap_name(r"\lambda", call)
 
-        name = _replace_greek_start(name)
+    leading, name, trailing = _split_escape_edge(name)
+
+    if config.use_symbols:
+        greek_start, name = _get_greek_start(name)
+        leading += greek_start
+
         name = _replace_greeks(name)
         name = _replace_accents(name)
         name = _replace_modifiers(name)
 
     if config.use_subscripts and "_" in name.strip("_"):
-        leading, name, trailing = _split_escape_edge(name)
         name = re.sub(r"__+", lambda m: r"\_" * (len(m.group()) - 1), name)
 
         base, *subs = re.split(r"(?<!\\)_", name)
@@ -62,20 +68,19 @@ def format_name(name: str, *, call: bool = False) -> str:
         subs = [_wrap_name(s) for s in subs]
         return f"{leading}{base}{trailing}_{{{', '.join(subs)}}}"
 
-    return _wrap_name(name.replace("_", r"\_"), call)
+    return f"{leading}{_wrap_name(name.replace('_', r'\_'), call)}{trailing}"
 
 
-def _replace_greek_start(name: str) -> str:
-    """If the beginning of the name is a Greek letter, replace it and
-    add space. e.g., Deltat -> \\Delta t."""
+def _get_greek_start(name: str) -> tuple[str, str]:
+    """If the beginning of the base name is a Greek letter, extract it."""
 
     base, *_ = name.split("_", 1)
 
     for greek in config.greek_starts:
         if base.startswith(greek) and base.replace(greek, "", 1):
-            return rf"\{greek} {name[len(greek):]}"
+            return rf"\{greek} ", f"{name[len(greek):]}"
 
-    return name
+    return "", name
 
 
 def _replace_greeks(name: str) -> str:
