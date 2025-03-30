@@ -130,7 +130,7 @@ a.to(ureg.N)
 
 ## What's Next?
 
-* Go back to [Expression and Statement Rendering](index.md) index to look at how other elements are rendered.
+Go back to [Expression and Statement Rendering](index.md) index to look at how other elements are rendered.
 
 [^1]: CGPM, "Resolution 10 of the 22nd General Conference on Weights and Measures (2003)," Bureau International des Poids et Mesures (BIPM). Available: https://www.bipm.org/en/committees/cg/cgpm/22-2003/resolution-10
 
