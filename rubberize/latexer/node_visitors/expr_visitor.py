@@ -120,7 +120,7 @@ class ExprVisitor(ast.NodeVisitor):
         rank = get_rank(node)
 
         op_latex = UNARY_OPS[type(node.op)]
-        opd = self.visit_opd(node.operand, rank)
+        opd = self.visit_opd(node.operand, rank, non_assoc=True)
         latex = op_latex + opd.latex
 
         return ExprLatex(latex, rank)
