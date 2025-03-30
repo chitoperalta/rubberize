@@ -1,27 +1,54 @@
+[build-system]
+requires = ["setuptools", "wheel"]
+build-backend = "setuptools.build_meta"
+
 [project]
 name = "rubberize"
-version = "0.2.1"
+dynamic = ["version"]
 description = "Turn Python calculations into well-formatted, math-rich documents."
-authors = [
-    {name = "Chito Peralta", email = "chitoangeloperalta@gmail.com"}
-]
-keywords = ["latex", "markdown", "jupyter", "notebook", "math", "engineering"]
-license = {file = "LICENSE"}
 readme = "README.md"
 requires-python = ">=3.11"
+license = {file = "LICENSE"}
+keywords = ["latex", "markdown", "jupyter", "notebook", "math", "engineering"]
+authors = [{name = "Chito Peralta", email = "chitoangeloperalta@gmail.com"}]
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Framework :: IPython",
+    "Framework :: Jupyter",
+    "Intended Audience :: Science/Research",
+    "Intended Audience :: Education",
+    "Intended Audience :: Developers",
+    "License :: OSI Approved :: MIT License",
+    "Natural Language :: English",
+    "Operating System :: OS Independent",
+    "Programming Language :: Python",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Topic :: Education",
+    "Topic :: Education :: Computer Aided Instruction (CAI)",
+    "Topic :: Scientific/Engineering",
+    "Topic :: Scientific/Engineering :: Mathematics",
+    "Topic :: Software Development :: Documentation",
+    "Topic :: Text Processing :: Markup :: LaTeX",
+    "Topic :: Text Processing :: Markup :: Markdown",
+    "Typing :: Typed",
+]
 dependencies = [
     "markdown>=3.7,<4.0",
-    "titlecase>=2.4.1,<3.0.0"
+    "titlecase>=2.4.1,<3.0.0",
 ]
 
 [project.optional-dependencies]
 notebook = [
     "ipython>=9.0.2,<10.0.0",
-    "playwright>=1.51.0,<2.0.0"
+    "playwright>=1.51.0,<2.0.0",
+    "nbconvert>=7.16.6,<8.0.0",
 ]
 dev = [
     "ipython>=9.0.2,<10.0.0",
     "playwright>=1.51.0,<2.0.0",
+    "nbconvert>=7.16.6,<8.0.0",
     "jupyterlab>=4.3.6,<5.0.0",
     "pint>=0.24.4,<0.25.0",
     "sympy>=1.13.3,<2.0.0",
@@ -29,15 +56,15 @@ dev = [
 ]
 
 [project.urls]
-repository = "https://github.com/chitoperalta/rubberize"
-homepage = "https://github.com/chitoperalta/rubberize"
-
-[build-system]
-requires = ["setuptools", "wheel"]
-build-backend = "setuptools.build_meta"
+Homepage = "https://github.com/chitoperalta/rubberize"
+Repository = "https://github.com/chitoperalta/rubberize"
+Documentation = "https://github.com/chitoperalta/rubberize/blob/main/docs/index.md"
 
 [tool.setuptools]
 include-package-data = true
+
+[tool.setuptools.dynamic]
+version = {attr = "rubberize.__version__"}
 
 [tool.setuptools.packages.find]
 include = ["rubberize", "rubberize.*"]
