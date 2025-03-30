@@ -1,6 +1,6 @@
-# Calls
+# Class and Function Calls
 
-This guide demonstrates how Rubberize renders various class, and function calls.
+This guide demonstrates how Rubberize renders various class and function calls.
 
 ## Class Calls
 
@@ -161,6 +161,12 @@ max_a_b(3, 9)
 </picture>
 
 If you want, you can use `register_call_converter()` to define how Rubberize should render a specific function call. For a step-by-step guide on creating custom converters, refer to the [Custom Calls](custom_types.md#creating-a-call-converter) guide.
+
+## Suppress Conversion of Calls
+
+If you want to stop Rubberize from rendering class and function calls based on special conversion rules and make them appear similar to unknown functions, set the `@convert_special_funcs` config option (a `bool`, default is `True`) to `False`.
+
+This might be useful for cases where the name of a custom function you are using is the same as one of the supported function names.
 
 ## What's Next?
 
