@@ -139,7 +139,7 @@ def _wrap_part(name: str, call: bool = False) -> str:
     if not _is_single_char_part(name):
         return r"\mathrm{" + name + "}"
 
-    return name
+    return f"{{{name}}}" if re.search(r"\^\{\*{1,4}\}$", name) else name
 
 
 def _is_single_char_part(part: str) -> bool:
