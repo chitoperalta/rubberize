@@ -87,6 +87,9 @@ ACCENTS: dict[str, str] = {
 MODIFIERS: dict[str, str] = {
     "_prime": "'",
     "_star": "^{*}",
+    "_sstar": "^{**}",
+    "_ssstar": "^{***}",
+    "_sssstar": "^{****}",
 }
 
 # Collections syntax
