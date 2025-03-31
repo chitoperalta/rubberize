@@ -21,6 +21,10 @@ def format_name(name: str, *, call: bool = False) -> str:
     name according to LaTeX conventions, including symbol replacements,
     subscript handling, and function call formatting.
 
+    Leading and trailing underscores are preserved and escaped. If
+    subscripts are enabled, trailing underscores are appended to the
+    base part instead of the subscript.
+
     If symbols are enabled and the name starts in a specified allowed
     starting greek letter, it gets rendered.
 
@@ -28,10 +32,6 @@ def format_name(name: str, *, call: bool = False) -> str:
     interpreted as subscripts, except for consecutive underscores
     (`__`), which are escaped as `\\_`. If subscripts are disabled, all
     underscores are escaped.
-
-    Leading and trailing underscores are preserved and escaped.
-    If subscripts are enabled, trailing underscores are appended to the
-    base instead of the subscript.
 
     Args:
         name: The identifier to be formatted.
@@ -44,7 +44,7 @@ def format_name(name: str, *, call: bool = False) -> str:
 
     if config.use_symbols and name == "lambda_":
         # Special case: a name "lambda" conflicts with Python lambda
-        return _wrap_name(r"\lambda", call)
+        return _wrap_part(r"\lambda", call)
 
     leading, name, trailing = _split_escape_edge(name)
 
@@ -56,19 +56,19 @@ def format_name(name: str, *, call: bool = False) -> str:
         name = _replace_accents(name)
         name = _replace_modifiers(name)
 
-    if config.use_subscripts and "_" in name.strip("_"):
+    if config.use_subscripts and "_" in name:
         name = re.sub(r"__+", lambda m: r"\_" * (len(m.group()) - 1), name)
 
         base, *subs = re.split(r"(?<!\\)_", name)
-        base = _wrap_name(base, call)
+        base = _wrap_part(base, call)
 
         if not subs:
             return f"{leading}{base}{trailing}"
 
-        subs = [_wrap_name(s) for s in subs]
+        subs = [_wrap_part(s) for s in subs]
         return f"{leading}{base}{trailing}_{{{', '.join(subs)}}}"
 
-    return f"{leading}{_wrap_name(name.replace('_', r'\_'), call)}{trailing}"
+    return f"{leading}{_wrap_part(name.replace('_', r'\_'), call)}{trailing}"
 
 
 def _get_greek_start(name: str) -> tuple[str, str]:
@@ -86,7 +86,7 @@ def _get_greek_start(name: str) -> tuple[str, str]:
 def _replace_greeks(name: str) -> str:
     """Replace Greek symbols in a name to LaTeX, e.g. beta -> \\beta."""
 
-    return "_".join(["\\" + n if n in GREEK else n for n in name.split("_")])
+    return "_".join([f"\\{n}" if n in GREEK else n for n in name.split("_")])
 
 
 def _replace_accents(name: str) -> str:
@@ -127,44 +127,46 @@ def _split_escape_edge(name: str) -> tuple[str, str, str]:
     return "", name, ""
 
 
-def _wrap_name(name: str, call: bool = False) -> str:
-    """Returns a name wrapped in \\mathrm if not a single-character name
-    when LaTeX string is rendered.
+def _wrap_part(name: str, call: bool = False) -> str:
+    """Returns a part wrapped in `\\mathrm` if not a single-character
+    part. If used for a function name (`call=True`), wraps the whole
+    part in `\\operatorname`.
     """
 
     if call:
         return r"\operatorname{" + name + "}"
 
-    if not _is_single_char(name):
+    if not _is_single_char_part(name):
         return r"\mathrm{" + name + "}"
 
     return name
 
 
-def _is_single_char(name: str) -> bool:
-    """Checks if the name (with all symbols converted) is a single
+def _is_single_char_part(part: str) -> bool:
+    """Checks if the part (with all symbols converted) is a single
     letter.
     """
 
-    # Remove modifiers
-    for modifier in MODIFIERS.values():
-        name = name.replace(modifier, "")
+    if config.use_symbols:
+        # Remove modifiers
+        for modifier in MODIFIERS.values():
+            part = part.replace(modifier, "")
 
-    # Remove accents
-    while True:
-        for accent in ACCENTS.values():
-            if name.startswith(accent + "{") and name.endswith("}"):
-                name = name[len(accent) + 1 : -1]
+        # Remove accents
+        while True:
+            for accent in ACCENTS.values():
+                if part.startswith(accent + "{") and part.endswith("}"):
+                    part = part[len(accent) + 1 : -1]
+                    break
+            else:
                 break
-        else:
-            break
 
     # Check if single greek letter after removing modifiers and accents
-    if len(name) > 1:
-        return name[1:] in GREEK
+    if len(part) > 1:
+        return part.lstrip("\\") in GREEK if config.use_symbols else False
 
     # Check if single character otherwise
-    return len(name) == 1
+    return len(part) == 1
 
 
 def format_equation(
