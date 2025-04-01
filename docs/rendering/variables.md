@@ -51,7 +51,7 @@ When `@use_symbols=True`, Greek letters, accents, and modifier keywords are rend
 
 ### Greek Letters
 
-Python variable name parts that match Greek or Hebrew letter names are replaced with their corresponding symbols. For example, `alpha` becomes $\alpha$, and `Omega` becomes $\Omega$. Note that capital Greek letters resembling Latin letters (e.g., $\Alpha$) are excluded to avoid ambiguity.
+Python variable name parts that match Greek or Hebrew letter names are replaced with their corresponding symbols. For example, `alpha` becomes $\alpha$, and `Omega` becomes $\Omega$. Note that capital Greek letters resembling Latin letters (e.g., A, B, etc.) are excluded.
 
 ```python
 %%tap --dead -g
@@ -69,7 +69,7 @@ These are all the Greek and Hebrew Letter names that are converted when used. Pa
 ```python
 %%tap --dead -g
 alpha; beta; Gamma, gamma; Delta, delta
-epsilon, varepsilon; zeta,; eta,; Theta, theta, vartheta
+epsilon, varepsilon; zeta; eta; Theta, theta, vartheta
 iota; kappa, varkappa; Lambda, lambda_; mu
 nu; Xi, xi; omicron; Pi, pi, varpi
 rho, varrho; Sigma, sigma, varsigma; tau; Upsilon, upsilon
@@ -91,6 +91,13 @@ Base name parts that start with `Delta`, `gamma`, `phi`, and `psi` will have the
 
 This is controlled by the `@greek_starts` config option (a `set`, default is `{"Delta", "gamma", "phi", "psi"}`). To add or remove Greek letters that should be rendered when it appears in the beginning of the base name part, use the functions `config.add_greek_start()` or `config.remove_greek_start()`, respectively.
 
+For example:
+
+```python
+config.add_greek_start("Sigma", "Pi")
+config.remove_hidden_module("gamma", "phi", "psi")
+```
+
 ### Accents and Modifiers
 
 Variable names with specific keywords after an underscore (e.g., `_hat`, `_bar`) are rendered with the corresponding accent or modifier. For instance, `x_hat` becomes $\hat{x}$, `S_star` becomes $S^{*}$ and `f_prime` becomes $f'$.
@@ -110,10 +117,12 @@ These are all the accents and modifiers that can be converted. Paste them in a c
 
 ```python
 %%tap --dead -g
-foo_hat; foo_widehat; foo_bar; foo_widebar; foo_tilde; foo_widetilde;
-foo_dot; foo_ddot; foo_dddot; foo_ddddot; foo_breve; foo_check;
-foo_acute; foo_grave; foo_ring; foo_mat; foo_vec; foo_vec2; foo_widevec2;
-foo_prime; foo_star;
+foo_hat; foo_widehat; foo_bar; foo_widebar;
+foo_tilde; foo_widetilde; foo_dot; foo_ddot;
+foo_dddot; foo_ddddot; foo_breve; foo_check;
+foo_acute; foo_grave; foo_ring; foo_mat;
+foo_vec; foo_vec2; foo_widevec2; foo_prime;
+foo_star; foo_sstar; foo_ssstar; foo_sssstar
 ```
 
 <picture>
@@ -128,6 +137,38 @@ foo_prime; foo_star;
 ### Disabling Symbols
 
 When `@use_symbols=False`, all greek, accent, and modifier keywords will be rendered exactly as they are typed but using a Roman font.
+
+### Attribute Access
+
+Attribute access is rendered the same as you would write it in Python. However, some module names, such as `math`, are skipped from being rendered, leaving only its attributes when displayed by Rubberize:
+
+```python
+import math
+
+class Foo:
+    def __init__(self):
+        self.bar = 42  # Instance attribute
+```
+```python
+%%tap
+foo = Foo()
+foo.bar  # Attribute access
+```
+
+<picture>
+    <source media="(prefers-color-scheme: dark)" srcset="../assets/rendering/variables/attribute_access_dark.png">
+    <source media="(prefers-color-scheme: light)" srcset="../assets/rendering/variables/attribute_access.png">
+    <img alt="Screenshot of attribute access in Rubberize" src="../assets/rendering/variables/attribute_access.png">
+</picture>
+
+Module names that are skipped are controlled by the `@hidden_modules` config option (a `set`, default is `{"math", "sp", "np", "ureg"}` for `math` module, conventional short names for SymPy and NumPy and Pint `UnitRegistry()` object). To add or remove hidden modules, use the functions `config.add_hidden_module()` or `config.remove_hidden_module()`, respectively.
+
+For example:
+
+```python
+config.add_hidden_module("scipy", "foo")
+config.remove_hidden_module("np")
+```
 
 ## What's Next?
 
