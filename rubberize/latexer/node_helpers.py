@@ -6,10 +6,10 @@ import ast
 import copy
 import re
 from types import ModuleType
-from typing import Literal, Any, Optional, TypeVar
+from typing import Any, Optional, TypeVar
 
-from rubberize.config import parse_modifiers
-from rubberize.latexer.expr_rules import BIN_OPS
+from rubberize.config import config, parse_modifiers
+from rubberize.latexer.expr_rules import BIN_OPS, GREEK
 from rubberize.utils import find_and_sub
 import rubberize.vendor.ast_comments as ast_c
 
@@ -154,11 +154,27 @@ def get_mult_infix(node: ast.BinOp, left_latex: str, right_latex: str) -> str:
     to avoid confusing it as another variable. Instead, variable names
     can be multiplied implicitly (e.g., a b instead of a·b).
 
-    There are also other cases where different multiplication symbols
-    are required, as discussed in this [issue][2] from latexify_py.
+    The decision on which multiplication symbol to use is governed by
+    this matrix, where rows are left operand types and columns are right
+    operand types:
+
+       * N -N  L -L  W -W  C -C  B -B  ? -?
+       N x  x     ⋅     ⋅     ⋅     ⋅  ⋅  ⋅
+      -N x  x     ⋅     ⋅     ⋅     ⋅  ⋅  ⋅
+       L ⋅  ⋅     ⋅  ⋅  ⋅  ⋅  ⋅  ⋅  ⋅  ⋅  ⋅
+      -L ⋅  ⋅     ⋅  ⋅  ⋅  ⋅  ⋅  ⋅  ⋅  ⋅  ⋅
+       W ⋅  ⋅  ⋅  ⋅  ⋅  ⋅  ⋅  ⋅  ⋅  ⋅  ⋅  ⋅
+      -W ⋅  ⋅  ⋅  ⋅  ⋅  ⋅  ⋅  ⋅  ⋅  ⋅  ⋅  ⋅
+       C ⋅  ⋅  ⋅  ⋅  ⋅  ⋅  ⋅  ⋅  ⋅  ⋅  ⋅  ⋅
+      -C ⋅  ⋅  ⋅  ⋅  ⋅  ⋅  ⋅  ⋅  ⋅  ⋅  ⋅  ⋅
+       B ⋅  ⋅     ⋅     ⋅     ⋅     ⋅  ⋅  ⋅
+      -B ⋅  ⋅     ⋅     ⋅     ⋅     ⋅  ⋅  ⋅
+       ? ⋅  ⋅  ⋅  ⋅  ⋅  ⋅  ⋅  ⋅  ⋅  ⋅  ⋅  ⋅
+      -? ⋅  ⋅  ⋅  ⋅  ⋅  ⋅  ⋅  ⋅  ⋅  ⋅  ⋅  ⋅
+
+    The operand type is defined in the `get_operand_type()` docstring.
 
     [1]: https://www.bipm.org/en/publications/si-brochure/
-    [2]: https://github.com/google/latexify_py/issues/89
 
     Args:
         node: The multiplication node to investigate.
@@ -171,78 +187,130 @@ def get_mult_infix(node: ast.BinOp, left_latex: str, right_latex: str) -> str:
 
     assert isinstance(node.op, ast.Mult)
 
-    left_type = get_operand_type(node.left, left_latex, "l")
-    right_type = get_operand_type(node.right, right_latex, "r")
+    left_type = get_operand_type(node.left, left_latex, is_left=True)
+    right_type = get_operand_type(node.right, right_latex, is_left=False)
 
-    if left_type in "n" and right_type in "n":
+    # print("LEFT:", left_latex, left_type)
+    # print("RIGHT:", right_latex, right_type)
+
+    if left_type[-1] == "N" and right_type[-1] == "N":
         return r" \times "
-    if right_type in "nu":
+    if right_type[-1] in "N?" or right_type[0] == "-":
         return BIN_OPS[ast.Mult].infix
-    if left_type in "bn":
+    if left_type[-1] in "NB":
         return r"\,"
-    if left_type in "amu" and right_type in "am":
+    if left_type[-1] == "L" and right_type == "L":
         return r"\,"
     return BIN_OPS[ast.Mult].infix
 
 
-# pylint: disable=too-many-return-statements
-def get_operand_type(
-    node: ast.expr, latex: str, pos: Literal["l", "r"]
-) -> Literal["n", "a", "m", "w", "f", "b", "u"]:
+# pylint: disable=too-many-return-statements,too-many-branches
+def get_operand_type(node: ast.expr, latex: str, is_left: bool) -> str:
     """Get the type of the operand of a binary operation.
 
     Args:
         node: Operand node to investigate.
         latex: LaTeX representation of the operand.
-        pos: Whether the node is left (`"l"`) or right (`"r"`) operand.
+        left: Whether the node is a left operand.
 
     Returns:
         Any one of the following literals
 
-        - `"n"`: Operand is a numeric.
-        - `"a"`: Operand is a single Latin alphabet letter.
-        - `"m"`: Operand is a mathematical symbol (e.g. Greek letter).
-        - `"w"`: Operand consists of multiple non-symbol characters.
-        - `"f"`: Operand is a function call.
-        - `"b"`: Operand is a wrapped nested operation.
-        - `"u"`: Operand is preceded by unary operator.
+        - `"N"`: Operand is a numeric value.
+        - `"L"`: Operand is a letter variable (a single-character base
+            name), including Greek letters.
+        - `"W"`: Operand is a word variables (with multiple characters
+            for base name).
+        - `"C"`: Operand is a function call.
+        - `"B"`: Operand is a bracketed expression.
+        - `"?"`: Operand is of other type.
+
+        Signed versions of each type are denoted by the `"-"` prefix.
     """
 
-    bracket_patterns = {
-        "r": re.compile(r"^\\left[^ ]+.*"),  # at start of LaTeX string
-        "l": re.compile(r".*\\right[^ ]+$"),  # at end of LaTeX string
-    }
-    word_patterns = {
-        "r": re.compile(r"^\\mathrm\{[^ ]+\}(_\{.*?\})?($| )"),  # at start
-        "l": re.compile(r"(^| )\\mathrm\{[^ ]+\}(_\{.*?\})?$"),  # at end
+    if latex == r"\mathrm{i}":
+        return "L"
+
+    call_re = (
+        r"(?:\\\w+ \\?\w+(?: \\?\w+)*"
+        # r"|\\sqrt(?:\[\d+\])?\{.*?\}"
+        r"|(?:\\operatorname\{[^}]+\}(?:_\{.*?\})?|\\\w+)"
+        r" \\left\([\s\S]*?\\right\))"
+    )
+    call_patterns = {
+        True: re.compile(f"{call_re}$"),
+        False: re.compile(f"^{call_re}"),
     }
 
-    if latex == r"\mathrm{i}":
-        return "m"
+    bracket_patterns = {
+        True: re.compile(r"(?:\\right[^ ,]+|\\end\{[^ },]+\})$"),
+        False: re.compile(r"^(?:\\left[^ ,]+|\\begin\{[^ },]+\})"),
+    }
+
+    greek_start_re = "|".join(map(re.escape, config.greek_starts))
+    word_re = rf"(?:\\(?:{greek_start_re}) )?" + r"\\mathrm\{.+\}(_\{.*?\})?"
+    word_patterns = {
+        True: re.compile(rf"(?:^|\ |\\\,){word_re}$"),
+        False: re.compile(f"^{word_re}"),
+    }
+
+    number_re = (
+        r"-?\d{1,3}(?:(?:\\,|\{[,.]\}|\\text\{’\})?\d{3})*"
+        r"(?:(?:\.|\{,\})?\d+)?"
+    )
+    number_patterns = {
+        True: re.compile(f"{number_re}$"),
+        False: re.compile(f"^{number_re}"),
+    }
+
+    while True:
+        if isinstance(node, ast.BinOp):
+            if isinstance(node.op, (ast.Div, ast.FloorDiv)):
+                return "B"
+            if isinstance(node.op, ast.Pow):
+                node = node.left
+            else:
+                node = node.right if is_left else node.left
+        elif isinstance(node, ast.Compare):
+            node = node.comparators[-1] if is_left else node.left
+        elif isinstance(node, ast.BoolOp):
+            node = node.values[-1] if is_left else node.values[0]
+        else:
+            break
+
+    if isinstance(node, ast.UnaryOp):
+        if isinstance(node.operand, ast.UnaryOp):
+            return "-B"  # Nested unaries are bracketed (e.g., -(-3))
+        return "-" + get_operand_type(
+            node.operand, latex.removeprefix("-"), is_left
+        )
 
     if isinstance(node, ast.Call):
-        return "f"
-    if bracket_patterns[pos].match(latex):
-        return "b"
-    if word_patterns[pos].match(latex):
-        return "w"
-    if (
-        latex[-1].isnumeric()
-        if pos == "l"
-        else latex.removeprefix("-")[0].isnumeric()
-    ):
-        return "n"
-    if isinstance(node, ast.UnaryOp):
-        return "u"
+        if get_id(node.func) == "sqrt":
+            return "B"
+        if call_patterns[is_left].search(latex):
+            return "C"
+    if bracket_patterns[is_left].search(latex):
+        return "B"
+    if word_patterns[is_left].search(latex):
+        return "W"
 
-    if isinstance(node, ast.BinOp):
-        node = node.right if pos == "l" else node.left
-    elif isinstance(node, ast.Compare):
-        node = node.comparators[-1] if pos == "l" else node.left
-    elif isinstance(node, ast.BoolOp):
-        node = node.values[-1] if pos == "l" else node.values[0]
+    number_search = number_patterns[is_left].search(latex)
+    if number_search:
+        return "-N" if number_search.group(0).startswith("-") else "N"
 
-    return "a" if isinstance(node, ast.Name) and len(node.id) == 1 else "m"
+    if isinstance(node, ast.Name):
+        # split "_" to get base
+        base = node.id.strip("_").split("_", 1)[0]
+
+        if (
+            (config.use_symbols and base in GREEK)
+            or (config.use_symbols and base[:-1] in config.greek_starts)
+            or len(base) == 1
+        ):
+            return "L"
+
+    return "?"
 
 
 def get_arg_ids(node: ast.arguments) -> set[str]:

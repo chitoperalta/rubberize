@@ -48,16 +48,35 @@ a ** b  # Exponentiation
 
 ### Contextual Multiplication Symbol
 
-By default, Rubberize infers which symbol to use for multiplication based on how the operands are rendered. In mathematical notation, different symbols such as the multiplication symbol ($\times$), a dot ($\cdot$), or implicit multiplication (a thin space) are used depending on readability and convention:
+By default, Rubberize infers which symbol to use for multiplication based on how the operands are rendered. In mathematical notation, different symbols such as the multiplication symbol ($\times$), a dot ($\cdot$), or implicit multiplication (a thin space) are used depending on readability and convention.
 
-|         L \ R |   + Number   | - Number | Single  |  Word   |  Call   | Bracketed |
-| ------------: | :----------: | :------: | :-----: | :-----: | :-----: | :-------: |
-|  **+ Number** | $\times$[^1] | $\times$ |  $\ $   |  $\ $   |  $\ $   |   $\ $    |
-|  **- Number** |   $\times$   | $\times$ |  $\ $   |  $\ $   |  $\ $   |   $\ $    |
-|    **Single** |   $\cdot$    | $\cdot$  |  $\ $   | $\cdot$ | $\cdot$ |  $\cdot$  |
-|      **Word** |   $\cdot$    | $\cdot$  | $\cdot$ | $\cdot$ | $\cdot$ |  $\cdot$  |
-|      **Call** |   $\cdot$    | $\cdot$  | $\cdot$ | $\cdot$ | $\cdot$ |  $\cdot$  |
-| **Bracketed** |   $\cdot$    | $\cdot$  |  $\ $   |  $\ $   |  $\ $   |   $\  $   |
+The following table illustrates how Rubberize determines the appropriate multiplication symbol based on the types of operands involved. The row (**L**) represents the left operand, and the column (**R**) represents the right operand. The intersection of a row and a column specifies the multiplication symbol used when those operand types are multiplied.
+
+The operand types are:
+
+- **N**: Numeric values (e.g., $3$, $-2.50$)
+- **L**: Letter variables (a single-character *base name*), including Greek letters, which are rendered in italics (e.g., $x$, $a_{\mathrm{foo}}$, $\epsilon$, $\Delta T$)
+- **W**: Word variables (with multiple characters for *base name*), which are rendered in Roman font (e.g., $\mathrm{foo}$, $\mathrm{var}_{a}$, $\Delta \mathrm{Temp}$)
+- **C**: Function (or class, or method) call. (e.g., $\cos \alpha$, $\mathrm{fcn}(a, b)$ )
+- **B**: Bracketed expressions
+- **?**: Other type not covered (should be explicit)
+
+Signed versions of each type are denoted by the **-** prefix.
+
+|  L \ R |  N  | -N  |  L  | -L  |  W  | -W  |  C  | -C  |  B  | -B  |  ?  | -?  |
+| -----: | :-: | :-: | :-: | :-: | :-: | :-: | :-: | :-: | :-: | :-: | :-: | :-: |
+|  **N** |  ×  |  ×  |     |  ⋅  |     |  ⋅  |     |  ⋅  |     |  ⋅  |  ⋅  |  ⋅  |
+| **-N** |  ×  |  ×  |     |  ⋅  |     |  ⋅  |     |  ⋅  |     |  ⋅  |  ⋅  |  ⋅  |
+|  **L** |  ⋅  |  ⋅  |     |  ⋅  |  ⋅  |  ⋅  |  ⋅  |  ⋅  |  ⋅  |  ⋅  |  ⋅  |  ⋅  |
+| **-L** |  ⋅  |  ⋅  |     |  ⋅  |  ⋅  |  ⋅  |  ⋅  |  ⋅  |  ⋅  |  ⋅  |  ⋅  |  ⋅  |
+|  **W** |  ⋅  |  ⋅  |  ⋅  |  ⋅  |  ⋅  |  ⋅  |  ⋅  |  ⋅  |  ⋅  |  ⋅  |  ⋅  |  ⋅  |
+| **-W** |  ⋅  |  ⋅  |  ⋅  |  ⋅  |  ⋅  |  ⋅  |  ⋅  |  ⋅  |  ⋅  |  ⋅  |  ⋅  |  ⋅  |
+|  **C** |  ⋅  |  ⋅  |  ⋅  |  ⋅  |  ⋅  |  ⋅  |  ⋅  |  ⋅  |  ⋅  |  ⋅  |  ⋅  |  ⋅  |
+| **-C** |  ⋅  |  ⋅  |  ⋅  |  ⋅  |  ⋅  |  ⋅  |  ⋅  |  ⋅  |  ⋅  |  ⋅  |  ⋅  |  ⋅  |
+|  **B** |  ⋅  |  ⋅  |     |  ⋅  |     |  ⋅  |     |  ⋅  |     |  ⋅  |  ⋅  |  ⋅  |
+| **-B** |  ⋅  |  ⋅  |     |  ⋅  |     |  ⋅  |     |  ⋅  |     |  ⋅  |  ⋅  |  ⋅  |
+|  **?** |  ⋅  |  ⋅  |  ⋅  |  ⋅  |  ⋅  |  ⋅  |  ⋅  |  ⋅  |  ⋅  |  ⋅  |  ⋅  |  ⋅  |
+| **-?** |  ⋅  |  ⋅  |  ⋅  |  ⋅  |  ⋅  |  ⋅  |  ⋅  |  ⋅  |  ⋅  |  ⋅  |  ⋅  |  ⋅  |
 
 You can turn off this feature and have Rubberize render all multiplication with dot ($\cdot$) by setting the `@use_contextual_mult` config option (a `bool`, default is `True`) to `False`.
 

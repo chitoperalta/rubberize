@@ -8,7 +8,9 @@ assigned a rank based on operator precedence.
 
 import re
 
-DECIMAL_PATTERN = r"\d{1,3}(?:[\s\\{.,'}]{2,3}?\d{3})*(?:.|\{,\})?\d+?"
+DECIMAL_PATTERN = (
+    r"\d{1,3}(?:(?:\\,|\{[,.]\}|\\text\{’\})?\d{3})*(?:(?:\.|\{,\})?\d+)?$"
+)
 
 
 def is_decimal_latex(latex: str) -> bool:

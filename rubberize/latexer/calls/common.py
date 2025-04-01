@@ -20,6 +20,8 @@ def get_result_and_convert(
     call, and then converts the resulting object to latex."""
 
     obj = get_object(call, visitor.namespace)
+    if obj is None:
+        return None
     return convert_object(obj)
 
 
