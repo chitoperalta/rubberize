@@ -8,7 +8,8 @@ dynamic = ["version"]
 description = "Turn Python calculations into well-formatted, math-rich documents."
 readme = "README.md"
 requires-python = ">=3.11"
-license = {file = "LICENSE"}
+license = "MIT"
+license-files = ["LICENSE"]
 keywords = ["latex", "markdown", "jupyter", "notebook", "math", "engineering"]
 authors = [{name = "Chito Peralta", email = "chitoangeloperalta@gmail.com"}]
 classifiers = [
@@ -18,7 +19,6 @@ classifiers = [
     "Intended Audience :: Science/Research",
     "Intended Audience :: Education",
     "Intended Audience :: Developers",
-    "License :: OSI Approved :: MIT License",
     "Natural Language :: English",
     "Operating System :: OS Independent",
     "Programming Language :: Python",
@@ -53,6 +53,7 @@ dev = [
     "pint>=0.24.4,<0.25.0",
     "sympy>=1.13.3,<2.0.0",
     "numpy>=2.2.4,<3.0.0",
+    "pytest>=8.3.5,<9.0.0"
 ]
 
 [project.urls]
