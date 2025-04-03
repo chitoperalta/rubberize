@@ -123,6 +123,25 @@ a not in A
     <img alt="Screenshot of unary operations in Rubberize" src="../assets/rendering/expressions/comparisons_dark.png">
 </picture>
 
+## Conditional Expressions
+
+Conditional *expressions* (not statements) are rendered like so:
+
+```python
+%%tap
+x = 3
+y = 1 if x > 0 else -1 if x < 0 else 0
+```
+
+<picture>
+    <source media="(prefers-color-scheme: dark)" srcset="../assets/rendering/expressions/ifexp_dark.png">
+    <source media="(prefers-color-scheme: light)" srcset="../assets/rendering/expressions/ifexp.png">
+    <img alt="Screenshot of conditional expressions in Rubberize" src="../assets/rendering/expressions/ifexp_dark.png">
+</picture>
+
+> [!NOTE]
+> Conditional *statements*, also known as if-elif-else blocks, are also [supported](conditionals.md).
+
 ## Operator Precedence
 
 Rubberize follows Python's standard operator precedence rules[^2] when deciding how to properly render an expression. when an operation already naturally follows the operator precedence, Rubberize renders it without any extra parentheses:
