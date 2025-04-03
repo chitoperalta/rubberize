@@ -17,7 +17,7 @@ This guide provides an overview of how Rubberize renders various Python expressi
 - TODO [Symbolic Expressions (SymPy)](sympy.md)
 
 ### Statements
-- TODO [Assignments](assignments.md)
+- [Assignments](assignments.md)
 - TODO [Conditionals](conditionals.md)
 - TODO [Function Definitions](funcdef.md)
 - TODO [Calc Sheet Component](calcsheet_component.md)
