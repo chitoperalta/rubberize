@@ -182,7 +182,7 @@ BIN_OPS: dict[type[ast.operator], _BinOpRule] = {
     ast.Div: _BinOpRule(r"\frac{", "}{", "}", left=_BinOpdRule(wrap=False), right=_BinOpdRule(wrap=False)),
     ast.Mod: _BinOpRule("", r" \mathbin{\%} ", "", right=_BinOpdRule(non_assoc=True)),
     # pylint: disable-next=line-too-long
-    ast.Pow: _BinOpRule("{", "}^{", "}", left=_BinOpdRule(non_assoc=True), right=_BinOpdRule(wrap=False)),
+    ast.Pow: _BinOpRule("", "^{", "}", left=_BinOpdRule(non_assoc=True), right=_BinOpdRule(wrap=False)),
     ast.LShift: _BinOpRule("", r" \ll ", "", right=_BinOpdRule(non_assoc=True)),
     ast.RShift: _BinOpRule("", r" \gg ", "", right=_BinOpdRule(non_assoc=True)),
     ast.BitOr: _BinOpRule("", r" \mathbin{|} ", ""),

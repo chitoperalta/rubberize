@@ -106,6 +106,13 @@ class ExprVisitor(ast.NodeVisitor):
         if is_unit_assignment(node, self.namespace):
             return self.visit_unit_assign(node, left, right)
 
+        if (
+            isinstance(node.op, ast.Pow)
+            and isinstance(node.left, ast.Name)
+            and ("^" in left.latex or "_{" in left.latex)
+        ):
+            left.latex = f"{{{left.latex}}}"
+
         if config.use_contextual_mult and isinstance(node.op, ast.Mult):
             infix = get_mult_infix(node, left.latex, right.latex)
             latex = op.prefix + left.latex + infix + right.latex + op.suffix

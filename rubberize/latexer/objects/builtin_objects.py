@@ -21,7 +21,9 @@ from rubberize.latexer.objects.convert_object import (
     register_object_converter,
 )
 from rubberize.latexer.ranks import (
+    VALUE_RANK,
     COLLECTIONS_RANK,
+    SIGNED_RANK,
     BELOW_ADD_RANK,
     BELOW_MULT_RANK,
     BELOW_POW_RANK,
@@ -42,7 +44,10 @@ def convert_int(obj: int) -> ExprLatex:
     """Converter for `int` type object."""
 
     thousands = THOUSANDS_SEPARATOR[config.thousands_separator]
-    return ExprLatex(f"{obj:,d}".replace(",", thousands))
+    return ExprLatex(
+        f"{obj:,d}".replace(",", thousands),
+        SIGNED_RANK if obj < 0.0 else VALUE_RANK,
+    )
 
 
 def convert_num(obj: float | Decimal) -> ExprLatex:
@@ -97,7 +102,7 @@ def convert_num(obj: float | Decimal) -> ExprLatex:
             result = base + r" \times 10^{" + str(int(exp)) + "}"
         return ExprLatex(result, BELOW_MULT_RANK)
 
-    return ExprLatex(result)
+    return ExprLatex(result, SIGNED_RANK if obj < 0.0 else VALUE_RANK)
 
 
 def _normalize_zero_float(num: float) -> float:
