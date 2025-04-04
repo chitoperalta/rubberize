@@ -18,7 +18,7 @@ This guide provides an overview of how Rubberize renders various Python expressi
 
 ### Statements
 - [Assignments](assignments.md)
-- TODO [Conditionals](conditionals.md)
+- [Conditional Statements](conditionals.md)
 - TODO [Function Definitions](funcdef.md)
 - TODO [Calc Sheet Component](calcsheet_component.md)
 - TODO [Table Component](table_component.md)
