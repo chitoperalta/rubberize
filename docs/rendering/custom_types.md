@@ -80,14 +80,19 @@ When creating an `ExprLatex` instance, you can specify a **rank** to indicate th
 
 A **rank** is actually an integer value, but `rubberize.latexer.ranks` provide self-explanatory helper constants for the assignment:
 
-| Helper Constant    | Rank Value | Helper Constant   | Rank Value |
-|--------------------|------------|-------------------|------------|
-| `VALUE_RANK`       | `9_001`    | `DIV_RANK`        | `130`      |
-| `COLLECTIONS_RANK` | `180`      | `BELOW_MULT_RANK` | `129`      |
-| `POW_RANK`         | `150`      | `ADD_RANK`        | `120`      |
-| `BELOW_POW_RANK`   | `149`      | `SUB_RANK`        | `120`      |
-| `MULT_RANK`        | `130`      | `BELOW_ADD_RANK`  | `119`      |
-
+| Helper Constant    | Rank Value |
+|--------------------|------------|
+| `VALUE_RANK`       | `9_001`    |
+| `COLLECTIONS_RANK` | `180`      |
+| `POW_RANK`         | `150`      |
+| `SIGNED_RANK`      | `140`      |
+| `BELOW_POW_RANK`   | `149`      |  
+| `MULT_RANK`        | `130`      |
+| `DIV_RANK`         | `130`      |
+| `BELOW_MULT_RANK`  | `129`      |
+| `ADD_RANK`         | `120`      |
+| `SUB_RANK`         | `120`      |
+| `BELOW_ADD_RANK`   | `119`      |
 
 If no explicit rank is provided, it is assigned a rank of `VALUE_RANK`, which represents standalone values that do not require parentheses unless explicitly needed.
 
