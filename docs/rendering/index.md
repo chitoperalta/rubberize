@@ -14,14 +14,14 @@ This guide provides an overview of how Rubberize renders various Python expressi
 - [Physical Quantities (Pint)](pint.md)
 - [Arrays (NumPy)](numpy.md)
 - [Operators and Expressions](expressions.md)
-- TODO [Symbolic Expressions (SymPy)](sympy.md)
+<!-- - TODO [Symbolic Expressions (SymPy)](sympy.md) -->
 
 ### Statements
 - [Assignments](assignments.md)
 - [Conditional Statements](conditionals.md)
-- TODO [Function Definitions](funcdef.md)
-- TODO [Calc Sheet Component](calcsheet_component.md)
-- TODO [Table Component](table_component.md)
+- [Function Definitions](funcdefs.md)
+<!-- - TODO [Calc Sheet Component](calcsheet_component.md)
+- TODO [Table Component](table_component.md) -->
 
 
 ## Supported Python Features (as of 0.3.x)
@@ -65,10 +65,10 @@ This table summarizes the Python features supported by Rubberize. Since Rubberiz
 
 | Feature                        | `ast` Node Name        | Support                 | Example Render                                               |
 | ------------------------------ | ---------------------- | ----------------------- | ------------------------------------------------------------ |
-| Function Definitions           | `FunctionDef`          | :white_check_mark:      | [See here](funcdef.md)                                       |
+| Function Definitions           | `FunctionDef`          | :white_check_mark:      | [See here](funcdefs.md)                                       |
 | Async Function Definitions     | `AsyncFunctionDef`     | :x:                     |                                                              |
 | Class Definitions              | `ClassDef`             | :x:                     |                                                              |
-| Return Statement               | `Return`               | :eight_spoked_asterisk: | Depends; [see here](funcdef.md)                              |
+| Return Statement               | `Return`               | :eight_spoked_asterisk: | Depends; [see here](funcdefs.md)                              |
 | Delete Statement               | `Delete`               | :x:                     |                                                              |
 | Assignments                    | `Assign`               | :white_check_mark:      | [See here](assignments.md)                                   |
 | Type Statement                 | `TypeAlias`            | :x:                     |                                                              |
