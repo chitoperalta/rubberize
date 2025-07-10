@@ -7,13 +7,13 @@ Welcome to **Rubberize**! This guide will help you get started with using Rubber
 
 ## Installation
 
-To install Rubberize for Jupyter Notebooks, run the following command:
+To install Rubberize and include dependencies that allow it to be used with Jupyter Notebooks:
 
 ```bash
 pip install rubberize[notebook]
 ```
 
-Additionally, you need to install [Playwright](https://playwright.dev)'s headless Chromium dependency, which is required for the PDF export functionality:
+Additionally, you will need to install [Playwright](https://playwright.dev)'s headless Chromium dependency, which is required for the PDF export functionality:
 
 ```bash
 playwright install chromium

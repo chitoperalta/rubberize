@@ -50,11 +50,15 @@ Install Rubberize with `pip`:
 pip install rubberize
 ```
 
-Rubberize is primarily built for Jupyter. To enable notebook magics:
+To include dependencies that allow Rubberize to be used with Jupyter Notebooks:
 
 ```bash
 pip install rubberize[notebook]
-# The headless chromium dependency of `playwright` also needs to be installed:
+```
+
+Additionally, you will need to install [Playwright](https://playwright.dev)'s headless Chromium dependency, which is required for the PDF export functionality:
+
+```bash
 playwright install chromium
 ```
 
@@ -142,13 +146,26 @@ Thank you for your support!
 
 ### Setting Up for Development
 
-To set up Rubberize for development, install the development dependencies:
+Clone the repository:
 
 ```bash
-pip install rubberize[dev]
+git clone https://github.com/chitoperalta/rubberize.git
+cd rubberize
 ```
 
-This will also install other libraries supported by Rubberize.
+Set up a virtual environment (recommended):
+
+```bash
+python -m venv .venv
+source .venv/bin/activate
+# Windows: .venv\Scripts\activate
+```
+
+Install Rubberize in editable mode with development dependencies:
+
+```bash
+pip install -e ".[dev]"
+```
 
 ## License
 
