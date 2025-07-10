@@ -68,7 +68,8 @@ def format_name(name: str, *, call: bool = False) -> str:
         subs = [_wrap_part(s) for s in subs]
         return f"{leading}{base}{trailing}_{{{', '.join(subs)}}}"
 
-    return f"{leading}{_wrap_part(name.replace('_', r'\_'), call)}{trailing}"
+    escaped_name = name.replace("_", r"\_")
+    return f"{leading}{_wrap_part(escaped_name, call)}{trailing}"
 
 
 def _get_greek_start(name: str) -> tuple[str, str]:
