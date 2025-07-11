@@ -2,9 +2,9 @@
 
 This guide demonstrates how Rubberize renders various class and function calls.
 
-## Class Calls
+## Built-in Class Calls
 
-Class calls to instantiate built-in types are rendered as the resulting instance, rather than as a function call:
+Class calls to instantiate built-in types are rendered as the resulting instance:
 
 ```python
 %%tap -g

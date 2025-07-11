@@ -33,7 +33,7 @@ You can change the grouping separator by setting the `@thousands_separator` conf
 
 ## Real Numbers
 
-A real number is distinguished from an integer by including a decimal point (to make it a `float`), by instantiating it as a `Decimal` from the `decimal` module, or by instantiating it as a `Fraction` from the `fractions` module.
+`float`, `Decimal`, and `Fraction` are formatted differently from `int`:
 
 ```python
 %%tap
@@ -54,7 +54,7 @@ Fraction("1/42")  # `Fraction`
 
 ### Infinity and NaN
 
-Infinity and Not a Number values are rendered:
+Infinity and Not a Number (NaN) values, which are special numbers, are rendered:
 
 ```python
 %%tap
@@ -152,7 +152,7 @@ str(math.cos(math.pi / 2))  # Actual value
 </picture>
 
 ## Complex Numbers
-Python uses `j` as the imaginary unit for `complex`, but Rubberize uses the standard $\mathrm{i}$ notation. Formatting rules for [real numbers](#real-numbers) also apply to both real and imaginary parts of a complex number.
+Rubberize uses the standard $\mathrm{i}$ notation for the imaginary unit. Formatting rules for [real numbers](#real-numbers) also apply to both real and imaginary parts of a complex number.
 
 If the complex number is `1j`, it is rendered as the imaginary unit $\mathrm{i}$. If the complex number is `0j`, it is rendered as zero.
 

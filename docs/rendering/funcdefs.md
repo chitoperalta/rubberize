@@ -44,7 +44,7 @@ f(3, 5)
     <img alt="Screenshot of function definition in Rubberize" src="../assets/rendering/funcdefs/funcdef.png">
 </picture>
 
-As seen from the example, Rubberize skips rendering for function docstrings. Similar to a basic function definition, the return statement is placed on the introductory expression as equal to the function signature. However, this time it will be followed by "$\text{where}$".
+As seen from the example, Rubberize skips rendering for function docstrings. Similar to a basic function definition, the return statement is placed on the introductory expression as equal to the function signature. However, this time it will be followed by the text "where".
 
 > [!NOTE]
 > Rubberize can only handle function definitions with **a single return statement as the last line** of the block, or **[piecewise functions](#piecewise-functions)**.
