@@ -2,10 +2,8 @@
 
 Pint's physical quantity types, which encapsulate numbers with units, are fully integrated into Rubberize. This guide demonstrates how Rubberize renders these quantities.
 
-Unit-aware calculations help ensure accuracy and consistency in computations by explicitly associating numerical values with their respective units. This reduces the risk of errors caused by unit mismatches. Pint is one of the most widely used tools in Python for working with units.
-
 > [!NOTE]
-> Familiarity with **Pint** is recommended for this guide. Pint is a powerful library widely used by engineers and scientists. [Learn more about Pint here](https://pint.readthedocs.io/en/stable/index.html).
+> Familiarity with **Pint** is recommended for this guide. Learn more about Pint [here](https://pint.readthedocs.io).
 
 ## Rendering Quantities
 
@@ -18,7 +16,7 @@ import pint
 ureg = pint.UnitRegistry()
 ```
 
-In the subsequent cells using `%%tap`, you can simply use the `UnitRegistry` instance to assign units to your variables. Rubberize heuristically recognizes when you intend to apply units, making the process seamless.
+In the subsequent code cells that use `%%tap`, you can simply use the `UnitRegistry` object to assign units to your variables. Rubberize heuristically recognizes when you intend to apply units.
 
 ```python
 %%tap

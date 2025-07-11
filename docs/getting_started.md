@@ -3,17 +3,17 @@
 Welcome to **Rubberize**! This guide will help you get started with using Rubberize in Jupyter Notebooks to render your calculations as beautifully typeset math.
 
 > [!TIP]
-> If you only plan to use Rubberize's functions in your scripts, you might want to go straight to the [API Reference](api_reference.md).
+> If you only plan to use Rubberize's functions in your scripts, you might want to go straight to the TODO [API Reference](api_reference.md).
 
 ## Installation
 
-To install Rubberize for Jupyter Notebooks, run the following command:
+To install Rubberize and include dependencies that allow it to be used with Jupyter Notebooks:
 
 ```bash
 pip install rubberize[notebook]
 ```
 
-Additionally, you need to install [Playwright](https://playwright.dev)'s headless Chromium dependency, which is required for the PDF export functionality:
+Additionally, you will need to install [Playwright](https://playwright.dev)'s headless Chromium dependency, which is required for the PDF export functionality:
 
 ```bash
 playwright install chromium
@@ -36,11 +36,11 @@ import rubberize
 %load_ext rubberize
 ```
 
-Rubberize loads its *cell magic* commands and CSS stylesheet, enabling you to use it in subsequent cells. **You only need to do this once per notebook session.**
+You only need to do this once per notebook session.
 
 ## Rendering Python Calculations
 
-Use the `%%tap` cell magic command **at the first line** of a code cell to render the entire cell as typeset math. For example, paste the following into a cell and run it:
+Use the `%%tap` cell magic command **at the first line** of a code cell to render the entire cell as typeset math:
 
 ```python
 %%tap
@@ -61,16 +61,14 @@ c = math.sqrt(a**2 + b**2)  # Length of the hypotenuse
 From the screenshot above, you can see the following:
 
 - `import` statements are ignored.
-- Comments are rendered as text, allowing you to add annotations or explanations directly in your code.
+- Comments are rendered as text annotations.
 - The expression `math.sqrt(a**2 + b**2)` is displayed in mathematical notation, with the substitution of known values and the final result shown.
 
-Rubberize can render different types of Python expressions and statements into beautifully formatted math and text. Whether you're working with mathematical formulas, loops, or conditionals, Rubberize ensures your code is presented clearly and effectively.
+Rubberize can render different types of Python expressions and statements into mathematical notation. For a breakdown on how specific constructs are handled, see the [Expression and Statement Rendering](rendering/index.md) guide.
 
-To see how Rubberize handles specific types of expressions and statements, see the [Expression and Statement Rendering](rendering/index.md) guide.
+### Grid Mode
 
-### Grid
-
-Use the `%%tap --grid` option to align statements in a N&times;4 grid. Note that annotations are ignored using this mode.
+Use the `--grid` flag (or `-g` for short) with `%%tap` to arrange statements in an N&times;4 grid. Note that all annotations are ignored in this mode.
 
 ```python
 %%tap --grid
@@ -84,9 +82,9 @@ a = 4; b = 5; c = 6; d = 7
     <img alt="Screenshot of a grid %%tap cell" src="assets/getting_started/grid_cell_dark.png">
 </picture>
 
-### Dead Cells
+### Dead Mode
 
-Use the `%%tap --dead` option to mark a cell as non-executable. Dead cells are rendered **but not executed**, allowing you to transform any valid syntax (but not necessarily runnable code) into an equation.
+Use the `--dead` flag with `%%tap` to suppress evaluation while still rendering the cell. This lets you transform any valid Python syntax&mdash;including code that isn't runnable, such as expressions with unbound variables&mdash;into mathematical notation.
 
 ```python
 %%tap --dead
@@ -99,15 +97,13 @@ y = m * x + b  # Slope-intercept form of a linear equation
     <img alt="Screenshot of a dead %%tap cell" src="assets/getting_started/dead_cell_dark.png">
 </picture>
 
-This is particularly useful for presenting theoretical concepts, incomplete code snippets, or equations that don't require execution.
-
 ### Getting the Output Source
 
-Use the `%%tap --html` option to get the HTML source of the cell output.
+Use the `--html` flag with `%%tap` to get the HTML source of the cell output. This is useful for inspecting the generated markup or integrating the output into external tools or documents.
 
 ## Formatting Annotations
 
-Rubberize supports [Markdown](https://www.markdownguide.org/basic-syntax/) in comments. Markdown allows you to format annotations directly within your code. Rubberize also provides these additional formatting syntaxes:
+Rubberize supports Markdown in comments so that you can style your text annotations. Rubberize also provides these additional formatting syntaxes:
 
 ```python
 %%tap
@@ -125,17 +121,14 @@ Rubberize supports [Markdown](https://www.markdownguide.org/basic-syntax/) in co
     <img alt="Screenshot of code cell with annotation formatting" src="assets/getting_started/formatting_annotations.png">
 </picture>
 
-Rubberize also supports alert boxes similar to GitHub's implementation and syntax to mark or highlight the rendered math expressions. See [Advanced Formatting](advanced_formatting.md) guide to learn about them.
+Rubberize also supports alert boxes similar to GitHub's implementation and syntax to mark or highlight the rendered math expressions. See TODO [Annotation Formatting](advanced_formatting.md) guide to learn about them.
 
 ## Units
 
-Scientists and engineers often work with physical quantities, which have *units*. Rubberize simplifies unit-aware calculations by integrating with [Pint](https://github.com/hgrecco/pint), which keeps track of physical quantities for you.
+Scientists and engineers often work with physical quantities&mdash;numbers that carry units. Rubberize simplifies unit-aware calculations by integrating with [Pint](https://github.com/hgrecco/pint), which automatically tracks and manages these quantities.
 
 > [!NOTE]
-> Pint is not a core dependency of `rubberize[notebook]`. If you want to work with units, you have to install it with:
-> ```bash
-> pip install pint
-> ```
+> Pint is not a core Rubberize dependency. You will need to install it separately. Refer to the [Pint documentation](https://pint.readthedocs.io) for details.
 
 ```python
 %%tap
@@ -155,9 +148,9 @@ c = np.sqrt(a**2 + b**2)  # Length of the hypotenuse
 
 ## Calculation Sheets
 
-In engineering reports, computed values are often compared against allowable limits to determine if a design is safe. Rubberize provides the `CalcSheet` class to aid users in creating reports by managing these comparisons, keeping the metadata for the calculation, and providing a formatted title heading.
+In engineering reports, computed values are often compared against allowable limits to determine if a design is safe. Rubberize provides the `CalcSheet` class to help organize these comparisons, manage related metadata, and generate a properly formatted heading for each calculation section.
 
-When starting a calculation for a component analysis, instantiate a `CalcSheet` with at least a name and section number. Adding `%%tap` with the instantiation will transform it into a calculation sheet heading:
+To begin a calculation (such as for a component analysis), create a `CalcSheet` instance with at least a section number and a name. Using `%%tap` with the instantiation transforms it into a styled heading for your report:
 
 ```python
 %%tap
@@ -180,7 +173,7 @@ sheet = rubberize.CalcSheet(
     <img alt="Screenshot of CalcSheet instantiation" src="assets/getting_started/calc_sheet.png">
 </picture>
 
-In subsequent cells, when you need to record a comparison, use the `check()` method of the `CalcSheet` object. This allows you to log a labeled comparison between computed and allowable values.
+In the subsequent cells, when you need to record a comparison, use the `check()` method of the `CalcSheet` object. This allows you to log a labeled comparison between computed and allowable values.
 
 ```
 %%tap
@@ -196,7 +189,7 @@ sheet.check("flexural strength", M_r, phi_b * M_n)
     <img alt="Screenshot of CalcSheet check" src="assets/getting_started/calc_sheet_check.png">
 </picture>
 
-Finally, when you're ready to determine whether the component being analyzed is safe, call the `conclude()` method. This automatically updates the conclusion based on all recorded comparisons.
+Finally, when you're ready to determine whether the component being analyzed is safe, call the `conclude()` method. This automatically renders the conclusion based on all recorded comparisons.
 
 ```
 %%tap
@@ -213,7 +206,14 @@ sheet.conclude(each_check=True)
 
 Normally, you would use a Pandas dataframe or another method to manipulate and present large tabular data in Rubberize.
 
-If you want to render a table within a cell with `%%tap` activated, you can use the `Table` class:
+If you want to render a table within a cell with `%%tap`, you can use the `Table` class of Rubberize:
+
+```python
+al_6061_t6 = [260.0 * ureg.MPa, 240.0 * ureg.MPa, 165 * ureg.MPa, 80 * ureg.MPa]
+al_6063_t5 = [150.0 * ureg.MPa, 110.0 * ureg.MPa, 115 * ureg.MPa, 55 * ureg.MPa]
+al_6063_t6 = [205.0 * ureg.MPa, 170.0 * ureg.MPa, 115 * ureg.MPa, 55 * ureg.MPa]
+al__strengths_data = [al_6061_t6, al_6063_t5, al_6063_t6]
+```
 
 ```python
 %%tap
@@ -237,73 +237,59 @@ al__strengths = rubberize.Table(
 
 ## Customizing Rubberize
 
-Rubberize allows you to customize how your code should be rendered by providing *`config` options* and *keywords* prefixed by `@`.
+Rubberize's rendering behavior can be customized using two mechanisms: **Config Options** and **Keywords**
 
-- **`config` Options** take values to provide detailed control over Rubberize's behavior. For example:
+- **Config Options** are settings that take values, giving you fine-grained control over how rubberize renders your code. For example:
 
     | `config` Option    | Type   | Purpose                                                                       |
     |--------------------|--------|-------------------------------------------------------------------------------|
     | `@use_symbols`     | `bool` | Whether to convert whole words as math symbols (e.g., `beta` &rarr; $\beta$). |
     | `@num_format_prec` | `int`  | Sets the display precision of numbers.                                        |
 
-- **Keywords**: These are single names that are shorthand for one or more configuration options. For example:
+- **Keywords** are shorthand names that represent one or more Config Options, allowing quick adjustments. For example:
 
     | Keyword  | Purpose                                                                                                                                                                        |
     |----------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
     | `@3`     | The number of decimal places to display for numeric results. Same as `@num_format_prec=3`.                                                                                     |
     | `@nosub` | Hides *substitution* and enables the display of *definition* and *results* of an expression. Shorthand for `@show_definition=True @show_substitution=False @show_result=True`. |
 
-In general, use **configuration options** for detailed control, and **keywords** for quick adjustments.
+Use Config Options when you need precise control, and Keywords for quick, common adjustments.
 
-See the [Config Reference](config_reference.md) to learn more about all available configuration.
+See the TODO [Config Reference](config_reference.md) to learn more about all available Config Options and Keywords.
 
-### Changing the Configuration
+### Applying Customizations
 
-There are four ways to apply configuration options and keywords:
+There are four ways to apply Config Options and Keywords:
 
-1. **By calling `config.set()`:** The method allows you to change the configuration **for the entire session**. This method can only take *`config` options* without an `@` prefix:
+1. **By passing Config Options as arguments to `config.set()`:** The method allows you to change the configuration **for the entire notebook session**. This method can only take Config Options without the `@` prefix:
 
     ```python
-    import rubberize
-
     rubberize.config.set(multiline=True, wrap_indices=False)
     ```
 
-    To reset the modified `config` option:
+    To reset the modified Config Option to defaults:
 
     ```python
-    rubberize.config.reset("show_substitution")
+    rubberize.config.reset("multiline", "wrap_indices")
     ```
 
-2. **By passing the configuration as an argument to `%%tap`:** This approach allows you to change the configure **for all lines in the cell**.
+2. **By passing Config Options and Keywords as arguments to `%%tap`:** This approach allows you to apply changes to **all lines in the rendered cell**.
 
     ```python
     %%tap  @use_symbols=False
-    omega_b = 1.67
+    omega_b = 1.67  # ASD
+    phi_b = 0.90  # LRFD
     ```
 
-    <picture>
-    <source media="(prefers-color-scheme: dark)" srcset="assets/getting_started/config_tap_argument_dark.png">
-    <source media="(prefers-color-scheme: light)" srcset="assets/getting_started/config_tap_argument.png">
-    <img alt="Screenshot of passing config arguments to %%tap" src="assets/getting_started/config_tap_argument.png">
-    </picture>
-
-3. **By adding to an inline comment:** This approach allows you to change the configuration **for the the line of code only**. Other lines will not be affected.
+3. **By adding Config Options and Keywords to an inline comment:** This approach allows you to customize **a single line of code**. Other lines will not be affected.
 
     ```python
     %%tap
-    apples__total = 104
-    n_b = 12  # @0 Number of students in class
-    apples_b = apples__total // n_b  # Number of apples per student
+    omega_b = 1.67  # @use_symbols=False ASD
+    phi_b = 0.90  # LRFD
     ```
 
-    <picture>
-    <source media="(prefers-color-scheme: dark)" srcset="assets/getting_started/config_inline_comment_dark.png">
-    <source media="(prefers-color-scheme: light)" srcset="assets/getting_started/config_inline_comment.png">
-    <img alt="Screenshot of adding config arguments to inline comment" src="assets/getting_started/config_inline_comment.png">
-    </picture>
-
-4. **By adding to a line comment:** The configuration set using this method will apply **to all subsequent lines**, until the next line comment is encountered.
+4. **By adding Config Options and Keywords to a line comment:** This approach allows you to apply customization **to all subsequent lines of code**, until the next line comment is encountered.
 
     ```python
     %%tap
@@ -324,9 +310,9 @@ There are four ways to apply configuration options and keywords:
 
 ## Exporting to PDF
 
-Rubberize allows you to export your Jupyter Notebook to a PDF file for technical reports. The exported PDF preserves rendered math and annotations for a polished presentation.
+Rubberize lets you export your Jupyter Notebook as a polished PDF report. Rendered math and annotations are preserved in the output, making it suitable for technical documentation.
 
-To export a single notebook to PDF, use the `export_notebook_to_pdf()` function in a module or a new notebook:
+To export a single notebook to PDF, use the export_notebook_to_pdf() function from a separate notebook or script:
 
 ```python
 from rubberize import export_notebook_to_pdf
@@ -334,13 +320,13 @@ from rubberize import export_notebook_to_pdf
 export_notebook_to_pdf("path/to/notebook.ipynb")
 ```
 
-This will generate a PDF file in the same directory as the notebook. You can specify an output file by passing `output=path/to/output/` as a function argument.
+This will generate a PDF file in the same directory as the notebook. You can specify an output file by passing `output="path/to/output/"` as an argument.
 
-By default, input cells are excluded in the PDF. To include them, pass `no_input=False` as a function argument.
+By default, input cells are excluded in the PDF. To include them, pass `no_input=False` as an argument.
 
 ### Exporting Multiple Notebooks
 
-If you have a directory containing multiple notebooks, you can export all of them to PDF as once:
+If you have a directory containing multiple notebooks, you can export all of them to separate PDF files at once:
 
 ```python
 export_notebook_to_pdf("path/to/notebooks_directory")

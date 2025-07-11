@@ -105,6 +105,7 @@ Variable names with specific keywords after an underscore (e.g., `_hat`, `_bar`)
 ```python
 %%tap --dead -g
 x_bar; k_hat; f_prime; L_star_a
+foo_prime; foo_star; foo_prime_prime; foo_delta_star
 ```
 
 <picture>
@@ -153,6 +154,7 @@ class Foo:
 %%tap
 foo = Foo()
 foo.bar  # Attribute access
+math.pi  # Hidden module name
 ```
 
 <picture>

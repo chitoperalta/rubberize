@@ -68,12 +68,12 @@ This table summarizes the Python features supported by Rubberize. Since Rubberiz
 | Function Definitions           | `FunctionDef`          | :white_check_mark:      | [See here](funcdefs.md)                                       |
 | Async Function Definitions     | `AsyncFunctionDef`     | :x:                     |                                                              |
 | Class Definitions              | `ClassDef`             | :x:                     |                                                              |
-| Return Statement               | `Return`               | :eight_spoked_asterisk: | Depends; [see here](funcdefs.md)                              |
+| Return Statement               | `Return`               | :large_orange_diamond: | Depends; [see here](funcdefs.md)                              |
 | Delete Statement               | `Delete`               | :x:                     |                                                              |
 | Assignments                    | `Assign`               | :white_check_mark:      | [See here](assignments.md)                                   |
 | Type Statement                 | `TypeAlias`            | :x:                     |                                                              |
 | Augmented Assignments (`+=`)   | `AugAssign`            | :x:                     |                                                              |
-| Annotated Assignments          | `AnnAssign`            | :eight_spoked_asterisk: | No effects; [see here](assignments.md#annotated-assignments) |
+| Annotated Assignments          | `AnnAssign`            | :large_orange_diamond: | No effect; [see here](assignments.md#annotated-assignments) |
 | For Loops                      | `For`                  | :x:                     |                                                              |
 | Async For Loops                | `AsyncFor`             | :x:                     |                                                              |
 | While Loops                    | `While`                | :x:                     |                                                              |
@@ -84,10 +84,10 @@ This table summarizes the Python features supported by Rubberize. Since Rubberiz
 | Raise Statements               | `Raise`                | :x:                     |                                                              |
 | Try Blocks                     | `Try`, `TryStar`       | :x:                     |                                                              |
 | Assert Statements              | `Assert`               | :x:                     |                                                              |
-| Import Statements              | `Import`, `ImportFrom` | :eight_spoked_asterisk: | Hidden                                                       |
+| Import Statements              | `Import`, `ImportFrom` | :large_orange_diamond: | Hidden                                                       |
 | Global Statements              | `Global`               | :x:                     |                                                              |
 | Nonlocal Statements            | `Nonlocal`             | :x:                     |                                                              |
 | Expression Statements          | `Expr`                 | :white_check_mark:      | [See here](expressions.md)                                   |
-| Pass Statements                | `Pass`                 | :eight_spoked_asterisk: | Hidden                                                       |
+| Pass Statements                | `Pass`                 | :large_orange_diamond: | Hidden                                                       |
 | Break Statements               | `Break`                | :x:                     |                                                              |
 | Continue Statements            | `Continue`             | :x:                     |                                                              |

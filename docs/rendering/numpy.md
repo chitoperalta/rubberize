@@ -3,7 +3,7 @@
 The rendering of NumPy's *n*-dimensional array type is supported by Rubberize. This guide demonstrates how Rubberize renders this type.
 
 > [!NOTE]
-> Familiarity with **NumPy** is recommended for this guide. NumPy provides arrays and routines for fast operations on arrays. [Learn more about NumPy here](https://numpy.org/doc/stable/).
+> Familiarity with **NumPy** is recommended for this guide. Learn more about NumPy [here](https://numpy.org/doc/stable/).
 
 ## Rendering Arrays
 
@@ -15,7 +15,7 @@ import numpy as np
 
 To create an array, you would use `np.array()`:
 
-> [!tip]
+> [!TIP]
 > For mathematical presentation, use the naming convention `..._mat` to render the variable in bold, as in textbooks.
 
 ```python
@@ -81,7 +81,7 @@ H_mat = np.full_like(E_mat, 420.0)
 
 ## Accessing Elements
 
-Access NumPy array elements similar to collection types:
+Access NumPy array elements similar to other collection types:
 
 ```python
 %%tap
