@@ -25,7 +25,7 @@ See: TODO [Annotation Formatting](annotation_formatting.md)
 
 Learn about all the configuration options and keywords Rubberize has to suit your needs.
 
-See: TODO [Config Reference](config_reference.md)
+See: [Config Reference](config_reference.md)
 
 ## API Reference
 

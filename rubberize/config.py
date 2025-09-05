@@ -17,22 +17,20 @@ from rubberize import exceptions
 class _ConfigDefaults:  # pylint: disable=too-many-instance-attributes
     """Default config."""
 
-    # Name
+    # Name options
     use_subscripts: bool = True
     use_symbols: bool = True
     greek_starts: set[str] = field(
         default_factory=lambda: {"Delta", "gamma", "phi", "psi"}
     )
+    hidden_modules: set[str] = field(
+        default_factory=lambda: {"math", "sp", "np", "ureg"}
+    )
 
-    # Display modes
-    show_definition: bool = True
-    show_substitution: bool = True
-    show_result: bool = True
-
-    # String display options
+    # Strings
     str_font: Literal["", "bf", "it", "rm", "sf", "tt"] = ""
 
-    # Number display options
+    # Numbers
     num_format: Literal["FIX", "SCI", "GEN", "ENG"] = "FIX"
     num_format_prec: int = 2
     num_format_max_digits: int = 15
@@ -44,28 +42,32 @@ class _ConfigDefaults:  # pylint: disable=too-many-instance-attributes
     use_polar: bool = False
     use_polar_deg: bool = True
 
-    use_inline_units: bool = True
-    use_dms_units: bool = False
-    use_fif_units: bool = False
-    fif_prec: int = 16
-
-    # Expressions
-    wrap_indices: bool = True
-    convert_special_funcs: bool = True
-    use_contextual_mult: bool = True
-    hidden_modules: set[str] = field(
-        default_factory=lambda: {"math", "sp", "np", "ureg"}
-    )
-    math_constants: set[str] = field(
-        default_factory=lambda: {"e", "pi", "phi", "varphi"}
-    )
+    # Collections
     show_list_as_col: bool = True
     show_tuple_as_col: bool = False
     show_set_as_col: bool = False
     show_dict_as_col: bool = True
 
-    # Statements
+    # Pint
+    use_inline_units: bool = True
+    use_dms_units: bool = False
+    use_fif_units: bool = False
+    fif_prec: int = 16
+
+    # Display modes
+    show_definition: bool = True
+    show_substitution: bool = True
+    show_result: bool = True
+
     multiline: bool = False
+    math_constants: set[str] = field(
+        default_factory=lambda: {"e", "pi", "phi", "varphi"}
+    )
+
+    # Expressions
+    wrap_indices: bool = True
+    convert_special_funcs: bool = True
+    use_contextual_mult: bool = True
 
 
 class _Config(_ConfigDefaults):
