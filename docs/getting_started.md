@@ -255,7 +255,7 @@ Rubberize's rendering behavior can be customized using two mechanisms: **Config 
 
 Use Config Options when you need precise control, and Keywords for quick, common adjustments.
 
-See the TODO [Config Reference](config_reference.md) to learn more about all available Config Options and Keywords.
+See the [Config Reference](config_reference.md) to learn more about all available Config Options and Keywords.
 
 ### Applying Customizations
 
@@ -280,6 +280,13 @@ There are four ways to apply Config Options and Keywords:
     omega_b = 1.67  # ASD
     phi_b = 0.90  # LRFD
     ```
+
+    > [!NOTE]
+    > For Config Options that take sets, wrap the set in quotes to avoid syntax errors:
+    > ```python
+    > %%tap @greek_starts='{"pi","nu"}'
+    > ...
+    > ```
 
 3. **By adding Config Options and Keywords to an inline comment:** This approach allows you to customize **a single line of code**. Other lines will not be affected.
 
