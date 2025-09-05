@@ -17,13 +17,18 @@ Config Options are name-value pairs (e.g., `@use_symbols=True`) that control how
 | `@greek_starts`   | `set[str]`[^1] | `{"Delta", "gamma", "phi", "psi"}` | Mathematical symbols (i.e., Greek letters) that will be rendered when it appears in the beginning of the base name, e.g., `DeltaT` becomes $\Delta T$. |
 | `@hidden_modules` | `set[str]`[^1] | `{"math", "sp", "np", "ureg"}`     | Names found in the set will be skipped from being rendered.                                                                                            |
 
+### String Types Rendering Options
+
+| Option      | Type  | Default | Description                                                                                                                                                                     |
+|-------------|-------|---------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| `@str_font` | `str` | `""`    | Set the $\LaTeX$ font style for `str` types. Options are `""` for default, `"bf"` for bold, `"it"` for italics, `"rm"` for roman, `"sf"` for sans serif, `"tt"` for typewriter. |
+
 ### Number Types Rendering Options
 
 > *Also see [numbers rendering guide](rendering/numbers.mds) for options for number types.*  
 
 | Option                   | Type    | Default | Description                                                                                                                                                                                                                                                                         |
 |--------------------------|---------|---------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| `@str_font`              | `str`   | `""`    | Set the $\LaTeX$ font style for `str` types. Options are `""` for default, `"bf"` for bold, `"it"` for italics, `"rm"` for roman, `"sf"` for sans serif, `"tt"` for typewriter.                                                                                                     |
 | `@num_format`            | `str`   | `"FIX"` | Set the number format used to render real number types. Options are `"FIX"` for fixed-point decimal notation, `"SCI"` for scientific notation, `"GEN"` for general notation, `"ENG"` for engineering notation.                                                                      |
 | `@num_format_prec`       | `int`   | `2`     | If `@num_format="FIX"`, set the **number of decimal digits** to be displayed. Otherwise, it is the **number of significant figures** to be displayed.                                                                                                                               |
 | `@num_format_max_digits` | `int`   | `15`    | Only works when `@num_format="FIX"`. Real numbers with more digits than this value will automatically switch to scientific notation for readability.                                                                                                                                |
