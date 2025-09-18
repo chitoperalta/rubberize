@@ -101,6 +101,12 @@ y = m * x + b  # Slope-intercept form of a linear equation
 
 Use the `--html` flag with `%%tap` to get the HTML source of the cell output. This is useful for inspecting the generated markup or integrating the output into external tools or documents.
 
+### Rendering and Loading Snippets
+
+The line magic `%tapload` behaves like Jupyter's built in `%loads`, but `%%tap` is added on the cell's first line. More info when you enter `%tapload?`.
+
+A Notebook encoded in the `py:percent` [format](https://jupytext.readthedocs.io/en/latest/formats-scripts.html#the-percent-format) can also be loaded across multiple `%%tap` cells using `%taploads`. More info when you enter `%taploads?`.
+
 ## Formatting Annotations
 
 Rubberize supports Markdown in comments so that you can style your text annotations. Rubberize also provides these additional formatting syntaxes:
