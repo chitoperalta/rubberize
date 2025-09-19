@@ -89,19 +89,18 @@ def _set_taploads_queue(
 
 
 def _render_taploads_chunk(
-    chunk: tuple[str, str], provenance: str, global_tap_args: str
+    chunk: tuple[str, str], provenance: str, global_args: str
 ) -> str:
     marker, body = chunk
 
     if "[markdown]" in marker:
-        return "%%markdown\n" f"<!-- {provenance} -->\n" f"{body.rstrip()}"
+        return f"%%markdown\n<!-- {provenance} -->\n{body.rstrip()}"
 
-    tap_args = marker[3:].strip() if marker.startswith("tap") else ""
-    return (
-        f"%%tap {tap_args or global_tap_args}\n"
-        f"# {provenance}\n"
-        f"{body.rstrip()}"
-    )
+    if marker.startswith(("py", "code")):
+        return f"# {provenance}\n{body.rstrip()}"
+
+    args = marker[3:].strip() if marker.startswith("tap") else global_args
+    return f"%%tap {args}\n# {provenance}\n{body.rstrip()}"
 
 
 @magics_class
@@ -295,8 +294,9 @@ class RubberizeMagics(Magics):
 
         Splits the snippet on lines that begin with `# %%`. These cell
         types are recognized:
-        - `# %% tap [args]` => `%%tap [args]`
-        - `# %%` => `%%tap [global tap options, if any]`
+        - `# %%` => `%%tap`
+        - `# %% tap [ARGS]` => `%%tap [ARGS]`
+        - `# %% py` or `# %% code` => code cell without `%%tap`
         - `# %% [markdown]` => `%%markdown`
         """
 
