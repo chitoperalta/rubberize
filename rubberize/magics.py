@@ -89,19 +89,18 @@ def _set_taploads_queue(
 
 
 def _render_taploads_chunk(
-    chunk: tuple[str, str], provenance: str, global_tap_args: str
+    chunk: tuple[str, str], provenance: str, global_args: str
 ) -> str:
     marker, body = chunk
 
     if "[markdown]" in marker:
-        return "%%markdown\n" f"<!-- {provenance} -->\n" f"{body.rstrip()}"
+        return f"%%markdown\n<!-- {provenance} -->\n{body.rstrip()}"
 
-    tap_args = marker[3:].strip() if marker.startswith("tap") else ""
-    return (
-        f"%%tap {tap_args or global_tap_args}\n"
-        f"# {provenance}\n"
-        f"{body.rstrip()}"
-    )
+    if marker.startswith(("py", "code")):
+        return f"# {provenance}\n{body.rstrip()}"
+
+    args = marker[3:].strip() if marker.startswith("tap") else global_args
+    return f"%%tap {args}\n# {provenance}\n{body.rstrip()}"
 
 
 @magics_class
@@ -277,7 +276,7 @@ class RubberizeMagics(Magics):
     @argument(
         "--next",
         action="store_true",
-        help="Continue inserting remaining cells from the last %%taploads",
+        help="Insert the next cell in the queue. Alias is `%%tln`.",
     )
     @argument(
         "source",
@@ -295,8 +294,9 @@ class RubberizeMagics(Magics):
 
         Splits the snippet on lines that begin with `# %%`. These cell
         types are recognized:
-        - `# %% tap [args]` => `%%tap [args]`
-        - `# %%` => `%%tap [global tap options, if any]`
+        - `# %%` => `%%tap`
+        - `# %% tap [ARGS]` => `%%tap [ARGS]`
+        - `# %% py` or `# %% code` => code cell without `%%tap`
         - `# %% [markdown]` => `%%markdown`
         """
 
@@ -312,7 +312,7 @@ class RubberizeMagics(Magics):
         if args.next:
             queue = _get_taploads_queue(self.shell)
             if not queue:
-                error("Nothing to resume")
+                error("Nothing to continue")
                 return
 
             cur_chunk = queue.pop(0)
@@ -322,7 +322,8 @@ class RubberizeMagics(Magics):
             if remaining:
                 print(
                     f"Inserted next cell ({remaining} remaining). "
-                    "Run `%taploads --next` on the next cell again to continue."
+                    "Run `%taploads --next` or `%tln` on the next cell "
+                    "to continue."
                 )
             else:
                 print("Inserted the final cell. Done!")
@@ -344,10 +345,19 @@ class RubberizeMagics(Magics):
             _set_taploads_queue(self.shell, rest)
             print(
                 f"Inserted the first cell ({len(rest)} remaining). "
-                "Run `%taploads --next` on the next cell to continue."
+                "Run `%taploads --next` or `%tln` on the next cell "
+                "to continue."
             )
         else:
             print("Inserted the only cell. Done!")
 
         contents = _render_taploads_chunk(first, f"%taploads {line}", tap_args)
         self.shell.set_next_input(contents, replace=True)
+
+    @line_magic
+    def tln(self, _) -> None:
+        """Alias of `%taploads --next` to quickly insert the next queued
+        cell.
+        """
+
+        return self.taploads("--next")
