@@ -276,7 +276,7 @@ class RubberizeMagics(Magics):
     @argument(
         "--next",
         action="store_true",
-        help="Continue inserting remaining cells from the last %%taploads",
+        help="Insert the next cell in the queue. Alias is `%%tln`.",
     )
     @argument(
         "source",
@@ -312,7 +312,7 @@ class RubberizeMagics(Magics):
         if args.next:
             queue = _get_taploads_queue(self.shell)
             if not queue:
-                error("Nothing to resume")
+                error("Nothing to continue")
                 return
 
             cur_chunk = queue.pop(0)
@@ -322,7 +322,8 @@ class RubberizeMagics(Magics):
             if remaining:
                 print(
                     f"Inserted next cell ({remaining} remaining). "
-                    "Run `%taploads --next` on the next cell again to continue."
+                    "Run `%taploads --next` or `%tln` on the next cell "
+                    "to continue."
                 )
             else:
                 print("Inserted the final cell. Done!")
@@ -344,10 +345,19 @@ class RubberizeMagics(Magics):
             _set_taploads_queue(self.shell, rest)
             print(
                 f"Inserted the first cell ({len(rest)} remaining). "
-                "Run `%taploads --next` on the next cell to continue."
+                "Run `%taploads --next` or `%tln` on the next cell "
+                "to continue."
             )
         else:
             print("Inserted the only cell. Done!")
 
         contents = _render_taploads_chunk(first, f"%taploads {line}", tap_args)
         self.shell.set_next_input(contents, replace=True)
+
+    @line_magic
+    def tln(self, _) -> None:
+        """Alias of `%taploads --next` to quickly insert the next queued
+        cell.
+        """
+
+        return self.taploads("--next")
