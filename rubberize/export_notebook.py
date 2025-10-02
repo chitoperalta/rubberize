@@ -106,6 +106,7 @@ def _html_to_pdf_sync(path: Path, output: str | Path) -> None:
         browser = p.chromium.launch(headless=True)
         try:
             page = browser.new_page()
+            page.set_default_timeout(0)  # Large notebooks might load for >30s
             page.goto(f"file:///{path.resolve().as_posix()}")
             page.wait_for_function(_MATHJAX_WAITER)
             page.pdf(path=output, prefer_css_page_size=True, outline=True)
@@ -120,6 +121,7 @@ async def _html_to_pdf_async(path: Path, output: str | Path) -> None:
         browser = await p.chromium.launch(headless=True)
         try:
             page = await browser.new_page()
+            page.set_default_timeout(0)  # Large notebooks might load for >30s
             await page.goto(f"file:///{path.resolve().as_posix()}")
             await page.wait_for_function(_MATHJAX_WAITER)
             await page.pdf(path=output, prefer_css_page_size=True, outline=True)

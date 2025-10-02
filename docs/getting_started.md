@@ -103,7 +103,7 @@ Use the `--html` flag with `%%tap` to get the HTML source of the cell output. Th
 
 ### Rendering and Loading Snippets
 
-The line magic `%tapload` behaves like Jupyter's built in `%loads`, but `%%tap` is added on the cell's first line. More info when you enter `%tapload?`.
+The line magic `%tapload` behaves like Jupyter's built in `%load`, but `%%tap` is added on the cell's first line. More info when you enter `%tapload?`.
 
 A Notebook encoded in the `py:percent` [format](https://jupytext.readthedocs.io/en/latest/formats-scripts.html#the-percent-format) can also be loaded across multiple `%%tap` cells using `%taploads`. More info when you enter `%taploads?`.
 
@@ -346,6 +346,13 @@ export_notebook_to_pdf("path/to/notebooks_directory")
 ```
 
 The PDFs will be saved in a new directory named `<directory_name>_pdf` in the same location as the input directory.
+
+### Using Line Magic
+
+For convenience, the `%export` line magic is provided to run exports directly from inside a notebook. It wraps the same export functions but gives you a shorthand command. More info when you enter `%export?`.
+
+> [!note]
+> **Windows limitation:** `%export` behaves unexpectedly on Jupyter Lab installed on Windows. Please run the export functions directly from Python scripts instead.
 
 ## What's Next?
 

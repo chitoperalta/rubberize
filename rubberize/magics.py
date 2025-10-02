@@ -37,6 +37,10 @@ from rubberize.config import config
 from rubberize.latexer.latexer import latexer
 from rubberize.render.render import render
 from rubberize.config import parse_modifiers
+from rubberize.export_notebook import (
+    export_notebook_to_pdf,
+    export_notebook_to_html,
+)
 
 
 def _strip_magics(cell: str) -> str:
@@ -361,3 +365,37 @@ class RubberizeMagics(Magics):
         """
 
         return self.taploads("--next")
+
+    @magic_arguments()
+    @argument("input_path", help="Path to the ipynb notebook or directory")
+    @argument(
+        "output_path",
+        nargs="?",
+        help="Optional output path. If not provided, inferred from input path",
+    )
+    @argument(
+        "--to",
+        choices=["pdf", "html"],
+        default="pdf",
+        help="Export format (default is pdf)",
+    )
+    @argument(
+        "--show-input",
+        action="store_true",
+        help="Include code cells in the exported file (default is hidden)",
+    )
+    @line_magic
+    def export(self, line: str) -> None:
+        """Export a notebook or a directory of notebooks to PDF. Note
+        that batch export only works for exports to PDF."""
+
+        args = parse_argstring(self.export, line)
+
+        if args.to == "pdf":
+            export_notebook_to_pdf(
+                args.input_path, args.output_path, no_input=not args.show_input
+            )
+        elif args.to == "html":
+            export_notebook_to_html(
+                args.input_path, args.output_path, no_input=not args.show_input
+            )
