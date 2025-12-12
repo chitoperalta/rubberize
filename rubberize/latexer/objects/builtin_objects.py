@@ -36,7 +36,13 @@ def convert_str(obj: str) -> ExprLatex:
 
     # Mathjax doesn't always render ``...'' properly
     # so we use the unicode characters “...”
-    obj = r"\text" + config.str_font + r"{“" + obj.replace("_", r"\_") + r"”}"
+    obj = (
+        r"\text"
+        + config.str_font
+        + r"{“"
+        + obj.replace("_", r"\_").replace("#", "\uff03")
+        + r"”}"
+    )
     return ExprLatex(obj)
 
 
