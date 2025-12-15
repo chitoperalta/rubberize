@@ -20,8 +20,7 @@ This guide provides an overview of how Rubberize renders various Python expressi
 - [Assignments](assignments.md)
 - [Conditional Statements](conditionals.md)
 - [Function Definitions](funcdefs.md)
-<!-- - TODO [Calc Sheet Component](calcsheet_component.md)
-- TODO [Table Component](table_component.md) -->
+<!-- - TODO [Calc Sheet Component](calcsheet_component.md) -->
 
 
 ## Supported Python Features (as of 0.3.x)

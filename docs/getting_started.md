@@ -208,39 +208,6 @@ sheet.conclude(each_check=True)
     <img alt="Screenshot of CalcSheet conclude" src="assets/getting_started/calc_sheet_conclude.png">
 </picture>
 
-## Tables
-
-Normally, you would use a Pandas dataframe or another method to manipulate and present large tabular data in Rubberize.
-
-If you want to render a table within a cell with `%%tap`, you can use the `Table` class of Rubberize:
-
-```python
-al_6061_t6 = [260.0 * ureg.MPa, 240.0 * ureg.MPa, 165 * ureg.MPa, 80 * ureg.MPa]
-al_6063_t5 = [150.0 * ureg.MPa, 110.0 * ureg.MPa, 115 * ureg.MPa, 55 * ureg.MPa]
-al_6063_t6 = [205.0 * ureg.MPa, 170.0 * ureg.MPa, 115 * ureg.MPa, 55 * ureg.MPa]
-al__strengths_data = [al_6061_t6, al_6063_t5, al_6063_t6]
-```
-
-```python
-%%tap
-al__strengths = rubberize.Table(
-    al__strengths_data,
-    col_headers = [
-        r"$F_{\mathrm{tu}}$",
-        r"$F_{\mathrm{ty}}$",
-        r"$F_{\mathrm{tuw}}$",
-        r"$F_{\mathrm{tyw}}$",
-    ],
-    row_headers = ["6061-T6", "6063-T5", "6063-T6"]
-)
-```
-
-<picture>
-    <source media="(prefers-color-scheme: dark)" srcset="assets/getting_started/table_dark.png">
-    <source media="(prefers-color-scheme: light)" srcset="assets/getting_started/table.png">
-    <img alt="Screenshot of CalcSheet conclude" src="assets/getting_started/table.png">
-</picture>
-
 ## Customizing Rubberize
 
 Rubberize's rendering behavior can be customized using two mechanisms: **Config Options** and **Keywords**
