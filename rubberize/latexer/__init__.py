@@ -4,7 +4,6 @@ Python code source string.
 
 from rubberize.latexer.latexer import latexer
 from rubberize.latexer.components.calcsheet import CalcSheet
-from rubberize.latexer.components.table import Table
 from rubberize.latexer.expr_latex import ExprLatex
 from rubberize.latexer.stmt_latex import StmtLatex
 
