@@ -34,15 +34,26 @@ from rubberize.latexer.ranks import (
 def convert_str(obj: str) -> ExprLatex:
     """Converter for `str` type object."""
 
+    replacements = {
+        "\\": r"\\",
+        "{": r"\{",
+        "}": r"\}",
+        "$": r"\$",
+        # Prefer fullwidth variants for proper rendering on HTML convert
+        "_": "＿",
+        "^": "＾",
+        "#": "＃",
+        "%": "％",
+        "&": "＆",
+        "~": "〜",
+    }
+
+    for k, v in replacements.items():
+        obj = obj.replace(k, v)
+
     # Mathjax doesn't always render ``...'' properly
     # so we use the unicode characters “...”
-    obj = (
-        r"\text"
-        + config.str_font
-        + r"{“"
-        + obj.replace("_", r"\_").replace("#", "\uff03")
-        + r"”}"
-    )
+    obj = r"\text" + config.str_font + "{“" + obj + "”}"
     return ExprLatex(obj)
 
 
