@@ -13,12 +13,6 @@ To install Rubberize and include dependencies that allow it to be used with Jupy
 pip install rubberize[notebook]
 ```
 
-Additionally, you will need to install [Playwright](https://playwright.dev)'s headless Chromium dependency, which is required for the PDF export functionality:
-
-```bash
-playwright install chromium
-```
-
 ## Before You Begin
 
 Rubberize is designed for Jupyter Notebooks. To follow along with this guide:
@@ -287,9 +281,13 @@ There are four ways to apply Config Options and Keywords:
 
 ## Exporting to PDF
 
-Rubberize lets you export your Jupyter Notebook as a polished PDF report. Rendered math and annotations are preserved in the output, making it suitable for technical documentation.
+Rubberize lets you export your Jupyter Notebook as a polished PDF report using `jupyter nbconvert --to webpdf`. You will need to install [Playwright](https://playwright.dev)'s headless Chromium dependency, which is required for web PDF exporting:
 
-To export a single notebook to PDF, use the export_notebook_to_pdf() function from a separate notebook or script:
+```bash
+playwright install chromium
+```
+
+To export a single notebook to PDF, use the `export_notebook_to_pdf()` function from a separate notebook or script:
 
 ```python
 from rubberize import export_notebook_to_pdf
