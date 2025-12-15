@@ -459,17 +459,3 @@
         --rz-alert-color: unset;
     }
 }
-
-/* table */
-table.rz-table {
-    font-size: var(--jp-content-font-size1);
-}
-
-table.rz-table thead th {
-    text-align: center !important;
-}
-
-table.rz-table td span.mjx-full-width {
-    width: unset !important;
-    display: inline-block !important;
-}

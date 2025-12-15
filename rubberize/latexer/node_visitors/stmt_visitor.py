@@ -13,10 +13,6 @@ from rubberize.latexer.components.calcsheet import (
     convert_conclude_method,
     convert_calc_sheet,
 )
-from rubberize.latexer.components.table import (
-    Table,
-    convert_table,
-)
 from rubberize.latexer.expr_modes import (
     definition,
     substitution,
@@ -133,11 +129,10 @@ class StmtVisitor(ast.NodeVisitor):
             return StmtLatex(None, description)
 
         with config.override(**override):
-            if self.namespace:
-                if is_class(node.value, CalcSheet, self.namespace):
-                    return convert_calc_sheet(node.value, self.namespace)
-                if is_class(node.value, Table, self.namespace):
-                    return convert_table(node.value, self.namespace)
+            if self.namespace and is_class(
+                node.value, CalcSheet, self.namespace
+            ):
+                return convert_calc_sheet(node.value, self.namespace)
 
             lhs = self.visit_assign_targets(node.targets)
             rhs = all_modes(node.value, self.namespace, node.targets[0])
@@ -284,8 +279,6 @@ class StmtVisitor(ast.NodeVisitor):
                     return convert_check_method(node.value, self.namespace)
                 if is_method(node.value, CalcSheet, "conclude", self.namespace):
                     return convert_conclude_method(node.value, self.namespace)
-                if is_class(node.value, Table, self.namespace):
-                    return convert_table(node.value, self.namespace)
 
             display_modes = all_modes(node.value, self.namespace)
             if display_modes:

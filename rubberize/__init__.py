@@ -9,7 +9,6 @@ from rubberize.config import config
 from rubberize.latexer import (
     latexer,
     CalcSheet,
-    Table,
     ExprLatex,
     StmtLatex,
     register_call_converter,

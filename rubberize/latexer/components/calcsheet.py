@@ -14,7 +14,6 @@ from typing import Any, Optional
 from titlecase import titlecase
 
 from rubberize.config import config
-from rubberize.latexer.components.table import Table
 from rubberize.latexer.expr_modes import all_modes
 from rubberize.latexer.formatters import format_equation
 from rubberize.latexer.node_helpers import get_object
@@ -105,32 +104,6 @@ class CalcSheet:
         """Clear all check entries."""
 
         self.checks.clear()
-
-    def table(self) -> Table:
-        """Return a `Table` object summarizing the checks contained by
-        the instance.
-
-        When called as an expression statement (on its own on a single
-        line), the cell magic `%%tap` renders the `Table`.
-        """
-
-        col_headers = ["Required", "Capacity", "Utilization", "Result"]
-
-        table_data = []
-        row_headers = []
-        for check in self.checks.values():
-            row = [
-                check.left,
-                check.right,
-                f"{check.ratio:.{config.num_format_prec}%}",
-                "PASS" if bool(check) else "FAIL",
-            ]
-            row_headers.append(titlecase(getattr(check, "label")))
-            table_data.append(row)
-
-        return Table(
-            table_data, col_headers=col_headers, row_headers=row_headers
-        )
 
 
 @dataclass
