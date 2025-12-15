@@ -56,12 +56,6 @@ To include dependencies that allow Rubberize to be used with Jupyter Notebooks:
 pip install rubberize[notebook]
 ```
 
-Additionally, you will need to install [Playwright](https://playwright.dev)'s headless Chromium dependency, which is required for the PDF export functionality:
-
-```bash
-playwright install chromium
-```
-
 ## Basic Usage
 
 > [!WARNING]
