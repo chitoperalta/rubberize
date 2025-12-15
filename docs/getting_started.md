@@ -29,14 +29,11 @@ Rubberize is designed for Jupyter Notebooks. To follow along with this guide:
 
 ## Loading Rubberize
 
-To load Rubberize in your notebook, import it and use the `%load_ext` line magic:
+To load Rubberize in your notebook, use the `%load_ext` line magic:
 
 ```python
-import rubberize
 %load_ext rubberize
 ```
-
-You only need to do this once per notebook session.
 
 ## Rendering Python Calculations
 

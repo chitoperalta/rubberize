@@ -73,7 +73,6 @@ Rubberize must be installed with `pip install rubberize[notebooks]`. Load the
 extension after importing:
 
 ```python
-import rubberize
 %load_ext rubberize
 ```
 
