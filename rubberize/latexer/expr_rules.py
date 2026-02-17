@@ -90,6 +90,12 @@ MODIFIERS: dict[str, str] = {
     "_sstar": "^{**}",
     "_ssstar": "^{***}",
     "_sssstar": "^{****}",
+    "_plusminus": r"^{\pm}",
+    "_minusplus": r"^{\mp}",
+    "_plus": "^{+}",
+    "_minus": "^{-}",
+    "_oplus": r"^{\oplus}",
+    "_ominus": r"^{\ominus}",
 }
 
 # Collections syntax
