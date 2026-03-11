@@ -518,29 +518,60 @@ def get_arg_ids(node: ast.arguments) -> set[str]:
     return idens
 
 
-def get_target_ids(body: list[ast.stmt]) -> set[str]:
-    """Get a set of all assignment target identifiers in a body.
+def get_store_ids(
+    node: ast.AST,
+    *,
+    stop: tuple[type, ...] = (),
+) -> set[str]:
+    """Get a set of identifiers appearing with ctx=ast.Store().
+
+    Traversal stops when encountering nodes of types in `stop`.
+
+    Args:
+        node: The ast node to investigate.
+    """
+
+    ids: set[str] = set()
+    stack = [node]
+
+    while stack:
+        cur = stack.pop()
+
+        if isinstance(cur, stop):
+            continue
+
+        if isinstance(cur, ast.Name) and isinstance(cur.ctx, ast.Store):
+            ids.add(cur.id)
+
+        stack.extend(ast.iter_child_nodes(cur))
+
+    return ids
+
+
+def get_body_store_ids(body: list[ast.stmt]) -> set[str]:
+    """Get a set of identifiers appearing with ctx=ast.Store() for
+    a list of ast.smt nodes.
 
     Args:
         body: The body to investigate
     """
 
-    idens: set[str] = set()
+    stop = (
+        ast.FunctionDef,
+        ast.AsyncFunctionDef,
+        ast.Lambda,
+        ast.ClassDef,
+        ast.ListComp,
+        ast.SetComp,
+        ast.DictComp,
+        ast.GeneratorExp,
+    )
 
+    ids: set[str] = set()
     for stmt in body:
-        if isinstance(stmt, ast.If):
-            idens.update(get_target_ids(stmt.body))
-        elif isinstance(stmt, ast.Assign):
-            for target in stmt.targets:
-                iden = get_id(target)
-                if iden:
-                    idens.add(iden)
-        elif isinstance(stmt, ast.AnnAssign):
-            iden = get_id(stmt.target)
-            if iden:
-                idens.add(iden)
+        ids |= get_store_ids(stmt, stop=stop)
 
-    return idens
+    return ids
 
 
 def is_pure_return_if(node: ast.If) -> bool:

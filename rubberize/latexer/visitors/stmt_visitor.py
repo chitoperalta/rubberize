@@ -46,7 +46,7 @@ class StmtVisitor(ast.NodeVisitor):
         ns = self.ns.copy() if self.ns else {}
 
         arg_ids = helpers.get_arg_ids(node.args)
-        body_ids = helpers.get_target_ids(node.body)
+        body_ids = helpers.get_body_store_ids(node.body)
 
         for iden in arg_ids | body_ids:
             ns.pop(iden, None)
