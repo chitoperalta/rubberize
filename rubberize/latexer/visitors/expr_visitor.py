@@ -114,12 +114,20 @@ class ExprVisitor(ast.NodeVisitor):
     def visit_Lambda(self, node: ast.Lambda) -> ExprLatex:
         """Visit an lambda expression."""
 
+        ns = self.ns.copy() if self.ns else {}
+
+        # shadow lambda args
+        for name in helpers.get_store_ids(node.args):
+            ns.pop(name, None)
+
+        visitor = ExprVisitor(ns)
+
         rank = ranks.get_rank(node)
 
         args_sep = rules.LAMBDA_ARGS_SEP
         args = [formatters.format_name(a.arg) for a in node.args.args]
         op = rules.LAMBDA_OP
-        body = self.visit_operand(node.body, rank).latex
+        body = visitor.visit_operand(node.body, rank).latex
 
         latex = f"{args_sep.join(args)}{op}{body}"
 
@@ -208,8 +216,17 @@ class ExprVisitor(ast.NodeVisitor):
     def visit_ListComp(self, node: ast.ListComp) -> ExprLatex:
         """Visit a list comprehension."""
 
-        elt = self.visit(node.elt).latex
-        comps = r",\, ".join(self.visit(c).latex for c in node.generators)
+        ns = self.ns.copy() if self.ns else {}
+
+        # shadow generator target args
+        for gen in node.generators:
+            for name in helpers.get_store_ids(gen.target):
+                ns.pop(name, None)
+
+        visitor = ExprVisitor(ns)
+
+        elt = visitor.visit(node.elt).latex
+        comps = r",\, ".join(visitor.visit(c).latex for c in node.generators)
 
         such_that = rules.COMP_SUCH_THAT
         prefix, _, suffix = rules.LIST_ROW_SYNTAX
@@ -224,8 +241,17 @@ class ExprVisitor(ast.NodeVisitor):
     def visit_SetComp(self, node: ast.SetComp) -> ExprLatex:
         """Visit a set comprehension."""
 
-        elt = self.visit(node.elt).latex
-        comps = r",\, ".join(self.visit(c).latex for c in node.generators)
+        ns = self.ns.copy() if self.ns else {}
+
+        # shadow generator target args
+        for gen in node.generators:
+            for name in helpers.get_store_ids(gen.target):
+                ns.pop(name, None)
+
+        visitor = ExprVisitor(ns)
+
+        elt = visitor.visit(node.elt).latex
+        comps = r",\, ".join(visitor.visit(c).latex for c in node.generators)
 
         such_that = rules.COMP_SUCH_THAT
         prefix, _, suffix = rules.SET_ROW_SYNTAX
@@ -240,11 +266,20 @@ class ExprVisitor(ast.NodeVisitor):
     def visit_DictComp(self, node: ast.DictComp) -> ExprLatex:
         """Visit a dict comprehension."""
 
-        key = self.visit(node.key).latex
-        value = self.visit(node.value).latex
+        ns = self.ns.copy() if self.ns else {}
+
+        # shadow generator target args
+        for gen in node.generators:
+            for name in helpers.get_store_ids(gen.target):
+                ns.pop(name, None)
+
+        visitor = ExprVisitor(ns)
+
+        key = visitor.visit(node.key).latex
+        value = visitor.visit(node.value).latex
 
         elt = f"{key}{rules.DICT_ROW_KV_SYNTAX}{value}"
-        comps = r",\, ".join(self.visit(c).latex for c in node.generators)
+        comps = r",\, ".join(visitor.visit(c).latex for c in node.generators)
 
         such_that = rules.COMP_SUCH_THAT
         prefix, _, suffix = rules.DICT_ROW_SYNTAX
@@ -259,8 +294,17 @@ class ExprVisitor(ast.NodeVisitor):
     def visit_GeneratorExp(self, node: ast.GeneratorExp) -> ExprLatex:
         """Visit a generator expression."""
 
-        elt = self.visit(node.elt).latex
-        comps = r",\, ".join(self.visit(c).latex for c in node.generators)
+        ns = self.ns.copy() if self.ns else {}
+
+        # shadow generator target args
+        for gen in node.generators:
+            for name in helpers.get_store_ids(gen.target):
+                ns.pop(name, None)
+
+        visitor = ExprVisitor(ns)
+
+        elt = visitor.visit(node.elt).latex
+        comps = r",\, ".join(visitor.visit(c).latex for c in node.generators)
 
         latex = f"{elt}{rules.COMP_SUCH_THAT}{comps}"
         rank = ranks.get_rank(node)
