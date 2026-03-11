@@ -3,7 +3,6 @@
 from __future__ import annotations
 
 import ast
-import copy
 from typing import TYPE_CHECKING
 
 import numpy as np
@@ -70,9 +69,7 @@ def _ones_like(visitor: ExprVisitor, node: ast.Call) -> ExprLatex | None:
     a_node = helpers.get_arg_node(node, 0, "a", required=True)
     shape_node = helpers.get_arg_node(node, 4, "shape")
 
-    if visitor.ns is not None:
-        visitor = copy.copy(visitor)
-        visitor.ns = None
+    visitor = common.no_substitution(visitor)
 
     if shape_node is not None:
         shape = _fmt_shape(visitor, shape_node)
@@ -102,9 +99,7 @@ def _zeros_like(visitor: ExprVisitor, node: ast.Call) -> ExprLatex | None:
     a_node = helpers.get_arg_node(node, 0, "a", required=True)
     shape_node = helpers.get_arg_node(node, 4, "shape")
 
-    if visitor.ns is not None:
-        visitor = copy.copy(visitor)
-        visitor.ns = None
+    visitor = common.no_substitution(visitor)
 
     if shape_node is not None:
         shape = _fmt_shape(visitor, shape_node)
@@ -174,9 +169,7 @@ def _full_like(visitor: ExprVisitor, node: ast.Call) -> ExprLatex | None:
     fill_node = helpers.get_arg_node(node, 1, "fill_value", required=True)
     shape_node = helpers.get_arg_node(node, 5, "shape")
 
-    if visitor.ns is not None:
-        visitor = copy.copy(visitor)
-        visitor.ns = None
+    visitor = common.no_substitution(visitor)
 
     if shape_node is not None:
         shape = _fmt_shape(visitor, shape_node)
