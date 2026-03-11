@@ -70,7 +70,7 @@ def test_tapload_big_text_prompt():
     assert shell.ask_called
 
 
-def test_tapload_cancel(monkeypatch):
+def test_tapload_cancel():
     class CancelShell(FakeShell):
         def ask_yes_no(self, *a, **k):  # type: ignore
             return False
@@ -123,7 +123,7 @@ def test_taploads_single_cell():
     assert "_taploads_queue" not in shell.user_ns
 
 
-def test_taploads_queue(monkeypatch):
+def test_taploads_queue():
 
     src = dedent(
         """
@@ -172,7 +172,7 @@ def test_taploads_next_empty(caplog):
     assert "Nothing to continue" in caplog.text
 
 
-def test_tln_alias(monkeypatch):
+def test_tln_alias():
     shell = FakeShell()
 
     m = tapload.TapLoadMagics(shell)
