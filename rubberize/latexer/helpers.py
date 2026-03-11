@@ -169,7 +169,7 @@ def get_desc(
             return None, {}
         node = inline
 
-    comment = node.value[1:].lstrip()
+    comment = node.value[1:]
 
     # temporarily remove inline rubberize
     dummy = "\ue000"
@@ -183,10 +183,17 @@ def get_desc(
         r"(?:=(?:{.*?}|\[.*?\]|\(.*?\)|\".*?\"|'.*?'|\S+))?)"
     )
     modifiers = [m.group(1) for m in re.finditer(modifier_re, comment)]
-    comment = re.sub(modifier_re, "", comment)
+    comment = re.sub(r"\s*" + modifier_re, "", comment)
 
     # unescape
     comment = comment.replace(r"\{{", "{{").replace(r"\@", "@")
+
+    # remove leading spaces
+    comment = comment.lstrip()
+
+    # normalize trailing spaces to 2 max
+    n_space = len(comment) - len(comment.rstrip())
+    comment = comment.rstrip() + " " * min(n_space, 2)
 
     # replace inline rubberize
     for i in inline_rzs:
