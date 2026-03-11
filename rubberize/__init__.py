@@ -17,6 +17,8 @@ from rubberize.render import render
 
 from rubberize.calcsheet import CalcSheet
 
+from rubberize.jupyter.export_notebook import export_notebook
+
 try:
     # requires Jupyter
     from rubberize.jupyter.ipython_extension import load_ipython_extension

@@ -41,7 +41,7 @@ def export_notebook(
     """Export a Jupyter notebook to specified fmt.
 
     Args:
-        path: The path to the notebook or directory to convert.
+        path: The path to the notebook or directory (PDF only) to convert.
         output: Optional output path. If None, uses the input path but
             with file extension changed to .pdf, or if input path is a
             directory, the output will be saved in a new sibling dir
