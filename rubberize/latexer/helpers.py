@@ -219,31 +219,7 @@ def is_class(node: ast.expr, cls: type, ns: dict[str, object] | None) -> bool:
 
     obj = get_object(node, ns)
 
-    return issubclass(type(obj), cls) or isinstance(obj, cls)
-
-
-def is_method(
-    node: ast.expr, cls: type, method: str, ns: dict[str, object] | None
-) -> bool:
-    """Check if the ast.expr node is a method call on a cls object.
-
-    Args:
-        node: The ast.expr node to investigate.
-        cls: Class to check against.
-        method: The method name.
-        ns: Name and object mapping.
-    """
-
-    if ns is None:
-        return False
-
-    return (
-        isinstance(node, ast.Call)
-        and isinstance(node.func, ast.Attribute)
-        and is_class(node.func.value, cls, ns)
-        and hasattr(cls, method)
-        and node.func.attr == method
-    )
+    return isinstance(obj, cls)
 
 
 def is_unit(node: ast.expr, ns: dict[str, object] | None) -> bool:
