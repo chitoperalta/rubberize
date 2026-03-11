@@ -504,12 +504,17 @@ def get_arg_ids(node: ast.arguments) -> set[str]:
         node: The ast.arguments node to investigate.
     """
 
-    idens = {a.arg for a in node.args}
-    idens.update(a.arg for a in node.kwonlyargs)
+    idens = {a.arg for a in node.posonlyargs}
+    idens.update(a.arg for a in node.args)
+
     if node.vararg:
         idens.add(node.vararg.arg)
+
+    idens.update(a.arg for a in node.kwonlyargs)
+
     if node.kwarg:
         idens.add(node.kwarg.arg)
+
     return idens
 
 
