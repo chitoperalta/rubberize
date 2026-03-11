@@ -3,6 +3,7 @@
 from textwrap import dedent
 
 import ast
+
 import pytest
 
 from rubberize._exceptions import RubberizeTypeError
