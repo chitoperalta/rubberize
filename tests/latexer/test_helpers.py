@@ -1,23 +1,29 @@
 # pylint: disable=all
 
+from textwrap import dedent
+
 import ast
 import pytest
 
+from rubberize._exceptions import RubberizeTypeError
 from rubberize.latexer import helpers, ranks
 from rubberize.latexer.visitors import ExprVisitor
 from rubberize.vendor import ast_comments as ast_c
 
 
 def _get_expr_ast(src: str) -> ast.expr:
-    """Helper function to parse an expression and return its AST node."""
     tree = ast_c.parse(src, mode="eval")
     return tree.body  # type: ignore
 
 
-def _get_stmt_ast(src: str) -> ast.expr:
-    """Helper function to parse an expression and return its AST node."""
+def _get_stmt_ast(src: str) -> ast.stmt:
     tree = ast_c.parse(src, mode="exec")
     return tree.body[0]  # type: ignore
+
+
+def _get_stmt_ast_body(src: str) -> list[ast.stmt]:
+    tree = ast_c.parse(src, mode="exec")
+    return tree.body  # type: ignore
 
 
 # -------
@@ -384,9 +390,9 @@ def test_is_ndarray_no_ns():
     assert helpers.is_unit(node, None) == False
 
 
-# -----------------
-# get_operand_type
-# -----------------
+# ----------------------------------
+# get_mult_infix / get_operand_type
+# ----------------------------------
 
 
 _opd_type_cases = {
@@ -453,3 +459,645 @@ def test_get_operand_type(src, is_left, expected):
     result = helpers.get_operand_type(node, latex, is_left=is_left)
 
     assert result == expected
+
+
+# ------------
+# is_str_expr
+# ------------
+
+
+@pytest.mark.parametrize(
+    "src, expected",
+    {
+        '"hello world"': True,
+        '"""hello\nworld"""': True,
+    }.items(),
+)
+def test_is_str_expr(src, expected):
+    node = _get_stmt_ast(src)
+    assert helpers.is_str_expr(node) == expected
+
+
+# ----------------
+# strip_docstring
+# ----------------
+
+
+def test_strip_docstring_async_function_def():
+    src = dedent(
+        '''
+        async def f():
+            """hello"""
+            x = 1
+        '''
+    )
+
+    node = _get_stmt_ast(src)
+    new = helpers.strip_docstring(node)
+
+    assert isinstance(new, ast.AsyncFunctionDef)
+    assert len(new.body) == 1
+    assert isinstance(new.body[0], ast.Assign)
+
+
+def test_strip_docstring_function_def():
+    src = dedent(
+        '''
+        def f():
+            """hello"""
+            x = 1
+        '''
+    )
+
+    node = _get_stmt_ast(src)
+    new = helpers.strip_docstring(node)
+
+    assert isinstance(new, ast.FunctionDef)
+    assert len(new.body) == 1
+    assert isinstance(new.body[0], ast.Assign)
+
+
+def test_strip_docstring_class_def():
+    src = dedent(
+        '''
+        class F:
+            """hello"""
+            x = 1
+        '''
+    )
+
+    node = _get_stmt_ast(src)
+    new = helpers.strip_docstring(node)
+
+    assert isinstance(new, ast.ClassDef)
+    assert len(new.body) == 1
+    assert isinstance(new.body[0], ast.Assign)
+
+
+def test_strip_docstring_module():
+    src = dedent(
+        '''
+        """hello"""
+        x = 1
+        '''
+    )
+
+    node = ast.parse(src, mode="exec")
+    new = helpers.strip_docstring(node)
+
+    assert len(new.body) == 1
+    assert isinstance(new.body[0], ast.Assign)
+
+
+def test_strip_docstring_empty_module():
+    node = ast.parse("", mode="exec")
+    new = helpers.strip_docstring(node)
+
+    assert len(new.body) == 0
+
+
+def test_strip_docstring_no_docstring_node():
+    src = dedent(
+        """
+        def f():
+            x = 1
+        """
+    )
+
+    node = _get_stmt_ast(src)
+    new = helpers.strip_docstring(node)
+
+    assert ast.dump(node) == ast.dump(new)
+
+
+def test_strip_docstring_no_docstring_supported_node():
+    src = dedent(
+        """
+        if x > 1:
+            a = True
+        """
+    )
+
+    node = _get_stmt_ast(src)
+    new = helpers.strip_docstring(node)
+
+    assert ast.dump(node) == ast.dump(new)
+
+
+def test_strip_docstring_after_comments():
+    src = dedent(
+        '''
+        def f():
+            # comment
+            # another comment
+            """hello"""
+            x = 1
+        '''
+    )
+
+    node = _get_stmt_ast(src)
+    new = helpers.strip_docstring(node)
+
+    assert isinstance(new, ast.FunctionDef)
+    assert len(new.body) == 3
+    assert isinstance(new.body[0], ast_c.Comment)
+    assert isinstance(new.body[1], ast_c.Comment)
+    assert isinstance(new.body[2], ast.Assign)
+
+
+def test_strip_docstring_does_not_modify_original():
+    src = dedent(
+        '''
+        def f():
+            """hello"""
+            x = 1
+        '''
+    )
+
+    node = _get_stmt_ast(src)
+    new = helpers.strip_docstring(node)
+
+    assert isinstance(node, ast.FunctionDef)
+    assert len(node.body) == 2
+    assert isinstance(new, ast.FunctionDef)
+    assert len(new.body) == 1
+
+
+# --------------------
+# strip_body_comments
+# --------------------
+
+
+def test_strip_body_comments():
+    src = dedent(
+        """
+        # hello
+        x = 1
+        # world
+        """
+    )
+
+    body = _get_stmt_ast_body(src)
+    new = helpers.strip_body_comments(body)
+
+    assert len(new) == 1
+    assert isinstance(new[0], ast.Assign)
+
+
+def test_strip_body_comments_removes_string_expr():
+    src = dedent(
+        """
+        "hello"
+        x = 1
+        """
+    )
+
+    body = _get_stmt_ast_body(src)
+    new = helpers.strip_body_comments(body)
+
+    assert len(new) == 1
+    assert isinstance(new[0], ast.Assign)
+
+
+def test_strip_body_comments_keeps_string_expr():
+    src = dedent(
+        """
+        "hello"
+        x = 1
+        """
+    )
+
+    body = _get_stmt_ast_body(src)
+    new = helpers.strip_body_comments(body, strip_str=False)
+
+    assert len(new) == 2
+    assert isinstance(new[0], ast.Expr)
+    assert isinstance(new[0].value, ast.Constant)
+    assert isinstance(new[1], ast.Assign)
+
+
+def test_strip_body_comments_does_not_modify_original():
+    src = dedent(
+        """
+        # hello
+        x = 1
+        """
+    )
+
+    body = _get_stmt_ast_body(src)
+    new = helpers.strip_body_comments(body)
+
+    assert len(body) == 2
+    assert len(new) == 1
+
+
+# ------------
+# get_arg_ids
+# ------------
+
+
+def test_get_arg_ids():
+    src = "def foo(a, b, /, c, d=1, *args, e, f=2, **kwargs): ..."
+    node = _get_stmt_ast(src)
+
+    assert isinstance(node, ast.FunctionDef)
+    args = helpers.get_arg_ids(node.args)
+
+    assert args == {"a", "b", "c", "d", "args", "e", "f", "kwargs"}
+
+
+# --------------
+# get_store_ids
+# --------------
+
+
+@pytest.mark.parametrize(
+    "src, expected",
+    {
+        "x = 1": {"x"},
+        "x = y = 1": {"x", "y"},
+        "a, b = f()": {"a", "b"},
+        "a, (b, c) = f()": {"a", "b", "c"},
+        "for i in xs: pass": {"i"},
+        "with open('x') as f: pass": {"f"},
+        "x += 1": {"x"},
+        "(x := 5)": {"x"},
+        "[x**y for x in range(5)]": {"x"},
+    }.items(),
+)
+def test_get_store_ids_basic(src, expected):
+    node = _get_stmt_ast(src)
+    ids = helpers.get_store_ids(node)
+    assert ids == expected
+
+
+@pytest.mark.parametrize(
+    "src, stop, expected",
+    [
+        ("if cond:\n    def g():\n        x = 1", (ast.FunctionDef,), set()),
+        ("[x for x in xs]", (ast.ListComp,), set()),
+    ],
+)
+def test_get_store_ids_stop(src, stop, expected):
+    node = ast.parse(src)
+    ids = helpers.get_store_ids(node, stop=stop)
+    assert ids == expected
+
+
+def test_get_store_ids_complex():
+    src = dedent(
+        """
+        a = 1
+        b, (c, d) = f()
+        for i, j in xs:
+            k = i
+        with open("x") as f:
+            pass
+        """
+    )
+    node = ast.parse(src)
+
+    ids = helpers.get_store_ids(node)
+
+    assert ids == {"a", "b", "c", "d", "i", "j", "k", "f"}
+
+
+# ------------------
+# is_pure_return_if
+# ------------------
+
+
+@pytest.mark.parametrize(
+    "src, expected",
+    {
+        dedent(
+            """
+            if x:
+                return 1
+            """
+        ): True,
+        dedent(
+            """
+            if x:
+                return 1
+            else:
+                return 2
+            """
+        ): True,
+        dedent(
+            """
+            if x:
+                return 1
+            elif y:
+                return 2
+                """
+        ): True,
+        dedent(
+            """
+            if x:
+                return 1
+            elif y:
+                return 2
+            else:
+                return 3
+            """
+        ): True,
+        # body not single statement
+        dedent(
+            """
+            if x:
+                a = 1
+                return 1
+            """
+        ): False,
+        # body not return
+        dedent(
+            """
+            if x:
+                a = 1
+            """
+        ): False,
+        # orelse more than one statement
+        dedent(
+            """
+            if x:
+                return 1
+            else:
+                a = 1
+                return 2
+            """
+        ): False,
+        # elif branch not return
+        dedent(
+            """
+            if x:
+                return 1
+            elif y:
+                a = 2
+            """
+        ): False,
+        # final else not return
+        dedent(
+            """
+            if x:
+                return 1
+            else:
+                a = 2
+            """
+        ): False,
+    }.items(),
+)
+def test_is_pure_return_if(src, expected):
+    node = _get_stmt_ast(src)
+
+    assert isinstance(node, ast.If)
+    assert helpers.is_pure_return_if(node) is expected
+
+
+def test_is_pure_return_if_ignores_comments():
+    src = dedent(
+        """
+        if x:
+            # comment
+            return 1
+        else:
+            # another
+            return 2
+        """
+    )
+    node = _get_stmt_ast(src)
+
+    assert isinstance(node, ast.If)
+    assert helpers.is_pure_return_if(node)
+
+
+# ---------------------
+# is_piecewise_funcdef
+# ---------------------
+
+
+@pytest.mark.parametrize(
+    "src, expected",
+    {
+        dedent(
+            """
+            def f(x):
+                if x > 0:
+                    return 1
+                else:
+                    return -1
+            """
+        ): True,
+        dedent(
+            """
+            def f(x):
+                if x > 0:
+                    return 1
+                else:
+                    return -1
+                return 0
+            """
+        ): True,
+        dedent(
+            """
+            def f(x):
+                if x > 0:
+                    return 1
+                if x < 0:
+                    return 2
+                return 0
+            """
+        ): True,
+        # empty body
+        dedent(
+            """
+            def f(x):
+                pass
+            """
+        ): False,
+        # only return (no ladder)
+        dedent(
+            """
+            def f(x):
+                return 1
+            """
+        ): False,
+    }.items(),
+)
+def test_is_piecewise_funcdef(src, expected):
+    node = _get_stmt_ast(src)
+
+    assert isinstance(node, ast.FunctionDef)
+    assert helpers.is_piecewise_funcdef(node) is expected
+
+
+def test_is_piecewise_funcdef_ignores_comments():
+    src = dedent(
+        """
+        def f(x):
+            # comment
+            if x > 0:
+                return 1
+            else:
+                return 2
+            # trailing comment
+            return 0
+        """
+    )
+    node = _get_stmt_ast(src)
+
+    assert isinstance(node, ast.FunctionDef)
+    assert helpers.is_piecewise_funcdef(node)
+
+
+# ----------------
+# is_piecewise_if
+# ----------------
+
+
+@pytest.mark.parametrize(
+    "src, expected",
+    {
+        dedent(
+            """
+            if x > 0:
+                y = 1
+            else:
+                y = 2
+            """
+        ): True,
+        dedent(
+            """
+            if x > 0:
+                y = 1
+            elif x < 0:
+                y = -1
+            """
+        ): True,
+        dedent(
+            """
+            if x > 0:
+                y = 1
+            elif x < 0:
+                y = -1
+            else:
+                y = 0
+            """
+        ): True,
+        dedent(
+            """
+            if x > 0:
+                a, b = 1, 2
+            else:
+                a, b = 3, 4
+            """
+        ): True,
+        # different targets across branches
+        dedent(
+            """
+            if x > 0:
+                y = 1
+            else:
+                z = 2
+            """
+        ): False,
+        # body contains more than one statement
+        dedent(
+            """
+            if x > 0:
+                y = 1
+                z = 2
+            else:
+                y = 3
+            """
+        ): False,
+        # else has multiple statements
+        dedent(
+            """
+            if x > 0:
+                y = 1
+            else:
+                y = 2
+                z = 3
+            """
+        ): False,
+    }.items(),
+)
+def test_is_piecewise_if(src, expected):
+    node = _get_stmt_ast(src)
+
+    assert isinstance(node, ast.If)
+    assert helpers.is_piecewise_if(node) is expected
+
+
+def test_is_piecewise_if_ignores_comments():
+    src = dedent(
+        """
+        if x > 0:
+            # comment
+            y = 1
+        else:
+            # another comment
+            y = 2
+        """
+    )
+    node = _get_stmt_ast(src)
+
+    assert isinstance(node, ast.If)
+    assert helpers.is_piecewise_if(node)
+
+
+# -------------
+# get_arg_node
+# -------------
+
+
+@pytest.mark.parametrize(
+    "src, pos, key, expected",
+    [
+        # positional argument
+        ("f(1, 2)", 0, None, "1"),
+        ("f(1, 2)", 1, None, "2"),
+        # positional out of range -> None
+        ("f(1)", 2, None, None),
+        # keyword argument
+        ("f(x=1)", None, "x", "1"),
+        # keyword among others
+        ("f(a=1, b=2)", None, "b", "2"),
+        # positional preferred if available
+        ("f(1, x=2)", 0, "x", "1"),
+        # fallback to keyword if positional missing
+        ("f(x=2)", 0, "x", "2"),
+        # neither present
+        ("f()", 0, "x", None),
+    ],
+)
+def test_get_arg_node(src, pos, key, expected):
+    node = _get_expr_ast(src)
+
+    assert isinstance(node, ast.Call)
+
+    result = helpers.get_arg_node(node, pos, key)
+
+    if expected is None:
+        assert result is None
+    else:
+        assert ast.unparse(result) == expected  # type: ignore
+
+
+def test_get_arg_node_required_raises():
+    node = _get_expr_ast("f()")
+
+    assert isinstance(node, ast.Call)
+
+    with pytest.raises(RubberizeTypeError):
+        helpers.get_arg_node(node, 0, None, required=True)
+
+
+def test_get_arg_node_required_missing_keyword():
+    node = _get_expr_ast("f(a=1)")
+
+    assert isinstance(node, ast.Call)
+
+    with pytest.raises(RubberizeTypeError):
+        helpers.get_arg_node(node, None, "b", required=True)
