@@ -61,6 +61,9 @@ Homepage = "https://github.com/chitoperalta/rubberize"
 Repository = "https://github.com/chitoperalta/rubberize"
 Documentation = "https://github.com/chitoperalta/rubberize/blob/main/docs/index.md"
 
+[project.scripts]
+rubberize = "rubberize.cli:main"
+
 [tool.setuptools]
 include-package-data = true
 
