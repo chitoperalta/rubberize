@@ -454,7 +454,7 @@ def strip_docstring(node: _AstT) -> _AstT:
     removed.
     """
 
-    node = copy.copy(node)
+    node = copy.deepcopy(node)
 
     if not isinstance(
         node,
@@ -462,18 +462,14 @@ def strip_docstring(node: _AstT) -> _AstT:
     ):
         return node
 
-    if node.body and is_str_expr(node.body[0]):
-        node.body.pop(0)
-        return node
+    # find first non-comment
+    first = next(
+        (stmt for stmt in node.body if not isinstance(stmt, ast_c.Comment)),
+        None,
+    )
 
-    if (
-        node.body
-        and isinstance(node.body[0], ast_c.Comment)
-        and is_str_expr(node.body[1])
-    ):
-        # docstring after a comment
-        node.body.pop(1)
-        return node
+    if first is not None and is_str_expr(first):
+        node.body.remove(first)
 
     return node
 
