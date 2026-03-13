@@ -57,7 +57,7 @@ class _DefaultConfig:
 
     # expressions
     wrap_indices: bool = True
-    convert_special_funcs: bool = True
+    convert_special_calls: bool = True
     use_contextual_mult: bool = True
 
     # statement display modes

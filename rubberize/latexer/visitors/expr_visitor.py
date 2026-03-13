@@ -329,7 +329,7 @@ class ExprVisitor(ast.NodeVisitor):
     def visit_Call(self, node: ast.Call) -> ExprLatex:
         """Visit a function call."""
 
-        if config.convert_special_funcs:
+        if config.convert_special_calls:
             special = convert_call(self, node)
             if special is not None:
                 return special
