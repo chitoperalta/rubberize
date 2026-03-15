@@ -306,7 +306,12 @@ class ExprVisitor(ast.NodeVisitor):
         elt = visitor.visit(node.elt).latex
         comps = r",\, ".join(visitor.visit(c).latex for c in node.generators)
 
-        latex = f"{elt}{rules.COMP_SUCH_THAT}{comps}"
+        such_that = rules.COMP_SUCH_THAT
+        prefix, _, suffix = rules.TUPLE_ROW_SYNTAX
+
+        latex = formatters.format_delims(
+            rf"{prefix}\,", f"{elt}{such_that}{comps}", rf"\,{suffix}"
+        )
         rank = ranks.get_rank(node)
 
         return ExprLatex(latex, rank)
