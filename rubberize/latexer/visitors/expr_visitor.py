@@ -48,15 +48,15 @@ class ExprVisitor(ast.NodeVisitor):
         op = rules.BOOL_OPS[type(node.op)]
         values = [self.visit_operand(o, rank).latex for o in node.values]
 
-        if len(values) > config.max_inline_elts:
-            prefix, sep, suffix = rules.MULTI_BOOL_OP_SYNTAX
-            latex = formatters.format_delims(
-                prefix, sep(op).join(values), suffix
-            )
-        else:
+        if len(values) < config.max_inline_bool:
             latex = op.join(values)
+            return ExprLatex(latex, rank)
 
-        return ExprLatex(latex, rank)
+        prefix, sep, suffix = rules.MULTI_BOOL_OP_SYNTAX
+        latex = formatters.format_delims(prefix, sep(op).join(values), suffix)
+        multi_bool_rank = ranks.COLLECTIONS_RANK
+
+        return ExprLatex(latex, multi_bool_rank)
 
     def visit_NamedExpr(self, node: ast.NamedExpr) -> ExprLatex:
         """Visit a named expression."""

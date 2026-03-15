@@ -59,6 +59,7 @@ class _DefaultConfig:
     wrap_indices: bool = True
     convert_special_calls: bool = True
     use_contextual_mult: bool = True
+    max_inline_bool: int = 3
 
     # statement display modes
     show_definition: bool = True
