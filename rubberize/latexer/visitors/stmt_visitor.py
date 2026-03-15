@@ -499,7 +499,7 @@ class StmtVisitor(ast.NodeVisitor):
 
         while isinstance(cur, ast.If):
             # inline comment is stored in ast.If.test
-            cur_desc, cur_cfg = helpers.get_desc(cur.test)  # sure not cur?
+            cur_desc, cur_cfg = helpers.get_desc(cur.test)
 
             if "hide" not in cur_cfg:
                 with config.override(**cur_cfg):
@@ -531,10 +531,9 @@ class StmtVisitor(ast.NodeVisitor):
                         StmtLatex(orelse_latex, orelse_desc, orelse_body)
                     )
 
-            elif len(cur.orelse) == 1:
+            if len(cur.orelse) == 1:
                 # either an "elif" or a single statement for "else"
                 cur = cur.orelse[0]
-
             else:
                 return StmtLatex(None, body=stmt_latex_body)
 
