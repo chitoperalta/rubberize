@@ -70,6 +70,8 @@ class CalcSheet:
         Args:
             *labels: The label of the check to remove.
         """
+        for label in labels:
+            self.checks.pop(label, None)
 
 
 @dataclass
