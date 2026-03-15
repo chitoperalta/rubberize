@@ -419,6 +419,7 @@ _opd_type_cases = {
     "-b_foo": "-L",
     "-c_hat": "-L",
     "-phiR_n": "-L",
+    "math.pi": "L",  # attribute of a hidden_module
     # Word variables (W)
     "foo": "W",
     "bar123": "W",

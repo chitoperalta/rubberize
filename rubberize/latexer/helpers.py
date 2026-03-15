@@ -421,18 +421,31 @@ def get_operand_type(node: ast.expr, latex: str, is_left: bool) -> str:
     if number_search:
         return "-N" if number_search.group(0).startswith("-") else "N"
 
-    if isinstance(node, ast.Name):
-        # split "_" to get base
-        base = node.id.strip("_").split("_", 1)[0]
+    if isinstance(node, ast.Name) and _is_id_single_char(node.id):
+        return "L"
 
-        if (
-            (config.use_symbols and base in rules.GREEK)
-            or (config.use_symbols and base[:-1] in config.greek_starts)
-            or len(base) == 1
-        ):
-            return "L"
+    if (
+        isinstance(node, ast.Attribute)
+        and isinstance(node.value, ast.Name)
+        and node.value.id in config.hidden_modules
+        and _is_id_single_char(node.attr)
+    ):
+        return "L"
 
     return "?"
+
+
+def _is_id_single_char(iden: str) -> bool:
+    base = iden.strip("_").split("_", 1)[0]
+
+    if config.use_symbols:
+        if base in rules.GREEK:
+            return True
+
+        if base[:-1] in config.greek_starts:
+            return True
+
+    return len(base) == 1
 
 
 def is_str_expr(node: ast.stmt) -> bool:
