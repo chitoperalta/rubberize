@@ -39,3 +39,7 @@ class RubberizeAttributeError(RubberizeError, AttributeError):
 
 class RubberizeKeyError(RubberizeError, KeyError):
     """This error is raised when the user uses an unknown mapping key."""
+
+
+class RubberizeUserWarning(UserWarning):
+    """Base warning for Rubberize user code."""

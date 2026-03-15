@@ -3,9 +3,10 @@
 from __future__ import annotations
 
 import ast
+import warnings
 from typing import TYPE_CHECKING
 
-from rubberize._exceptions import RubberizeValueError
+from rubberize._exceptions import RubberizeUserWarning
 from rubberize.latexer import helpers
 from rubberize.latexer.expr_latex import ExprLatex
 
@@ -35,25 +36,28 @@ def register_call_converter(
         call: The callable object the converter applies to, or a string
             representing an undefined callable.
         func: The converter function.
+        syntactic: If True, also register the call for string lookup,
+            when the callable is undefined.
     """
 
     if isinstance(call, str):
-        _call_converters_by_name[call] = func
+        name = call
+    else:
+        _call_converters[call] = func
+        name = call.__name__ if syntactic else None
+
+    if name is None:
         return
 
-    _call_converters[call] = func
+    existing = _call_converters_by_name.get(name)
+    if existing is not None and existing is not func:
+        warnings.warn(
+            f"Syntactic converter for '{name}' is being overwritten.",
+            RubberizeUserWarning,
+            stacklevel=2,
+        )
 
-    if syntactic:
-        name = call.__name__
-
-        existing = _call_converters_by_name.get(name)
-        if existing is not None and existing is not func:
-            raise RubberizeValueError(
-                f"Syntactic converter already registered for '{name}'. "
-                "Disable syntactic fallback or resolve the conflict."
-            )
-
-        _call_converters_by_name.setdefault(name, func)
+    _call_converters_by_name[name] = func
 
 
 def convert_call(visitor: ExprVisitor, node: ast.Call) -> ExprLatex | None:
