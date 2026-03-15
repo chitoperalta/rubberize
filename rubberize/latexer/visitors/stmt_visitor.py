@@ -162,7 +162,11 @@ class StmtVisitor(ast.NodeVisitor):
                 if test_cond is None or not config.show_substitution:
                     if helpers.is_piecewise_if(node):
                         return self.visit_piecewise_if(node)
-                    return self.visit_definition_if(node)
+                    if not config.show_result:
+                        return self.visit_definition_if(node)
+                    raise RubberizeNotImplementedError(
+                        "Cannot show all conditions with `@show_result=True`"
+                    )
 
                 if test_cond:
                     test = displays.definition(cur.test, self.ns)
