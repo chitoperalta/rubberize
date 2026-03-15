@@ -161,12 +161,12 @@ def unary(
     return ExprLatex(latex, rank)
 
 
-def first_arg(visitor: ExprVisitor, call: ast.Call) -> ExprLatex:
+def first_arg(visitor: ExprVisitor, node: ast.Call) -> ExprLatex:
     """Visit and return LaTeX for the first argument only, effectively
     hiding the call on the argument.
     """
 
-    return visitor.visit(call.args[0])
+    return visitor.visit(node.args[0])
 
 
 def hide_method(visitor: ExprVisitor, node: ast.Call) -> ExprLatex | None:
