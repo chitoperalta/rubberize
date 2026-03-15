@@ -184,11 +184,18 @@ def _complex(obj: complex) -> ExprLatex:
     return ExprLatex(latex, rank)
 
 
-def _iters(obj: list | str | set) -> ExprLatex | None:
+def _iters(obj: list | tuple | set | str) -> ExprLatex | None:
     """Converter for list, str, or set.
 
     Returns None if any one of the elements return None when converted.
     """
+
+    if (config.show_list_as_array and isinstance(obj, list)) or (
+        config.show_tuple_as_array and isinstance(obj, tuple)
+    ):
+        special = _array(obj)
+        if special is not None:
+            return special
 
     elts: list[str] = []
     for o in obj:
@@ -205,6 +212,55 @@ def _iters(obj: list | str | set) -> ExprLatex | None:
         prefix, sep, suffix = getattr(rules, f"{iter_type}_ROW_SYNTAX")
 
     latex = formatters.format_delims(prefix, sep.join(elts), suffix)
+    rank = ranks.COLLECTIONS_RANK
+
+    return ExprLatex(latex, rank)
+
+
+def _array(obj: list | tuple) -> ExprLatex | None:
+    """Converter for list as an array format.
+
+    Returns None if any one of the elements return None when converted
+    or when the nested sequence is ragged.
+    """
+
+    def build(arr):
+        if not isinstance(arr, (list, tuple)):
+            elt = convert_object(arr)
+            if elt is None:
+                return None
+            return elt.latex
+
+        parts: list = []
+        for a in arr:
+            sub = build(a)
+            if sub is None:
+                return None
+            parts.append(sub)
+
+        return parts
+
+    def shape(a):
+        if not isinstance(a, (list, tuple)):
+            return ()
+        if not a:
+            return (0,)
+
+        sub = shape(a[0])
+        for e in a[1:]:
+            if shape(e) != sub:
+                return None
+
+        return (len(a), *sub)
+
+    if shape(obj) is None:
+        return None
+
+    arr = build(obj)
+    if arr is None:
+        return None
+
+    latex = formatters.format_array(arr)
     rank = ranks.COLLECTIONS_RANK
 
     return ExprLatex(latex, rank)
