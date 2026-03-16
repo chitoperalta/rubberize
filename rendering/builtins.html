@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Arrays – Rubberize</title>
+<title>Built-in Types – Rubberize</title>
 <style>
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
@@ -61,27 +61,27 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </style>
 
 
-<script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js" integrity="sha384-ZvpUoO/+PpLXR1lu4jmpXWu80pZlYUAfxl5NsBMWOEPSjUn/6Z/hRTt8+pR6L4N2" crossorigin="anonymous"></script><script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
-<script src="../../site_libs/quarto-nav/headroom.min.js"></script>
-<script src="../../site_libs/clipboard/clipboard.min.js"></script>
-<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
-<script src="../../site_libs/quarto-search/fuse.min.js"></script>
-<script src="../../site_libs/quarto-search/quarto-search.js"></script>
-<meta name="quarto:offset" content="../../">
-<script src="../../site_libs/quarto-html/quarto.js" type="module"></script>
-<script src="../../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
-<script src="../../site_libs/quarto-html/popper.min.js"></script>
-<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
-<script src="../../site_libs/quarto-html/anchor.min.js"></script>
-<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-067f8ab80d092ae3595f7402c2c9b667.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
-<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-dark-ca1cb3032aa6b9181247695f27e2facc.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
-<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-067f8ab80d092ae3595f7402c2c9b667.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
-<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
-<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../../site_libs/bootstrap/bootstrap-18592173e188cdae81627623887a06db.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
-<link href="../../site_libs/bootstrap/bootstrap-dark-2be3bacf71d4ec939c4fa8f4e9c7a46b.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
-<link href="../../site_libs/bootstrap/bootstrap-18592173e188cdae81627623887a06db.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js" integrity="sha384-ZvpUoO/+PpLXR1lu4jmpXWu80pZlYUAfxl5NsBMWOEPSjUn/6Z/hRTt8+pR6L4N2" crossorigin="anonymous"></script><script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<script src="../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-067f8ab80d092ae3595f7402c2c9b667.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-dark-ca1cb3032aa6b9181247695f27e2facc.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-067f8ab80d092ae3595f7402c2c9b667.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap-18592173e188cdae81627623887a06db.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/bootstrap/bootstrap-dark-2be3bacf71d4ec939c4fa8f4e9c7a46b.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="../site_libs/bootstrap/bootstrap-18592173e188cdae81627623887a06db.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -143,7 +143,7 @@ window.Quarto = {
 };
 </script>
 
-<link rel="stylesheet" href="../../docs/styles.css">
+<link rel="stylesheet" href="../styles.css">
 </head>
 
 <body class="nav-sidebar docked nav-fixed quarto-light"><script id="quarto-html-before-body" type="application/javascript">
@@ -315,7 +315,7 @@ window.Quarto = {
     <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container mx-auto">
-    <a class="navbar-brand" href="../../index.html">
+    <a class="navbar-brand" href="../index.html">
     <span class="navbar-title">Rubberize</span>
     </a>
   </div>
@@ -326,23 +326,23 @@ window.Quarto = {
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll me-auto">
   <li class="nav-item">
-    <a class="nav-link" href="../../docs/index.html"> 
+    <a class="nav-link" href="../index.html"> 
 <span class="menu-text">Home</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link active" href="../../docs/get_started.html" aria-current="page"> 
+    <a class="nav-link active" href="../get_started.html" aria-current="page"> 
 <span class="menu-text">Get Started</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="../../docs/rendering/index.html"> 
+    <a class="nav-link" href="../rendering/index.html"> 
 <span class="menu-text">Rendering Code</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="../../docs/advanced/custom_converters.html"> 
+    <a class="nav-link" href="../advanced/custom_converters.html"> 
 <span class="menu-text">Custom Converters</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="../../docs/config_reference.html"> 
+    <a class="nav-link" href="../config_reference.html"> 
 <span class="menu-text">Config Reference</span></a>
   </li>  
 </ul>
@@ -358,7 +358,7 @@ window.Quarto = {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../docs/rendering/index.html">Rendering Code</a></li><li class="breadcrumb-item"><a href="../../docs/rendering/variables.html">Expressions</a></li><li class="breadcrumb-item"><a href="../../docs/rendering/numpy.html">Arrays</a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../rendering/index.html">Rendering Code</a></li><li class="breadcrumb-item"><a href="../rendering/variables.html">Expressions</a></li><li class="breadcrumb-item"><a href="../rendering/builtins.html">Built-in Types</a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
     </div>
@@ -372,13 +372,13 @@ window.Quarto = {
     <ul class="list-unstyled mt-1">
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../docs/get_started.html" class="sidebar-item-text sidebar-link">
+  <a href="../get_started.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Get Started</span></a>
   </div>
 </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a href="../../docs/rendering/index.html" class="sidebar-item-text sidebar-link">
+            <a href="../rendering/index.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Rendering Code</span></a>
           <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#" role="navigation" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
@@ -396,49 +396,49 @@ window.Quarto = {
       <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth2 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../docs/rendering/variables.html" class="sidebar-item-text sidebar-link">
+  <a href="../rendering/variables.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Variables</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../docs/rendering/numbers.html" class="sidebar-item-text sidebar-link">
+  <a href="../rendering/numbers.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Numbers</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../docs/rendering/collections.html" class="sidebar-item-text sidebar-link">
+  <a href="../rendering/collections.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Collections</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../docs/rendering/builtins.html" class="sidebar-item-text sidebar-link">
+  <a href="../rendering/builtins.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text">Built-in Types</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../docs/rendering/calls.html" class="sidebar-item-text sidebar-link">
+  <a href="../rendering/calls.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Calls</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../docs/rendering/pint.html" class="sidebar-item-text sidebar-link">
+  <a href="../rendering/pint.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Physical Quantities</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../docs/rendering/numpy.html" class="sidebar-item-text sidebar-link active">
+  <a href="../rendering/numpy.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Arrays</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../docs/rendering/operations.html" class="sidebar-item-text sidebar-link">
+  <a href="../rendering/operations.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Operations</span></a>
   </div>
 </li>
@@ -455,25 +455,25 @@ window.Quarto = {
       <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth2 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../docs/rendering/expressions.html" class="sidebar-item-text sidebar-link">
+  <a href="../rendering/expressions.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Expressions</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../docs/rendering/assignments.html" class="sidebar-item-text sidebar-link">
+  <a href="../rendering/assignments.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Assignments</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../docs/rendering/conditionals.html" class="sidebar-item-text sidebar-link">
+  <a href="../rendering/conditionals.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Conditionals</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../docs/rendering/funcdefs.html" class="sidebar-item-text sidebar-link">
+  <a href="../rendering/funcdefs.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Function Definitions</span></a>
   </div>
 </li>
@@ -490,13 +490,13 @@ window.Quarto = {
       <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth2 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../docs/rendering/calcsheet.html" class="sidebar-item-text sidebar-link">
+  <a href="../rendering/calcsheet.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Calculation Sheets</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../docs/rendering/annotations.html" class="sidebar-item-text sidebar-link">
+  <a href="../rendering/annotations.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Annotations</span></a>
   </div>
 </li>
@@ -515,13 +515,13 @@ window.Quarto = {
       <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../docs/advanced/implementation_notes.html" class="sidebar-item-text sidebar-link">
+  <a href="../advanced/implementation_notes.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Implementation Notes</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../docs/advanced/custom_converters.html" class="sidebar-item-text sidebar-link">
+  <a href="../advanced/custom_converters.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Custom Converters</span></a>
   </div>
 </li>
@@ -529,7 +529,7 @@ window.Quarto = {
   </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../docs/config_reference.html" class="sidebar-item-text sidebar-link">
+  <a href="../config_reference.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Config Reference</span></a>
   </div>
 </li>
@@ -543,30 +543,11 @@ window.Quarto = {
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#creating-arrays" id="toc-creating-arrays" class="nav-link active" data-scroll-target="#creating-arrays">Creating Arrays</a>
-  <ul class="collapse">
-  <li><a href="#array-delimiters" id="toc-array-delimiters" class="nav-link" data-scroll-target="#array-delimiters">Array Delimiters</a></li>
-  <li><a href="#array-creation-routines" id="toc-array-creation-routines" class="nav-link" data-scroll-target="#array-creation-routines">Array Creation Routines</a></li>
-  </ul></li>
-  <li><a href="#d-arrays" id="toc-d-arrays" class="nav-link" data-scroll-target="#d-arrays">1D Arrays</a></li>
-  <li><a href="#accessing-elements" id="toc-accessing-elements" class="nav-link" data-scroll-target="#accessing-elements">Accessing Elements</a></li>
-  <li><a href="#array-operations" id="toc-array-operations" class="nav-link" data-scroll-target="#array-operations">Array Operations</a>
-  <ul class="collapse">
-  <li><a href="#arithmetic-operations" id="toc-arithmetic-operations" class="nav-link" data-scroll-target="#arithmetic-operations">Arithmetic Operations</a></li>
-  <li><a href="#scalar-operations" id="toc-scalar-operations" class="nav-link" data-scroll-target="#scalar-operations">Scalar Operations</a></li>
-  <li><a href="#array-transpose" id="toc-array-transpose" class="nav-link" data-scroll-target="#array-transpose">Array Transpose</a></li>
-  <li><a href="#matrix-multiplication" id="toc-matrix-multiplication" class="nav-link" data-scroll-target="#matrix-multiplication">Matrix Multiplication</a></li>
-  <li><a href="#cross-product" id="toc-cross-product" class="nav-link" data-scroll-target="#cross-product">Cross Product</a></li>
-  <li><a href="#inner-product" id="toc-inner-product" class="nav-link" data-scroll-target="#inner-product">Inner Product</a></li>
-  <li><a href="#outer-product" id="toc-outer-product" class="nav-link" data-scroll-target="#outer-product">Outer Product</a></li>
-  <li><a href="#norm" id="toc-norm" class="nav-link" data-scroll-target="#norm">Norm</a></li>
-  <li><a href="#power" id="toc-power" class="nav-link" data-scroll-target="#power">Power</a></li>
-  <li><a href="#determinant" id="toc-determinant" class="nav-link" data-scroll-target="#determinant">Determinant</a></li>
-  <li><a href="#rank" id="toc-rank" class="nav-link" data-scroll-target="#rank">Rank</a></li>
-  <li><a href="#trace" id="toc-trace" class="nav-link" data-scroll-target="#trace">Trace</a></li>
-  <li><a href="#inverse-and-pseudo-inverse" id="toc-inverse-and-pseudo-inverse" class="nav-link" data-scroll-target="#inverse-and-pseudo-inverse">Inverse and Pseudo-inverse</a></li>
-  <li><a href="#solving-systems-of-equations" id="toc-solving-systems-of-equations" class="nav-link" data-scroll-target="#solving-systems-of-equations">Solving Systems of Equations</a></li>
-  </ul></li>
+  <li><a href="#strings" id="toc-strings" class="nav-link active" data-scroll-target="#strings">Strings</a></li>
+  <li><a href="#boolean" id="toc-boolean" class="nav-link" data-scroll-target="#boolean">Boolean</a></li>
+  <li><a href="#none-type" id="toc-none-type" class="nav-link" data-scroll-target="#none-type">None Type</a></li>
+  <li><a href="#range" id="toc-range" class="nav-link" data-scroll-target="#range">Range</a></li>
+  <li><a href="#ellipsis-type" id="toc-ellipsis-type" class="nav-link" data-scroll-target="#ellipsis-type">Ellipsis Type</a></li>
   </ul>
 </nav>
     </div>
@@ -574,9 +555,9 @@ window.Quarto = {
 <main class="content" id="quarto-document-content">
 
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../docs/rendering/index.html">Rendering Code</a></li><li class="breadcrumb-item"><a href="../../docs/rendering/variables.html">Expressions</a></li><li class="breadcrumb-item"><a href="../../docs/rendering/numpy.html">Arrays</a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../rendering/index.html">Rendering Code</a></li><li class="breadcrumb-item"><a href="../rendering/variables.html">Expressions</a></li><li class="breadcrumb-item"><a href="../rendering/builtins.html">Built-in Types</a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title">Arrays</h1>
+<h1 class="title">Built-in Types</h1>
 </div>
 
 
@@ -593,7 +574,7 @@ window.Quarto = {
 </header>
 
 
-<div id="039869f2" class="cell" data-execution_count="1">
+<div id="dd9ba741" class="cell" data-execution_count="1">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="op">%</span>reload_ext rubberize</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> rubberize.config <span class="im">import</span> config</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display">
@@ -1060,810 +1041,141 @@ window.Quarto = {
 </style>
 </div>
 </div>
-<p>The rendering of <code>numpy.ndarray</code> type is supported by Rubberize.</p>
-<section id="creating-arrays" class="level2">
-<h2 class="anchored" data-anchor-id="creating-arrays">Creating Arrays</h2>
-<p>Arrays created using <code>array()</code> are rendered as the resulting array:</p>
-<div class="callout callout-style-default callout-tip callout-titled">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-Tip
+<p>Built-in Python types other than <a href="../rendering/numbers.html">numbers</a> and <a href="../rendering/collections.html">collections</a> are rendered like so:</p>
+<section id="strings" class="level2">
+<h2 class="anchored" data-anchor-id="strings">Strings</h2>
+<p>The font style for strings can be changed using <code>@str_font</code>:</p>
+<div id="05d62f9d" class="cell" data-execution_count="2">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>config.str_font</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display" data-execution_count="2">
+<pre><code>''</code></pre>
 </div>
 </div>
-<div class="callout-body-container callout-body">
-<p>Append <code>_mat</code> or <code>_vec</code> to the variable name to render them in bold font, as in textbooks.</p>
-</div>
-</div>
-<div id="e8fcfce1" class="cell" data-execution_count="2">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="op">%%</span>tap <span class="op">--</span>grid</span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>a_mat <span class="op">=</span> np.array([<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>])</span>
-<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>b_mat <span class="op">=</span> np.array([[<span class="dv">1</span>, <span class="dv">2</span>], [<span class="dv">3</span>, <span class="dv">4</span>]])</span>
-<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>c_mat <span class="op">=</span> np.array([[[<span class="dv">1</span>, <span class="dv">2</span>], [<span class="dv">3</span>, <span class="dv">4</span>]], [[<span class="dv">5</span>, <span class="dv">6</span>], [<span class="dv">7</span>, <span class="dv">8</span>]]])</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-display">
-<div class="rz-grid-container"></div>
-</div>
-<div class="cell-output cell-output-display">
-<div class="rz-grid-container">
-    <div class="rz-line">\( \displaystyle \mathbf{a} = \begin{bmatrix} 1 &amp; 2 &amp; 3 \end{bmatrix} \)</div>
-    <div class="rz-line">
-        \( \displaystyle 
-            \mathbf{b} = \begin{bmatrix}
-                1 &amp; 2 \\ 3 &amp; 4
-            \end{bmatrix}
-         \)
-    </div>
-    <div class="rz-line">
-        \( \displaystyle 
-            \mathbf{c} = \begin{bmatrix}
-                \begin{bmatrix}
-                    1 &amp; 2 \\ 3 &amp; 4
-                \end{bmatrix} \\ \begin{bmatrix}
-                    5 &amp; 6 \\ 7 &amp; 8
-                \end{bmatrix}
-            \end{bmatrix}
-         \)
-    </div>
-</div>
-</div>
-</div>
-<section id="array-delimiters" class="level3">
-<h3 class="anchored" data-anchor-id="array-delimiters">Array Delimiters</h3>
-<p><code>@array_delimiter</code> controls the appearance of delimiters used in an array. Use <code>"pmatrix"</code> for parentheses and <code>"bmatrix"</code> for square brackets.</p>
-<div id="f849bff9" class="cell" data-execution_count="3">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>config.array_delimiter</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>It can be changed to any of these values:</p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>Font style</th>
+<th>Value</th>
+<th>Rendered Output</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>None</td>
+<td><code>""</code></td>
+<td><span class="math inline">\(\displaystyle \text{“Hello world!”}\)</span></td>
+</tr>
+<tr class="even">
+<td>Boldface</td>
+<td><code>"bf"</code></td>
+<td><span class="math inline">\(\displaystyle \textbf{“Hello world!”}\)</span></td>
+</tr>
+<tr class="odd">
+<td>Italics</td>
+<td><code>"it"</code></td>
+<td><span class="math inline">\(\displaystyle \textit{“Hello world!”}\)</span></td>
+</tr>
+<tr class="even">
+<td>Roman</td>
+<td><code>"rm"</code></td>
+<td><span class="math inline">\(\displaystyle \textrm{“Hello world!”}\)</span></td>
+</tr>
+<tr class="odd">
+<td>Sans serif</td>
+<td><code>"sf"</code></td>
+<td><span class="math inline">\(\displaystyle \textsf{“Hello world!”}\)</span></td>
+</tr>
+<tr class="even">
+<td>Typewriter</td>
+<td><code>"tt"</code></td>
+<td><span class="math inline">\(\displaystyle \texttt{“Hello world!”}\)</span></td>
+</tr>
+</tbody>
+</table>
+<p>Additionally, string quotes can also be changed using <code>@str_quotes</code>:</p>
+<div id="bd6b4bb5" class="cell" data-execution_count="3">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>config.str_quotes</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display" data-execution_count="3">
-<pre><code>'bmatrix'</code></pre>
+<pre><code>'"'</code></pre>
 </div>
 </div>
-<div id="edd44872" class="cell" data-execution_count="4">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="op">%%</span>tap <span class="op">--</span>grid <span class="op">@</span>array_delimiter<span class="op">=</span><span class="st">"pmatrix"</span></span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>a_mat<span class="op">;</span> b_mat<span class="op">;</span> c_mat</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>It can be changed to any of these values:</p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>Quotation Marks</th>
+<th>Value</th>
+<th>Rendered Output</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>None</td>
+<td><code>""</code></td>
+<td><span class="math inline">\(\displaystyle \text{Hello world!}\)</span></td>
+</tr>
+<tr class="even">
+<td>Single</td>
+<td><code>"'"</code></td>
+<td><span class="math inline">\(\displaystyle \text{‘Hello world!’}\)</span></td>
+</tr>
+<tr class="odd">
+<td>Double</td>
+<td><code>'"'</code></td>
+<td><span class="math inline">\(\displaystyle \text{“Hello world!”}\)</span></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="boolean" class="level2">
+<h2 class="anchored" data-anchor-id="boolean">Boolean</h2>
+<div id="27b310e6" class="cell" data-execution_count="4">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="op">%%</span>tap <span class="op">--</span>grid</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="va">True</span></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="va">False</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display">
 <div class="rz-grid-container">
-    <div class="rz-line">\( \displaystyle \mathbf{a} = \begin{pmatrix} 1 &amp; 2 &amp; 3 \end{pmatrix} \)</div>
-    <div class="rz-line">
-        \( \displaystyle 
-            \mathbf{b} = \begin{pmatrix}
-                1 &amp; 2 \\ 3 &amp; 4
-            \end{pmatrix}
-         \)
-    </div>
-    <div class="rz-line">
-        \( \displaystyle 
-            \mathbf{c} = \begin{pmatrix}
-                \begin{pmatrix}
-                    1 &amp; 2 \\ 3 &amp; 4
-                \end{pmatrix} \\ \begin{pmatrix}
-                    5 &amp; 6 \\ 7 &amp; 8
-                \end{pmatrix}
-            \end{pmatrix}
-         \)
-    </div>
+    <div class="rz-line">\( \displaystyle \text{True} \)</div>
+    <div class="rz-line">\( \displaystyle \text{False} \)</div>
 </div>
 </div>
 </div>
 </section>
-<section id="array-creation-routines" class="level3">
-<h3 class="anchored" data-anchor-id="array-creation-routines">Array Creation Routines</h3>
-<p>The following array creation routines are also supported:</p>
-<div id="8ace22aa" class="cell" data-execution_count="5">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="op">%%</span>tap</span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>A_mat <span class="op">=</span> np.eye(<span class="dv">2</span>,<span class="dv">3</span>,<span class="dv">1</span>)</span>
-<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>B_mat <span class="op">=</span> np.identity(<span class="dv">2</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-display">
-<div class="rz-line">
-    \( \displaystyle 
-        \mathbf{A} = \mathbf{I}_{2 \times 3}^{\left( 1 \right)} = \begin{bmatrix}
-            0.00 &amp; 1.00 &amp; 0.00 \\ 0.00 &amp; 0.00 &amp; 1.00
-        \end{bmatrix}
-     \)
-</div>
-<div class="rz-line">
-    \( \displaystyle 
-        \mathbf{B} = \mathbf{I}_{2} = \begin{bmatrix}
-            1.00 &amp; 0.00 \\ 0.00 &amp; 1.00
-        \end{bmatrix}
-     \)
-</div>
-</div>
-</div>
-<div id="20c8a0f8" class="cell" data-execution_count="6">
+<section id="none-type" class="level2">
+<h2 class="anchored" data-anchor-id="none-type">None Type</h2>
+<div id="9dc679fc" class="cell" data-execution_count="5">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="op">%%</span>tap</span>
-<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>C_mat <span class="op">=</span> np.ones((<span class="dv">3</span>,<span class="dv">2</span>)) </span>
-<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>C_mat_star <span class="op">=</span> np.ones(<span class="dv">3</span>)</span>
-<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>D_mat <span class="op">=</span> np.ones_like(B_mat)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="va">None</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display">
-<div class="rz-line">
-    \( \displaystyle 
-        \mathbf{C} = \mathbf{1}_{3 \times 2} = \begin{bmatrix}
-            1.00 &amp; 1.00 \\ 1.00 &amp; 1.00 \\ 1.00 &amp; 1.00
-        \end{bmatrix}
-     \)
-</div>
-<div class="rz-line">\( \displaystyle \mathbf{C}^{*} = \mathbf{1}_{1 \times 3} = \begin{bmatrix} 1.00 &amp; 1.00 &amp; 1.00 \end{bmatrix} \)</div>
-<div class="rz-line">
-    \( \displaystyle 
-        \mathbf{D} = \mathbf{1}_{\mathbf{B}} = \begin{bmatrix}
-            1.00 &amp; 1.00 \\ 1.00 &amp; 1.00
-        \end{bmatrix}
-     \)
+<div class="rz-line">\( \displaystyle \emptyset \)</div>
 </div>
 </div>
-</div>
-<div id="cd7f4fc9" class="cell" data-execution_count="7">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="op">%%</span>tap</span>
-<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>E_mat <span class="op">=</span> np.zeros((<span class="dv">3</span>,<span class="dv">2</span>))</span>
-<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>E_mat_star <span class="op">=</span> np.zeros(<span class="dv">2</span>)</span>
-<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>F_mat <span class="op">=</span> np.zeros_like(A_mat)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</section>
+<section id="range" class="level1">
+<h1>Range</h1>
+<div id="1aecf543" class="cell" data-execution_count="6">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="op">%%</span>tap <span class="op">--</span>dead</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="bu">range</span>(<span class="dv">25</span>)</span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="bu">range</span>(x, y, <span class="dv">2</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display">
-<div class="rz-line">
-    \( \displaystyle 
-        \mathbf{E} = \mathbf{0}_{3 \times 2} = \begin{bmatrix}
-            0.00 &amp; 0.00 \\ 0.00 &amp; 0.00 \\ 0.00 &amp; 0.00
-        \end{bmatrix}
-     \)
-</div>
-<div class="rz-line">\( \displaystyle \mathbf{E}^{*} = \mathbf{0}_{1 \times 2} = \begin{bmatrix} 0.00 &amp; 0.00 \end{bmatrix} \)</div>
-<div class="rz-line">
-    \( \displaystyle 
-        \mathbf{F} = \mathbf{0}_{\mathbf{A}} = \begin{bmatrix}
-            0.00 &amp; 0.00 &amp; 0.00 \\ 0.00 &amp; 0.00 &amp; 0.00
-        \end{bmatrix}
-     \)
+<div class="rz-line">\( \displaystyle \left( 0,\, 1,\, \cdots,\, 24 \right) \)</div>
+<div class="rz-line">\( \displaystyle \left( x,\, x + 2,\, \cdots,\, \le y - 1 \right) \)</div>
 </div>
 </div>
-</div>
-<div id="24a2b76a" class="cell" data-execution_count="8">
+</section>
+<section id="ellipsis-type" class="level1">
+<h1>Ellipsis Type</h1>
+<div id="712d5695" class="cell" data-execution_count="7">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="op">%%</span>tap</span>
-<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>G_mat <span class="op">=</span> np.full((<span class="dv">2</span>,<span class="dv">1</span>), <span class="fl">69.0</span>)</span>
-<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>H_mat <span class="op">=</span> np.full_like(E_mat, <span class="fl">420.0</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>(...)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display">
-<div class="rz-line">
-    \( \displaystyle 
-        \mathbf{G} = 69.00 \cdot \mathbf{1}_{2 \times 1} = \begin{bmatrix}
-            69.00 \\ 69.00
-        \end{bmatrix}
-     \)
-</div>
-<div class="rz-line">
-    \( \displaystyle 
-        \mathbf{H} = 420.00 \cdot \mathbf{1}_{\mathbf{E}} = \begin{bmatrix}
-            420.00 &amp; 420.00 \\ 420.00 &amp; 420.00 \\ 420.00 &amp; 420.00
-        \end{bmatrix}
-     \)
-</div>
-</div>
-</div>
-</section>
-</section>
-<section id="d-arrays" class="level2">
-<h2 class="anchored" data-anchor-id="d-arrays">1D Arrays</h2>
-<p><code>@show_1d_as_col</code> specifies whether to render 1-dimension arrays vertically or horizontally:</p>
-<div id="be0432d1" class="cell" data-execution_count="9">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>config.show_1d_as_col</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-display" data-execution_count="9">
-<pre><code>False</code></pre>
-</div>
-</div>
-<div id="b6c01500" class="cell" data-execution_count="10">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="op">%%</span>tap <span class="op">--</span>grid</span>
-<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>a_mat  <span class="co"># @show_1d_as_col=False</span></span>
-<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>a_mat  <span class="co"># @show_1d_as_col=True</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-display">
-<div class="rz-grid-container">
-    <div class="rz-line">\( \displaystyle \mathbf{a} = \begin{bmatrix} 1 &amp; 2 &amp; 3 \end{bmatrix} \)</div>
-    <div class="rz-line">
-        \( \displaystyle 
-            \mathbf{a} = \begin{bmatrix}
-                1 \\ 2 \\ 3
-            \end{bmatrix}
-         \)
-    </div>
-</div>
-</div>
-</div>
-</section>
-<section id="accessing-elements" class="level2">
-<h2 class="anchored" data-anchor-id="accessing-elements">Accessing Elements</h2>
-<p>Element access is rendered like other collection types:</p>
-<div id="ce4e99d6" class="cell" data-execution_count="11">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="op">%%</span>tap</span>
-<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>b_mat</span>
-<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>b_mat[<span class="dv">0</span>][<span class="dv">1</span>]</span>
-<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>b_mat[<span class="dv">0</span>, <span class="dv">1</span>]  <span class="co"># Tuple access</span></span>
-<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>b_mat[:, <span class="dv">0</span>]  <span class="co"># Slice access</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-display">
-<div class="rz-line">
-    \( \displaystyle 
-        \mathbf{b} = \begin{bmatrix}
-            1 &amp; 2 \\ 3 &amp; 4
-        \end{bmatrix}
-     \)
-</div>
-<div class="rz-line">\( \displaystyle \mathbf{b}_{\left( 0,\, 1 \right)} = 2 \)</div>
-<div class="rz-line">
-    <div class="rz-line__main">\( \displaystyle \mathbf{b}_{\left( 0,\, 1 \right)} = 2 \)</div>
-    <div class="rz-line__desc">Tuple access</div>
-</div>
-<div class="rz-line">
-    <div class="rz-line__main">\( \displaystyle \mathbf{b}_{\left(  : ,\, 0 \right)} = \begin{bmatrix} 1 &amp; 3 \end{bmatrix} \)</div>
-    <div class="rz-line__desc">Slice access</div>
-</div>
-</div>
-</div>
-</section>
-<section id="array-operations" class="level2">
-<h2 class="anchored" data-anchor-id="array-operations">Array Operations</h2>
-<p>Common array operations are supported:</p>
-<section id="arithmetic-operations" class="level3">
-<h3 class="anchored" data-anchor-id="arithmetic-operations">Arithmetic Operations</h3>
-<div id="917e7ce5" class="cell" data-execution_count="12">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="op">%%</span>tap</span>
-<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>d_mat <span class="op">=</span> np.array([[<span class="dv">5</span>, <span class="dv">6</span>], [<span class="dv">7</span>, <span class="dv">8</span>]])</span>
-<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a>b_mat <span class="op">+</span> d_mat</span>
-<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a>b_mat <span class="op">*</span> d_mat</span>
-<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a>b_mat <span class="op">/</span> d_mat</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-display">
-<div class="rz-line">
-    \( \displaystyle 
-        \mathbf{d} = \begin{bmatrix}
-            5 &amp; 6 \\ 7 &amp; 8
-        \end{bmatrix}
-     \)
-</div>
-</div>
-<div class="cell-output cell-output-display">
-<div class="rz-line">
-    \( \displaystyle 
-        \mathbf{b} + \mathbf{d} = \begin{bmatrix}
-            1 &amp; 2 \\ 3 &amp; 4
-        \end{bmatrix} + \begin{bmatrix}
-            5 &amp; 6 \\ 7 &amp; 8
-        \end{bmatrix} = \begin{bmatrix}
-            6 &amp; 8 \\ 10 &amp; 12
-        \end{bmatrix}
-     \)
-</div>
-<div class="rz-line">
-    \( \displaystyle 
-        \mathbf{b}\,\mathbf{d} = \begin{bmatrix}
-            1 &amp; 2 \\ 3 &amp; 4
-        \end{bmatrix}\,\begin{bmatrix}
-            5 &amp; 6 \\ 7 &amp; 8
-        \end{bmatrix} = \begin{bmatrix}
-            5 &amp; 12 \\ 21 &amp; 32
-        \end{bmatrix}
-     \)
-</div>
-<div class="rz-line">
-    \( \displaystyle 
-        \frac{\mathbf{b}}{\mathbf{d}} = \frac{\begin{bmatrix}
-            1 &amp; 2 \\ 3 &amp; 4
-        \end{bmatrix}}{\begin{bmatrix}
-            5 &amp; 6 \\ 7 &amp; 8
-        \end{bmatrix}} = \begin{bmatrix}
-            0.20 &amp; 0.33 \\ 0.43 &amp; 0.50
-        \end{bmatrix}
-     \)
-</div>
-</div>
-</div>
-</section>
-<section id="scalar-operations" class="level3">
-<h3 class="anchored" data-anchor-id="scalar-operations">Scalar Operations</h3>
-<div id="ccaa7bd4" class="cell" data-execution_count="13">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="op">%%</span>tap</span>
-<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a><span class="dv">1</span> <span class="op">+</span> d_mat</span>
-<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a><span class="dv">2</span> <span class="op">*</span> d_mat</span>
-<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a><span class="dv">3</span> <span class="op">/</span> d_mat</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-display">
-<div class="rz-line">
-    \( \displaystyle 
-        1 + \mathbf{d} = 1 + \begin{bmatrix}
-            5 &amp; 6 \\ 7 &amp; 8
-        \end{bmatrix} = \begin{bmatrix}
-            6 &amp; 7 \\ 8 &amp; 9
-        \end{bmatrix}
-     \)
-</div>
-<div class="rz-line">
-    \( \displaystyle 
-        2\,\mathbf{d} = 2\,\begin{bmatrix}
-            5 &amp; 6 \\ 7 &amp; 8
-        \end{bmatrix} = \begin{bmatrix}
-            10 &amp; 12 \\ 14 &amp; 16
-        \end{bmatrix}
-     \)
-</div>
-<div class="rz-line">
-    \( \displaystyle 
-        \frac{3}{\mathbf{d}} = \frac{3}{\begin{bmatrix}
-            5 &amp; 6 \\ 7 &amp; 8
-        \end{bmatrix}} = \begin{bmatrix}
-            0.60 &amp; 0.50 \\ 0.43 &amp; 0.38
-        \end{bmatrix}
-     \)
-</div>
-</div>
-</div>
-</section>
-<section id="array-transpose" class="level3">
-<h3 class="anchored" data-anchor-id="array-transpose">Array Transpose</h3>
-<div id="f2388f73" class="cell" data-execution_count="14">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="op">%%</span>tap</span>
-<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>b_mat.transpose()</span>
-<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>np.transpose(b_mat)</span>
-<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a>np.linalg.matrix_transpose(b_mat)</span>
-<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a>b_mat.T  <span class="co"># Substituted form not displayed</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-display">
-<div class="rz-line">
-    \( \displaystyle 
-        \mathbf{b}^{\intercal} = \begin{bmatrix}
-            1 &amp; 2 \\ 3 &amp; 4
-        \end{bmatrix}^{\intercal} = \begin{bmatrix}
-            1 &amp; 3 \\ 2 &amp; 4
-        \end{bmatrix}
-     \)
-</div>
-<div class="rz-line">
-    \( \displaystyle 
-        \mathbf{b}^{\intercal} = \begin{bmatrix}
-            1 &amp; 2 \\ 3 &amp; 4
-        \end{bmatrix}^{\intercal} = \begin{bmatrix}
-            1 &amp; 3 \\ 2 &amp; 4
-        \end{bmatrix}
-     \)
-</div>
-<div class="rz-line">
-    \( \displaystyle 
-        \mathbf{b}^{\intercal} = \begin{bmatrix}
-            1 &amp; 2 \\ 3 &amp; 4
-        \end{bmatrix}^{\intercal} = \begin{bmatrix}
-            1 &amp; 3 \\ 2 &amp; 4
-        \end{bmatrix}
-     \)
-</div>
-<div class="rz-line">
-    <div class="rz-line__main">
-        \( \displaystyle 
-            \mathbf{b}^{\intercal} = \begin{bmatrix}
-                1 &amp; 3 \\ 2 &amp; 4
-            \end{bmatrix}
-         \)
-    </div>
-    <div class="rz-line__desc">Substituted form not displayed</div>
-</div>
-</div>
-</div>
-</section>
-<section id="matrix-multiplication" class="level3">
-<h3 class="anchored" data-anchor-id="matrix-multiplication">Matrix Multiplication</h3>
-<p>Matrix multiplication always uses a center dot (<span class="math inline">\(\cdot\)</span>) as the multiplication symbol.</p>
-<div id="1649766e" class="cell" data-execution_count="15">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="op">%%</span>tap</span>
-<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>e_mat <span class="op">=</span> np.array([[<span class="dv">9</span>, <span class="dv">10</span>], [<span class="dv">11</span>, <span class="dv">12</span>]])</span>
-<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a>d_mat <span class="op">@</span> e_mat</span>
-<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a>d_mat.dot(e_mat)</span>
-<span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a>np.dot(d_mat, e_mat)</span>
-<span id="cb17-7"><a href="#cb17-7" aria-hidden="true" tabindex="-1"></a>np.matmul(d_mat, e_mat)</span>
-<span id="cb17-8"><a href="#cb17-8" aria-hidden="true" tabindex="-1"></a>np.linalg.matmul(d_mat, e_mat)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-display">
-<div class="rz-line">
-    \( \displaystyle 
-        \mathbf{e} = \begin{bmatrix}
-            9 &amp; 10 \\ 11 &amp; 12
-        \end{bmatrix}
-     \)
-</div>
-</div>
-<div class="cell-output cell-output-display">
-<div class="rz-line">
-    \( \displaystyle 
-        \mathbf{d} \cdot \mathbf{e} = \begin{bmatrix}
-            5 &amp; 6 \\ 7 &amp; 8
-        \end{bmatrix} \cdot \begin{bmatrix}
-            9 &amp; 10 \\ 11 &amp; 12
-        \end{bmatrix} = \begin{bmatrix}
-            111 &amp; 122 \\ 151 &amp; 166
-        \end{bmatrix}
-     \)
-</div>
-<div class="rz-line">
-    \( \displaystyle 
-        \mathbf{d} \cdot \mathbf{e} = \begin{bmatrix}
-            5 &amp; 6 \\ 7 &amp; 8
-        \end{bmatrix} \cdot \begin{bmatrix}
-            9 &amp; 10 \\ 11 &amp; 12
-        \end{bmatrix} = \begin{bmatrix}
-            111 &amp; 122 \\ 151 &amp; 166
-        \end{bmatrix}
-     \)
-</div>
-<div class="rz-line">
-    \( \displaystyle 
-        \mathbf{d} \cdot \mathbf{e} = \begin{bmatrix}
-            5 &amp; 6 \\ 7 &amp; 8
-        \end{bmatrix} \cdot \begin{bmatrix}
-            9 &amp; 10 \\ 11 &amp; 12
-        \end{bmatrix} = \begin{bmatrix}
-            111 &amp; 122 \\ 151 &amp; 166
-        \end{bmatrix}
-     \)
-</div>
-<div class="rz-line">
-    \( \displaystyle 
-        \mathbf{d} \cdot \mathbf{e} = \begin{bmatrix}
-            5 &amp; 6 \\ 7 &amp; 8
-        \end{bmatrix} \cdot \begin{bmatrix}
-            9 &amp; 10 \\ 11 &amp; 12
-        \end{bmatrix} = \begin{bmatrix}
-            111 &amp; 122 \\ 151 &amp; 166
-        \end{bmatrix}
-     \)
-</div>
-<div class="rz-line">
-    \( \displaystyle 
-        \mathbf{d} \cdot \mathbf{e} = \begin{bmatrix}
-            5 &amp; 6 \\ 7 &amp; 8
-        \end{bmatrix} \cdot \begin{bmatrix}
-            9 &amp; 10 \\ 11 &amp; 12
-        \end{bmatrix} = \begin{bmatrix}
-            111 &amp; 122 \\ 151 &amp; 166
-        \end{bmatrix}
-     \)
-</div>
-</div>
-</div>
-</section>
-<section id="cross-product" class="level3">
-<h3 class="anchored" data-anchor-id="cross-product">Cross Product</h3>
-<p>Associativity rules are accounted for when rendering cross products:</p>
-<div id="532b1772" class="cell" data-execution_count="16">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb18"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="op">%%</span>tap</span>
-<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>Q_mat <span class="op">=</span> np.array([[<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>], [<span class="dv">4</span>, <span class="dv">5</span>, <span class="dv">6</span>]])</span>
-<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>W_mat <span class="op">=</span> np.array([[<span class="dv">7</span>, <span class="dv">8</span>, <span class="dv">9</span>], [<span class="dv">10</span>, <span class="dv">11</span>, <span class="dv">12</span>]])</span>
-<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a>E_mat <span class="op">=</span> np.array([[<span class="dv">7</span>, <span class="dv">8</span>, <span class="dv">9</span>], [<span class="dv">10</span>, <span class="dv">11</span>, <span class="dv">12</span>]])</span>
-<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-6"><a href="#cb18-6" aria-hidden="true" tabindex="-1"></a>np.cross(Q_mat, W_mat)</span>
-<span id="cb18-7"><a href="#cb18-7" aria-hidden="true" tabindex="-1"></a>np.cross(np.cross(Q_mat, W_mat), E_mat)</span>
-<span id="cb18-8"><a href="#cb18-8" aria-hidden="true" tabindex="-1"></a>np.cross(Q_mat, np.cross(W_mat, E_mat))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-display">
-<div class="rz-line">
-    \( \displaystyle 
-        \mathbf{Q} = \begin{bmatrix}
-            1 &amp; 2 &amp; 3 \\ 4 &amp; 5 &amp; 6
-        \end{bmatrix}
-     \)
-</div>
-<div class="rz-line">
-    \( \displaystyle 
-        \mathbf{W} = \begin{bmatrix}
-            7 &amp; 8 &amp; 9 \\ 10 &amp; 11 &amp; 12
-        \end{bmatrix}
-     \)
-</div>
-<div class="rz-line">
-    \( \displaystyle 
-        \mathbf{E} = \begin{bmatrix}
-            7 &amp; 8 &amp; 9 \\ 10 &amp; 11 &amp; 12
-        \end{bmatrix}
-     \)
-</div>
-</div>
-<div class="cell-output cell-output-display">
-<div class="rz-line">
-    \( \displaystyle 
-        \mathbf{Q} \times \mathbf{W} = \begin{bmatrix}
-            1 &amp; 2 &amp; 3 \\ 4 &amp; 5 &amp; 6
-        \end{bmatrix} \times \begin{bmatrix}
-            7 &amp; 8 &amp; 9 \\ 10 &amp; 11 &amp; 12
-        \end{bmatrix} = \begin{bmatrix}
-            -6 &amp; 12 &amp; -6 \\ -6 &amp; 12 &amp; -6
-        \end{bmatrix}
-     \)
-</div>
-<div class="rz-line">
-    \( \displaystyle 
-        \left( \mathbf{Q} \times \mathbf{W} \right) \times \mathbf{E} = \left(
-            \begin{bmatrix}
-                1 &amp; 2 &amp; 3 \\ 4 &amp; 5 &amp; 6
-            \end{bmatrix} \times \begin{bmatrix}
-                7 &amp; 8 &amp; 9 \\ 10 &amp; 11 &amp; 12
-            \end{bmatrix}
-        \right) \times \begin{bmatrix}
-            7 &amp; 8 &amp; 9 \\ 10 &amp; 11 &amp; 12
-        \end{bmatrix} = \begin{bmatrix}
-            156 &amp; 12 &amp; -132 \\ 210 &amp; 12 &amp; -186
-        \end{bmatrix}
-     \)
-</div>
-<div class="rz-line">
-    \( \displaystyle 
-        \mathbf{Q} \times \left( \mathbf{W} \times \mathbf{E} \right) = \begin{bmatrix}
-            1 &amp; 2 &amp; 3 \\ 4 &amp; 5 &amp; 6
-        \end{bmatrix} \times \left(
-            \begin{bmatrix}
-                7 &amp; 8 &amp; 9 \\ 10 &amp; 11 &amp; 12
-            \end{bmatrix} \times \begin{bmatrix}
-                7 &amp; 8 &amp; 9 \\ 10 &amp; 11 &amp; 12
-            \end{bmatrix}
-        \right) = \begin{bmatrix}
-            0 &amp; 0 &amp; 0 \\ 0 &amp; 0 &amp; 0
-        \end{bmatrix}
-     \)
-</div>
-</div>
-</div>
-</section>
-<section id="inner-product" class="level3">
-<h3 class="anchored" data-anchor-id="inner-product">Inner Product</h3>
-<div id="afeed641" class="cell" data-execution_count="17">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb19"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="op">%%</span>tap</span>
-<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>np.inner(Q_mat, W_mat)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-display">
-<div class="rz-line">
-    \( \displaystyle 
-        \left\langle \mathbf{Q},\, \mathbf{W} \right\rangle = \left\langle \begin{bmatrix}
-            1 &amp; 2 &amp; 3 \\ 4 &amp; 5 &amp; 6
-        \end{bmatrix},\, \begin{bmatrix}
-            7 &amp; 8 &amp; 9 \\ 10 &amp; 11 &amp; 12
-        \end{bmatrix} \right\rangle = \begin{bmatrix}
-            50 &amp; 68 \\ 122 &amp; 167
-        \end{bmatrix}
-     \)
-</div>
-</div>
-</div>
-</section>
-<section id="outer-product" class="level3">
-<h3 class="anchored" data-anchor-id="outer-product">Outer Product</h3>
-<div id="232c984e" class="cell" data-execution_count="18">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb20"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="op">%%</span>tap</span>
-<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>u_vec <span class="op">=</span> np.array([<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>])</span>
-<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a>v_vec <span class="op">=</span> np.array([<span class="dv">4</span>, <span class="dv">5</span>])</span>
-<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-5"><a href="#cb20-5" aria-hidden="true" tabindex="-1"></a>np.outer(u_vec, v_vec)</span>
-<span id="cb20-6"><a href="#cb20-6" aria-hidden="true" tabindex="-1"></a>np.linalg.outer(u_vec, v_vec)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-display">
-<div class="rz-line">\( \displaystyle \mathbf{u} = \begin{bmatrix} 1 &amp; 2 &amp; 3 \end{bmatrix} \)</div>
-<div class="rz-line">\( \displaystyle \mathbf{v} = \begin{bmatrix} 4 &amp; 5 \end{bmatrix} \)</div>
-</div>
-<div class="cell-output cell-output-display">
-<div class="rz-line">
-    \( \displaystyle 
-        \mathbf{u} \otimes \mathbf{v} = \begin{bmatrix} 1 &amp; 2 &amp; 3 \end{bmatrix} \otimes \begin{bmatrix} 4 &amp; 5 \end{bmatrix} = \begin{bmatrix}
-            4 &amp; 5 \\ 8 &amp; 10 \\ 12 &amp; 15
-        \end{bmatrix}
-     \)
-</div>
-<div class="rz-line">
-    \( \displaystyle 
-        \mathbf{u} \otimes \mathbf{v} = \begin{bmatrix} 1 &amp; 2 &amp; 3 \end{bmatrix} \otimes \begin{bmatrix} 4 &amp; 5 \end{bmatrix} = \begin{bmatrix}
-            4 &amp; 5 \\ 8 &amp; 10 \\ 12 &amp; 15
-        \end{bmatrix}
-     \)
-</div>
-</div>
-</div>
-</section>
-<section id="norm" class="level3">
-<h3 class="anchored" data-anchor-id="norm">Norm</h3>
-<div id="8e184ca0" class="cell" data-execution_count="19">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb21"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="op">%%</span>tap</span>
-<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>np.linalg.vector_norm(a_mat)</span>
-<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a>np.linalg.matrix_norm(b_mat)</span>
-<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a>np.linalg.matrix_norm(b_mat, <span class="bu">ord</span><span class="op">=</span><span class="st">"nuc"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-display">
-<div class="rz-line">\( \displaystyle \left\| \mathbf{a} \right\| = \begin{Vmatrix} 1 &amp; 2 &amp; 3 \end{Vmatrix} = 3.74 \)</div>
-<div class="rz-line">
-    \( \displaystyle 
-        \left\| \mathbf{b} \right\|_{F} = \begin{Vmatrix}
-            1 &amp; 2 \\ 3 &amp; 4
-        \end{Vmatrix}_{F} = 5.48
-     \)
-</div>
-<div class="rz-line">
-    \( \displaystyle 
-        \left\| \mathbf{b} \right\|_{*} = \begin{Vmatrix}
-            1 &amp; 2 \\ 3 &amp; 4
-        \end{Vmatrix}_{*} = 5.83
-     \)
-</div>
-</div>
-</div>
-</section>
-<section id="power" class="level3">
-<h3 class="anchored" data-anchor-id="power">Power</h3>
-<div id="39244a63" class="cell" data-execution_count="20">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb22"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="op">%%</span>tap</span>
-<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>np.linalg.matrix_power(b_mat, <span class="dv">3</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-display">
-<div class="rz-line">
-    \( \displaystyle 
-        \mathbf{b}^{3} = \begin{bmatrix}
-            1 &amp; 2 \\ 3 &amp; 4
-        \end{bmatrix}^{3} = \begin{bmatrix}
-            37 &amp; 54 \\ 81 &amp; 118
-        \end{bmatrix}
-     \)
-</div>
-</div>
-</div>
-</section>
-<section id="determinant" class="level3">
-<h3 class="anchored" data-anchor-id="determinant">Determinant</h3>
-<div id="2572da4b" class="cell" data-execution_count="21">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb23"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="op">%%</span>tap</span>
-<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>np.linalg.det(b_mat)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-display">
-<div class="rz-line">
-    \( \displaystyle 
-        \det \left( \mathbf{b} \right) = \det \begin{pmatrix}
-            1 &amp; 2 \\ 3 &amp; 4
-        \end{pmatrix} = -2.00
-     \)
-</div>
-</div>
-</div>
-</section>
-<section id="rank" class="level3">
-<h3 class="anchored" data-anchor-id="rank">Rank</h3>
-<div id="76dfeac2" class="cell" data-execution_count="22">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb24"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="op">%%</span>tap</span>
-<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>np.linalg.matrix_rank(b_mat)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-display">
-<div class="rz-line">
-    \( \displaystyle 
-        \operatorname{rank} \left( \mathbf{b} \right) = \operatorname{rank} \begin{pmatrix}
-            1 &amp; 2 \\ 3 &amp; 4
-        \end{pmatrix} = 2
-     \)
-</div>
-</div>
-</div>
-</section>
-<section id="trace" class="level3">
-<h3 class="anchored" data-anchor-id="trace">Trace</h3>
-<div id="196b8d81" class="cell" data-execution_count="23">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb25"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="op">%%</span>tap</span>
-<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a>np.trace(b_mat)</span>
-<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a>np.linalg.trace(b_mat)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-display">
-<div class="rz-line">
-    \( \displaystyle 
-        \operatorname{Tr} \left( \mathbf{b} \right) = \operatorname{Tr} \begin{pmatrix}
-            1 &amp; 2 \\ 3 &amp; 4
-        \end{pmatrix} = 5
-     \)
-</div>
-<div class="rz-line">
-    \( \displaystyle 
-        \operatorname{Tr} \left( \mathbf{b} \right) = \operatorname{Tr} \begin{pmatrix}
-            1 &amp; 2 \\ 3 &amp; 4
-        \end{pmatrix} = 5
-     \)
-</div>
-</div>
-</div>
-</section>
-<section id="inverse-and-pseudo-inverse" class="level3">
-<h3 class="anchored" data-anchor-id="inverse-and-pseudo-inverse">Inverse and Pseudo-inverse</h3>
-<div id="96a36987" class="cell" data-execution_count="24">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb26"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="op">%%</span>tap</span>
-<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a>np.linalg.inv(b_mat)</span>
-<span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a>np.linalg.pinv(b_mat)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-display">
-<div class="rz-line">
-    \( \displaystyle 
-        \mathbf{b}^{-1} = \begin{bmatrix}
-            1 &amp; 2 \\ 3 &amp; 4
-        \end{bmatrix}^{-1} = \begin{bmatrix}
-            -2.00 &amp; 1.00 \\ 1.50 &amp; -0.50
-        \end{bmatrix}
-     \)
-</div>
-<div class="rz-line">
-    \( \displaystyle 
-        \mathbf{b}^{+} = \begin{bmatrix}
-            1 &amp; 2 \\ 3 &amp; 4
-        \end{bmatrix}^{+} = \begin{bmatrix}
-            -2.00 &amp; 1.00 \\ 1.50 &amp; -0.50
-        \end{bmatrix}
-     \)
-</div>
-</div>
-</div>
-</section>
-<section id="solving-systems-of-equations" class="level3">
-<h3 class="anchored" data-anchor-id="solving-systems-of-equations">Solving Systems of Equations</h3>
-<div id="a99bf89f" class="cell" data-execution_count="25">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb27"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="op">%%</span>tap <span class="op">@</span>show_1d_as_col<span class="op">=</span><span class="va">True</span></span>
-<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a><span class="co"># **Define stiffness matrix**</span></span>
-<span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a>k_1, k_2, k_3 <span class="op">=</span> <span class="dv">10</span>, <span class="dv">15</span>, <span class="dv">20</span>  <span class="co"># Example stiffness values</span></span>
-<span id="cb27-4"><a href="#cb27-4" aria-hidden="true" tabindex="-1"></a>K_mat <span class="op">=</span> np.array([[k_1 <span class="op">+</span> k_2, <span class="op">-</span>k_2],</span>
-<span id="cb27-5"><a href="#cb27-5" aria-hidden="true" tabindex="-1"></a>                  [<span class="op">-</span>k_2, k_2 <span class="op">+</span> k_3]])</span>
-<span id="cb27-6"><a href="#cb27-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb27-7"><a href="#cb27-7" aria-hidden="true" tabindex="-1"></a><span class="co"># **Force vector**</span></span>
-<span id="cb27-8"><a href="#cb27-8" aria-hidden="true" tabindex="-1"></a>F_mat <span class="op">=</span> np.array([<span class="dv">100</span>, <span class="dv">150</span>])  <span class="co"># Example forces</span></span>
-<span id="cb27-9"><a href="#cb27-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb27-10"><a href="#cb27-10" aria-hidden="true" tabindex="-1"></a>u_mat <span class="op">=</span> np.linalg.inv(K_mat) <span class="op">@</span> F_mat  <span class="co"># Solve for displacements</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-display">
-<div class="rz-line"><strong>Define stiffness matrix</strong></div>
-<div class="rz-line">
-    <div class="rz-line__main">\( \displaystyle k_{1},\, k_{2},\, k_{3} = \left( 10,\, 15,\, 20 \right) \)</div>
-    <div class="rz-line__desc">Example stiffness values</div>
-</div>
-<div class="rz-line">
-    \( \displaystyle 
-        \mathbf{K} = \begin{bmatrix}
-            k_{1} + k_{2} &amp; -k_{2} \\ -k_{2} &amp; k_{2} + k_{3}
-        \end{bmatrix} = \begin{bmatrix}
-            10 + 15 &amp; -15 \\ -15 &amp; 15 + 20
-        \end{bmatrix} = \begin{bmatrix}
-            25 &amp; -15 \\ -15 &amp; 35
-        \end{bmatrix}
-     \)
-</div>
-</div>
-<div class="cell-output cell-output-display">
-<div class="rz-line"><strong>Force vector</strong></div>
-<div class="rz-line">
-    <div class="rz-line__main">
-        \( \displaystyle 
-            \mathbf{F} = \begin{bmatrix}
-                100 \\ 150
-            \end{bmatrix}
-         \)
-    </div>
-    <div class="rz-line__desc">Example forces</div>
-</div>
-</div>
-<div class="cell-output cell-output-display">
-<div class="rz-line">
-    <div class="rz-line__main">
-        \( \displaystyle 
-            \mathbf{u} = \mathbf{K}^{-1} \cdot \mathbf{F} = \begin{bmatrix}
-                25 &amp; -15 \\ -15 &amp; 35
-            \end{bmatrix}^{-1} \cdot \begin{bmatrix}
-                100 \\ 150
-            \end{bmatrix} = \begin{bmatrix}
-                8.85 \\ 8.08
-            \end{bmatrix}
-         \)
-    </div>
-    <div class="rz-line__desc">Solve for displacements</div>
-</div>
-</div>
-</div>
-<p>Or using <code>numpy.linalg.solve()</code>:</p>
-<div id="a792d731" class="cell" data-execution_count="26">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb28"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="op">%%</span>tap <span class="op">@</span>show_1d_as_col<span class="op">=</span><span class="va">True</span></span>
-<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a>u_mat_alt <span class="op">=</span> np.linalg.solve(K_mat, F_mat)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-display">
-<div class="rz-line">
-    \( \displaystyle 
-        \mathbf{u}_{\mathrm{alt}} = \underbracket{\mathbf{K}^{-1} \cdot \mathbf{F}}_{\text{via LAPACK}} = \underbracket{\begin{bmatrix}
-            25 &amp; -15 \\ -15 &amp; 35
-        \end{bmatrix}^{-1} \cdot \begin{bmatrix}
-            100 \\ 150
-        \end{bmatrix}}_{\text{via LAPACK}} = \begin{bmatrix}
-            8.85 \\ 8.08
-        \end{bmatrix}
-     \)
-</div>
+<div class="rz-line">\( \displaystyle \dots \)</div>
 </div>
 </div>
 
 
 
-</section>
 </section>
 
 </main> <!-- /main -->

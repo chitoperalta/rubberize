@@ -1,83 +1,83 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://chitoperalta.github.io/rubberize/docs/rendering/variables.html</loc>
-    <lastmod>2026-03-16T14:49:21.006Z</lastmod>
-  </url>
-  <url>
-    <loc>https://chitoperalta.github.io/rubberize/docs/rendering/operations.html</loc>
-    <lastmod>2026-03-16T14:49:21.006Z</lastmod>
-  </url>
-  <url>
-    <loc>https://chitoperalta.github.io/rubberize/docs/rendering/numbers.html</loc>
-    <lastmod>2026-03-16T14:49:21.005Z</lastmod>
-  </url>
-  <url>
-    <loc>https://chitoperalta.github.io/rubberize/docs/rendering/funcdefs.html</loc>
-    <lastmod>2026-03-16T14:49:21.004Z</lastmod>
-  </url>
-  <url>
-    <loc>https://chitoperalta.github.io/rubberize/docs/rendering/conditionals.html</loc>
-    <lastmod>2026-03-16T14:49:21.004Z</lastmod>
-  </url>
-  <url>
-    <loc>https://chitoperalta.github.io/rubberize/docs/rendering/calls.html</loc>
-    <lastmod>2026-03-16T14:49:21.003Z</lastmod>
-  </url>
-  <url>
-    <loc>https://chitoperalta.github.io/rubberize/docs/rendering/builtins.html</loc>
-    <lastmod>2026-03-16T14:49:21.003Z</lastmod>
-  </url>
-  <url>
-    <loc>https://chitoperalta.github.io/rubberize/docs/rendering/annotations.html</loc>
-    <lastmod>2026-03-16T14:49:21.001Z</lastmod>
-  </url>
-  <url>
-    <loc>https://chitoperalta.github.io/rubberize/docs/get_started.html</loc>
-    <lastmod>2026-03-16T14:49:21.000Z</lastmod>
-  </url>
-  <url>
-    <loc>https://chitoperalta.github.io/rubberize/docs/advanced/implementation_notes.html</loc>
-    <lastmod>2026-03-16T14:49:20.995Z</lastmod>
-  </url>
-  <url>
-    <loc>https://chitoperalta.github.io/rubberize/docs/advanced/custom_converters.html</loc>
-    <lastmod>2026-03-16T14:49:20.995Z</lastmod>
-  </url>
-  <url>
-    <loc>https://chitoperalta.github.io/rubberize/docs/config_reference.html</loc>
+    <loc>https://chitoperalta.github.io/rubberize/config_reference.html</loc>
     <lastmod>2026-03-16T14:49:20.999Z</lastmod>
   </url>
   <url>
-    <loc>https://chitoperalta.github.io/rubberize/docs/index.html</loc>
-    <lastmod>2026-03-16T14:49:21.000Z</lastmod>
+    <loc>https://chitoperalta.github.io/rubberize/rendering/operations.html</loc>
+    <lastmod>2026-03-16T14:49:21.006Z</lastmod>
   </url>
   <url>
-    <loc>https://chitoperalta.github.io/rubberize/docs/rendering/assignments.html</loc>
-    <lastmod>2026-03-16T14:49:21.001Z</lastmod>
+    <loc>https://chitoperalta.github.io/rubberize/rendering/expressions.html</loc>
+    <lastmod>2026-03-16T14:49:21.004Z</lastmod>
   </url>
   <url>
-    <loc>https://chitoperalta.github.io/rubberize/docs/rendering/calcsheet.html</loc>
+    <loc>https://chitoperalta.github.io/rubberize/rendering/builtins.html</loc>
     <lastmod>2026-03-16T14:49:21.003Z</lastmod>
   </url>
   <url>
-    <loc>https://chitoperalta.github.io/rubberize/docs/rendering/collections.html</loc>
-    <lastmod>2026-03-16T14:49:21.004Z</lastmod>
-  </url>
-  <url>
-    <loc>https://chitoperalta.github.io/rubberize/docs/rendering/expressions.html</loc>
-    <lastmod>2026-03-16T14:49:21.004Z</lastmod>
-  </url>
-  <url>
-    <loc>https://chitoperalta.github.io/rubberize/docs/rendering/index.html</loc>
+    <loc>https://chitoperalta.github.io/rubberize/rendering/index.html</loc>
     <lastmod>2026-03-16T14:49:21.005Z</lastmod>
   </url>
   <url>
-    <loc>https://chitoperalta.github.io/rubberize/docs/rendering/numpy.html</loc>
-    <lastmod>2026-03-16T14:49:21.005Z</lastmod>
+    <loc>https://chitoperalta.github.io/rubberize/rendering/annotations.html</loc>
+    <lastmod>2026-03-16T14:49:21.001Z</lastmod>
   </url>
   <url>
-    <loc>https://chitoperalta.github.io/rubberize/docs/rendering/pint.html</loc>
+    <loc>https://chitoperalta.github.io/rubberize/rendering/calls.html</loc>
+    <lastmod>2026-03-16T14:49:21.003Z</lastmod>
+  </url>
+  <url>
+    <loc>https://chitoperalta.github.io/rubberize/rendering/assignments.html</loc>
+    <lastmod>2026-03-16T14:49:21.001Z</lastmod>
+  </url>
+  <url>
+    <loc>https://chitoperalta.github.io/rubberize/get_started.html</loc>
+    <lastmod>2026-03-16T14:49:21.000Z</lastmod>
+  </url>
+  <url>
+    <loc>https://chitoperalta.github.io/rubberize/advanced/implementation_notes.html</loc>
+    <lastmod>2026-03-16T14:49:20.995Z</lastmod>
+  </url>
+  <url>
+    <loc>https://chitoperalta.github.io/rubberize/advanced/custom_converters.html</loc>
+    <lastmod>2026-03-16T14:49:20.995Z</lastmod>
+  </url>
+  <url>
+    <loc>https://chitoperalta.github.io/rubberize/index.html</loc>
+    <lastmod>2026-03-16T15:13:30.139Z</lastmod>
+  </url>
+  <url>
+    <loc>https://chitoperalta.github.io/rubberize/rendering/calcsheet.html</loc>
+    <lastmod>2026-03-16T14:49:21.003Z</lastmod>
+  </url>
+  <url>
+    <loc>https://chitoperalta.github.io/rubberize/rendering/variables.html</loc>
     <lastmod>2026-03-16T14:49:21.006Z</lastmod>
+  </url>
+  <url>
+    <loc>https://chitoperalta.github.io/rubberize/rendering/numbers.html</loc>
+    <lastmod>2026-03-16T14:49:21.005Z</lastmod>
+  </url>
+  <url>
+    <loc>https://chitoperalta.github.io/rubberize/rendering/conditionals.html</loc>
+    <lastmod>2026-03-16T14:49:21.004Z</lastmod>
+  </url>
+  <url>
+    <loc>https://chitoperalta.github.io/rubberize/rendering/collections.html</loc>
+    <lastmod>2026-03-16T14:49:21.004Z</lastmod>
+  </url>
+  <url>
+    <loc>https://chitoperalta.github.io/rubberize/rendering/pint.html</loc>
+    <lastmod>2026-03-16T14:49:21.006Z</lastmod>
+  </url>
+  <url>
+    <loc>https://chitoperalta.github.io/rubberize/rendering/numpy.html</loc>
+    <lastmod>2026-03-16T14:49:21.005Z</lastmod>
+  </url>
+  <url>
+    <loc>https://chitoperalta.github.io/rubberize/rendering/funcdefs.html</loc>
+    <lastmod>2026-03-16T14:49:21.004Z</lastmod>
   </url>
 </urlset>

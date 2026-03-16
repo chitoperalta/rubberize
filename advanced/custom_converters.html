@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Physical Quantities – Rubberize</title>
+<title>Custom Converters – Rubberize</title>
 <style>
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
@@ -61,27 +61,27 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </style>
 
 
-<script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js" integrity="sha384-ZvpUoO/+PpLXR1lu4jmpXWu80pZlYUAfxl5NsBMWOEPSjUn/6Z/hRTt8+pR6L4N2" crossorigin="anonymous"></script><script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
-<script src="../../site_libs/quarto-nav/headroom.min.js"></script>
-<script src="../../site_libs/clipboard/clipboard.min.js"></script>
-<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
-<script src="../../site_libs/quarto-search/fuse.min.js"></script>
-<script src="../../site_libs/quarto-search/quarto-search.js"></script>
-<meta name="quarto:offset" content="../../">
-<script src="../../site_libs/quarto-html/quarto.js" type="module"></script>
-<script src="../../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
-<script src="../../site_libs/quarto-html/popper.min.js"></script>
-<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
-<script src="../../site_libs/quarto-html/anchor.min.js"></script>
-<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-067f8ab80d092ae3595f7402c2c9b667.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
-<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-dark-ca1cb3032aa6b9181247695f27e2facc.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
-<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-067f8ab80d092ae3595f7402c2c9b667.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
-<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
-<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../../site_libs/bootstrap/bootstrap-18592173e188cdae81627623887a06db.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
-<link href="../../site_libs/bootstrap/bootstrap-dark-2be3bacf71d4ec939c4fa8f4e9c7a46b.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
-<link href="../../site_libs/bootstrap/bootstrap-18592173e188cdae81627623887a06db.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js" integrity="sha384-ZvpUoO/+PpLXR1lu4jmpXWu80pZlYUAfxl5NsBMWOEPSjUn/6Z/hRTt8+pR6L4N2" crossorigin="anonymous"></script><script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<script src="../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-067f8ab80d092ae3595f7402c2c9b667.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-dark-ca1cb3032aa6b9181247695f27e2facc.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-067f8ab80d092ae3595f7402c2c9b667.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap-18592173e188cdae81627623887a06db.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/bootstrap/bootstrap-dark-2be3bacf71d4ec939c4fa8f4e9c7a46b.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="../site_libs/bootstrap/bootstrap-18592173e188cdae81627623887a06db.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -143,7 +143,7 @@ window.Quarto = {
 };
 </script>
 
-<link rel="stylesheet" href="../../docs/styles.css">
+<link rel="stylesheet" href="../styles.css">
 </head>
 
 <body class="nav-sidebar docked nav-fixed quarto-light"><script id="quarto-html-before-body" type="application/javascript">
@@ -315,7 +315,7 @@ window.Quarto = {
     <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container mx-auto">
-    <a class="navbar-brand" href="../../index.html">
+    <a class="navbar-brand" href="../index.html">
     <span class="navbar-title">Rubberize</span>
     </a>
   </div>
@@ -326,23 +326,23 @@ window.Quarto = {
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll me-auto">
   <li class="nav-item">
-    <a class="nav-link" href="../../docs/index.html"> 
+    <a class="nav-link" href="../index.html"> 
 <span class="menu-text">Home</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link active" href="../../docs/get_started.html" aria-current="page"> 
+    <a class="nav-link active" href="../get_started.html" aria-current="page"> 
 <span class="menu-text">Get Started</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="../../docs/rendering/index.html"> 
+    <a class="nav-link" href="../rendering/index.html"> 
 <span class="menu-text">Rendering Code</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="../../docs/advanced/custom_converters.html"> 
+    <a class="nav-link" href="../advanced/custom_converters.html"> 
 <span class="menu-text">Custom Converters</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="../../docs/config_reference.html"> 
+    <a class="nav-link" href="../config_reference.html"> 
 <span class="menu-text">Config Reference</span></a>
   </li>  
 </ul>
@@ -358,7 +358,7 @@ window.Quarto = {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../docs/rendering/index.html">Rendering Code</a></li><li class="breadcrumb-item"><a href="../../docs/rendering/variables.html">Expressions</a></li><li class="breadcrumb-item"><a href="../../docs/rendering/pint.html">Physical Quantities</a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../advanced/implementation_notes.html">Advanced Topics</a></li><li class="breadcrumb-item"><a href="../advanced/custom_converters.html">Custom Converters</a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
     </div>
@@ -372,13 +372,13 @@ window.Quarto = {
     <ul class="list-unstyled mt-1">
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../docs/get_started.html" class="sidebar-item-text sidebar-link">
+  <a href="../get_started.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Get Started</span></a>
   </div>
 </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a href="../../docs/rendering/index.html" class="sidebar-item-text sidebar-link">
+            <a href="../rendering/index.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Rendering Code</span></a>
           <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#" role="navigation" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
@@ -387,58 +387,58 @@ window.Quarto = {
       <ul id="" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true">
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="false">
  <span class="menu-text">Expressions</span></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true" aria-label="Toggle section">
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="false" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth2 show">  
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth2 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../docs/rendering/variables.html" class="sidebar-item-text sidebar-link">
+  <a href="../rendering/variables.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Variables</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../docs/rendering/numbers.html" class="sidebar-item-text sidebar-link">
+  <a href="../rendering/numbers.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Numbers</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../docs/rendering/collections.html" class="sidebar-item-text sidebar-link">
+  <a href="../rendering/collections.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Collections</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../docs/rendering/builtins.html" class="sidebar-item-text sidebar-link">
+  <a href="../rendering/builtins.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Built-in Types</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../docs/rendering/calls.html" class="sidebar-item-text sidebar-link">
+  <a href="../rendering/calls.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Calls</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../docs/rendering/pint.html" class="sidebar-item-text sidebar-link active">
+  <a href="../rendering/pint.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Physical Quantities</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../docs/rendering/numpy.html" class="sidebar-item-text sidebar-link">
+  <a href="../rendering/numpy.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Arrays</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../docs/rendering/operations.html" class="sidebar-item-text sidebar-link">
+  <a href="../rendering/operations.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Operations</span></a>
   </div>
 </li>
@@ -455,25 +455,25 @@ window.Quarto = {
       <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth2 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../docs/rendering/expressions.html" class="sidebar-item-text sidebar-link">
+  <a href="../rendering/expressions.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Expressions</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../docs/rendering/assignments.html" class="sidebar-item-text sidebar-link">
+  <a href="../rendering/assignments.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Assignments</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../docs/rendering/conditionals.html" class="sidebar-item-text sidebar-link">
+  <a href="../rendering/conditionals.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Conditionals</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../docs/rendering/funcdefs.html" class="sidebar-item-text sidebar-link">
+  <a href="../rendering/funcdefs.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Function Definitions</span></a>
   </div>
 </li>
@@ -490,13 +490,13 @@ window.Quarto = {
       <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth2 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../docs/rendering/calcsheet.html" class="sidebar-item-text sidebar-link">
+  <a href="../rendering/calcsheet.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Calculation Sheets</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../docs/rendering/annotations.html" class="sidebar-item-text sidebar-link">
+  <a href="../rendering/annotations.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Annotations</span></a>
   </div>
 </li>
@@ -515,13 +515,13 @@ window.Quarto = {
       <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../docs/advanced/implementation_notes.html" class="sidebar-item-text sidebar-link">
+  <a href="../advanced/implementation_notes.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Implementation Notes</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../docs/advanced/custom_converters.html" class="sidebar-item-text sidebar-link">
+  <a href="../advanced/custom_converters.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text">Custom Converters</span></a>
   </div>
 </li>
@@ -529,7 +529,7 @@ window.Quarto = {
   </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../docs/config_reference.html" class="sidebar-item-text sidebar-link">
+  <a href="../config_reference.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Config Reference</span></a>
   </div>
 </li>
@@ -543,14 +543,13 @@ window.Quarto = {
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#creating-quantities" id="toc-creating-quantities" class="nav-link active" data-scroll-target="#creating-quantities">Creating Quantities</a></li>
-  <li><a href="#unit-conversions" id="toc-unit-conversions" class="nav-link" data-scroll-target="#unit-conversions">Unit Conversions</a></li>
-  <li><a href="#contextual-multiplication" id="toc-contextual-multiplication" class="nav-link" data-scroll-target="#contextual-multiplication">Contextual Multiplication</a></li>
-  <li><a href="#inline-units" id="toc-inline-units" class="nav-link" data-scroll-target="#inline-units">Inline Units</a></li>
-  <li><a href="#angular-degrees" id="toc-angular-degrees" class="nav-link" data-scroll-target="#angular-degrees">Angular Degrees</a></li>
-  <li><a href="#foot-inch-fraction" id="toc-foot-inch-fraction" class="nav-link" data-scroll-target="#foot-inch-fraction">Foot-Inch-Fraction</a></li>
-  <li><a href="#degree-minute-second" id="toc-degree-minute-second" class="nav-link" data-scroll-target="#degree-minute-second">Degree-Minute-Second</a></li>
-  <li><a href="#custom-unit-latex" id="toc-custom-unit-latex" class="nav-link" data-scroll-target="#custom-unit-latex">Custom Unit LaTeX</a></li>
+  <li><a href="#creating-an-object-converter" id="toc-creating-an-object-converter" class="nav-link active" data-scroll-target="#creating-an-object-converter">Creating an Object Converter</a></li>
+  <li><a href="#expression-ranks" id="toc-expression-ranks" class="nav-link" data-scroll-target="#expression-ranks">Expression Ranks</a></li>
+  <li><a href="#creating-a-call-converter" id="toc-creating-a-call-converter" class="nav-link" data-scroll-target="#creating-a-call-converter">Creating a Call Converter</a>
+  <ul class="collapse">
+  <li><a href="#using-a-common-call-converter" id="toc-using-a-common-call-converter" class="nav-link" data-scroll-target="#using-a-common-call-converter">Using a Common Call Converter</a></li>
+  <li><a href="#custom-call-converter" id="toc-custom-call-converter" class="nav-link" data-scroll-target="#custom-call-converter">Custom Call Converter</a></li>
+  </ul></li>
   </ul>
 </nav>
     </div>
@@ -558,9 +557,9 @@ window.Quarto = {
 <main class="content" id="quarto-document-content">
 
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../docs/rendering/index.html">Rendering Code</a></li><li class="breadcrumb-item"><a href="../../docs/rendering/variables.html">Expressions</a></li><li class="breadcrumb-item"><a href="../../docs/rendering/pint.html">Physical Quantities</a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../advanced/implementation_notes.html">Advanced Topics</a></li><li class="breadcrumb-item"><a href="../advanced/custom_converters.html">Custom Converters</a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title">Physical Quantities</h1>
+<h1 class="title">Custom Converters</h1>
 </div>
 
 
@@ -577,9 +576,8 @@ window.Quarto = {
 </header>
 
 
-<div id="05067c4a" class="cell" data-execution_count="1">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="op">%</span>reload_ext rubberize</span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> rubberize.config <span class="im">import</span> config</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div id="7a0c8490" class="cell" data-execution_count="1">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="op">%</span>reload_ext rubberize</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display">
 <style>:root {
     --rz-icon-check-circle: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="%23000" class="bi bi-check-circle" viewBox="0 0 16 16"><path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14m0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16"/><path d="m10.97 4.97-.02.022-3.473 4.425-2.093-2.094a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-1.071-1.05"/></svg>');
@@ -1044,235 +1042,282 @@ window.Quarto = {
 </style>
 </div>
 </div>
-<p>Rubberize integrates well with <a href="https://github.com/hgrecco/pint">Pint</a> to support physical quantities:</p>
-<div class="callout callout-style-default callout-note callout-titled">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
+<p>Rubberize uses registries of converter functions for calls and objects for rendering. If Rubberize encounters a call or an object that it doesn’t have a converter for, it won’t try to render any mathematical representation. Instead, it will simply render the <a href="../rendering/calls.html#unknown-functions">default call syntax</a> if it is a call, or the variable name if it is an object reference.</p>
+<p>For example, if a <code>Point</code> class is defined as:</p>
+<div id="aec9278a" class="cell" data-execution_count="2">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> Point:</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> <span class="fu">__init__</span>(<span class="va">self</span>, x, y):</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.x <span class="op">=</span> x</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.y <span class="op">=</span> y</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> distance_to(<span class="va">self</span>, other):</span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> ((<span class="va">self</span>.x <span class="op">-</span> other.x) <span class="op">**</span> <span class="dv">2</span> <span class="op">+</span> (<span class="va">self</span>.y <span class="op">-</span> other.y) <span class="op">**</span> <span class="dv">2</span>) <span class="op">**</span> <span class="fl">0.5</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-<div class="callout-title-container flex-fill">
-Note
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p>Pint is not a core Rubberize dependency. You will need to install it separately.</p>
-</div>
-</div>
-<p><code>pint.Quantity</code> objects, which encapsulate numbers with units, are fully integrated into Rubberize. This guide demonstrates how Rubberize renders these quantities.</p>
-<div id="ae452c4f" class="cell" data-execution_count="2">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pint</span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="co"># instantiate a unit registry</span></span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>ureg <span class="op">=</span> pint.UnitRegistry()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</div>
-<section id="creating-quantities" class="level2">
-<h2 class="anchored" data-anchor-id="creating-quantities">Creating Quantities</h2>
-<p>Rubberize recognizes when the user intends to create physical quantities by applying units:</p>
-<div id="1213cabe" class="cell" data-execution_count="3">
+<p>Rubberize will not know how to convert a <code>Point</code> instance, so it will just output the default call syntax and the variable name:</p>
+<div id="af4e7106" class="cell" data-execution_count="3">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="op">%%</span>tap</span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>v_1 <span class="op">=</span> <span class="fl">0.0</span>                       <span class="co"># Final velocity of the car</span></span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>v_0 <span class="op">=</span> <span class="fl">25.0</span> <span class="op">*</span> (ureg.m <span class="op">/</span> ureg.s)  <span class="co"># Initial velocity of the car</span></span>
-<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>Deltat <span class="op">=</span> <span class="fl">0.2</span> <span class="op">*</span> ureg.s           <span class="co"># Time for the change in velocity</span></span>
-<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>a <span class="op">=</span> (v_1 <span class="op">-</span> v_0) <span class="op">/</span> Deltat  <span class="co"># Deceleration of the car</span></span>
-<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>m <span class="op">=</span> <span class="fl">1_500.0</span> <span class="op">*</span> ureg.kg     <span class="co"># Mass of the car</span></span>
-<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>F <span class="op">=</span> (m <span class="op">*</span> a).to(ureg.kN)   <span class="co"># Average force experienced by the car in the crash</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>P_1 <span class="op">=</span> Point(<span class="dv">1</span>, <span class="dv">2</span>)</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>P_1</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display">
-<div class="rz-line">
-    <div class="rz-line__main">\( \displaystyle v_{1} = 0.00 \)</div>
-    <div class="rz-line__desc">Final velocity of the car</div>
-</div>
-<div class="rz-line">
-    <div class="rz-line__main">\( \displaystyle v_{0} = 25.00\ \mathrm{m} / \mathrm{s} \)</div>
-    <div class="rz-line__desc">Initial velocity of the car</div>
-</div>
-<div class="rz-line">
-    <div class="rz-line__main">\( \displaystyle \Delta t = 0.20\ \mathrm{s} \)</div>
-    <div class="rz-line__desc">Time for the change in velocity</div>
+<div class="rz-line">\( \displaystyle P_{1} = \operatorname{Point} \left( 1,\, 2 \right) \)</div>
+<div class="rz-line">\( \displaystyle P_{1} \)</div>
 </div>
 </div>
-<div class="cell-output cell-output-display">
-<div class="rz-line">
-    <div class="rz-line__main">\( \displaystyle a = \frac{v_{1} - v_{0}}{\Delta t} = \frac{0.00 - 25.00\ \mathrm{m} / \mathrm{s}}{0.20\ \mathrm{s}} = -125.00\ \mathrm{m} / \mathrm{s}^{2} \)</div>
-    <div class="rz-line__desc">Deceleration of the car</div>
+<section id="creating-an-object-converter" class="level2">
+<h2 class="anchored" data-anchor-id="creating-an-object-converter">Creating an Object Converter</h2>
+<p>To handle custom objects, a converter function can be created and registered to Rubberize using <code>register_object_converter()</code>. This allows Rubberize to recognize and properly transform the object.</p>
+<p>The function takes two arguments:</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 8%">
+<col style="width: 42%">
+<col style="width: 49%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Keyword</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>cls</code></td>
+<td><code>type</code></td>
+<td>The object type the converter applies to.</td>
+</tr>
+<tr class="even">
+<td><code>func</code></td>
+<td><code>Callable[[Any], ExprLatex | None]</code></td>
+<td>The converter function.</td>
+</tr>
+</tbody>
+</table>
+<p>The converter function must be defined to take at an object of type <code>cls</code> (which is the object to convert) and return an <code>ExprLatex</code> instance, which contains the LaTeX representation of the object, or <code>None</code> if the object is considered unconvertible.</p>
+<p>Internally, registering the converter maps <code>cls</code> to <code>func</code>, so that when an instance of <code>cls</code> is encountered, Rubberize can look up the correct converter and apply it.</p>
+<p>Continuing the example, we define a converter <code>convert_point()</code> and register it as an object converter:</p>
+<div id="ab0ebad9" class="cell" data-execution_count="4">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> rubberize.latexer <span class="im">import</span> ExprLatex, ranks, register_object_converter</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> convert_point(obj: Point) <span class="op">-&gt;</span> ExprLatex:</span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>    latex <span class="op">=</span> <span class="vs">rf"</span><span class="er">\</span><span class="vs">langle </span><span class="sc">{</span>obj<span class="sc">.</span>x<span class="sc">}</span><span class="vs">, </span><span class="sc">{</span>obj<span class="sc">.</span>y<span class="sc">}</span><span class="vs"> </span><span class="ch">\r</span><span class="vs">angle"</span></span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>    rank <span class="op">=</span> ranks.COLLECTIONS_RANK</span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> ExprLatex(latex, rank)</span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a><span class="co"># register the converter</span></span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>register_object_converter(Point, convert_point)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-<div class="rz-line">
-    <div class="rz-line__main">\( \displaystyle m = 1\,500.00\ \mathrm{kg} \)</div>
-    <div class="rz-line__desc">Mass of the car</div>
-</div>
-<div class="rz-line">
-    <div class="rz-line__main">\( \displaystyle F = m\,a = \left( 1\,500.00\ \mathrm{kg} \right)\,\left( -125.00\ \mathrm{m} / \mathrm{s}^{2} \right) = -187.50\ \mathrm{kN} \)</div>
-    <div class="rz-line__desc">Average force experienced by the car in the crash</div>
-</div>
-</div>
-</div>
-<p>Unit assignments are rendered with a small space between the quantity value and the unit symbols. All unit symbols are in upright Roman font, in accordance with CGPM.<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a></p>
-<p>When quantities are multiplied, they are wrapped in parentheses, following the recommendation of SI Brochure.<a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a></p>
-</section>
-<section id="unit-conversions" class="level2">
-<h2 class="anchored" data-anchor-id="unit-conversions">Unit Conversions</h2>
-<p>A <code>pint.Quantity</code> object’s <code>to()</code> or <code>ito()</code> methods calls are hidden by Rubberize.</p>
-<div id="dba670a5" class="cell" data-execution_count="4">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="op">%%</span>tap</span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>F <span class="op">=</span> (m <span class="op">*</span> a).to(ureg.kN)</span>
-<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>F.to(ureg.kip)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-display">
-<div class="rz-line">\( \displaystyle F = m\,a = \left( 1\,500.00\ \mathrm{kg} \right)\,\left( -125.00\ \mathrm{m} / \mathrm{s}^{2} \right) = -187.50\ \mathrm{kN} \)</div>
-<div class="rz-line">\( \displaystyle F = -187.50\ \mathrm{kN} = -42.15\ \mathrm{kip} \)</div>
-</div>
-</div>
-</section>
-<section id="contextual-multiplication" class="level2">
-<h2 class="anchored" data-anchor-id="contextual-multiplication">Contextual Multiplication</h2>
-<p>Multiplication of compound units matches Rubberize’s config for <code>@use_contextual_mult</code>.</p>
-<div id="24140512" class="cell" data-execution_count="5">
+<p>Now, when we try to render the object, it will be rendered correctly:</p>
+<div id="cbdb888f" class="cell" data-execution_count="5">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="op">%%</span>tap</span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="fl">50.0</span> <span class="op">*</span> (ureg.kN <span class="op">*</span> ureg.m)  <span class="co"># @use_contextual_mult=True</span></span>
-<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="fl">50.0</span> <span class="op">*</span> (ureg.kN <span class="op">*</span> ureg.m)  <span class="co"># @use_contextual_mult=False</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>P_1</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display">
-<div class="rz-line">\( \displaystyle 50.00\ \mathrm{kN}\,\mathrm{m} \)</div>
-<div class="rz-line">\( \displaystyle 50.00\ \mathrm{kN} \cdot \mathrm{m} \)</div>
+<div class="rz-line">\( \displaystyle P_{1} = \langle 1, 2 \rangle \)</div>
 </div>
 </div>
 </section>
-<section id="inline-units" class="level2">
-<h2 class="anchored" data-anchor-id="inline-units">Inline Units</h2>
-<p><code>@use_inline_units</code> controls whether units will be shown inline using a solidus (<span class="math inline">\(a/b\)</span>) or using a fraction (<span class="math inline">\(\frac{a}{b}\)</span>).</p>
-<div id="ea1dc0f9" class="cell" data-execution_count="6">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>config.use_inline_units</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-display" data-execution_count="6">
-<pre><code>True</code></pre>
-</div>
-</div>
-<div id="3d4673d2" class="cell" data-execution_count="7">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="op">%%</span>tap <span class="op">--</span>grid</span>
-<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="fl">12.0</span> <span class="op">*</span> (ureg.kN <span class="op">/</span> ureg.m)  <span class="co"># @use_inline_units=True</span></span>
-<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="fl">12.0</span> <span class="op">*</span> (ureg.kN <span class="op">/</span> ureg.m)  <span class="co"># @use_inline_units=False</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<section id="expression-ranks" class="level2">
+<h2 class="anchored" data-anchor-id="expression-ranks">Expression Ranks</h2>
+<p>When creating an <code>ExprLatex</code>, you can specify a <code>rank</code> to indicate the precedence of an expression. <strong>A higher rank means a higher precedence</strong>.</p>
+<p>This rank determines whether Rubberize will apply parentheses around the expression when used as an operand in a larger mathematical expression. If the rank is higher than the operation’s rank, then no parentheses will be applied.</p>
+<p>For example, the rank for multiplication (<code>130</code>) is higher than that for addition (<code>120</code>). Thus, when an addition expression is used as an operand for a multiplication operation, the addition expression is wrapped in parentheses, following PEMDAS rules.</p>
+<p><code>rubberize.latexer.ranks</code> provides commonly used self-explanatory helper rank constants:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>VALUE_RANK <span class="op">=</span> <span class="dv">9_001</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>COLLECTIONS_RANK <span class="op">=</span> <span class="dv">180</span></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>CALL_RANK <span class="op">=</span> <span class="dv">170</span></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>POW_RANK <span class="op">=</span> <span class="dv">150</span></span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>SIGNED_RANK <span class="op">=</span> <span class="dv">140</span></span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>MULT_RANK <span class="op">=</span> DIV_RANK <span class="op">=</span> <span class="dv">130</span></span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>ADD_RANK <span class="op">=</span> SUB_RANK <span class="op">=</span> <span class="dv">120</span></span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>COMPARE_RANK <span class="op">=</span> <span class="dv">70</span></span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a>BELOW_POW_RANK <span class="op">=</span> POW_RANK <span class="op">-</span> <span class="dv">1</span></span>
+<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a>BELOW_MULT_RANK <span class="op">=</span> MULT_RANK <span class="op">-</span> <span class="dv">1</span></span>
+<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a>BELOW_ADD_RANK <span class="op">=</span> ADD_RANK <span class="op">-</span> <span class="dv">1</span></span>
+<span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a>BELOW_COMPARE_RANK <span class="op">=</span> COMPARE_RANK <span class="op">-</span> <span class="dv">1</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>If no explicit <code>rank</code> is provided to <code>ExprLatex</code>, it is assigned a rank of <code>VALUE_RANK</code>, which means it will never be wrapped in parentheses whenever used as an operand.</p>
+</section>
+<section id="creating-a-call-converter" class="level2">
+<h2 class="anchored" data-anchor-id="creating-a-call-converter">Creating a Call Converter</h2>
+<p>Continuing the example, if we try to render calls to <code>Point</code> and its method:</p>
+<div id="610f324a" class="cell" data-execution_count="6">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="op">%%</span>tap</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>P_2 <span class="op">=</span> Point(<span class="dv">3</span>, <span class="dv">3</span>)</span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>P_1.distance_to(P_2)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display">
-<div class="rz-grid-container">
-    <div class="rz-line">\( \displaystyle 12.00\ \mathrm{kN} / \mathrm{m} \)</div>
-    <div class="rz-line">\( \displaystyle 12.00\ \frac{\mathrm{kN}}{\mathrm{m}} \)</div>
+<div class="rz-line">\( \displaystyle P_{2} = \operatorname{Point} \left( 3,\, 3 \right) = \langle 3, 3 \rangle \)</div>
+<div class="rz-line">\( \displaystyle P_{1}.\operatorname{distance}_{\mathrm{to}} \left( P_{2} \right) = \left( \langle 1, 2 \rangle \right).\operatorname{distance}_{\mathrm{to}} \left( \langle 3, 3 \rangle \right) = 2.24 \)</div>
 </div>
 </div>
+<p>They will be rendered using only the default syntax.</p>
+<p>To handle custom calls, converter functions can similarly be created and registered to Rubberize using <code>register_call_converter()</code>.</p>
+<p>The function takes three arguments:</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 6%">
+<col style="width: 32%">
+<col style="width: 60%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Keyword</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>call</code></td>
+<td><code>Callable | str</code></td>
+<td>The callable object the converter applies to, or a string representing an undefined callable object.</td>
+</tr>
+<tr class="even">
+<td><code>func</code></td>
+<td><code>Callable[[ExprVisitor, ast.Call], ExprLatex | None]</code></td>
+<td>The converter function.</td>
+</tr>
+<tr class="odd">
+<td><code>syntactic</code></td>
+<td><code>bool</code></td>
+<td>If True, also register the call for string lookup, when the callable is undefined.</td>
+</tr>
+</tbody>
+</table>
+<p>The converter function can be one of the predefined common call converters from <code>rubberize.latexer.calls.common</code>, or a fully custom one.</p>
+<section id="using-a-common-call-converter" class="level3">
+<h3 class="anchored" data-anchor-id="using-a-common-call-converter">Using a Common Call Converter</h3>
+<p>The table below lists Rubberize’s common converters. They all have at least two arguments which <code>register_call_converter()</code> requires:</p>
+<ul>
+<li><code>visitor</code>: the <code>ExprVisitor</code> object that will be used in the function for converting sub-nodes of <code>node</code>.</li>
+<li><code>node</code>: the <code>ast.Call</code> node of the function call.</li>
+</ul>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 11%">
+<col style="width: 88%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Converter</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>get_result_and_convert</code></td>
+<td>Get the resulting object of the call and then convert the object.</td>
+</tr>
+<tr class="even">
+<td><code>wrap</code></td>
+<td>Remove the name, convert and join the arguments with <code>sep</code>, and wrap <code>prefix</code> and <code>suffix</code> around the arguments. Optionally assign <code>rank</code>.</td>
+</tr>
+<tr class="odd">
+<td><code>wrap_method</code></td>
+<td>Remove the name, include the object of the method call as the first argument, join the arguments with <code>sep</code>, and wrap <code>prefix</code> and <code>suffix</code> around the arguments. Optionally assign <code>rank</code>.</td>
+</tr>
+<tr class="even">
+<td><code>rename</code></td>
+<td>Change the operator name to <code>name</code> and retain the default call syntax. Optionally assign <code>rank</code>.</td>
+</tr>
+<tr class="odd">
+<td><code>rename_method</code></td>
+<td>Change the operator name to <code>name</code>, include the object of the method call as the first argument, and retain the default call syntax. Optionally assign <code>rank</code>.</td>
+</tr>
+<tr class="even">
+<td><code>unary</code></td>
+<td>Convert to a math function that notationally takes only one argument and with a <code>prefix</code> and <code>suffix</code>. Optionally assign <code>rank</code>.</td>
+</tr>
+<tr class="odd">
+<td><code>first_arg</code></td>
+<td>Convert the first argument, effectively hiding the call on the argument.</td>
+</tr>
+<tr class="even">
+<td><code>hide_method</code></td>
+<td>Convert the object of the method call, effectively hiding the call itself and its arguments.</td>
+</tr>
+</tbody>
+</table>
+<p>If the function takes more than <code>visitor</code> and <code>node</code>, a <code>lambda</code> expression can be used when registering the converter.</p>
+<p>Continuing the example, we register converters for <code>Point()</code> and <code>distance_to()</code> using the common converters:</p>
+<div id="5561c949" class="cell" data-execution_count="7">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> rubberize.latexer <span class="im">import</span> ranks, register_call_converter</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> rubberize.latexer.calls <span class="im">import</span> common</span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>register_call_converter(Point, common.get_result_and_convert)</span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>register_call_converter(</span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>    call<span class="op">=</span>Point.distance_to,</span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>    func<span class="op">=</span><span class="kw">lambda</span> v, n: common.wrap_method(</span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a>        v, n, <span class="st">""</span>, <span class="st">""</span>, <span class="vs">r" </span><span class="er">\</span><span class="vs">longleftrightarrow "</span>, rank<span class="op">=</span>ranks.BELOW_ADD_RANK</span>
+<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a>    ),</span>
+<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-<p>If units are inline and the fraction has multiple denominator terms, negative exponents will be used instead of a solidus.</p>
-<div id="56b7cf57" class="cell" data-execution_count="8">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="op">%%</span>tap <span class="op">--</span>grid</span>
-<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="fl">1.1</span> <span class="op">*</span> (ureg.W <span class="op">/</span> (ureg.m<span class="op">**</span><span class="dv">2</span> <span class="op">*</span> ureg.K))  <span class="co"># @use_inline_units=True</span></span>
-<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a><span class="fl">1.1</span> <span class="op">*</span> (ureg.W <span class="op">/</span> (ureg.m<span class="op">**</span><span class="dv">2</span> <span class="op">*</span> ureg.K))  <span class="co"># @use_inline_units=False</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Now when we try to render:</p>
+<div id="a157fcfd" class="cell" data-execution_count="8">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="op">%%</span>tap</span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>P_2 <span class="op">=</span> Point(<span class="dv">3</span>, <span class="dv">3</span>)</span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>P_1.distance_to(P_2)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display">
-<div class="rz-grid-container">
-    <div class="rz-line">\( \displaystyle 1.10\ \mathrm{W}\,\mathrm{K}^{-1}\,\mathrm{m}^{-2} \)</div>
-    <div class="rz-line">\( \displaystyle 1.10\ \frac{\mathrm{W}}{\left(\mathrm{K}\,\mathrm{m}^{2}\right)} \)</div>
-</div>
+<div class="rz-line">\( \displaystyle P_{2} = \langle 3, 3 \rangle \)</div>
+<div class="rz-line">\( \displaystyle P_{1} \longleftrightarrow P_{2} = \langle 1, 2 \rangle \longleftrightarrow \langle 3, 3 \rangle = 2.24 \)</div>
 </div>
 </div>
 </section>
-<section id="angular-degrees" class="level2">
-<h2 class="anchored" data-anchor-id="angular-degrees">Angular Degrees</h2>
-<p>Angular degree units are rendered with <span class="math inline">\(x^{\circ}\)</span> instead of <span class="math inline">\(x\,\deg\)</span>.</p>
-<div id="9863efd5" class="cell" data-execution_count="9">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="op">%%</span>tap</span>
-<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="fl">45.0</span> <span class="op">*</span> ureg.deg</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<section id="custom-call-converter" class="level3">
+<h3 class="anchored" data-anchor-id="custom-call-converter">Custom Call Converter</h3>
+<p>If more control on rendering is needed, a fully custom converter function can be defined. However, this requires more familiarity with Rubberize’s <code>rubberize.latexer.visitors.ExprVIsitor</code> AST node visitor and <code>rubberize.latexer.helpers</code> functions, as well as Python’s <code>ast</code> library.</p>
+<p>A custom converter function must be defined to take at least two arguments:</p>
+<ul>
+<li>An <code>ExprVisitor</code> that can be used within the converter to convert expressions.</li>
+<li>An <code>ast.Call</code> node, which is the <code>ast</code> node of the call.</li>
+</ul>
+<p>The converter must return an <code>ExprLatex</code> instance, or <code>None</code> if the call node should be considered unconvertible.</p>
+<p>Continuing the example, we can define a custom converter for <code>distance_to</code>:</p>
+<div id="72e9892e" class="cell" data-execution_count="9">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="op">%%</span>capture</span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> ast</span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> rubberize.latexer <span class="im">import</span> ExprLatex, helpers, ranks, register_call_converter</span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> rubberize.latexer.visitors <span class="im">import</span> ExprVisitor</span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> rubberize.latexer.objects <span class="im">import</span> convert_object</span>
+<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> convert_point_distance_to(visitor: ExprVisitor, node: ast.Call) <span class="op">-&gt;</span> ExprLatex:</span>
+<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="kw">not</span> <span class="bu">isinstance</span>(node.func, ast.Attribute):</span>
+<span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="va">None</span></span>
+<span id="cb10-11"><a href="#cb10-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-12"><a href="#cb10-12" aria-hidden="true" tabindex="-1"></a>    other_node <span class="op">=</span> helpers.get_arg_node(node, <span class="dv">0</span>, <span class="st">"other"</span>, required<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb10-13"><a href="#cb10-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-14"><a href="#cb10-14" aria-hidden="true" tabindex="-1"></a>    <span class="va">self</span>: Point <span class="op">=</span> helpers.get_object(node.func.value, visitor.ns)</span>
+<span id="cb10-15"><a href="#cb10-15" aria-hidden="true" tabindex="-1"></a>    other: Point <span class="op">=</span> helpers.get_object(other_node, visitor.ns)</span>
+<span id="cb10-16"><a href="#cb10-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-17"><a href="#cb10-17" aria-hidden="true" tabindex="-1"></a>    x0 <span class="op">=</span> convert_object(<span class="va">self</span>.x).latex</span>
+<span id="cb10-18"><a href="#cb10-18" aria-hidden="true" tabindex="-1"></a>    y0 <span class="op">=</span> convert_object(<span class="va">self</span>.y).latex</span>
+<span id="cb10-19"><a href="#cb10-19" aria-hidden="true" tabindex="-1"></a>    x1 <span class="op">=</span> convert_object(other.x).latex</span>
+<span id="cb10-20"><a href="#cb10-20" aria-hidden="true" tabindex="-1"></a>    y1 <span class="op">=</span> convert_object(other.y).latex</span>
+<span id="cb10-21"><a href="#cb10-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-22"><a href="#cb10-22" aria-hidden="true" tabindex="-1"></a>    latex <span class="op">=</span> <span class="vs">rf"</span><span class="dv">\s</span><span class="vs">qrt</span><span class="ch">{{</span><span class="kw">(</span><span class="sc">{</span>x0<span class="sc">}</span><span class="vs"> - </span><span class="sc">{</span>x1<span class="sc">}</span><span class="kw">)</span><span class="dv">^</span><span class="ch">{{</span><span class="op">2</span><span class="ch">}}</span><span class="vs"> </span><span class="op">+</span><span class="vs"> </span><span class="kw">(</span><span class="sc">{</span>y0<span class="sc">}</span><span class="vs"> - </span><span class="sc">{</span>y1<span class="sc">}</span><span class="kw">)</span><span class="dv">^</span><span class="ch">{{</span><span class="op">2</span><span class="ch">}}}}</span><span class="vs">"</span></span>
+<span id="cb10-23"><a href="#cb10-23" aria-hidden="true" tabindex="-1"></a>    rank <span class="op">=</span> ranks.BELOW_POW_RANK</span>
+<span id="cb10-24"><a href="#cb10-24" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-25"><a href="#cb10-25" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> ExprLatex(latex, rank)</span>
+<span id="cb10-26"><a href="#cb10-26" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-27"><a href="#cb10-27" aria-hidden="true" tabindex="-1"></a><span class="co"># register the converter</span></span>
+<span id="cb10-28"><a href="#cb10-28" aria-hidden="true" tabindex="-1"></a>register_call_converter(Point.distance_to, convert_point_distance_to)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>Now, the method call will be rendered like so:</p>
+<div id="d79ae83b" class="cell" data-execution_count="10">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="op">%%</span>tap</span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>P_1.distance_to(P_2)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display">
-<div class="rz-line">\( \displaystyle 45.00^{\circ} \)</div>
-</div>
-</div>
-</section>
-<section id="foot-inch-fraction" class="level2">
-<h2 class="anchored" data-anchor-id="foot-inch-fraction">Foot-Inch-Fraction</h2>
-<p><code>@use_fif_units</code> controls whether to render inch and foot quantities in foot-inch-fraction (FIF) format:</p>
-<div id="b486ffb3" class="cell" data-execution_count="10">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>config.use_fif_units</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-display" data-execution_count="10">
-<pre><code>False</code></pre>
-</div>
-</div>
-<p>This feature is particularly useful for applications in US construction and other fields where fractional inch measurements are standard. You can also specify the displayed precision of the fractional part using the <code>@fif_prec</code> option. By default, this is set to <code>16</code>, representing sixteenths of an inch.</p>
-<div class="callout callout-style-default callout-note callout-titled">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-Note
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p>Only the rendering is affected in the conversion. The value still contains the full precision of the inch or foot quantity.</p>
-</div>
-</div>
-<div id="f458a701" class="cell" data-execution_count="11">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="op">%%</span>tap <span class="op">@</span>use_fif_units<span class="op">=</span><span class="va">True</span></span>
-<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>height <span class="op">=</span> <span class="fl">8.41</span> <span class="op">*</span> ureg.ft</span>
-<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>width <span class="op">=</span> <span class="fl">42.1875</span> <span class="op">*</span> ureg.inch</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-display">
-<div class="rz-line">\( \displaystyle \mathrm{height} = 8.41\ \mathrm{ft} = 8\text{{’}}\ 4\ 15/16\text{”} \)</div>
-<div class="rz-line">\( \displaystyle \mathrm{width} = 42.19\ \mathrm{in} = 42\ 3/16\text{”} \)</div>
-</div>
-</div>
-</section>
-<section id="degree-minute-second" class="level2">
-<h2 class="anchored" data-anchor-id="degree-minute-second">Degree-Minute-Second</h2>
-<p>Similar to FIF format, Rubberize supports rendering angle measurements as degree-minute-second (DMS) format using the <code>@use_dms_units</code> option.</p>
-<div id="2d654e16" class="cell" data-execution_count="12">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>config.use_dms_units</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-display" data-execution_count="12">
-<pre><code>False</code></pre>
-</div>
-</div>
-<div id="4d64492c" class="cell" data-execution_count="13">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="op">%%</span>tap <span class="op">@</span>use_dms_units<span class="op">=</span><span class="va">True</span></span>
-<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a><span class="fl">42.6969</span> <span class="op">*</span> ureg.deg</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-display">
-<div class="rz-line">\( \displaystyle 42.70^{\circ} = 42^{\circ}\ 41\text{{’}}\ 48.84\text{”} \)</div>
-</div>
-</div>
-</section>
-<section id="custom-unit-latex" class="level2">
-<h2 class="anchored" data-anchor-id="custom-unit-latex">Custom Unit LaTeX</h2>
-<p>Rubberize allows definition of custom LaTeX representations for specific unit combinations using <code>register_units_latex()</code>.</p>
-<p>For example, to register custom LaTeX for bending moment (structural engineering), ensuring that the units are displayed as <span class="math inline">\(x\,\mathrm{N}\,\mathrm{m}\)</span> instead of <span class="math inline">\(x\,\mathrm{m}\,\mathrm{N}\)</span>:</p>
-<div id="7273173e" class="cell" data-execution_count="14">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> rubberize <span class="im">import</span> register_units_latex</span>
-<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Register a custom LaTeX representation for bending moment</span></span>
-<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a>register_units_latex(<span class="vs">r"</span><span class="dv">\m</span><span class="vs">athrm{N} </span><span class="er">\</span><span class="vs">cdot </span><span class="dv">\m</span><span class="vs">athrm{m}"</span>, meter<span class="op">=</span><span class="dv">1</span>, newton<span class="op">=</span><span class="dv">1</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</div>
-<div id="b1d89682" class="cell" data-execution_count="15">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb18"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="op">%%</span>tap</span>
-<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a><span class="fl">42.0</span> <span class="op">*</span> (ureg.N <span class="op">*</span> ureg.m)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-display">
-<div class="rz-line">\( \displaystyle 42.00\ \mathrm{N}\,\mathrm{m} \)</div>
-</div>
-</div>
-<p>The same process can be done for defining LaTeX representations of custom units:</p>
-<div id="08e5856d" class="cell" data-execution_count="16">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb19"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>ureg.define(<span class="st">"boop = 3 newton"</span>)</span>
-<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>register_units_latex(<span class="vs">r"</span><span class="dv">\m</span><span class="vs">athrm{_{b}oO</span><span class="dv">^</span><span class="vs">{P}!}"</span>, boop<span class="op">=</span><span class="dv">1</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</div>
-<div id="ac540fdf" class="cell" data-execution_count="17">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb20"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="op">%%</span>tap</span>
-<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>a <span class="op">=</span> <span class="fl">84.42</span> <span class="op">*</span> ureg.boop</span>
-<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a>a.to(ureg.N)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-display">
-<div class="rz-line">\( \displaystyle a = 84.42\ \mathrm{_{b}oO^{P}!} \)</div>
-<div class="rz-line">\( \displaystyle a = 84.42\ \mathrm{_{b}oO^{P}!} = 253.26\ \mathrm{N} \)</div>
+<div class="rz-line">\( \displaystyle \sqrt{(1 - 3)^{2} + (2 - 3)^{2}} = 2.24 \)</div>
 </div>
 </div>
 
 
 
 </section>
+</section>
 
-
-<div id="quarto-appendix" class="default"><section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes"><h2 class="anchored quarto-appendix-heading">Footnotes</h2>
-
-<ol>
-<li id="fn1"><p>CGPM, “Resolution 10 of the 22nd General Conference on Weights and Measures (2003),” Bureau International des Poids et Mesures (BIPM). Available: https://www.bipm.org/en/committees/cg/cgpm/22-2003/resolution-10<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-<li id="fn2"><p>BIPM, “The International System of Units (SI),” 9th edition, Section 5.4.6, Bureau International des Poids et Mesures, 2019. Available: https://www.bipm.org/en/publications/si-brochure<a href="#fnref2" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-</ol>
-</section></div></main> <!-- /main -->
+</main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
   window.document.addEventListener("DOMContentLoaded", function (event) {
     // Ensure there is a toggle, if there isn't float one in the top right

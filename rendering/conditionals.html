@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Variables – Rubberize</title>
+<title>Conditionals – Rubberize</title>
 <style>
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
@@ -61,27 +61,27 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </style>
 
 
-<script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js" integrity="sha384-ZvpUoO/+PpLXR1lu4jmpXWu80pZlYUAfxl5NsBMWOEPSjUn/6Z/hRTt8+pR6L4N2" crossorigin="anonymous"></script><script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
-<script src="../../site_libs/quarto-nav/headroom.min.js"></script>
-<script src="../../site_libs/clipboard/clipboard.min.js"></script>
-<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
-<script src="../../site_libs/quarto-search/fuse.min.js"></script>
-<script src="../../site_libs/quarto-search/quarto-search.js"></script>
-<meta name="quarto:offset" content="../../">
-<script src="../../site_libs/quarto-html/quarto.js" type="module"></script>
-<script src="../../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
-<script src="../../site_libs/quarto-html/popper.min.js"></script>
-<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
-<script src="../../site_libs/quarto-html/anchor.min.js"></script>
-<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-067f8ab80d092ae3595f7402c2c9b667.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
-<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-dark-ca1cb3032aa6b9181247695f27e2facc.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
-<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-067f8ab80d092ae3595f7402c2c9b667.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
-<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
-<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../../site_libs/bootstrap/bootstrap-18592173e188cdae81627623887a06db.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
-<link href="../../site_libs/bootstrap/bootstrap-dark-2be3bacf71d4ec939c4fa8f4e9c7a46b.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
-<link href="../../site_libs/bootstrap/bootstrap-18592173e188cdae81627623887a06db.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js" integrity="sha384-ZvpUoO/+PpLXR1lu4jmpXWu80pZlYUAfxl5NsBMWOEPSjUn/6Z/hRTt8+pR6L4N2" crossorigin="anonymous"></script><script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<script src="../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-067f8ab80d092ae3595f7402c2c9b667.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-dark-ca1cb3032aa6b9181247695f27e2facc.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-067f8ab80d092ae3595f7402c2c9b667.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap-18592173e188cdae81627623887a06db.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/bootstrap/bootstrap-dark-2be3bacf71d4ec939c4fa8f4e9c7a46b.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="../site_libs/bootstrap/bootstrap-18592173e188cdae81627623887a06db.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -143,7 +143,7 @@ window.Quarto = {
 };
 </script>
 
-<link rel="stylesheet" href="../../docs/styles.css">
+<link rel="stylesheet" href="../styles.css">
 </head>
 
 <body class="nav-sidebar docked nav-fixed quarto-light"><script id="quarto-html-before-body" type="application/javascript">
@@ -315,7 +315,7 @@ window.Quarto = {
     <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container mx-auto">
-    <a class="navbar-brand" href="../../index.html">
+    <a class="navbar-brand" href="../index.html">
     <span class="navbar-title">Rubberize</span>
     </a>
   </div>
@@ -326,23 +326,23 @@ window.Quarto = {
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll me-auto">
   <li class="nav-item">
-    <a class="nav-link" href="../../docs/index.html"> 
+    <a class="nav-link" href="../index.html"> 
 <span class="menu-text">Home</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link active" href="../../docs/get_started.html" aria-current="page"> 
+    <a class="nav-link active" href="../get_started.html" aria-current="page"> 
 <span class="menu-text">Get Started</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="../../docs/rendering/index.html"> 
+    <a class="nav-link" href="../rendering/index.html"> 
 <span class="menu-text">Rendering Code</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="../../docs/advanced/custom_converters.html"> 
+    <a class="nav-link" href="../advanced/custom_converters.html"> 
 <span class="menu-text">Custom Converters</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="../../docs/config_reference.html"> 
+    <a class="nav-link" href="../config_reference.html"> 
 <span class="menu-text">Config Reference</span></a>
   </li>  
 </ul>
@@ -358,7 +358,7 @@ window.Quarto = {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../docs/rendering/index.html">Rendering Code</a></li><li class="breadcrumb-item"><a href="../../docs/rendering/variables.html">Expressions</a></li><li class="breadcrumb-item"><a href="../../docs/rendering/variables.html">Variables</a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../rendering/index.html">Rendering Code</a></li><li class="breadcrumb-item"><a href="../rendering/expressions.html">Statements</a></li><li class="breadcrumb-item"><a href="../rendering/conditionals.html">Conditionals</a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
     </div>
@@ -372,13 +372,13 @@ window.Quarto = {
     <ul class="list-unstyled mt-1">
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../docs/get_started.html" class="sidebar-item-text sidebar-link">
+  <a href="../get_started.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Get Started</span></a>
   </div>
 </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a href="../../docs/rendering/index.html" class="sidebar-item-text sidebar-link">
+            <a href="../rendering/index.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Rendering Code</span></a>
           <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#" role="navigation" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
@@ -387,58 +387,58 @@ window.Quarto = {
       <ul id="" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true">
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="false">
  <span class="menu-text">Expressions</span></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true" aria-label="Toggle section">
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="false" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth2 show">  
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth2 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../docs/rendering/variables.html" class="sidebar-item-text sidebar-link active">
+  <a href="../rendering/variables.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Variables</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../docs/rendering/numbers.html" class="sidebar-item-text sidebar-link">
+  <a href="../rendering/numbers.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Numbers</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../docs/rendering/collections.html" class="sidebar-item-text sidebar-link">
+  <a href="../rendering/collections.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Collections</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../docs/rendering/builtins.html" class="sidebar-item-text sidebar-link">
+  <a href="../rendering/builtins.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Built-in Types</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../docs/rendering/calls.html" class="sidebar-item-text sidebar-link">
+  <a href="../rendering/calls.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Calls</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../docs/rendering/pint.html" class="sidebar-item-text sidebar-link">
+  <a href="../rendering/pint.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Physical Quantities</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../docs/rendering/numpy.html" class="sidebar-item-text sidebar-link">
+  <a href="../rendering/numpy.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Arrays</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../docs/rendering/operations.html" class="sidebar-item-text sidebar-link">
+  <a href="../rendering/operations.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Operations</span></a>
   </div>
 </li>
@@ -446,34 +446,34 @@ window.Quarto = {
   </li>
           <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="false">
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true">
  <span class="menu-text">Statements</span></a>
-          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="false" aria-label="Toggle section">
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth2 ">  
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth2 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../docs/rendering/expressions.html" class="sidebar-item-text sidebar-link">
+  <a href="../rendering/expressions.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Expressions</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../docs/rendering/assignments.html" class="sidebar-item-text sidebar-link">
+  <a href="../rendering/assignments.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Assignments</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../docs/rendering/conditionals.html" class="sidebar-item-text sidebar-link">
+  <a href="../rendering/conditionals.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text">Conditionals</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../docs/rendering/funcdefs.html" class="sidebar-item-text sidebar-link">
+  <a href="../rendering/funcdefs.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Function Definitions</span></a>
   </div>
 </li>
@@ -490,13 +490,13 @@ window.Quarto = {
       <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth2 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../docs/rendering/calcsheet.html" class="sidebar-item-text sidebar-link">
+  <a href="../rendering/calcsheet.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Calculation Sheets</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../docs/rendering/annotations.html" class="sidebar-item-text sidebar-link">
+  <a href="../rendering/annotations.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Annotations</span></a>
   </div>
 </li>
@@ -515,13 +515,13 @@ window.Quarto = {
       <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../docs/advanced/implementation_notes.html" class="sidebar-item-text sidebar-link">
+  <a href="../advanced/implementation_notes.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Implementation Notes</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../docs/advanced/custom_converters.html" class="sidebar-item-text sidebar-link">
+  <a href="../advanced/custom_converters.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Custom Converters</span></a>
   </div>
 </li>
@@ -529,7 +529,7 @@ window.Quarto = {
   </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../docs/config_reference.html" class="sidebar-item-text sidebar-link">
+  <a href="../config_reference.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Config Reference</span></a>
   </div>
 </li>
@@ -543,23 +543,10 @@ window.Quarto = {
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#subscripts" id="toc-subscripts" class="nav-link active" data-scroll-target="#subscripts">Subscripts</a>
-  <ul class="collapse">
-  <li><a href="#names-with-underscores" id="toc-names-with-underscores" class="nav-link" data-scroll-target="#names-with-underscores">Names with Underscores</a></li>
-  <li><a href="#leading-and-trailing-underscores" id="toc-leading-and-trailing-underscores" class="nav-link" data-scroll-target="#leading-and-trailing-underscores">Leading and Trailing Underscores</a></li>
-  <li><a href="#disabling-subscripts" id="toc-disabling-subscripts" class="nav-link" data-scroll-target="#disabling-subscripts">Disabling Subscripts</a></li>
-  </ul></li>
-  <li><a href="#math-symbols" id="toc-math-symbols" class="nav-link" data-scroll-target="#math-symbols">Math Symbols</a>
-  <ul class="collapse">
-  <li><a href="#greek-letters" id="toc-greek-letters" class="nav-link" data-scroll-target="#greek-letters">Greek Letters</a></li>
-  <li><a href="#starting-greek-letter" id="toc-starting-greek-letter" class="nav-link" data-scroll-target="#starting-greek-letter">Starting Greek Letter</a></li>
-  <li><a href="#accents-and-modifiers" id="toc-accents-and-modifiers" class="nav-link" data-scroll-target="#accents-and-modifiers">Accents and Modifiers</a></li>
-  <li><a href="#disabling-symbols" id="toc-disabling-symbols" class="nav-link" data-scroll-target="#disabling-symbols">Disabling Symbols</a></li>
-  </ul></li>
-  <li><a href="#attributes" id="toc-attributes" class="nav-link" data-scroll-target="#attributes">Attributes</a>
-  <ul class="collapse">
-  <li><a href="#hidden-modules" id="toc-hidden-modules" class="nav-link" data-scroll-target="#hidden-modules">Hidden Modules</a></li>
-  </ul></li>
+  <li><a href="#skipping-code-with-pass" id="toc-skipping-code-with-pass" class="nav-link active" data-scroll-target="#skipping-code-with-pass">Skipping Code with <code>pass</code></a></li>
+  <li><a href="#as-piecewise-assignment" id="toc-as-piecewise-assignment" class="nav-link" data-scroll-target="#as-piecewise-assignment">As Piecewise Assignment</a></li>
+  <li><a href="#showing-all-conditions" id="toc-showing-all-conditions" class="nav-link" data-scroll-target="#showing-all-conditions">Showing All Conditions</a></li>
+  <li><a href="#rendering-summary" id="toc-rendering-summary" class="nav-link" data-scroll-target="#rendering-summary">Rendering Summary</a></li>
   </ul>
 </nav>
     </div>
@@ -567,9 +554,9 @@ window.Quarto = {
 <main class="content" id="quarto-document-content">
 
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../docs/rendering/index.html">Rendering Code</a></li><li class="breadcrumb-item"><a href="../../docs/rendering/variables.html">Expressions</a></li><li class="breadcrumb-item"><a href="../../docs/rendering/variables.html">Variables</a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../rendering/index.html">Rendering Code</a></li><li class="breadcrumb-item"><a href="../rendering/expressions.html">Statements</a></li><li class="breadcrumb-item"><a href="../rendering/conditionals.html">Conditionals</a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title">Variables</h1>
+<h1 class="title">Conditionals</h1>
 </div>
 
 
@@ -586,7 +573,7 @@ window.Quarto = {
 </header>
 
 
-<div id="040cc204" class="cell" data-execution_count="1">
+<div id="bb3d1e47" class="cell" data-execution_count="1">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="op">%</span>reload_ext rubberize</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> rubberize.config <span class="im">import</span> config</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display">
@@ -1053,165 +1040,110 @@ window.Quarto = {
 </style>
 </div>
 </div>
-<p>Python variables are rendered considering the following rules:</p>
-<ul>
-<li><strong>Single letters</strong> are rendered in italics</li>
-<li><strong>Words</strong> (i.e., a chain of multiple letters) appear roman.</li>
-</ul>
-<div id="05921b74" class="cell" data-execution_count="2">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="op">%%</span>tap <span class="op">--</span>dead <span class="op">--</span>grid</span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>a<span class="op">;</span> b<span class="op">;</span> x<span class="op">;</span> y<span class="op">;</span> apple<span class="op">;</span> boy<span class="op">;</span> xylophone<span class="op">;</span> yoyo</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>By default, Rubberize renders only the lines within the <code>True</code> path of the conditional ladder, with the condition itself being displayed as an introductory expression.</p>
+<p>The lines within the <code>True</code> path are indented to visually indicate that they belong to this block. The other branches are not rendered.</p>
+<div id="69572a66" class="cell" data-execution_count="2">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="op">%%</span>tap</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> <span class="dv">5</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> x <span class="op">&gt;</span> <span class="dv">0</span>:</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>    y <span class="op">=</span> x<span class="op">**</span><span class="dv">2</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display">
-<div class="rz-grid-container">
-    <div class="rz-line">\( \displaystyle a \)</div>
-    <div class="rz-line">\( \displaystyle b \)</div>
-    <div class="rz-line">\( \displaystyle x \)</div>
-    <div class="rz-line">\( \displaystyle y \)</div>
-    <div class="rz-line">\( \displaystyle \mathrm{apple} \)</div>
-    <div class="rz-line">\( \displaystyle \mathrm{boy} \)</div>
-    <div class="rz-line">\( \displaystyle \mathrm{xylophone} \)</div>
-    <div class="rz-line">\( \displaystyle \mathrm{yoyo} \)</div>
+<div class="rz-line">\( \displaystyle x = 5 \)</div>
+<div class="rz-line">\( \displaystyle \text{Since}\ x &gt; 0\ \to\ 5 &gt; 0 \text{:} \)</div>
+<div class="rz-body"><div class="rz-line">\( \displaystyle y = x^{2} = 5^{2} = 25 \)</div></div>
 </div>
 </div>
-</div>
-<p>Depending on the Config Options, additional rendering rules are applied.</p>
-<section id="subscripts" class="level2">
-<h2 class="anchored" data-anchor-id="subscripts">Subscripts</h2>
-<p><code>@use_subscripts</code> controls whether subscript rules will be applied to variables:</p>
-<div id="55570c0b" class="cell" data-execution_count="3">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>config.use_subscripts</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-display" data-execution_count="3">
-<pre><code>True</code></pre>
-</div>
-</div>
-<p>When it is set to <code>True</code>, the following rules apply:</p>
-<section id="names-with-underscores" class="level3">
-<h3 class="anchored" data-anchor-id="names-with-underscores">Names with Underscores</h3>
-<p>The first underscore is treated as a subscript marker. The left part is rendered as the base name of the variable, and the right part is rendered as the variable subscript.</p>
-<p>Subsequent underscores are rendered as commas within the subscript part.</p>
-<div id="ca74d912" class="cell" data-execution_count="4">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="op">%%</span>tap <span class="op">--</span>dead <span class="op">--</span>grid</span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>f_o<span class="op">;</span> I_x_male<span class="op">;</span> foo_bulous<span class="op">;</span> foo_a_bravo_c_d</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>If no conditions are <code>True</code>, nothing in the conditional block will be rendered.</p>
+<div id="039e2840" class="cell" data-execution_count="3">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="op">%%</span>tap</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> <span class="op">-</span><span class="dv">5</span></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> x <span class="op">&gt;</span> <span class="dv">0</span>:</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>    y <span class="op">=</span> x<span class="op">**</span><span class="dv">2</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display">
-<div class="rz-grid-container">
-    <div class="rz-line">\( \displaystyle f_{o} \)</div>
-    <div class="rz-line">\( \displaystyle I_{x, \mathrm{male}} \)</div>
-    <div class="rz-line">\( \displaystyle \mathrm{foo}_{\mathrm{bulous}} \)</div>
-    <div class="rz-line">\( \displaystyle \mathrm{foo}_{a, \mathrm{bravo}, c, d} \)</div>
+<div class="rz-line">\( \displaystyle x = -5 \)</div>
 </div>
 </div>
-</div>
-<p>Two or more consecutive underscores are rendered as a single literal underscore rather than indicating a subscript.</p>
-<div id="d982fed2" class="cell" data-execution_count="5">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="op">%%</span>tap <span class="op">--</span>dead <span class="op">--</span>grid</span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>f__o<span class="op">;</span> I__x_male<span class="op">;</span> I_x__male<span class="op">;</span> foo__a_bravo_c__d</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>However, if an <code>else</code> statement is provided, lines in <code>else</code> will be rendered without any indentation and introductory expression.</p>
+<div id="6e005525" class="cell" data-execution_count="4">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="op">%%</span>tap</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> <span class="op">-</span><span class="dv">5</span></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> x <span class="op">&gt;</span> <span class="dv">0</span>:</span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>    y <span class="op">=</span> x<span class="op">**</span><span class="dv">2</span></span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a><span class="cf">else</span>:</span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>    y <span class="op">=</span> <span class="op">-</span>x<span class="op">**</span><span class="dv">2</span></span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>y <span class="op">+</span> <span class="dv">10</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display">
-<div class="rz-grid-container">
-    <div class="rz-line">\( \displaystyle \mathrm{f\_o} \)</div>
-    <div class="rz-line">\( \displaystyle \mathrm{I\_x}_{\mathrm{male}} \)</div>
-    <div class="rz-line">\( \displaystyle I_{\mathrm{x\_male}} \)</div>
-    <div class="rz-line">\( \displaystyle \mathrm{foo\_a}_{\mathrm{bravo}, \mathrm{c\_d}} \)</div>
+<div class="rz-line">\( \displaystyle x = -5 \)</div>
+<div class="rz-line">\( \displaystyle y = -x^{2} = -\left( -5 \right)^{2} = -25 \)</div>
+<div class="rz-line">\( \displaystyle y + 10 = -25 + 10 = -15 \)</div>
 </div>
 </div>
+<div class="callout callout-style-default callout-warning callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
 </div>
+<div class="callout-title-container flex-fill">
+Warning
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><strong>Gotcha</strong>: Rubberize generates the rendering based on the actual execution of the Python code.</p>
+<p>If a test within the conditional ladder alters the value being tested, Rubberize will use the altered value in generating the rendered output. <strong>This means that if the value is modified within the conditional block, the render may not appear as expected.</strong></p>
+<p>This code will not render properly:</p>
+<div id="adb8545f" class="cell" data-execution_count="5">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="op">%%</span>tap</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> <span class="dv">5</span></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> x <span class="op">&gt;</span> <span class="dv">0</span>:</span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>    x <span class="op">=</span> <span class="op">-</span><span class="dv">1</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display">
+<div class="rz-line">\( \displaystyle x = 5 = -1 \)</div>
+</div>
+</div>
+<p>because for Rubberize, the value of <code>x</code> is <code>-1</code>, not <code>5</code>.</p>
+<p>To avoid confusion and ensure accurate rendering, <strong>do not modify the value being tested within the conditional ladder.</strong> Keep the value consistent across the conditions to avoid unexpected behavior in the rendered output.</p>
+</div>
+</div>
+<section id="skipping-code-with-pass" class="level2">
+<h2 class="anchored" data-anchor-id="skipping-code-with-pass">Skipping Code with <code>pass</code></h2>
+<p>When Rubberize encounters a conditional ladder where the <code>True</code> path contains only a <code>pass</code> statement, nothing will be rendered.</p>
+<div id="34f63117" class="cell" data-execution_count="6">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="op">%%</span>tap</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> <span class="dv">5</span></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> x <span class="op">&gt;</span> <span class="dv">0</span>:</span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>    <span class="cf">pass</span></span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>x <span class="op">+</span> <span class="dv">3</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display">
+<div class="rz-line">\( \displaystyle x = 5 \)</div>
+
+<div class="rz-line">\( \displaystyle x + 3 = 5 + 3 = 8 \)</div>
+</div>
+</div>
+<p>A common usage pattern is when certain calculation lines are needed only when specific conditions are met, and the presentation should remain silent otherwise.</p>
+<p>In this pattern, the <code>if</code> branch contains the <strong>negation of the condition</strong> and uses <code>pass</code> to suppress output. The <code>else</code> branch then contains the calculation that should be rendered when the condition is actually true.</p>
+<p>For example:</p>
+<div id="aa0176aa" class="cell" data-execution_count="7">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="op">%%</span>tap</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>temp_c <span class="op">=</span> <span class="op">-</span><span class="dv">3</span></span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> <span class="kw">not</span> (temp_c <span class="op">&lt;</span> <span class="dv">0</span>):</span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>    <span class="cf">pass</span></span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a><span class="cf">else</span>:</span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>    temp_c <span class="op">*</span> <span class="fl">1.8</span> <span class="op">+</span> <span class="dv">32</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display">
+<div class="rz-line">\( \displaystyle \mathrm{temp}_{c} = -3 \)</div>
+</div>
+<div class="cell-output cell-output-display">
+<div class="rz-line">\( \displaystyle \mathrm{temp}_{c} \cdot 1.80 + 32 = -3 \times 1.80 + 32 = 26.60 \)</div>
+</div>
+</div>
+<p>Here the conversion to Fahrenheit is rendered only when the temperature is <strong>below zero</strong>. If the temperature is zero or positive, the <code>pass</code> branch runs and Rubberize produces no output for the conditional.</p>
+<p>This pattern allows the code to control when a calculation appears while keeping the conditional logic hidden in the rendered presentation.</p>
 </section>
-<section id="leading-and-trailing-underscores" class="level3">
-<h3 class="anchored" data-anchor-id="leading-and-trailing-underscores">Leading and Trailing Underscores</h3>
-<p>Leading and trailing underscores are not converted to subscripts. If the variable name includes subscripts, the leading and trailing underscores are attached to the base part and not on the subscript.</p>
-<div id="fde2f401" class="cell" data-execution_count="6">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="op">%%</span>tap <span class="op">--</span>dead <span class="op">--</span>grid</span>
-<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>_private<span class="op">;</span> __very__private<span class="op">;</span> __dunder__<span class="op">;</span> __base_subscript__</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-display">
-<div class="rz-grid-container">
-    <div class="rz-line">\( \displaystyle \_\mathrm{private} \)</div>
-    <div class="rz-line">\( \displaystyle \_\_\mathrm{very\_private} \)</div>
-    <div class="rz-line">\( \displaystyle \_\_\mathrm{dunder}\_\_ \)</div>
-    <div class="rz-line">\( \displaystyle \_\_\mathrm{base}\_\__{\mathrm{subscript}} \)</div>
-</div>
-</div>
-</div>
-</section>
-<section id="disabling-subscripts" class="level3">
-<h3 class="anchored" data-anchor-id="disabling-subscripts">Disabling Subscripts</h3>
-<p>When <code>@use_subscripts=False</code>, all underscores are shown as literal underscores, and variables will be rendered exactly as they are written but using a Roman font.</p>
-<div id="c8ed33ec" class="cell" data-execution_count="7">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="op">%%</span>tap <span class="op">--</span>dead <span class="op">--</span>grid <span class="op">@</span>use_subscripts<span class="op">=</span><span class="va">False</span></span>
-<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>I_x_male<span class="op">;</span> I__x_male<span class="op">;</span> foo__a_bravo_c__d<span class="op">;</span> __base_subscript__</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-display">
-<div class="rz-grid-container">
-    <div class="rz-line">\( \displaystyle \mathrm{I\_x\_male} \)</div>
-    <div class="rz-line">\( \displaystyle \mathrm{I\_\_x\_male} \)</div>
-    <div class="rz-line">\( \displaystyle \mathrm{foo\_\_a\_bravo\_c\_\_d} \)</div>
-    <div class="rz-line">\( \displaystyle \_\_\mathrm{base\_subscript}\_\_ \)</div>
-</div>
-</div>
-</div>
-</section>
-</section>
-<section id="math-symbols" class="level2">
-<h2 class="anchored" data-anchor-id="math-symbols">Math Symbols</h2>
-<p><code>@use_symbols</code> controls whether certain words will be transformed to symbols in variables:</p>
-<div id="d5ccc898" class="cell" data-execution_count="8">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>config.use_symbols</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-display" data-execution_count="8">
-<pre><code>True</code></pre>
-</div>
-</div>
-<p>When it is set to <code>True</code>, Greek letters, accents, and modifier keywords are rendered with their proper math symbols.</p>
-<section id="greek-letters" class="level3">
-<h3 class="anchored" data-anchor-id="greek-letters">Greek Letters</h3>
-<p>Python variable name parts that match Greek or Hebrew letter names are replaced with their corresponding symbols. For example, <code>alpha</code> becomes <span class="math inline">\(\alpha\)</span>, and <code>Omega</code> becomes <span class="math inline">\(\Omega\)</span>.</p>
-<div id="6ccf2cbf" class="cell" data-execution_count="9">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="op">%%</span>tap <span class="op">--</span>dead <span class="op">--</span>grid</span>
-<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>x_gamma<span class="op">;</span> Omega_b_o<span class="op">;</span> delta_max<span class="op">;</span> phiR_n</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-display">
-<div class="rz-grid-container">
-    <div class="rz-line">\( \displaystyle x_{\gamma} \)</div>
-    <div class="rz-line">\( \displaystyle \Omega_{b, o} \)</div>
-    <div class="rz-line">\( \displaystyle \delta_{\mathrm{max}} \)</div>
-    <div class="rz-line">\( \displaystyle \phi R_{n} \)</div>
-</div>
-</div>
-</div>
-<p>These are all the Greek letter names that are converted when used:</p>
-<div id="41ad263e" class="cell" data-execution_count="10">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="op">%%</span>tap <span class="op">--</span>dead <span class="op">--</span>grid</span>
-<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>alpha<span class="op">;</span> beta<span class="op">;</span> (Gamma, gamma)<span class="op">;</span> (Delta, delta)</span>
-<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>(epsilon, varepsilon)<span class="op">;</span> zeta<span class="op">;</span> eta<span class="op">;</span> (Theta, theta, vartheta)</span>
-<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>iota<span class="op">;</span> (kappa, varkappa)<span class="op">;</span> (Lambda, lambda_)<span class="op">;</span> mu</span>
-<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a>nu<span class="op">;</span> (Xi, xi)<span class="op">;</span> omicron<span class="op">;</span> (Pi, pi, varpi)</span>
-<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a>(rho, varrho)<span class="op">;</span> (Sigma, sigma, varsigma)<span class="op">;</span> tau<span class="op">;</span> (Upsilon, upsilon)</span>
-<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a>(Phi, phi, varphi)<span class="op">;</span> chi<span class="op">;</span> (Psi, psi)<span class="op">;</span> (Omega, omega)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-display">
-<div class="rz-grid-container">
-    <div class="rz-line">\( \displaystyle \alpha \)</div>
-    <div class="rz-line">\( \displaystyle \beta \)</div>
-    <div class="rz-line">\( \displaystyle \left( \Gamma,\, \gamma \right) \)</div>
-    <div class="rz-line">\( \displaystyle \left( \Delta,\, \delta \right) \)</div>
-    <div class="rz-line">\( \displaystyle \left( \epsilon,\, \varepsilon \right) \)</div>
-    <div class="rz-line">\( \displaystyle \zeta \)</div>
-    <div class="rz-line">\( \displaystyle \eta \)</div>
-    <div class="rz-line">\( \displaystyle \left( \Theta,\, \theta,\, \vartheta \right) \)</div>
-    <div class="rz-line">\( \displaystyle \iota \)</div>
-    <div class="rz-line">\( \displaystyle \left( \kappa,\, \varkappa \right) \)</div>
-    <div class="rz-line">\( \displaystyle \left( \Lambda,\, \lambda \right) \)</div>
-    <div class="rz-line">\( \displaystyle \mu \)</div>
-    <div class="rz-line">\( \displaystyle \nu \)</div>
-    <div class="rz-line">\( \displaystyle \left( \Xi,\, \xi \right) \)</div>
-    <div class="rz-line">\( \displaystyle \omicron \)</div>
-    <div class="rz-line">\( \displaystyle \left( \Pi,\, \pi,\, \varpi \right) \)</div>
-    <div class="rz-line">\( \displaystyle \left( \rho,\, \varrho \right) \)</div>
-    <div class="rz-line">\( \displaystyle \left( \Sigma,\, \sigma,\, \varsigma \right) \)</div>
-    <div class="rz-line">\( \displaystyle \tau \)</div>
-    <div class="rz-line">\( \displaystyle \left( \Upsilon,\, \upsilon \right) \)</div>
-    <div class="rz-line">\( \displaystyle \left( \Phi,\, \phi,\, \varphi \right) \)</div>
-    <div class="rz-line">\( \displaystyle \chi \)</div>
-    <div class="rz-line">\( \displaystyle \left( \Psi,\, \psi \right) \)</div>
-    <div class="rz-line">\( \displaystyle \left( \Omega,\, \omega \right) \)</div>
-</div>
-</div>
-</div>
-<p>Due to name conflict with the Python <code>lambda</code> statement, <code>lambda_</code> is used to render a standalone <span class="math inline">\(\lambda\)</span>.</p>
+<section id="as-piecewise-assignment" class="level2">
+<h2 class="anchored" data-anchor-id="as-piecewise-assignment">As Piecewise Assignment</h2>
+<p>If all of the branches in the conditional ladder only contain a single assignment statement to the same variable, it will be rendered as a piecewise assignment to the target variable when <code>@show_substitution=False</code> (or <code>@nosub</code>, <code>@def</code>).</p>
+<p>THe inline comment on the first assignment will be used as annotation.</p>
 <div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -1222,226 +1154,141 @@ Note
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>Capital Greek letters that resemble Latin letters (A, B, E, Z, H, K, I, M, N, O, R, T, and X) are excluded to avoid ambiguity.</p>
+<p>Options and shortcuts applied to the <code>if</code> keyword line applies to the whole <code>if-elif-else</code> ladder.</p>
 </div>
 </div>
-<p>In addition, these Hebrew letter names are also converted:</p>
-<div id="083bc00a" class="cell" data-execution_count="11">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="op">%%</span>tap <span class="op">--</span>dead <span class="op">--</span>grid</span>
-<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>digamma<span class="op">;</span> aleph<span class="op">;</span> beth<span class="op">;</span> gimel</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div id="e7966853" class="cell" data-execution_count="8">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="op">%%</span>tap</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> <span class="dv">3</span></span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> x <span class="op">&gt;</span> <span class="dv">0</span>:  <span class="co"># @show_substitution=False</span></span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>    y <span class="op">=</span> x <span class="op">+</span> <span class="dv">1</span>  <span class="co"># Value of y</span></span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a><span class="cf">else</span>:</span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>    y <span class="op">=</span> x <span class="op">-</span> <span class="dv">1</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display">
-<div class="rz-grid-container">
-    <div class="rz-line">\( \displaystyle \digamma \)</div>
-    <div class="rz-line">\( \displaystyle \aleph \)</div>
-    <div class="rz-line">\( \displaystyle \beth \)</div>
-    <div class="rz-line">\( \displaystyle \gimel \)</div>
-</div>
-</div>
-</div>
-</section>
-<section id="starting-greek-letter" class="level3">
-<h3 class="anchored" data-anchor-id="starting-greek-letter">Starting Greek Letter</h3>
-<p>If the base part of a variable starts with certain Greek letters, it will be rendered as a symbol alongside the rest of the base part.</p>
-<div id="f954b352" class="cell" data-execution_count="12">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="op">%%</span>tap <span class="op">--</span>dead <span class="op">--</span>grid</span>
-<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>DeltaT<span class="op">;</span> psiR_k</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-display">
-<div class="rz-grid-container">
-    <div class="rz-line">\( \displaystyle \Delta T \)</div>
-    <div class="rz-line">\( \displaystyle \psi R_{k} \)</div>
-</div>
-</div>
-</div>
-<p>These Greek letter keywords that are defined in <code>@greek_starts</code>:</p>
-<div id="a347aa68" class="cell" data-execution_count="13">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>config.greek_starts</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-display" data-execution_count="13">
-<pre><code>{'Delta', 'gamma', 'phi', 'psi'}</code></pre>
-</div>
-</div>
-<p>To add or remove Greek letters that should be rendered when it appears in the beginning of the base name part, use the <code>config</code> methods <code>add_greek_start()</code> or <code>remove_greek_start()</code>, respectively.</p>
-<p>For example:</p>
-<div id="ce59fa90" class="cell" data-execution_count="14">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>config.add_greek_start(<span class="st">"Sigma"</span>, <span class="st">"Pi"</span>)</span>
-<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>config.remove_greek_start(<span class="st">"gamma"</span>, <span class="st">"phi"</span>, <span class="st">"psi"</span>)</span>
-<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a>config.greek_starts</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-display" data-execution_count="14">
-<pre><code>{'Delta', 'Pi', 'Sigma'}</code></pre>
-</div>
-</div>
-<div id="dabcfbf3" class="cell" data-execution_count="15">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb19"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="op">%%</span>tap <span class="op">--</span>dead <span class="op">--</span>grid</span>
-<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>Sigmaboy<span class="op">;</span> phiF_y</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-display">
-<div class="rz-grid-container">
-    <div class="rz-line">\( \displaystyle \Sigma \mathrm{boy} \)</div>
-    <div class="rz-line">\( \displaystyle \mathrm{phiF}_{y} \)</div>
-</div>
-</div>
-</div>
-</section>
-<section id="accents-and-modifiers" class="level3">
-<h3 class="anchored" data-anchor-id="accents-and-modifiers">Accents and Modifiers</h3>
-<p>Variable names with specific keywords after an underscore (e.g., <code>_hat</code>, <code>_bar</code>) are rendered with the corresponding accent or modifier.</p>
-<div id="5562061f" class="cell" data-execution_count="16">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb20"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="op">%%</span>tap <span class="op">--</span>dead <span class="op">--</span>grid</span>
-<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>x_bar<span class="op">;</span> k_hat<span class="op">;</span> f_prime<span class="op">;</span> L_star_a</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-display">
-<div class="rz-grid-container">
-    <div class="rz-line">\( \displaystyle \bar{x} \)</div>
-    <div class="rz-line">\( \displaystyle \hat{k} \)</div>
-    <div class="rz-line">\( \displaystyle f' \)</div>
-    <div class="rz-line">\( \displaystyle L^{*}_{a} \)</div>
-</div>
-</div>
-</div>
-<p>These are all the accents and modifiers that can be converted:</p>
-<div id="5b742d57" class="cell" data-execution_count="17">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb21"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="op">%%</span>tap <span class="op">--</span>dead <span class="op">--</span>grid</span>
-<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>foo_hat<span class="op">;</span> foo_widehat<span class="op">;</span> foo_bar<span class="op">;</span> foo_widebar</span>
-<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a>foo_tilde<span class="op">;</span> foo_widetilde<span class="op">;</span> foo_dot<span class="op">;</span> foo_ddot</span>
-<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a>foo_dddot<span class="op">;</span> foo_ddddot<span class="op">;</span> foo_breve<span class="op">;</span> foo_check</span>
-<span id="cb21-5"><a href="#cb21-5" aria-hidden="true" tabindex="-1"></a>foo_acute<span class="op">;</span> foo_grave<span class="op">;</span> foo_ring<span class="op">;</span> foo_mat</span>
-<span id="cb21-6"><a href="#cb21-6" aria-hidden="true" tabindex="-1"></a>foo_vec<span class="op">;</span> foo_vec2<span class="op">;</span> foo_widevec2<span class="op">;</span> foo_prime</span>
-<span id="cb21-7"><a href="#cb21-7" aria-hidden="true" tabindex="-1"></a>foo_star<span class="op">;</span> foo_sstar<span class="op">;</span> foo_ssstar<span class="op">;</span> foo_sssstar</span>
-<span id="cb21-8"><a href="#cb21-8" aria-hidden="true" tabindex="-1"></a>foo_plus<span class="op">;</span> foo_minus<span class="op">;</span> foo_oplus<span class="op">;</span> foo_ominus</span>
-<span id="cb21-9"><a href="#cb21-9" aria-hidden="true" tabindex="-1"></a>foo_plusminus</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-display">
-<div class="rz-grid-container">
-    <div class="rz-line">\( \displaystyle \mathrm{\hat{foo}} \)</div>
-    <div class="rz-line">\( \displaystyle \mathrm{\widehat{foo}} \)</div>
-    <div class="rz-line">\( \displaystyle \mathrm{\bar{foo}} \)</div>
-    <div class="rz-line">\( \displaystyle \mathrm{\overline{foo}} \)</div>
-    <div class="rz-line">\( \displaystyle \mathrm{\tilde{foo}} \)</div>
-    <div class="rz-line">\( \displaystyle \mathrm{\widetilde{foo}} \)</div>
-    <div class="rz-line">\( \displaystyle \mathrm{\dot{foo}} \)</div>
-    <div class="rz-line">\( \displaystyle \mathrm{\ddot{foo}} \)</div>
-    <div class="rz-line">\( \displaystyle \mathrm{\dddot{foo}} \)</div>
-    <div class="rz-line">\( \displaystyle \mathrm{\ddddot{foo}} \)</div>
-    <div class="rz-line">\( \displaystyle \mathrm{\breve{foo}} \)</div>
-    <div class="rz-line">\( \displaystyle \mathrm{\check{foo}} \)</div>
-    <div class="rz-line">\( \displaystyle \mathrm{\acute{foo}} \)</div>
-    <div class="rz-line">\( \displaystyle \mathrm{\grave{foo}} \)</div>
-    <div class="rz-line">\( \displaystyle \mathrm{\mathring{foo}} \)</div>
-    <div class="rz-line">\( \displaystyle \mathrm{\mathbf{foo}} \)</div>
-    <div class="rz-line">\( \displaystyle \mathrm{\mathbf{foo}} \)</div>
-    <div class="rz-line">\( \displaystyle \mathrm{\vec{foo}} \)</div>
-    <div class="rz-line">\( \displaystyle \mathrm{\overrightarrow{foo}} \)</div>
-    <div class="rz-line">\( \displaystyle \mathrm{foo'} \)</div>
-    <div class="rz-line">\( \displaystyle \mathrm{foo^{*}} \)</div>
-    <div class="rz-line">\( \displaystyle \mathrm{foo^{**}} \)</div>
-    <div class="rz-line">\( \displaystyle \mathrm{foo^{***}} \)</div>
-    <div class="rz-line">\( \displaystyle \mathrm{foo^{****}} \)</div>
-    <div class="rz-line">\( \displaystyle \mathrm{foo^{+}} \)</div>
-    <div class="rz-line">\( \displaystyle \mathrm{foo^{-}} \)</div>
-    <div class="rz-line">\( \displaystyle \mathrm{foo^{\oplus}} \)</div>
-    <div class="rz-line">\( \displaystyle \mathrm{foo^{\ominus}} \)</div>
-    <div class="rz-line">\( \displaystyle \mathrm{foo^{\pm}} \)</div>
-</div>
-</div>
-</div>
-<div class="callout callout-style-default callout-tip callout-titled">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-Tip
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p><code>foo_mat</code> and <code>foo_vec</code> will render similarly. To avoid confusion, they are not recommended to be used together on a single notebook.</p>
-</div>
-</div>
-</section>
-<section id="disabling-symbols" class="level3">
-<h3 class="anchored" data-anchor-id="disabling-symbols">Disabling Symbols</h3>
-<p>When <code>@use_symbols=False</code>, all greek, accent, and modifier keywords will be rendered exactly as they are typed but using a Roman font.</p>
-<div id="fc69266a" class="cell" data-execution_count="18">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb22"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="op">%%</span>tap <span class="op">--</span>dead <span class="op">--</span>grid <span class="op">@</span>use_symbols<span class="op">=</span><span class="va">False</span></span>
-<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>alpha_widebar</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-display">
-<div class="rz-grid-container"><div class="rz-line">\( \displaystyle \mathrm{alpha}_{\mathrm{widebar}} \)</div></div>
-</div>
-</div>
-</section>
-</section>
-<section id="attributes" class="level2">
-<h2 class="anchored" data-anchor-id="attributes">Attributes</h2>
-<p>Attribute access is rendered the same as you would write it in Python.</p>
-<div id="1dbce88c" class="cell" data-execution_count="19">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb23"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> Foo:</span>
-<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> <span class="fu">__init__</span>(<span class="va">self</span>):</span>
-<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.bar <span class="op">=</span> <span class="dv">42</span>  <span class="co"># Instance attribute</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</div>
-<div id="72f4795b" class="cell" data-execution_count="20">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb24"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="op">%%</span>tap</span>
-<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>foo <span class="op">=</span> Foo()</span>
-<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a>foo.bar  <span class="co"># Attribute access</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-display">
-<div class="rz-line">\( \displaystyle \mathrm{foo} = \operatorname{Foo} \left(\right) \)</div>
+<div class="rz-line">\( \displaystyle x = 3 \)</div>
 <div class="rz-line">
-    <div class="rz-line__main">\( \displaystyle \mathrm{foo}.\mathrm{bar} = 42 \)</div>
-    <div class="rz-line__desc">Attribute access</div>
+    <div class="rz-line__main">
+        \( \displaystyle 
+            y = \begin{cases}
+                \displaystyle x + 1, &amp;\text{if}\ x &gt; 0 \\
+                \displaystyle x - 1, &amp;\text{otherwise}
+            \end{cases} = 4
+         \)
+    </div>
+    <div class="rz-line__desc">Value of y</div>
 </div>
 </div>
 </div>
-<section id="hidden-modules" class="level3">
-<h3 class="anchored" data-anchor-id="hidden-modules">Hidden Modules</h3>
-<p>Some module names, such as <code>math</code>, are not rendered, leaving only its attributes:</p>
-<div id="cb425a0c" class="cell" data-execution_count="21">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb25"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="op">%%</span>tap</span>
-<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> math</span>
-<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb25-4"><a href="#cb25-4" aria-hidden="true" tabindex="-1"></a>math.pi  <span class="co"># Hidden module name</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</section>
+<section id="showing-all-conditions" class="level2">
+<h2 class="anchored" data-anchor-id="showing-all-conditions">Showing All Conditions</h2>
+<p>To show all the conditions in a conditional ladder, turn off both the substitution and result display modes by setting <code>@show_substitution=False @show_result=False</code>, or using <code>@def</code>.</p>
+<div id="37da336a" class="cell" data-execution_count="9">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="op">%%</span>tap</span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> <span class="dv">3</span></span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> x <span class="op">&gt;</span> <span class="dv">0</span>:  <span class="co"># @def</span></span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>    y <span class="op">=</span> x <span class="op">+</span> <span class="dv">1</span></span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>    z <span class="op">=</span> x <span class="op">-</span> <span class="dv">1</span></span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a><span class="cf">else</span>:</span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a>    y <span class="op">=</span> x <span class="op">-</span> <span class="dv">1</span></span>
+<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a>    z <span class="op">=</span> x <span class="op">+</span> <span class="dv">1</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display">
-
+<div class="rz-line">\( \displaystyle x = 3 \)</div>
+<div class="rz-line">\( \displaystyle \text{If}\ x &gt; 0 \text{:} \)</div>
+<div class="rz-body">
+    <div class="rz-line">\( \displaystyle y = x + 1 \)</div>
+    <div class="rz-line">\( \displaystyle z = x - 1 \)</div>
 </div>
-<div class="cell-output cell-output-display">
-<div class="rz-line">
-    <div class="rz-line__main">\( \displaystyle \pi = 3.14 \)</div>
-    <div class="rz-line__desc">Hidden module name</div>
-</div>
-</div>
-</div>
-<p>This is controlled by the <code>@hidden_modules</code>:</p>
-<div id="9e97d0af" class="cell" data-execution_count="22">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb26"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a>config.hidden_modules</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-display" data-execution_count="22">
-<pre><code>{'math', 'np', 'sp', 'ureg'}</code></pre>
-</div>
-</div>
-<p>To add or remove module names that should be hidden when the attribute is rendered, use the <code>config</code> methods <code>add_hidden_module()</code> or <code>remove_hidden_module()</code>, respectively.</p>
-<p>For example:</p>
-<div id="48652e37" class="cell" data-execution_count="23">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb28"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a>config.add_hidden_module(<span class="st">"scipy"</span>, <span class="st">"foo"</span>)</span>
-<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a>config.remove_hidden_module(<span class="st">"math"</span>)</span>
-<span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb28-4"><a href="#cb28-4" aria-hidden="true" tabindex="-1"></a>config.hidden_modules</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-display" data-execution_count="23">
-<pre><code>{'foo', 'np', 'scipy', 'sp', 'ureg'}</code></pre>
-</div>
-</div>
-<div id="13a13290" class="cell" data-execution_count="24">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb30"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="op">%%</span>tap</span>
-<span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a>foo.bar  <span class="co"># `foo` now hidden</span></span>
-<span id="cb30-3"><a href="#cb30-3" aria-hidden="true" tabindex="-1"></a>math.pi  <span class="co"># `math` now shown</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-display">
-<div class="rz-line">
-    <div class="rz-line__main">\( \displaystyle \mathrm{bar} = 42 \)</div>
-    <div class="rz-line__desc"><code>foo</code> now hidden</div>
-</div>
-<div class="rz-line">
-    <div class="rz-line__main">\( \displaystyle \mathrm{math}.\pi = 3.14 \)</div>
-    <div class="rz-line__desc"><code>math</code> now shown</div>
+<div class="rz-line">\( \displaystyle \text{Otherwise:} \)</div>
+<div class="rz-body">
+    <div class="rz-line">\( \displaystyle y = x - 1 \)</div>
+    <div class="rz-line">\( \displaystyle z = x + 1 \)</div>
 </div>
 </div>
 </div>
+<p>If <code>@show_substitution=False @show_result=True</code> and the conditional block cannot be rendered as a piecewise assignment, An error will be raised, prompting you to set <code>@show_result=False</code>.</p>
+</section>
+<section id="rendering-summary" class="level2">
+<h2 class="anchored" data-anchor-id="rendering-summary">Rendering Summary</h2>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 7%">
+<col style="width: 9%">
+<col style="width: 11%">
+<col style="width: 6%">
+<col style="width: 64%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Shortcut</th>
+<th>Definition</th>
+<th>Substitution</th>
+<th>Result</th>
+<th>Branch shown</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>@all</code></td>
+<td><code>True</code></td>
+<td><code>True</code></td>
+<td><code>True</code></td>
+<td><code>True</code> path only.</td>
+</tr>
+<tr class="even">
+<td><code>@nodef</code></td>
+<td><code>False</code></td>
+<td><code>True</code></td>
+<td><code>True</code></td>
+<td><code>True</code> path only.</td>
+</tr>
+<tr class="odd">
+<td><code>@nosub</code></td>
+<td><code>True</code></td>
+<td><code>False</code></td>
+<td><code>True</code></td>
+<td>As piecewise if possible, otherwise <code>RubberizeNotImplementedError</code></td>
+</tr>
+<tr class="even">
+<td><code>@nores</code></td>
+<td><code>True</code></td>
+<td><code>True</code></td>
+<td><code>False</code></td>
+<td><code>True</code> path only.</td>
+</tr>
+<tr class="odd">
+<td><code>@def</code></td>
+<td><code>True</code></td>
+<td><code>False</code></td>
+<td><code>False</code></td>
+<td>As piecewise if possible, otherwise all branches.</td>
+</tr>
+<tr class="even">
+<td><code>@sub</code></td>
+<td><code>False</code></td>
+<td><code>True</code></td>
+<td><code>False</code></td>
+<td><code>True</code> path only.</td>
+</tr>
+<tr class="odd">
+<td><code>@res</code></td>
+<td><code>False</code></td>
+<td><code>False</code></td>
+<td><code>True</code></td>
+<td>Single result if possible, otherise <code>RubberizeNotImplementedError</code></td>
+</tr>
+<tr class="even">
+<td><code>@none</code></td>
+<td><code>False</code></td>
+<td><code>False</code></td>
+<td><code>False</code></td>
+<td>Single target if possible, otherwise all branches.</td>
+</tr>
+</tbody>
+</table>
 
 
 
-</section>
 </section>
 
 </main> <!-- /main -->

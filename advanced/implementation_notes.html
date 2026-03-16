@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Built-in Types – Rubberize</title>
+<title>Implementation Notes – Rubberize</title>
 <style>
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
@@ -23,65 +23,30 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
-/* CSS for syntax highlighting */
-html { -webkit-text-size-adjust: 100%; }
-pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
-pre > code.sourceCode > span:empty { height: 1.2em; }
-.sourceCode { overflow: visible; }
-code.sourceCode > span { color: inherit; text-decoration: inherit; }
-div.sourceCode { margin: 1em 0; }
-pre.sourceCode { margin: 0; }
-@media screen {
-div.sourceCode { overflow: auto; }
-}
-@media print {
-pre > code.sourceCode { white-space: pre-wrap; }
-pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
-}
-pre.numberSource code
-  { counter-reset: source-line 0; }
-pre.numberSource code > span
-  { position: relative; left: -4em; counter-increment: source-line; }
-pre.numberSource code > span > a:first-child::before
-  { content: counter(source-line);
-    position: relative; left: -1em; text-align: right; vertical-align: baseline;
-    border: none; display: inline-block;
-    -webkit-touch-callout: none; -webkit-user-select: none;
-    -khtml-user-select: none; -moz-user-select: none;
-    -ms-user-select: none; user-select: none;
-    padding: 0 4px; width: 4em;
-  }
-pre.numberSource { margin-left: 3em;  padding-left: 4px; }
-div.sourceCode
-  {   }
-@media screen {
-pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
-}
 </style>
 
 
-<script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js" integrity="sha384-ZvpUoO/+PpLXR1lu4jmpXWu80pZlYUAfxl5NsBMWOEPSjUn/6Z/hRTt8+pR6L4N2" crossorigin="anonymous"></script><script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
-<script src="../../site_libs/quarto-nav/headroom.min.js"></script>
-<script src="../../site_libs/clipboard/clipboard.min.js"></script>
-<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
-<script src="../../site_libs/quarto-search/fuse.min.js"></script>
-<script src="../../site_libs/quarto-search/quarto-search.js"></script>
-<meta name="quarto:offset" content="../../">
-<script src="../../site_libs/quarto-html/quarto.js" type="module"></script>
-<script src="../../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
-<script src="../../site_libs/quarto-html/popper.min.js"></script>
-<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
-<script src="../../site_libs/quarto-html/anchor.min.js"></script>
-<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-067f8ab80d092ae3595f7402c2c9b667.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
-<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-dark-ca1cb3032aa6b9181247695f27e2facc.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
-<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-067f8ab80d092ae3595f7402c2c9b667.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
-<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
-<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../../site_libs/bootstrap/bootstrap-18592173e188cdae81627623887a06db.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
-<link href="../../site_libs/bootstrap/bootstrap-dark-2be3bacf71d4ec939c4fa8f4e9c7a46b.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
-<link href="../../site_libs/bootstrap/bootstrap-18592173e188cdae81627623887a06db.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<script src="../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-067f8ab80d092ae3595f7402c2c9b667.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-dark-ca1cb3032aa6b9181247695f27e2facc.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-067f8ab80d092ae3595f7402c2c9b667.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap-18592173e188cdae81627623887a06db.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/bootstrap/bootstrap-dark-2be3bacf71d4ec939c4fa8f4e9c7a46b.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="../site_libs/bootstrap/bootstrap-18592173e188cdae81627623887a06db.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -109,9 +74,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     "search-label": "Search"
   }
 }</script>
-<script src="https://cdn.jsdelivr.net/npm/requirejs@2.3.6/require.min.js" integrity="sha384-c9c+LnTbwQ3aujuU7ULEPVvgLs+Fn6fJUvIGTsuu1ZcCf11fiEubah0ttpca4ntM sha384-6V1/AdqZRWk1KAlWbKBlGhN7VG4iE/yAZcO6NZPMF8od0vukrvr0tg4qY6NSrItx" crossorigin="anonymous"></script>
-
-<script type="application/javascript">define('jquery', [],function() {return window.jQuery;})</script>
+<script src="../site_libs/quarto-diagram/mermaid.min.js"></script>
+<script src="../site_libs/quarto-diagram/mermaid-init.js"></script>
+<link href="../site_libs/quarto-diagram/mermaid.css" rel="stylesheet">
 
   <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
   <script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
@@ -143,7 +108,7 @@ window.Quarto = {
 };
 </script>
 
-<link rel="stylesheet" href="../../docs/styles.css">
+<link rel="stylesheet" href="../styles.css">
 </head>
 
 <body class="nav-sidebar docked nav-fixed quarto-light"><script id="quarto-html-before-body" type="application/javascript">
@@ -315,7 +280,7 @@ window.Quarto = {
     <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container mx-auto">
-    <a class="navbar-brand" href="../../index.html">
+    <a class="navbar-brand" href="../index.html">
     <span class="navbar-title">Rubberize</span>
     </a>
   </div>
@@ -326,23 +291,23 @@ window.Quarto = {
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll me-auto">
   <li class="nav-item">
-    <a class="nav-link" href="../../docs/index.html"> 
+    <a class="nav-link" href="../index.html"> 
 <span class="menu-text">Home</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link active" href="../../docs/get_started.html" aria-current="page"> 
+    <a class="nav-link active" href="../get_started.html" aria-current="page"> 
 <span class="menu-text">Get Started</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="../../docs/rendering/index.html"> 
+    <a class="nav-link" href="../rendering/index.html"> 
 <span class="menu-text">Rendering Code</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="../../docs/advanced/custom_converters.html"> 
+    <a class="nav-link" href="../advanced/custom_converters.html"> 
 <span class="menu-text">Custom Converters</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="../../docs/config_reference.html"> 
+    <a class="nav-link" href="../config_reference.html"> 
 <span class="menu-text">Config Reference</span></a>
   </li>  
 </ul>
@@ -358,7 +323,7 @@ window.Quarto = {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../docs/rendering/index.html">Rendering Code</a></li><li class="breadcrumb-item"><a href="../../docs/rendering/variables.html">Expressions</a></li><li class="breadcrumb-item"><a href="../../docs/rendering/builtins.html">Built-in Types</a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../advanced/implementation_notes.html">Advanced Topics</a></li><li class="breadcrumb-item"><a href="../advanced/implementation_notes.html">Implementation Notes</a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
     </div>
@@ -372,13 +337,13 @@ window.Quarto = {
     <ul class="list-unstyled mt-1">
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../docs/get_started.html" class="sidebar-item-text sidebar-link">
+  <a href="../get_started.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Get Started</span></a>
   </div>
 </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a href="../../docs/rendering/index.html" class="sidebar-item-text sidebar-link">
+            <a href="../rendering/index.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Rendering Code</span></a>
           <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#" role="navigation" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
@@ -387,58 +352,58 @@ window.Quarto = {
       <ul id="" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true">
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="false">
  <span class="menu-text">Expressions</span></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true" aria-label="Toggle section">
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="false" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth2 show">  
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth2 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../docs/rendering/variables.html" class="sidebar-item-text sidebar-link">
+  <a href="../rendering/variables.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Variables</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../docs/rendering/numbers.html" class="sidebar-item-text sidebar-link">
+  <a href="../rendering/numbers.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Numbers</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../docs/rendering/collections.html" class="sidebar-item-text sidebar-link">
+  <a href="../rendering/collections.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Collections</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../docs/rendering/builtins.html" class="sidebar-item-text sidebar-link active">
+  <a href="../rendering/builtins.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Built-in Types</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../docs/rendering/calls.html" class="sidebar-item-text sidebar-link">
+  <a href="../rendering/calls.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Calls</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../docs/rendering/pint.html" class="sidebar-item-text sidebar-link">
+  <a href="../rendering/pint.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Physical Quantities</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../docs/rendering/numpy.html" class="sidebar-item-text sidebar-link">
+  <a href="../rendering/numpy.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Arrays</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../docs/rendering/operations.html" class="sidebar-item-text sidebar-link">
+  <a href="../rendering/operations.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Operations</span></a>
   </div>
 </li>
@@ -455,25 +420,25 @@ window.Quarto = {
       <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth2 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../docs/rendering/expressions.html" class="sidebar-item-text sidebar-link">
+  <a href="../rendering/expressions.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Expressions</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../docs/rendering/assignments.html" class="sidebar-item-text sidebar-link">
+  <a href="../rendering/assignments.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Assignments</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../docs/rendering/conditionals.html" class="sidebar-item-text sidebar-link">
+  <a href="../rendering/conditionals.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Conditionals</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../docs/rendering/funcdefs.html" class="sidebar-item-text sidebar-link">
+  <a href="../rendering/funcdefs.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Function Definitions</span></a>
   </div>
 </li>
@@ -490,13 +455,13 @@ window.Quarto = {
       <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth2 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../docs/rendering/calcsheet.html" class="sidebar-item-text sidebar-link">
+  <a href="../rendering/calcsheet.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Calculation Sheets</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../docs/rendering/annotations.html" class="sidebar-item-text sidebar-link">
+  <a href="../rendering/annotations.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Annotations</span></a>
   </div>
 </li>
@@ -515,13 +480,13 @@ window.Quarto = {
       <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../docs/advanced/implementation_notes.html" class="sidebar-item-text sidebar-link">
+  <a href="../advanced/implementation_notes.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text">Implementation Notes</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../docs/advanced/custom_converters.html" class="sidebar-item-text sidebar-link">
+  <a href="../advanced/custom_converters.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Custom Converters</span></a>
   </div>
 </li>
@@ -529,7 +494,7 @@ window.Quarto = {
   </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../docs/config_reference.html" class="sidebar-item-text sidebar-link">
+  <a href="../config_reference.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Config Reference</span></a>
   </div>
 </li>
@@ -538,26 +503,16 @@ window.Quarto = {
 </nav>
 <div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        <nav id="TOC" role="doc-toc" class="toc-active">
-    <h2 id="toc-title">On this page</h2>
-   
-  <ul>
-  <li><a href="#strings" id="toc-strings" class="nav-link active" data-scroll-target="#strings">Strings</a></li>
-  <li><a href="#boolean" id="toc-boolean" class="nav-link" data-scroll-target="#boolean">Boolean</a></li>
-  <li><a href="#none-type" id="toc-none-type" class="nav-link" data-scroll-target="#none-type">None Type</a></li>
-  <li><a href="#range" id="toc-range" class="nav-link" data-scroll-target="#range">Range</a></li>
-  <li><a href="#ellipsis-type" id="toc-ellipsis-type" class="nav-link" data-scroll-target="#ellipsis-type">Ellipsis Type</a></li>
-  </ul>
-</nav>
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
+        
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../docs/rendering/index.html">Rendering Code</a></li><li class="breadcrumb-item"><a href="../../docs/rendering/variables.html">Expressions</a></li><li class="breadcrumb-item"><a href="../../docs/rendering/builtins.html">Built-in Types</a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../advanced/implementation_notes.html">Advanced Topics</a></li><li class="breadcrumb-item"><a href="../advanced/implementation_notes.html">Implementation Notes</a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title">Built-in Types</h1>
+<h1 class="title">Implementation Notes</h1>
 </div>
 
 
@@ -574,609 +529,50 @@ window.Quarto = {
 </header>
 
 
-<div id="64ecc756" class="cell" data-execution_count="1">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="op">%</span>reload_ext rubberize</span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> rubberize.config <span class="im">import</span> config</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-display">
-<style>:root {
-    --rz-icon-check-circle: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="%23000" class="bi bi-check-circle" viewBox="0 0 16 16"><path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14m0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16"/><path d="m10.97 4.97-.02.022-3.473 4.425-2.093-2.094a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-1.071-1.05"/></svg>');
-    --rz-icon-check-circle-fill-green: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="%230a3622" class="bi bi-check-circle-fill" viewBox="0 0 16 16"><path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0m-3.97-3.03a.75.75 0 0 0-1.08.022L7.477 9.417 5.384 7.323a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-.01-1.05z"/></svg>');
-    --rz-icon-check-circle-fill-green-dark: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="%2375b798" class="bi bi-check-circle-fill" viewBox="0 0 16 16"><path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0m-3.97-3.03a.75.75 0 0 0-1.08.022L7.477 9.417 5.384 7.323a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-.01-1.05z"/></svg>');
-    --rz-icon-x-circle: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="%23000" class="bi bi-x-circle" viewBox="0 0 16 16"><path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14m0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16"/><path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708"/></svg>');
-    --rz-icon-x-circle-fill-red: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="%2358151c" class="bi bi-x-circle-fill" viewBox="0 0 16 16"><path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0M5.354 4.646a.5.5 0 1 0-.708.708L7.293 8l-2.647 2.646a.5.5 0 0 0 .708.708L8 8.707l2.646 2.647a.5.5 0 0 0 .708-.708L8.707 8l2.647-2.646a.5.5 0 0 0-.708-.708L8 7.293z"/></svg>');
-    --rz-icon-x-circle-fill-red-dark: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="%23e9868f" class="bi bi-x-circle-fill" viewBox="0 0 16 16"><path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0M5.354 4.646a.5.5 0 1 0-.708.708L7.293 8l-2.647 2.646a.5.5 0 0 0 .708.708L8 8.707l2.646 2.647a.5.5 0 0 0 .708-.708L8.707 8l2.647-2.646a.5.5 0 0 0-.708-.708L8 7.293z"/></svg>');
-    --rz-icon-info-circle: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="%23000" class="bi bi-info-circle" viewBox="0 0 16 16"><path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14m0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16"/><path d="m8.93 6.588-2.29.287-.082.38.45.083c.294.07.352.176.288.469l-.738 3.468c-.194.897.105 1.319.808 1.319.545 0 1.178-.252 1.465-.598l.088-.416c-.2.176-.492.246-.686.246-.275 0-.375-.193-.304-.533zM9 4.5a1 1 0 1 1-2 0 1 1 0 0 1 2 0"/></svg>');
-    --rz-icon-info-circle-fill-blue: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="%23052c65" class="bi bi-info-circle-fill" viewBox="0 0 16 16"><path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16m.93-9.412-1 4.705c-.07.34.029.533.304.533.194 0 .487-.07.686-.246l-.088.416c-.287.346-.92.598-1.465.598-.703 0-1.002-.422-.808-1.319l.738-3.468c.064-.293.006-.399-.287-.47l-.451-.081.082-.381 2.29-.287zM8 5.5a1 1 0 1 1 0-2 1 1 0 0 1 0 2"/></svg>');
-    --rz-icon-info-circle-fill-blue-dark: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="%236ea8fe" class="bi bi-info-circle-fill" viewBox="0 0 16 16"><path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16m.93-9.412-1 4.705c-.07.34.029.533.304.533.194 0 .487-.07.686-.246l-.088.416c-.287.346-.92.598-1.465.598-.703 0-1.002-.422-.808-1.319l.738-3.468c.064-.293.006-.399-.287-.47l-.451-.081.082-.381 2.29-.287zM8 5.5a1 1 0 1 1 0-2 1 1 0 0 1 0 2"/></svg>');
-    --rz-icon-exclamation-triangle: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="%23000" class="bi bi-exclamation-triangle" viewBox="0 0 16 16"><path d="M7.938 2.016A.13.13 0 0 1 8.002 2a.13.13 0 0 1 .063.016.15.15 0 0 1 .054.057l6.857 11.667c.036.06.035.124.002.183a.2.2 0 0 1-.054.06.1.1 0 0 1-.066.017H1.146a.1.1 0 0 1-.066-.017.2.2 0 0 1-.054-.06.18.18 0 0 1 .002-.183L7.884 2.073a.15.15 0 0 1 .054-.057m1.044-.45a1.13 1.13 0 0 0-1.96 0L.165 13.233c-.457.778.091 1.767.98 1.767h13.713c.889 0 1.438-.99.98-1.767z"/><path d="M7.002 12a1 1 0 1 1 2 0 1 1 0 0 1-2 0M7.1 5.995a.905.905 0 1 1 1.8 0l-.35 3.507a.552.552 0 0 1-1.1 0z"/></svg>');
-    --rz-icon-exclamation-triangle-fill-yellow: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="%23664d03" class="bi bi-exclamation-triangle-fill" viewBox="0 0 16 16"><path d="M8.982 1.566a1.13 1.13 0 0 0-1.96 0L.165 13.233c-.457.778.091 1.767.98 1.767h13.713c.889 0 1.438-.99.98-1.767zM8 5c.535 0 .954.462.9.995l-.35 3.507a.552.552 0 0 1-1.1 0L7.1 5.995A.905.905 0 0 1 8 5m.002 6a1 1 0 1 1 0 2 1 1 0 0 1 0-2"/></svg>');
-    --rz-icon-exclamation-triangle-fill-yellow-dark: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="%23ffda6a" class="bi bi-exclamation-triangle-fill" viewBox="0 0 16 16"><path d="M8.982 1.566a1.13 1.13 0 0 0-1.96 0L.165 13.233c-.457.778.091 1.767.98 1.767h13.713c.889 0 1.438-.99.98-1.767zM8 5c.535 0 .954.462.9.995l-.35 3.507a.552.552 0 0 1-1.1 0L7.1 5.995A.905.905 0 0 1 8 5m.002 6a1 1 0 1 1 0 2 1 1 0 0 1 0-2"/></svg>');
-}
+<p>First, the code inside a <code>%%tap</code> cell is parsed into an abstract syntax tree (AST) using a custom parser. Unlike Python’s standard <code>ast</code> module, this parser preserves comments by including them as new nodes in the tree.</p>
+<p>Rubberize then walks the syntax tree using its <code>latexer</code> and translates Python expressions into <span class="math inline">\(LaTeX\)</span> based on predefined rules, and stores the comments as annotation. Additionally, variable values are retrieved from the execution and substituted into expressions as auxillary representations.</p>
+<p>Finally, Rubberize provides HTML layout and styling using its <code>render</code>(er), and in notebooks generated LaTeX is rendered using MathJax.</p>
+<p>In simplified form, the process looks like this:</p>
+<div class="cell" data-layout-align="default">
+<div class="cell-output-display">
+<div>
+<p></p><figure class="figure"><p></p>
+<div>
+<pre class="mermaid mermaid-js">flowchart TD
 
-.jp-RenderedHTMLCommon p {
-    text-align: justify;
-}
-
-@media print {
-    @page {
-        size: A4;
-        margin: 1in;
-      }
-      
-    :root {
-        --jp-notebook-padding: 0 !important;
-        --jp-cell-padding: 0 !important;
-        --jp-code-padding: 0 !important;
-        
-        --jp-content-font-size0: 0.83333em !important;
-        --jp-content-font-size1: 9pt !important;
-        --jp-content-font-size2: 1.1em !important;
-        --jp-content-font-size3: 1.21em !important;
-        --jp-content-font-size4: 1.331em !important;
-        --jp-content-font-size5: 1.5972em !important;
-    
-        --jp-content-font-family: arial, sans-serif,
-            'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol';  
-    }
-
-    body {
-        margin: 0 !important;
-    }
-
-    h1, h2, h3, h4, h5, h6 {
-        font-weight: bold !important;
-        break-after: avoid-page;
-    }
-}
-
-/* param container */
-.rz-grid-container {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(1.5in, 1fr));
-    align-items: baseline;
-    gap: 0 1em;
-}
-
-/* line */
-
-.rz-line {
-    margin-bottom: 0.5em;
-}
-
-.rz-line__main {
-    flex: 1 1 auto;
-}
-
-.rz-line__desc {
-    flex: 0 1 2.5in;
-    margin-left: auto;
-}
-
-.rz-line:has(> .rz-line__desc) {
-    display: flex;
-    flex-wrap: wrap;
-    align-items: baseline;
-    gap: 0.25em 1em;
-}
-
-.rz-line--mark {
-    padding-left: 0.5em;
-    border-left: 0.25em solid;
-}
-
-.rz-line--mark-noprint {
-    padding-left: 0.5em;
-    border-left: 0.25em solid #dc3545;
-}
-
-.rz-line--hi mjx-math,
-.rz-line--hi .mjx-math,
-.rz-line--yhi mjx-math,
-.rz-line--yhi .mjx-math {
-    padding: 3px;
-    background-color: #fff3cd;
-}
-
-.rz-line--hi-noprint mjx-math,
-.rz-line--hi-noprint .mjx-math,
-.rz-line--yhi-noprint mjx-math,
-.rz-line--yhi-noprint .mjx-math {
-    padding: 3px;
-    background: repeating-linear-gradient(
-        -45deg,
-        #fff3cd,
-        #fff3cd 3px,
-        #fffcf1 3px,
-        #fffcf1 6px
-    );
-}
-
-.rz-line--rhi mjx-math,
-.rz-line--rhi .mjx-math {
-    padding: 3px;
-    background-color: #f9d7da;
-}
-
-.rz-line--rhi-noprint mjx-math,
-.rz-line--rhi-noprint .mjx-math {
-    padding: 3px;
-    background: repeating-linear-gradient(
-        -45deg,
-        #f9d7da,
-        #f9d7da 3px,
-        #ffe1e4 3px,
-        #ffe1e4 6px
-    );
-}
-
-.rz-line--ghi mjx-math,
-.rz-line--ghi .mjx-math {
-    padding: 3px;
-    background-color: #d1e7de;
-}
-
-.rz-line--ghi-noprint mjx-math,
-.rz-line--ghi-noprint .mjx-math {
-    padding: 3px;
-    background: repeating-linear-gradient(
-        -45deg,
-        #d1e7de,
-        #d1e7de 3px,
-        #e8fff6 3px,
-        #e8fff6 6px
-    );
-}
-
-.rz-line--bhi mjx-math,
-.rz-line--bhi .mjx-math {
-    padding: 3px;
-    background-color: #d0e2ff;
-}
-
-.rz-line--bhi-noprint mjx-math,
-.rz-line--bhi-noprint .mjx-math {
-    padding: 3px;
-    background: repeating-linear-gradient(
-        -45deg,
-        #d0e2ff,
-        #d0e2ff 3px,
-        #e3efff 3px,
-        #e3efff 6px
-    );
-}
+    A[Cell]
+    B[Python Code]
+    C[AST with Comments]
+    D[Comment Nodes]
+    E[Latexer]
+    F[Render]
+    H[Python Nodes]
+    G[HTML + Mathjax]
+    I[Execute]
 
 
-[data-jp-theme-light="false"] .rz-line--hi mjx-math,
-[data-jp-theme-light="false"] .rz-line--hi .mjx-math,
-[data-jp-theme-light="false"] .rz-line--yhi mjx-math,
-[data-jp-theme-light="false"] .rz-line--yhi .mjx-math {
-    border: 1px solid #997405;
-    padding: 3px;
-    background-color: #332702;
-}
+    A --&gt; B
+    B --&gt; C
+    C --&gt; D
+    D --&gt; E
+    E --&gt; F
+    F --&gt; G
 
-[data-jp-theme-light="false"] .rz-line--hi-noprint mjx-math,
-[data-jp-theme-light="false"] .rz-line--hi-noprint .mjx-math,
-[data-jp-theme-light="false"] .rz-line--yhi-noprint mjx-math,
-[data-jp-theme-light="false"] .rz-line--yhi-noprint .mjx-math {
-    border: 1px solid #997405;
-    padding: 3px;
-    background: repeating-linear-gradient(
-        -45deg,
-        #332702,
-        #332702 3px,
-        #181202 3px,
-        #181202 6px
-    );
-}
-
-[data-jp-theme-light="false"] .rz-line--rhi mjx-math,
-[data-jp-theme-light="false"] .rz-line--rhi .mjx-math {
-    border: 1px solid #841f29;
-    padding: 3px;
-    background-color: #2c0b0e;
-}
-
-[data-jp-theme-light="false"] .rz-line--rhi-noprint mjx-math,
-[data-jp-theme-light="false"] .rz-line--rhi-noprint .mjx-math {
-    border: 1px solid #841f29;
-    padding: 3px;
-    background: repeating-linear-gradient(
-        -45deg,
-        #2c0b0e,
-        #2c0b0e 3px,
-        #0e0405 3px,
-        #0e0405 6px
-    );
-}
-
-[data-jp-theme-light="false"] .rz-line--ghi mjx-math,
-[data-jp-theme-light="false"] .rz-line--ghi .mjx-math {
-    border: 1px solid #0f5132;
-    padding: 3px;
-    background-color: #051b11;
-}
-
-[data-jp-theme-light="false"] .rz-line--ghi-noprint mjx-math,
-[data-jp-theme-light="false"] .rz-line--ghi-noprint .mjx-math {
-    border: 1px solid #0f5132;
-    padding: 3px;
-    background: repeating-linear-gradient(
-        -45deg,
-        #051b11,
-        #051b11 3px,
-        #030d08 3px,
-        #030d08 6px
-    );
-}
-
-[data-jp-theme-light="false"] .rz-line--bhi mjx-math,
-[data-jp-theme-light="false"] .rz-line--bhi .mjx-math {
-    border: 1px solid #084298;
-    padding: 3px;
-    background-color: #031633;
-}
-
-[data-jp-theme-light="false"] .rz-line--bhi-noprint mjx-math,
-[data-jp-theme-light="false"] .rz-line--bhi-noprint .mjx-math {
-    border: 1px solid #084298;
-    padding: 3px;
-    background: repeating-linear-gradient(
-        -45deg,
-        #031633,
-        #031633 3px,
-        #020a18 3px,
-        #020a18 6px
-    );
-}
-
-@media print {
-    .rz-line--mark-noprint {
-        padding-left: unset;
-        border-left: unset;
-    }
-    
-    .rz-line--hi-noprint mjx-math,
-    .rz-line--hi-noprint .mjx-math,
-    .rz-line--rhi-noprint mjx-math,
-    .rz-line--rhi-noprint .mjx-math,
-    .rz-line--yhi-noprint mjx-math,
-    .rz-line--yhi-noprint .mjx-math,
-    .rz-line--ghi-noprint mjx-math,
-    .rz-line--ghi-noprint .mjx-math,
-    .rz-line--bhi-noprint mjx-math,
-    .rz-line--bhi-noprint .mjx-math {
-        border: unset;
-        padding: unset;
-        background: unset;
-    }
-}
-
-.rz-body {
-    padding-left: 1.5em;
-}
-
-/* header */
-
-.rz-header {
-    margin-bottom: 1em;
-    border-bottom: 1px solid;
-    padding-bottom: 0.5em;
-}
-
-.rz-header h1 {
-    margin-top: 1em;
-    margin-bottom: 0.5em;
-}
-
-.rz-header p {
-    margin-bottom: 0.5em;
-}
-
-.rz-header ul {
-    margin-top: 0;
-    margin-bottom: 0.5em;
-    padding-left: 0 !important;
-    font-size: var(--jp-content-font-size0);
-    list-style: none;
-
-}
-
-.rz-header :last-child {
-    margin-bottom: 0;
-}
-
-/* alert */
-
-.rz-alert {
-    display: grid;
-    grid-template-columns: auto 1fr;
-    gap: calc(var(--rz-alert-icon-size, 1em) * 0.5);
-    align-items: center;
-
-    border: var(--rz-alert-border);
-    padding: var(--rz-alert-padding);
-    background-color: var(--rz-alert-bg);
-    color: var(--rz-alert-color);
-    font-size: var(--rz-alert-font-size);
-    font-weight: var(--rz-alert-font-weight);
-}
-
-.rz-alert::before {
-    content: "";
-    width: var(--rz-alert-icon-size, 1em);
-    height: var(--rz-alert-icon-size, 1em);
-    background-image: var(--rz-alert-icon, var(--rz-icon-info-circle));
-    background-size: contain;
-    background-repeat: no-repeat;
-}
-
-.rz-alert__content :last-child {
-    margin-bottom: 0;
-}
-
-.rz-alert--noprint {
-    background: repeating-linear-gradient(
-        -45deg,
-        var(--rz-alert-bg),
-        var(--rz-alert-bg) 3px,
-        var(--rz-alert-bg-2) 3px,
-        var(--rz-alert-bg-2) 6px
-    );
-}
-
-.rz-alert--pass {
-    --rz-alert-icon-size: 1.5em;
-    --rz-alert-icon: var(--rz-icon-check-circle-fill-green);
-    --rz-alert-border: 1px solid #a3cfbb;
-    --rz-alert-padding: 0.5em;
-    --rz-alert-bg: #d1e7de;
-    --rz-alert-bg-2: #e8fff6;
-    --rz-alert-color: #0a3622;
-    --rz-alert-font-weight: 500;
-}
-
-.rz-alert--fail {
-    --rz-alert-icon-size: 1.5em;
-    --rz-alert-icon: var(--rz-icon-x-circle-fill-red);
-    --rz-alert-border: 1px solid #f1aeb5;
-    --rz-alert-padding: 0.5em;
-    --rz-alert-bg: #f9d7da;
-    --rz-alert-bg-2: #ffe1e4;
-    --rz-alert-color: #58151c;
-    --rz-alert-font-weight: 500;
-}
-
-.rz-alert--note {
-    --rz-alert-icon-size: 1.2em;
-    --rz-alert-icon: var(--rz-icon-info-circle-fill-blue);
-    --rz-alert-border: 1px solid #9ec5fe;
-    --rz-alert-padding: 0.5em;
-    --rz-alert-bg: #d0e2ff;
-    --rz-alert-bg-2: #e3efff;
-    --rz-alert-color: #052c65;
-}
-
-.rz-alert--warning {
-    --rz-alert-icon-size: 1.2em;
-    --rz-alert-icon: var(--rz-icon-exclamation-triangle-fill-yellow);
-    --rz-alert-border: 1px solid #ffe69c;
-    --rz-alert-padding: 0.5em;
-    --rz-alert-bg: #fff3cd;
-    --rz-alert-bg-2: #fffcf1;
-    --rz-alert-color: #664d03;
-}
-
-[data-jp-theme-light="false"] .rz-alert--pass {
-    --rz-alert-border: 1px solid #0f5132;
-    --rz-alert-icon: var(--rz-icon-check-circle-fill-green-dark);
-    --rz-alert-bg: #051b11;
-    --rz-alert-bg-2: #030d08;
-    --rz-alert-color: #75b798;
-}
-
-[data-jp-theme-light="false"] .rz-alert--fail {
-    --rz-alert-border: 1px solid #841f29;
-    --rz-alert-icon: var(--rz-icon-x-circle-fill-red-dark);
-    --rz-alert-bg: #2c0b0e;
-    --rz-alert-bg-2: #0e0405;
-    --rz-alert-color: #e9868f;
-}
-
-[data-jp-theme-light="false"] .rz-alert--note {
-    --rz-alert-border: 1px solid #084298;
-    --rz-alert-icon: var(--rz-icon-info-circle-fill-blue-dark);
-    --rz-alert-bg: #031633;
-    --rz-alert-bg-2: #020a18;
-    --rz-alert-color: #6ea8fe;
-}
-
-[data-jp-theme-light="false"] .rz-alert--warning {
-    --rz-alert-border: 1px solid #997405;
-    --rz-alert-icon: var(--rz-icon-exclamation-triangle-fill-yellow-dark);
-    --rz-alert-bg: #332702;
-    --rz-alert-bg-2: #181202;
-    --rz-alert-color: #ffda6a;
-}
-
-@media print {
-    .rz-alert--noprint {
-        display: none !important;
-    }
-
-    .rz-alert--pass {
-        --rz-alert-icon: var(--rz-icon-check-circle);
-        --rz-alert-border: unset;
-        --rz-alert-padding: unset;
-        --rz-alert-bg: unset;
-        --rz-alert-color: unset;
-        --rz-alert-font-weight: bold;
-    }
-
-    .rz-alert--fail {
-        --rz-alert-icon: var(--rz-icon-x-circle);
-        --rz-alert-border: unset;
-        --rz-alert-padding: unset;
-        --rz-alert-bg: unset;
-        --rz-alert-color: unset;
-        --rz-alert-font-weight: bold;
-    }
-
-    .rz-alert--note {
-        --rz-alert-icon: var(--rz-icon-info-circle);
-        --rz-alert-border: unset;
-        --rz-alert-padding: unset;
-        --rz-alert-bg: unset;
-        --rz-alert-color: unset;
-    }
-
-    .rz-alert--warning {
-        --rz-alert-icon: var(--rz-icon-exclamation-triangle);
-        --rz-alert-border: unset;
-        --rz-alert-padding: unset;
-        --rz-alert-bg: unset;
-        --rz-alert-color: unset;
-    }
-}
-</style>
+    C --&gt; H
+    H --&gt; E
+    I --&gt; E
+    B --&gt; I
+</pre>
 </div>
-</div>
-<p>Built-in Python types other than <a href="../../docs/rendering/numbers.html">numbers</a> and <a href="../../docs/rendering/collections.html">collections</a> are rendered like so:</p>
-<section id="strings" class="level2">
-<h2 class="anchored" data-anchor-id="strings">Strings</h2>
-<p>The font style for strings can be changed using <code>@str_font</code>:</p>
-<div id="d22f0cc1" class="cell" data-execution_count="2">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>config.str_font</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-display" data-execution_count="2">
-<pre><code>''</code></pre>
-</div>
-</div>
-<p>It can be changed to any of these values:</p>
-<table class="caption-top table">
-<thead>
-<tr class="header">
-<th>Font style</th>
-<th>Value</th>
-<th>Rendered Output</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>None</td>
-<td><code>""</code></td>
-<td><span class="math inline">\(\displaystyle \text{“Hello world!”}\)</span></td>
-</tr>
-<tr class="even">
-<td>Boldface</td>
-<td><code>"bf"</code></td>
-<td><span class="math inline">\(\displaystyle \textbf{“Hello world!”}\)</span></td>
-</tr>
-<tr class="odd">
-<td>Italics</td>
-<td><code>"it"</code></td>
-<td><span class="math inline">\(\displaystyle \textit{“Hello world!”}\)</span></td>
-</tr>
-<tr class="even">
-<td>Roman</td>
-<td><code>"rm"</code></td>
-<td><span class="math inline">\(\displaystyle \textrm{“Hello world!”}\)</span></td>
-</tr>
-<tr class="odd">
-<td>Sans serif</td>
-<td><code>"sf"</code></td>
-<td><span class="math inline">\(\displaystyle \textsf{“Hello world!”}\)</span></td>
-</tr>
-<tr class="even">
-<td>Typewriter</td>
-<td><code>"tt"</code></td>
-<td><span class="math inline">\(\displaystyle \texttt{“Hello world!”}\)</span></td>
-</tr>
-</tbody>
-</table>
-<p>Additionally, string quotes can also be changed using <code>@str_quotes</code>:</p>
-<div id="a51d3791" class="cell" data-execution_count="3">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>config.str_quotes</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-display" data-execution_count="3">
-<pre><code>'"'</code></pre>
-</div>
-</div>
-<p>It can be changed to any of these values:</p>
-<table class="caption-top table">
-<thead>
-<tr class="header">
-<th>Quotation Marks</th>
-<th>Value</th>
-<th>Rendered Output</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>None</td>
-<td><code>""</code></td>
-<td><span class="math inline">\(\displaystyle \text{Hello world!}\)</span></td>
-</tr>
-<tr class="even">
-<td>Single</td>
-<td><code>"'"</code></td>
-<td><span class="math inline">\(\displaystyle \text{‘Hello world!’}\)</span></td>
-</tr>
-<tr class="odd">
-<td>Double</td>
-<td><code>'"'</code></td>
-<td><span class="math inline">\(\displaystyle \text{“Hello world!”}\)</span></td>
-</tr>
-</tbody>
-</table>
-</section>
-<section id="boolean" class="level2">
-<h2 class="anchored" data-anchor-id="boolean">Boolean</h2>
-<div id="262eb5e3" class="cell" data-execution_count="4">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="op">%%</span>tap <span class="op">--</span>grid</span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="va">True</span></span>
-<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="va">False</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-display">
-<div class="rz-grid-container">
-    <div class="rz-line">\( \displaystyle \text{True} \)</div>
-    <div class="rz-line">\( \displaystyle \text{False} \)</div>
+<p></p></figure><p></p>
 </div>
 </div>
 </div>
-</section>
-<section id="none-type" class="level2">
-<h2 class="anchored" data-anchor-id="none-type">None Type</h2>
-<div id="e90a3744" class="cell" data-execution_count="5">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="op">%%</span>tap</span>
-<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="va">None</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-display">
-<div class="rz-line">\( \displaystyle \emptyset \)</div>
-</div>
-</div>
-</section>
-<section id="range" class="level1">
-<h1>Range</h1>
-<div id="62b404ab" class="cell" data-execution_count="6">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="op">%%</span>tap <span class="op">--</span>dead</span>
-<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="bu">range</span>(<span class="dv">25</span>)</span>
-<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="bu">range</span>(x, y, <span class="dv">2</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-display">
-<div class="rz-line">\( \displaystyle \left( 0,\, 1,\, \cdots,\, 24 \right) \)</div>
-<div class="rz-line">\( \displaystyle \left( x,\, x + 2,\, \cdots,\, \le y - 1 \right) \)</div>
-</div>
-</div>
-</section>
-<section id="ellipsis-type" class="level1">
-<h1>Ellipsis Type</h1>
-<div id="aaa2aa55" class="cell" data-execution_count="7">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="op">%%</span>tap</span>
-<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>(...)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-display">
-<div class="rz-line">\( \displaystyle \dots \)</div>
-</div>
-</div>
+<p>Rubberize does not change how Python executes. The original code still runs normally, and variables remain available for later cells. Rendering simply provides a mathematical view of the code.</p>
+<p>The sections in this chapter describe how different parts of Python code are translated into mathematical notation.</p>
 
 
 
-</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
