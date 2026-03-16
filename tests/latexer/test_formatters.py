@@ -400,7 +400,7 @@ def test_2d_array(array):
 def test_nested_row_elements_do_not_get_wrapped():
     # ensures recursive is_elt=True behavior
     row = ["a", "b"]
-    _, row_sep, _ = rules.ARRAY_ROW_SYNTAX
+    _, row_sep, _ = rules.ARRAY_ROW_SYNTAX[config.array_delimiter]
 
     result = formatters.format_array(row, is_elt=True)
 
