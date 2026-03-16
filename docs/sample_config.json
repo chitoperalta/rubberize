@@ -1,0 +1,5 @@
+{
+    "multiline": true,
+    "use_symbols": false,
+    "greek_starts": ["pi", "nu"]
+}

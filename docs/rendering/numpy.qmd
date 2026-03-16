@@ -1,0 +1,248 @@
+---
+title: Arrays
+toc: true
+---
+
+```{python}
+%reload_ext rubberize
+from rubberize.config import config
+```
+
+The rendering of `numpy.ndarray` type is supported by Rubberize.
+
+## Creating Arrays
+
+Arrays created using `array()` are rendered as the resulting array:
+
+::: {.callout-tip}
+Append `_mat` or `_vec` to the variable name to render them in bold font, as in textbooks.
+:::
+
+```{python}
+%%tap --grid
+import numpy as np
+
+a_mat = np.array([1, 2, 3])
+b_mat = np.array([[1, 2], [3, 4]])
+c_mat = np.array([[[1, 2], [3, 4]], [[5, 6], [7, 8]]])
+```
+
+### Array Delimiters
+
+`@array_delimiter` controls the appearance of delimiters used in an array. Use `"pmatrix"` for parentheses and `"bmatrix"` for square brackets.
+
+```{python}
+config.array_delimiter
+```
+
+```{python}
+%%tap --grid @array_delimiter="pmatrix"
+a_mat; b_mat; c_mat
+```
+
+### Array Creation Routines
+
+The following array creation routines are also supported:
+
+```{python}
+%%tap
+A_mat = np.eye(2,3,1)
+B_mat = np.identity(2)
+```
+
+```{python}
+%%tap
+C_mat = np.ones((3,2)) 
+C_mat_star = np.ones(3)
+D_mat = np.ones_like(B_mat)
+```
+
+```{python}
+%%tap
+E_mat = np.zeros((3,2))
+E_mat_star = np.zeros(2)
+F_mat = np.zeros_like(A_mat)
+```
+
+```{python}
+%%tap
+G_mat = np.full((2,1), 69.0)
+H_mat = np.full_like(E_mat, 420.0)
+```
+
+## 1D Arrays
+
+`@show_1d_as_col` specifies whether to render 1-dimension arrays vertically or horizontally:
+
+```{python}
+config.show_1d_as_col
+```
+
+```{python}
+%%tap --grid
+a_mat  # @show_1d_as_col=False
+a_mat  # @show_1d_as_col=True
+```
+
+## Accessing Elements
+
+Element access is rendered like other collection types:
+
+```{python}
+%%tap
+b_mat
+b_mat[0][1]
+b_mat[0, 1]  # Tuple access
+b_mat[:, 0]  # Slice access
+```
+
+## Array Operations
+
+Common array operations are supported:
+
+### Arithmetic Operations
+
+```{python}
+%%tap
+d_mat = np.array([[5, 6], [7, 8]])
+
+b_mat + d_mat
+b_mat * d_mat
+b_mat / d_mat
+```
+
+### Scalar Operations
+
+```{python}
+%%tap
+1 + d_mat
+2 * d_mat
+3 / d_mat
+```
+
+### Array Transpose
+
+```{python}
+%%tap
+b_mat.transpose()
+np.transpose(b_mat)
+np.linalg.matrix_transpose(b_mat)
+b_mat.T  # Substituted form not displayed
+```
+
+### Matrix Multiplication
+
+Matrix multiplication always uses a center dot ($\cdot$) as the multiplication symbol.
+
+```{python}
+%%tap
+e_mat = np.array([[9, 10], [11, 12]])
+
+d_mat @ e_mat
+d_mat.dot(e_mat)
+np.dot(d_mat, e_mat)
+np.matmul(d_mat, e_mat)
+np.linalg.matmul(d_mat, e_mat)
+```
+
+### Cross Product
+
+Associativity rules are accounted for when rendering cross products:
+
+```{python}
+%%tap
+Q_mat = np.array([[1, 2, 3], [4, 5, 6]])
+W_mat = np.array([[7, 8, 9], [10, 11, 12]])
+E_mat = np.array([[7, 8, 9], [10, 11, 12]])
+
+np.cross(Q_mat, W_mat)
+np.cross(np.cross(Q_mat, W_mat), E_mat)
+np.cross(Q_mat, np.cross(W_mat, E_mat))
+```
+
+### Inner Product
+
+```{python}
+%%tap
+np.inner(Q_mat, W_mat)
+```
+
+### Outer Product
+
+```{python}
+%%tap
+u_vec = np.array([1, 2, 3])
+v_vec = np.array([4, 5])
+
+np.outer(u_vec, v_vec)
+np.linalg.outer(u_vec, v_vec)
+```
+
+### Norm
+
+```{python}
+%%tap
+np.linalg.vector_norm(a_mat)
+np.linalg.matrix_norm(b_mat)
+np.linalg.matrix_norm(b_mat, ord="nuc")
+```
+
+### Power
+
+```{python}
+%%tap
+np.linalg.matrix_power(b_mat, 3)
+```
+
+
+### Determinant
+
+```{python}
+%%tap
+np.linalg.det(b_mat)
+```
+
+### Rank
+
+```{python}
+%%tap
+np.linalg.matrix_rank(b_mat)
+```
+
+### Trace
+
+```{python}
+%%tap
+np.trace(b_mat)
+np.linalg.trace(b_mat)
+```
+
+### Inverse and Pseudo-inverse
+
+```{python}
+%%tap
+np.linalg.inv(b_mat)
+np.linalg.pinv(b_mat)
+```
+
+### Solving Systems of Equations
+
+```{python}
+%%tap @show_1d_as_col=True
+# **Define stiffness matrix**
+k_1, k_2, k_3 = 10, 15, 20  # Example stiffness values
+K_mat = np.array([[k_1 + k_2, -k_2],
+                  [-k_2, k_2 + k_3]])
+
+# **Force vector**
+F_mat = np.array([100, 150])  # Example forces
+
+u_mat = np.linalg.inv(K_mat) @ F_mat  # Solve for displacements
+```
+
+Or using `numpy.linalg.solve()`:
+
+```{python}
+%%tap @show_1d_as_col=True
+u_mat_alt = np.linalg.solve(K_mat, F_mat)
+```

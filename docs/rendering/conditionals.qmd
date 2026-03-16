@@ -1,0 +1,141 @@
+---
+title: Conditionals
+toc: true
+---
+
+```{python}
+%reload_ext rubberize
+from rubberize.config import config
+```
+
+By default, Rubberize renders only the lines within the `True` path of the conditional ladder, with the condition itself being displayed as an introductory expression.
+
+The lines within the `True` path are indented to visually indicate that they belong to this block. The other branches are not rendered.
+
+```{python}
+%%tap
+x = 5
+if x > 0:
+    y = x**2
+```
+
+If no conditions are `True`, nothing in the conditional block will be rendered.
+
+```{python}
+%%tap
+x = -5
+if x > 0:
+    y = x**2
+```
+
+However, if an `else` statement is provided, lines in `else` will be rendered without any indentation and introductory expression.
+
+```{python}
+%%tap
+x = -5
+if x > 0:
+    y = x**2
+else:
+    y = -x**2
+y + 10
+```
+
+::: {.callout-warning}
+**Gotcha**: Rubberize generates the rendering based on the actual execution of the Python code.
+
+If a test within the conditional ladder alters the value being tested, Rubberize will use the altered value in generating the rendered output. **This means that if the value is modified within the conditional block, the render may not appear as expected.**
+
+This code will not render properly:
+
+```{python}
+%%tap
+x = 5
+if x > 0:
+    x = -1
+```
+
+because for Rubberize, the value of `x` is `-1`, not `5`.
+
+To avoid confusion and ensure accurate rendering, **do not modify the value being tested within the conditional ladder.** Keep the value consistent across the conditions to avoid unexpected behavior in the rendered output.
+:::
+
+## Skipping Code with `pass`
+
+When Rubberize encounters a conditional ladder where the `True` path contains only a `pass` statement, nothing will be rendered.
+
+```{python}
+%%tap
+x = 5
+if x > 0:
+    pass
+x + 3
+```
+
+A common usage pattern is when certain calculation lines are needed only when specific conditions are met, and the presentation should remain silent otherwise.
+
+In this pattern, the `if` branch contains the **negation of the condition** and uses `pass` to suppress output. The `else` branch then contains the calculation that should be rendered when the condition is actually true.
+
+For example:
+
+```{python}
+%%tap
+temp_c = -3
+
+if not (temp_c < 0):
+    pass
+else:
+    temp_c * 1.8 + 32
+```
+
+Here the conversion to Fahrenheit is rendered only when the temperature is **below zero**. If the temperature is zero or positive, the `pass` branch runs and Rubberize produces no output for the conditional.
+
+This pattern allows the code to control when a calculation appears while keeping the conditional logic hidden in the rendered presentation.
+
+## As Piecewise Assignment
+
+If all of the branches in the conditional ladder only contain a single assignment statement to the same variable, it will be rendered as a piecewise assignment to the target variable when `@show_substitution=False` (or `@nosub`, `@def`).
+
+THe inline comment on the first assignment will be used as annotation.
+
+::: {.callout-note}
+Options and shortcuts applied to the `if` keyword line applies to the whole `if-elif-else` ladder.
+:::
+
+```{python}
+%%tap
+x = 3
+if x > 0:  # @show_substitution=False
+    y = x + 1  # Value of y
+else:
+    y = x - 1
+```
+
+## Showing All Conditions
+
+To show all the conditions in a conditional ladder, turn off both the substitution and result display modes by setting `@show_substitution=False @show_result=False`, or using `@def`.
+
+```{python}
+%%tap
+x = 3
+if x > 0:  # @def
+    y = x + 1
+    z = x - 1
+else:
+    y = x - 1
+    z = x + 1
+```
+
+If `@show_substitution=False @show_result=True` and the conditional block cannot be rendered as a piecewise assignment, An error will be raised, prompting you to set `@show_result=False`.
+
+## Rendering Summary
+
+| Shortcut | Definition | Substitution | Result  | Branch shown                                                       |
+| -------- | ---------- | ------------ | ------- | ------------------------------------------------------------------ |
+| `@all`   | `True`     | `True`       | `True`  | `True` path only.                                                  |
+| `@nodef` | `False`    | `True`       | `True`  | `True` path only.                                                  |
+| `@nosub` | `True`     | `False`      | `True`  | As piecewise if possible, otherwise `RubberizeNotImplementedError` |
+| `@nores` | `True`     | `True`       | `False` | `True` path only.                                                  |
+| `@def`   | `True`     | `False`      | `False` | As piecewise if possible, otherwise all branches.                  |
+| `@sub`   | `False`    | `True`       | `False` | `True` path only.                                                  |
+| `@res`   | `False`    | `False`      | `True`  | Single result if possible, otherise `RubberizeNotImplementedError` |
+| `@none`  | `False`    | `False`      | `False` | Single target if possible, otherwise all branches.                 |

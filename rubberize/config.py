@@ -1,23 +1,31 @@
-"""Config system.
+"""Config singleton."""
 
-The configuration is a singleton instance of `_Config`.
-"""
+from __future__ import annotations
 
 import ast
 import json
 from contextlib import contextmanager
-from dataclasses import dataclass, field, asdict
 from pathlib import Path
-from typing import Any, Iterable, Literal, Optional
+from typing import TYPE_CHECKING
 
-from rubberize import exceptions
+from dataclasses import dataclass, field, asdict
+
+from rubberize._exceptions import (
+    RubberizeAttributeError,
+    RubberizeKeyError,
+    RubberizeFileNotFoundError,
+    RubberizeTypeError,
+)
+
+if TYPE_CHECKING:
+    from typing import Literal, Iterable
 
 
 @dataclass
-class _ConfigDefaults:  # pylint: disable=too-many-instance-attributes
-    """Default config."""
+# pylint: disable=too-many-instance-attributes
+class _DefaultConfig:
 
-    # Name options
+    # symbols
     use_subscripts: bool = True
     use_symbols: bool = True
     greek_starts: set[str] = field(
@@ -27,160 +35,145 @@ class _ConfigDefaults:  # pylint: disable=too-many-instance-attributes
         default_factory=lambda: {"math", "sp", "np", "ureg"}
     )
 
-    # Strings
+    # strings
     str_font: Literal["", "bf", "it", "rm", "sf", "tt"] = ""
+    str_quotes: Literal["", "'", '"'] = '"'
 
-    # Numbers
-    num_format: Literal["FIX", "SCI", "GEN", "ENG"] = "FIX"
-    num_format_prec: int = 2
-    num_format_max_digits: int = 15
-    num_format_e_not: bool = False
+    # numerical values
+    float_format: Literal["FIX", "SCI", "GEN", "ENG"] = "FIX"
+    float_prec: int = 2
+    float_max_digits: int = 15
+    use_e_not: bool = False
     thousands_separator: Literal["", " ", ",", ".", "'"] = " "
     decimal_marker: Literal[".", ","] = "."
     zero_float_threshold: float = 1e-12
-
     use_polar: bool = False
     use_polar_deg: bool = True
 
-    # Collections
-    show_list_as_col: bool = True
-    show_tuple_as_col: bool = False
-    show_set_as_col: bool = False
-    show_dict_as_col: bool = True
+    # collections
+    max_inline_elts: int = 5
+    show_list_as_array: bool = False
+    show_tuple_as_array: bool = False
+    show_1d_as_col: bool = False
+    array_delimiter: Literal["pmatrix", "bmatrix"] = "bmatrix"
 
-    # Pint
-    use_inline_units: bool = True
-    use_dms_units: bool = False
-    use_fif_units: bool = False
-    fif_prec: int = 16
+    # expressions
+    wrap_indices: bool = True
+    convert_special_calls: bool = True
+    use_contextual_mult: bool = True
+    max_inline_bool: int = 3
 
-    # Display modes
+    # display modes
     show_definition: bool = True
     show_substitution: bool = True
     show_result: bool = True
-
     multiline: bool = False
     math_constants: set[str] = field(
         default_factory=lambda: {"e", "pi", "phi", "varphi"}
     )
 
-    # Expressions
-    wrap_indices: bool = True
-    convert_special_funcs: bool = True
-    use_contextual_mult: bool = True
+    # settings for Pint
+    use_inline_units: bool = True
+    use_dms_units: bool = False
+    use_fif_units: bool = False
+    fif_prec: int = 16
 
 
-class _Config(_ConfigDefaults):
-    """Singleton global configuration."""
+class _Config(_DefaultConfig):
 
     def __init__(self):
         super().__init__()
         self.load()
 
     def set(self, **kwargs: bool | int | Iterable[str]) -> None:
-        """Update multiple config values passed as keyword arguments."""
+        """Update multiple config values passed as kwargs."""
 
-        for key, value in kwargs.items():
-            if not hasattr(self, key):
-                raise AttributeError(f"Invalid config key: {key}")
+        for k, v in kwargs.items():
+            if not hasattr(self, k):
+                raise RubberizeAttributeError(f"Invalid config key: {k}")
 
-            if key in ("greek_starts", "hidden_modules", "math_constants"):
-                if not isinstance(value, (set, list, tuple)):
-                    raise exceptions.RubberizeTypeError(
-                        f"Invalid {key} type: {type(value)}"
-                    )
-                value = set(value)
+            if k in ("greek_starts", "hidden_modules", "math_constants"):
+                if not isinstance(v, (set, list, tuple)):
+                    raise RubberizeTypeError(f"Invalid {k} type: {type(v)}")
+                v = set(v)
 
-            setattr(self, key, value)
+            setattr(self, k, v)
 
-    def load(self, *args: str, path: Optional[str | Path] = None) -> None:
-        """Load config from defaults or a specified JSON file.
-
-        If a file exists for a given `path`, its contents are loaded and
-        used to update the config. Otherwise, default values are used.
+    def load(self, *args: str, path: str | Path | None = None) -> None:
+        """Load config from defaults or a JSON file.
 
         Args:
             *args: If provided, only the specified keys are updated.
-            path: Path to the JSON file. If `None`, the default values
-                are used.
+            path: Path to the JSON file. If None, the default values are used.
         """
 
-        data = asdict(_ConfigDefaults())
+        cfg = asdict(_DefaultConfig())
 
         if path is not None:
             path = Path(path)
-            if path.exists():
-                with path.open("r", encoding="utf-8") as f:
-                    data.update(json.load(f))
+            if not path.is_file():
+                raise RubberizeFileNotFoundError(f"File not found: {str(path)}")
+
+            cfg.update(json.loads(path.read_text("utf-8")))
 
         if args:
-            data = {k: data[k] for k in args if k in data}
-        self.set(**data)
+            cfg = {k: cfg[k] for k in args if k in cfg}
+
+        self.set(**cfg)
 
     def reset(self, *args: str) -> None:
         """Reset the config or only the specified keys to defaults."""
 
         self.load(*args, path=None)
 
-    def save(self, path: str | Path) -> None:
-        """Save the current config to a JSON file."""
+    def add_greek_start(self, *greeks: str) -> None:
+        """Add one or more greek letters to greek_starts."""
 
-        config_dict = asdict(self)
-        config_dict["greek_starts"] = list(config_dict["greek_starts"])
-        config_dict["hidden_modules"] = list(config_dict["hidden_modules"])
-        config_dict["math_constants"] = list(config_dict["math_constants"])
+        self.greek_starts.update(greeks)
 
-        path = Path(path)
-        path.parent.mkdir(parents=True, exist_ok=True)
+    def remove_greek_start(self, *greeks: str) -> None:
+        """Remove one or more greek letters from greek_starts."""
 
-        with path.open("w", encoding="utf-8") as f:
-            json.dump(config_dict, f, indent=4)
-
-    def add_greek_start(self, *modules: str) -> None:
-        """Add one or more modules to `greek_starts`."""
-
-        self.greek_starts.update(modules)
-
-    def remove_greek_start(self, *modules: str) -> None:
-        """Remove one or more modules from `greek_starts`."""
-
-        self.greek_starts.difference_update(modules)
+        self.greek_starts.difference_update(greeks)
 
     def add_hidden_module(self, *modules: str) -> None:
-        """Add one or more modules to `hidden_modules`."""
+        """Add one or more modules to hidden_modules."""
 
         self.hidden_modules.update(modules)
 
     def remove_hidden_module(self, *modules: str) -> None:
-        """Remove one or more modules from `hidden_modules`."""
+        """Remove one or more modules from hidden_modules."""
 
         self.hidden_modules.difference_update(modules)
 
-    def add_math_constant(self, *constant: str) -> None:
-        """Add one or more constant to `math_constants`."""
+    def add_math_constant(self, *constants: str) -> None:
+        """Add one or more constants to math_constants."""
 
-        self.math_constants.update(constant)
+        self.math_constants.update(constants)
 
-    def remove_math_constant(self, *constant: str) -> None:
-        """Remove one or more constant from `math_constants`."""
+    def remove_math_constant(self, *constants: str) -> None:
+        """Remove one or more constants from math_constants."""
 
-        self.math_constants.difference_update(constant)
+        self.math_constants.difference_update(constants)
 
     @contextmanager
     def override(self, **kwargs: bool | int | Iterable[str]):
         """Temporarily override config values within a context."""
 
-        original_values = {key: getattr(self, key) for key in kwargs}
+        original = {k: getattr(self, k) for k in kwargs}
 
         try:
             self.set(**kwargs)
             yield
         finally:
-            self.set(**original_values)
+            self.set(**original)
+
+
+config = _Config()
 
 
 # fmt: off
-_KEYWORDS: dict[str, dict[str, Any]] = {
+_SHORTCUTS: dict[str, dict[str, bool | int | Iterable[str]]] = {
     "none": {"show_definition": False, "show_substitution": False, "show_result": False},
     "all": {"show_definition": True, "show_substitution": True, "show_result": True},
     "def": {"show_definition": True, "show_substitution": False, "show_result": False},
@@ -191,46 +184,42 @@ _KEYWORDS: dict[str, dict[str, Any]] = {
     "nores": {"show_definition": True, "show_substitution": True, "show_result": False},
     "line": {"multiline": False},
     "stack": {"multiline": True},
-    "fix": {"num_format": "FIX"},
-    "sci": {"num_format": "SCI"},
-    "gen": {"num_format": "GEN"},
-    "eng": {"num_format": "ENG"},
-    "0": {"num_format_prec": 0},
-    "1": {"num_format_prec": 1},
-    "2": {"num_format_prec": 2},
-    "3": {"num_format_prec": 3},
-    "4": {"num_format_prec": 4},
-    "5": {"num_format_prec": 5},
-    "6": {"num_format_prec": 6},
+    "fix": {"float_format": "FIX"},
+    "sci": {"float_format": "SCI"},
+    "gen": {"float_format": "GEN"},
+    "eng": {"float_format": "ENG"},
+    "0": {"float_prec": 0},
+    "1": {"float_prec": 1},
+    "2": {"float_prec": 2},
+    "3": {"float_prec": 3},
+    "4": {"float_prec": 4},
+    "5": {"float_prec": 5},
+    "6": {"float_prec": 6},
 }
 # fmt: on
 
 
-def parse_modifiers(modifiers: list[str]) -> dict[str, Any]:
-    """Parse a list of modifiers to an overrides dict for use with
-    `config.override()`.
-    """
+def parse_modifiers(
+    modifiers: list[str],
+) -> dict[str, bool | int | Iterable[str]]:
+    """Parse a list of modifiers to a config dict."""
 
-    override_dict = {}
-    for modifier in modifiers:
-        modifier = modifier.removeprefix("@")
+    cfg = {}
+    for m in modifiers:
+        m = m.removeprefix("@")
 
-        if modifier == "hide":
-            return {"hide": ...}
-        if modifier == "endhide":
-            return {"endhide": ...}
+        if m == "hide":
+            return {"hide": True}
 
-        if "=" in modifier:
-            key, value = modifier.split("=", 1)
-            override_dict[key] = ast.literal_eval(value)
-        elif modifier in _KEYWORDS:
-            override_dict.update(_KEYWORDS[modifier])
+        if m == "endhide":
+            return {"endhide": True}
+
+        if "=" in m:
+            k, v = m.split("=", 1)
+            cfg[k] = ast.literal_eval(v)
+        elif m in _SHORTCUTS:
+            cfg.update(_SHORTCUTS[m])
         else:
-            raise exceptions.RubberizeKeywordError(
-                f"Unknown keyword: '{modifier}'"
-            )
-    return override_dict
+            raise RubberizeKeyError(f"Unknown keyword: {m}")
 
-
-# Singleton instance
-config = _Config()
+    return cfg

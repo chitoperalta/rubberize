@@ -1,131 +1,141 @@
-"""The main function that typesets LaTeX representation of statements
-and their descriptions to HTML with Mathjax support.
-"""
+"""Renders LaTeX to HTML with Mathjax."""
+
+from __future__ import annotations
 
 import re
-from typing import Any, Optional, TYPE_CHECKING
+import textwrap
+from typing import TYPE_CHECKING
 
 from markdown import markdown
 
-from rubberize.render.md_extensions.alert import Alert
-from rubberize.render.md_extensions.irbz import Irbz
-from rubberize.render.md_extensions.latex_linebreak import LatexLinebreak
-from rubberize.render.md_extensions.small import Small
-from rubberize.utils import find_and_sub, wrap_delims
-from rubberize.utils import html_tag
+from rubberize.render.md_extensions import (
+    Alert,
+    InlineRubberize,
+    LatexLinebreak,
+    Small,
+)
 
 if TYPE_CHECKING:
     from rubberize.latexer.stmt_latex import StmtLatex
 
 
 def render(
-    latex_list: list["StmtLatex"],
-    namespace: Optional[dict[str, Any]],
+    latexes: list[StmtLatex],
+    ns: dict[str, object] | None = None,
     *,
     grid: bool = False,
 ) -> str:
-    """Render the Python code to HTML with Mathjax support.
-
-    This function takes a list of `StmtLatex` instances, wraps LaTeX in
-    `\\( \\)` for Mathjax conversion, converts Markdown syntax to HTML,
-    and applies `<div>` tags as necessary to format.
+    """Render a list of StmtLatex to HTML with Mathjax.
 
     Args:
-        latex_list: A list of `StmtLatex`, which usually comes from
-            `latexer()`.
-        namespace: A dictionary of identifier and object pairs.
-
-    Returns:
-        The HTML string for list of `StmtLatex`.
+        latexes: The list of StmtLatex to render.
+        namespace: A dictionary of identifier and object pairs, used for
+            code in inline comments.
+        grid: If True, arrange rendered statements on a grid.
     """
 
-    html = []
-    for latex in latex_list:
-        html.append(_stmt_html(latex, namespace, grid=grid))
+    htmls = []
+    for l in latexes:
+        htmls.append(_stmt_html(l, ns, grid=grid))
 
     if grid:
-        return html_tag("div", html, _class="rz-grid-container")
-    return "\n".join(html)
+        return _html_tag("div", "\n".join(htmls), class_="rz-grid-container")
+
+    return "\n".join(htmls)
 
 
 def _stmt_html(
-    latex: "StmtLatex",
-    namespace: Optional[dict[str, Any]] = None,
-    *,
-    grid: bool = False,
+    stmt: StmtLatex, ns: dict[str, object] | None = None, *, grid: bool = False
 ) -> str:
-    """Transform a single `StmtLatex` instance into HTML."""
 
-    main = _mathjax(latex.latex) if latex.latex else None
-    desc, classes, classes_noprint = _md_and_classes(latex.desc, namespace)
+    if stmt.latex is not None:
+        latex = _mathjax_tag(stmt.latex)
+    else:
+        latex = None
+
+    if stmt.desc is not None:
+        desc, flags, npflags = _desc_html_and_flags(stmt.desc, ns)
+    else:
+        desc, flags, npflags = None, set(), set()
 
     if grid:
         desc = None
 
-    line_classes = " ".join(
+    classes = " ".join(
         ["rz-line"]
-        + [f"rz-line--{c}" for c in classes]
-        + [f"rz-line--{c_noprint}-noprint" for c_noprint in classes_noprint]
+        + [f"rz-line--{f}" for f in flags]
+        + [f"rz-line--{f}-noprint" for f in npflags]
     )
 
     html = ""
-    if main and desc:
+    if latex and desc:
         desc = desc.removeprefix("<p>").removesuffix("</p>")
-        main_html = html_tag("div", main, _class="rz-line__main")
-        desc_html = html_tag("div", desc, _class="rz-line__desc")
-        html += html_tag("div", [main_html, desc_html], _class=line_classes)
-    elif main and not desc:
-        html += html_tag("div", main, _class=line_classes)
-    elif not main and desc:
-        html += desc
+        latex_html = _html_tag("div", latex, class_="rz-line__main")
+        desc_html = _html_tag("div", desc, class_="rz-line__desc")
+        content = "\n".join([latex_html, desc_html])
+        html += _html_tag("div", content, class_=classes)
+    elif latex and not desc:
+        html += _html_tag("div", latex, class_=classes)
+    elif not latex and desc:
+        desc = desc.removeprefix("<p>").removesuffix("</p>")
+        html += _html_tag("div", desc, class_=classes)
 
     body_lines: list[str] = []
-    for nested_latex in latex.body:
-        body_lines.append(_stmt_html(nested_latex))
+    for b in stmt.body:
+        body_lines.append(_stmt_html(b))
 
     if body_lines and html:
-        html += "\n" + html_tag("div", body_lines, _class="rz-body")
+        html += "\n" + _html_tag("div", "\n".join(body_lines), class_="rz-body")
     else:
         html += "\n".join(body_lines)
 
     return html
 
 
-def _mathjax(latex: str, *, force_block: bool = False, indent: int = 4) -> str:
-    """Wrap latex for MathJax display."""
-
+def _mathjax_tag(latex: str, *, indent: int = 4) -> str:
     # "<" needs HTML escaping when it's next to a letter
     latex = re.sub(r"<(?=[a-zA-Z])", "&lt;", latex)
 
-    return wrap_delims(
-        latex,
-        (r"\( \displaystyle", r"\)"),
-        force_block=force_block,
-        spaced_line=True,
-        indent=indent,
-    )
+    mathjax = r"\( \displaystyle "
+
+    if "\n" in latex:
+        latex = "\n" + textwrap.indent(latex, " " * indent) + "\n"
+
+    mathjax += latex + r" \)"
+
+    return mathjax
 
 
-def _md_and_classes(
-    desc: Optional[str], namespace: Optional[dict[str, Any]]
+def _html_tag(
+    tag: str, content: str, *, indent: int = 4, **kwargs: str | None
+) -> str:
+
+    html = f"<{tag}"
+    for k, v in kwargs.items():
+        html += f' {k.rstrip("_")}="{v}"' if v is not None else ""
+    html += ">"
+
+    if "\n" in content:
+        content = "\n" + textwrap.indent(content, " " * indent) + "\n"
+
+    html += content + f"</{tag}>"
+
+    return html
+
+
+def _desc_html_and_flags(
+    desc: str, ns: dict[str, object] | None
 ) -> tuple[str | None, set[str], set[str]]:
-    """Process a description string."""
+    flag_re = r"(?:(?<=\s)|^)\!(\w[\w_]*)"
+    npflag_re = r"(?:(?<=\s)|^)\?(\w[\w_]*)"
 
-    if desc is None:
-        return None, set(), set()
+    flags = {m.group(1) for m in re.finditer(flag_re, desc)}
+    desc = re.sub(flag_re, "", desc)
 
-    classes, desc = find_and_sub(r"(?:(?<=\s)|^)\!(\w[\w_]*)", "", desc)
-    classes_noprint, desc = find_and_sub(r"(?:(?<=\s)|^)\?(\w[\w_]*)", "", desc)
+    npflags = {m.group(1) for m in re.finditer(npflag_re, desc)}
+    desc = re.sub(npflag_re, "", desc)
 
-    desc = markdown(
-        desc,
-        extensions=[
-            "tables",
-            Alert(),
-            Irbz(namespace),
-            LatexLinebreak(),
-            Small(),
-        ],
-    )
+    ext = ["tables", Alert(), InlineRubberize(ns), LatexLinebreak(), Small()]
+    desc = markdown(desc, extensions=ext)
 
-    return desc, set(classes) - set(classes_noprint), set(classes_noprint)
+    return desc, flags - npflags, npflags

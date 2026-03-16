@@ -40,26 +40,25 @@ dependencies = [
 ]
 
 [project.optional-dependencies]
-notebook = [
-    "ipython>=9.0.2,<10.0.0",
+jupyter = [
+    "jupyterlab>=4.3.6,<5.0.0",
     "playwright>=1.51.0,<2.0.0",
-    "nbconvert>=7.16.6,<8.0.0",
 ]
 dev = [
-    "ipython>=9.0.2,<10.0.0",
-    "playwright>=1.51.0,<2.0.0",
-    "nbconvert>=7.16.6,<8.0.0",
     "jupyterlab>=4.3.6,<5.0.0",
+    "playwright>=1.51.0,<2.0.0",
     "pint>=0.24.4,<0.25.0",
-    "sympy>=1.13.3,<2.0.0",
     "numpy>=2.2.4,<3.0.0",
     "pytest>=8.3.5,<9.0.0"
 ]
 
 [project.urls]
-Homepage = "https://github.com/chitoperalta/rubberize"
+Homepage = "https://chitoperalta.github.io/rubberize/"
 Repository = "https://github.com/chitoperalta/rubberize"
-Documentation = "https://github.com/chitoperalta/rubberize/blob/main/docs/index.md"
+Documentation = "https://chitoperalta.github.io/rubberize/"
+
+[project.scripts]
+rubberize = "rubberize.cli:main"
 
 [tool.setuptools]
 include-package-data = true

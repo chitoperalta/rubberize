@@ -1,274 +1,352 @@
 """Converters for builtin objects and objects from the Standard Library."""
 
+import cmath
+import math
 from decimal import Decimal
 from fractions import Fraction
-from math import floor, log10, isnan, isinf, copysign, degrees, isclose
-from cmath import polar
-from typing import Optional
 
-from rubberize import exceptions
+from rubberize._exceptions import RubberizeSyntaxError
 from rubberize.config import config
+from rubberize.latexer import formatters, ranks, rules
 from rubberize.latexer.expr_latex import ExprLatex
-from rubberize.latexer.expr_rules import (
-    COLLECTIONS_ROW,
-    COLLECTIONS_COL,
-    THOUSANDS_SEPARATOR,
-    DECIMAL_MARKER,
-)
-from rubberize.latexer.formatters import format_elts, format_delims
 from rubberize.latexer.objects.convert_object import (
     convert_object,
     register_object_converter,
 )
-from rubberize.latexer.ranks import (
-    VALUE_RANK,
-    COLLECTIONS_RANK,
-    SIGNED_RANK,
-    BELOW_ADD_RANK,
-    BELOW_MULT_RANK,
-    BELOW_POW_RANK,
-    DIV_RANK,
-)
 
 
 def convert_str(obj: str) -> ExprLatex:
-    """Converter for `str` type object."""
+    """Converter for str."""
 
-    replacements = {
-        "\\": r"\\",
-        "{": r"\{",
-        "}": r"\}",
-        "$": r"\$",
-        # Prefer fullwidth variants for proper rendering on HTML convert
-        "_": "＿",
-        "^": "＾",
-        "#": "＃",
-        "%": "％",
-        "&": "＆",
-        "~": "〜",
-    }
+    table = str.maketrans(
+        {
+            "\\": r"\\",
+            "{": r"\{",
+            "}": r"\}",
+            "$": r"\$",
+            # prefer fullwidth variants
+            "_": "＿",
+            "^": "＾",
+            "#": "＃",
+            "%": "％",
+            "&": "＆",
+            "~": "〜",
+        }
+    )
 
-    for k, v in replacements.items():
-        obj = obj.replace(k, v)
+    obj = obj.translate(table)
 
-    # Mathjax doesn't always render ``...'' properly
-    # so we use the unicode characters “...”
-    obj = r"\text" + config.str_font + "{“" + obj + "”}"
-    return ExprLatex(obj)
+    if config.str_quotes == "":
+        left = right = ""
+    elif config.str_quotes == "'":
+        left, right = "‘", "’"
+    else:
+        left, right = "“", "”"
+
+    latex = r"\text" + config.str_font + "{" + left + obj + right + "}"
+    rank = ranks.VALUE_RANK
+
+    return ExprLatex(latex, rank)
 
 
 def convert_int(obj: int) -> ExprLatex:
-    """Converter for `int` type object."""
+    """Converter for int."""
 
-    thousands = THOUSANDS_SEPARATOR[config.thousands_separator]
-    return ExprLatex(
-        f"{obj:,d}".replace(",", thousands),
-        SIGNED_RANK if obj < 0.0 else VALUE_RANK,
-    )
+    thousands = rules.THOUSANDS_SEPARATOR[config.thousands_separator]
+    latex = f"{obj:,d}".replace(",", thousands)
+    rank = ranks.SIGNED_RANK if obj < 0.0 else ranks.VALUE_RANK
+
+    return ExprLatex(latex, rank)
 
 
-def convert_num(obj: float | Decimal) -> ExprLatex:
-    """Converter for `float` or `Decimal` type object. If the resulting
-    format is in scientific notation, the precedence rank is just under
-    the rank for a multiplication operation.
-    """
+def convert_float(obj: float) -> ExprLatex:
+    """Converter for float."""
 
-    if isinstance(obj, float):
-        obj = _normalize_zero_float(obj)
+    obj = _normalize_zero(obj)
 
-    special = _convert_special_num(obj)
+    special = _convert_special_float(obj)
     if special is not None:
         return special
 
-    if config.num_format == "FIX" and (
-        abs(obj) >= 10**config.num_format_max_digits
+    if config.float_format == "FIX" and (
+        abs(obj) >= 10**config.float_max_digits
         or (
-            0.0 < abs(obj) < 10 ** (-config.num_format_prec)
-            and round(obj, config.num_format_prec) == 0.0
+            0.0 < abs(obj) < 10 ** (-config.float_prec)
+            and round(obj, config.float_prec) == 0.0
         )
     ):
-        num_format = "SCI"
+        float_format = "SCI"
     else:
-        num_format = config.num_format
+        float_format = config.float_format
 
-    if num_format == "FIX":
-        result = f"{obj:,.{config.num_format_prec}f}"
-    elif num_format == "SCI":
-        result = f"{obj:,.{config.num_format_prec}E}"
-    elif num_format == "GEN":
-        result = f"{obj:,.{config.num_format_prec}G}"
-    elif num_format == "ENG":
-        exp = 3 * (floor(log10(abs(float(obj)))) // 3) if obj != 0 else 0
-        base = obj / (10**exp)
-        result = f"{base:,.{config.num_format_prec}f}E{int(exp):+03d}"
-    else:
-        raise exceptions.RubberizeSyntaxError(
-            f"Unknown float format: {config.num_format}"
-        )
-
-    thousands = THOUSANDS_SEPARATOR[config.thousands_separator]
-    decimal = DECIMAL_MARKER[config.decimal_marker]
-    result = result.replace(".", "ddd").replace(",", "ttt")
-    result = result.replace("ddd", decimal).replace("ttt", thousands)
-
-    if "E" in result:
-        base, exp = result.split("E")
-        if config.num_format_e_not:
-            result = base + r"\mathrm{E}" + "{" + exp + "}"
+    if float_format == "FIX":
+        latex = f"{obj:,.{config.float_prec}f}"
+    elif float_format == "SCI":
+        latex = f"{obj:,.{config.float_prec}E}"
+    elif float_format == "GEN":
+        latex = f"{obj:,.{config.float_prec}G}"
+    elif float_format == "ENG":
+        if obj != 0:
+            exp = 3 * (math.floor(math.log10(abs(float(obj)))) // 3)
         else:
-            result = base + r" \times 10^{" + str(int(exp)) + "}"
-        return ExprLatex(result, BELOW_MULT_RANK)
+            exp = 0
+        base = obj / 10**exp
+        latex = f"{base:,.{config.float_prec}f}E{int(exp):+03d}"
+    else:
+        raise RubberizeSyntaxError(f"Invalid format: {config.float_format}")
 
-    return ExprLatex(result, SIGNED_RANK if obj < 0.0 else VALUE_RANK)
+    return _format_number_latex(latex)
 
 
-def _normalize_zero_float(num: float) -> float:
-    """
-    Replace `floats` that are theoretically zero with `0.0`.
-
-    Due to floating-point precision limitations, mathematical operations
-    can produce extremely small numbers that should theoretically be
-    0 (e.g., `math.cos(math.pi / 2)` returns `6.123233995736766e-17`).
-    This function checks if a `float` is close to zero within a
-    configurable absolute tolerance and replaces it with 0.0.
-
-    This is necessary to avoid theoretical zeros to be displayed in
-    scientific notation, but allow number types that have controlled
-    precision like `Decimal` to be displayed properly.
-    """
-
-    if isclose(num, 0.0, abs_tol=config.zero_float_threshold):
+def _normalize_zero(num: float) -> float:
+    if math.isclose(num, 0.0, abs_tol=config.zero_float_threshold):
         return 0.0
     return num
 
 
-def _convert_special_num(obj: float | Decimal) -> ExprLatex | None:
-    """Detect and convert exceptional values. Returns `None` if the
-    number is not special.
-    """
-
-    if isinf(obj):
+def _convert_special_float(obj: float | Decimal) -> ExprLatex | None:
+    if math.isinf(obj):
         return ExprLatex(r"-\infty" if obj < 0 else r"\infty")
-    if isnan(obj):
+    if math.isnan(obj):
         return ExprLatex(r"\text{NaN}")
-    if copysign(1, obj) < 0.0 and obj == 0.0:
-        return convert_num(0.0)
+    if math.copysign(1, obj) < 0.0 and obj == 0.0:
+        return convert_float(0.0)
     return None
 
 
-def _fraction(obj: Fraction) -> ExprLatex:
-    """Converter for `Fraction` type object."""
+def _format_number_latex(latex: str) -> ExprLatex:
+    thousands = rules.THOUSANDS_SEPARATOR[config.thousands_separator]
+    decimal = rules.DECIMAL_MARKER[config.decimal_marker]
+    latex = latex.replace(".", "ddd").replace(",", "ttt")
+    latex = latex.replace("ddd", decimal).replace("ttt", thousands)
 
-    numerator = convert_int(obj.numerator)
-    denominator = convert_int(obj.denominator)
-    return ExprLatex(
-        r"\frac{" + numerator.latex + "}{" + denominator.latex + "}", DIV_RANK
-    )
+    if "E" in latex:
+        base, exp = latex.split("E")
+
+        if config.use_e_not:
+            latex = base + r"\mathrm{E}" + "{" + exp + "}"
+        else:
+            latex = base + r" \times 10^{" + str(int(exp)) + "}"
+
+        rank = ranks.BELOW_MULT_RANK
+        return ExprLatex(latex, rank)
+
+    rank = ranks.SIGNED_RANK if latex.startswith("-") else ranks.VALUE_RANK
+
+    return ExprLatex(latex, rank)
 
 
 def _complex(obj: complex) -> ExprLatex:
-    """Converter for `complex` type object."""
+    """Converter for complex."""
 
     if config.use_polar:
-        r, phi = polar(obj)
-        r_latex = convert_num(r).latex
+        r, phi = cmath.polar(obj)
+        r_latex = convert_float(r).latex
 
         if config.use_polar_deg:
-            phi_latex = rf"{convert_num(degrees(phi)).latex}^{{\circ}}"
+            phi_latex = rf"{convert_float(math.degrees(phi)).latex}^{{\circ}}"
         else:
-            phi_latex = rf"{convert_num(phi).latex}\ \mathrm{{rad}}"
+            phi_latex = rf"{convert_float(phi).latex}\ \mathrm{{rad}}"
 
-        return ExprLatex(rf"{r_latex} \angle {phi_latex}", BELOW_POW_RANK)
+        latex = rf"{r_latex} \angle {phi_latex}"
+        rank = ranks.BELOW_POW_RANK
 
-    if not obj.real:
-        if isclose(obj.imag, 1.0):
+    elif not obj.real:
+        if math.isclose(obj.imag, 1.0):
             return ExprLatex(r"\mathrm{i}")
 
-        if _normalize_zero_float(obj.imag) == 0.0:
-            return convert_num(0.0)
+        if _normalize_zero(obj.imag) == 0.0:
+            return convert_float(0.0)
 
-        imag = convert_num(obj.imag)
-        if imag.rank <= BELOW_MULT_RANK:
-            imag.latex = format_delims(imag.latex, (r"\left(", r"\right)"))
+        imag = convert_float(obj.imag)
+        latex = imag.latex
 
-        return ExprLatex(rf"{imag.latex}\,\mathrm{{i}}", BELOW_MULT_RANK)
+        if imag.rank <= ranks.BELOW_MULT_RANK:
+            latex = formatters.format_delims(r"\left( ", latex, r" \right)")
 
-    real = convert_num(obj.real)
-    imag_sign = "+" if obj.imag >= 0.0 else "-"
+        latex += r"\,\mathrm{i}"
+        rank = ranks.BELOW_MULT_RANK
 
-    imag_abs = convert_num(abs(obj.imag))
-    if imag_abs.rank <= BELOW_MULT_RANK:
-        imag_abs.latex = format_delims(imag_abs.latex, (r"\left(", r"\right)"))
+    else:
+        real = convert_float(obj.real)
+        imag_sign = "+" if obj.imag >= 0.0 else "-"
+        latex = f"{real.latex} {imag_sign} "
 
-    return ExprLatex(
-        rf"{real.latex} {imag_sign} {imag_abs.latex}\,\mathrm{{i}}",
-        BELOW_ADD_RANK,
-    )
+        imag_abs = convert_float(abs(obj.imag))
+        latex += imag_abs.latex
+
+        if imag_abs.rank <= ranks.BELOW_MULT_RANK:
+            latex = formatters.format_delims(r"\left(", latex, r"\right)")
+
+        latex += r"\,\mathrm{i}"
+        rank = ranks.BELOW_ADD_RANK
+
+    return ExprLatex(latex, rank)
 
 
-def _iters(obj: list | str | set) -> Optional[ExprLatex]:
-    """Convert a `list`, `str`, or `set` type object. Returns `None` if
-    any one of the elements return `None` when converted.
+def _iters(obj: list | tuple | set | str) -> ExprLatex | None:
+    """Converter for list, str, or set.
+
+    Returns None if any one of the elements return None when converted.
     """
 
-    elts_latex: list[str] = []
+    if (config.show_list_as_array and isinstance(obj, list)) or (
+        config.show_tuple_as_array and isinstance(obj, tuple)
+    ):
+        special = _array(obj)
+        if special is not None:
+            return special
+
+    elts: list[str] = []
     for o in obj:
         converted = convert_object(o)
         if converted is None:
             return None
-        elts_latex.append(converted.latex)
+        elts.append(converted.latex)
 
-    if getattr(config, f"show_{type(obj).__name__}_as_col"):
-        syntax = COLLECTIONS_COL[type(obj)]
+    iter_type = type(obj).__name__.upper()
+
+    if len(elts) > config.max_inline_elts:
+        prefix, sep, suffix = getattr(rules, f"{iter_type}_COL_SYNTAX")
     else:
-        syntax = COLLECTIONS_ROW[type(obj)]
-    latex = format_elts(elts_latex, *syntax)
+        prefix, sep, suffix = getattr(rules, f"{iter_type}_ROW_SYNTAX")
 
-    return ExprLatex(latex, COLLECTIONS_RANK)
+    latex = formatters.format_delims(prefix, sep.join(elts), suffix)
+    rank = ranks.COLLECTIONS_RANK
+
+    return ExprLatex(latex, rank)
 
 
-def _dict(obj: dict) -> Optional[ExprLatex]:
+def _array(obj: list | tuple) -> ExprLatex | None:
+    """Converter for list as an array format.
+
+    Returns None if any one of the elements return None when converted
+    or when the nested sequence is ragged.
+    """
+
+    def build(arr):
+        if not isinstance(arr, (list, tuple)):
+            elt = convert_object(arr)
+            if elt is None:
+                return None
+            return elt.latex
+
+        parts: list = []
+        for a in arr:
+            sub = build(a)
+            if sub is None:
+                return None
+            parts.append(sub)
+
+        return parts
+
+    def shape(a):
+        if not isinstance(a, (list, tuple)):
+            return ()
+        if not a:
+            return (0,)
+
+        sub = shape(a[0])
+        for e in a[1:]:
+            if shape(e) != sub:
+                return None
+
+        return (len(a), *sub)
+
+    if shape(obj) is None:
+        return None
+
+    arr = build(obj)
+    if arr is None:
+        return None
+
+    latex = formatters.format_array(arr)
+    rank = ranks.COLLECTIONS_RANK
+
+    return ExprLatex(latex, rank)
+
+
+def _dict(obj: dict) -> ExprLatex | None:
     """Convert for `dict` type object."""
 
-    elts: list[str] = []
     obj_latex: dict[str, str] = {}
-    for obj_key, obj_value in obj.items():
-        key = convert_object(obj_key)
-        value = convert_object(obj_value)
+
+    for k, v in obj.items():
+        key = convert_object(k)
+        value = convert_object(v)
         if key is None or value is None:
             return None
         obj_latex[key.latex] = value.latex
 
-    if not obj_latex:
-        return ExprLatex(r"\left\{\right\}", COLLECTIONS_RANK)
-
-    if config.show_dict_as_col:
-        elts = [rf"{k} &\to {v}" for k, v in obj_latex.items()]
-        syntax = COLLECTIONS_COL[dict]
+    if len(obj_latex) > config.max_inline_elts:
+        prefix, sep, suffix = rules.DICT_COL_SYNTAX
+        kv_sep = rules.DICT_COL_KV_SYNTAX
     else:
-        elts = [rf"{k} \to {v}" for k, v in obj_latex.items()]
-        syntax = COLLECTIONS_ROW[dict]
+        prefix, sep, suffix = rules.DICT_ROW_SYNTAX
+        kv_sep = rules.DICT_ROW_KV_SYNTAX
 
-    latex = format_elts(elts, *syntax)
+    elts = [rf"{k}{kv_sep}{v}" for k, v in obj_latex.items()]
+    latex = formatters.format_delims(prefix, sep.join(elts), suffix)
+    rank = ranks.COLLECTIONS_RANK
 
-    return ExprLatex(latex, COLLECTIONS_RANK)
+    return ExprLatex(latex, rank)
 
 
-def _range(obj: range) -> Optional[ExprLatex]:
+def _range(obj: range) -> ExprLatex | None:
     """Convert for `range` type object."""
 
-    if len(obj) <= 3:
+    if len(obj) <= 4:
         elts = [str(o) for o in obj]
     else:
-        dots = r"\vdots" if config.show_list_as_col else r"\cdots"
-        elts = [str(obj[0]), str(obj[1]), dots, str(obj[-1])]
+        elts = [str(obj[0]), str(obj[1]), "\ue000", str(obj[-1])]
 
-    if config.show_list_as_col:
-        syntax = COLLECTIONS_COL[list]
+    if len(elts) > config.max_inline_elts:
+        prefix, sep, suffix = rules.TUPLE_COL_SYNTAX
+        dots = r"\vdots"
     else:
-        syntax = COLLECTIONS_ROW[list]
+        prefix, sep, suffix = rules.TUPLE_ROW_SYNTAX
+        dots = r"\cdots"
 
-    return ExprLatex(format_elts(elts, *syntax), COLLECTIONS_RANK)
+    latex = formatters.format_delims(
+        prefix, sep.join(elts).replace("\ue000", dots), suffix
+    )
+    rank = ranks.COLLECTIONS_RANK
+
+    return ExprLatex(latex, rank)
+
+
+def convert_decimal(obj: Decimal) -> ExprLatex:
+    """Converter for decimal.Decimal."""
+
+    special = _convert_special_decimal(obj)
+    if special is not None:
+        return special
+
+    latex = f"{obj:,}"
+
+    return _format_number_latex(latex)
+
+
+def _convert_special_decimal(obj: Decimal) -> ExprLatex | None:
+    if obj.is_infinite():
+        return ExprLatex(r"-\infty" if obj < 0 else r"\infty")
+    if obj.is_nan():
+        return ExprLatex(r"\text{NaN}")
+    if obj.is_signed() and obj == Decimal("0"):
+        return convert_decimal(Decimal("0"))
+    return None
+
+
+def _fraction(obj: Fraction) -> ExprLatex:
+    """Converter for fractions.Fraction."""
+
+    numerator = convert_int(obj.numerator)
+    denominator = convert_int(obj.denominator)
+
+    latex = r"\frac{" + numerator.latex + "}{" + denominator.latex + "}"
+    rank = ranks.DIV_RANK
+
+    return ExprLatex(latex, rank)
 
 
 # fmt: off
@@ -278,12 +356,13 @@ register_object_converter(type(None), lambda _: ExprLatex(r"\emptyset"))
 register_object_converter(bool, lambda obj: ExprLatex(r"\text{" + str(obj) + "}"))
 register_object_converter(str, convert_str)
 register_object_converter(int, convert_int)
-register_object_converter(float, convert_num)
-register_object_converter(Decimal, convert_num)
-register_object_converter(Fraction, _fraction)
+register_object_converter(float, convert_float)
 register_object_converter(complex, _complex)
 register_object_converter(list, _iters)
 register_object_converter(tuple, _iters)
 register_object_converter(set, lambda o: _iters(set(sorted(o))))
 register_object_converter(dict, _dict)
 register_object_converter(range, _range)
+
+register_object_converter(Decimal, convert_decimal)
+register_object_converter(Fraction, _fraction)

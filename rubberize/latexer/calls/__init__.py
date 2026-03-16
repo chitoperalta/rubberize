@@ -1,4 +1,4 @@
-"""Call registry system."""
+"""Call converters."""
 
 from rubberize.latexer.calls.convert_call import (
     convert_call,
@@ -7,19 +7,13 @@ from rubberize.latexer.calls.convert_call import (
 from rubberize.latexer.calls import builtin_calls
 
 try:
-    # If Pint is installed:
-    from rubberize.latexer.calls import pint_calls
-except ImportError:
-    pass
-
-try:
-    # If Sympy is installed:
-    from rubberize.latexer.calls import sympy_calls
-except ImportError:
-    pass
-
-try:
-    # If Numpy is installed:
+    # requires NumPy
     from rubberize.latexer.calls import numpy_calls
+except ImportError:
+    pass
+
+try:
+    # requires Pint
+    from rubberize.latexer.calls import pint_calls
 except ImportError:
     pass

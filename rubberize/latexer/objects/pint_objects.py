@@ -1,9 +1,9 @@
 """Converters for Pint objects.
 
-Custom units LaTeX representations can be registered using
-`register_units_latex()`, allowing users to define their own display
-formats for specific unit combinations.
+Custom units LaTeX can be registered using register_units_latex.
 """
+
+from __future__ import annotations
 
 import re
 from fractions import Fraction
@@ -11,40 +11,36 @@ from fractions import Fraction
 import pint
 
 from rubberize.config import config
+from rubberize.latexer import formatters, ranks, rules
 from rubberize.latexer.expr_latex import ExprLatex
-from rubberize.latexer.formatters import format_delims
 from rubberize.latexer.objects.convert_object import (
-    register_object_converter,
     convert_object,
+    register_object_converter,
 )
-from rubberize.latexer.objects.builtin_objects import convert_num
-from rubberize.latexer.ranks import BELOW_MULT_RANK, BELOW_POW_RANK
 
 
-_custom_units_latex: dict[frozenset[tuple[str, int]], str] = {}
+_custom_units_latex: dict[frozenset[tuple[str, object]], str] = {}
 
 
-def register_units_latex(latex: str, **kwargs: int) -> None:
-    """Register a custom LaTeX representation for a unit.
+def register_units_latex(latex: str, **kwargs: object) -> None:
+    """Register custom LaTeX representation for Pint units.
 
-    This function allows users to define a custom LaTeX format for
-    specific unit combinations. The units are specified as keyword
-    arguments, where keys are unit names and values are their
-    corresponding exponents.
+    Units are specified as kwargs, where keywords are unit names and
+    values are their corresponding exponents.
 
     Example:
     >>> register_units_latex(r"\\mathrm{N} \\cdot \\mathrm{m}", meter=1, newton=1)
 
     Args:
-        latex: The LaTeX string representing the unit.
-        **kwargs: Unit-exponent pairs defining the unit combination.
+        latex: The LaTeX string for the units.
+        **kwargs: Unit-exponent pairs defining the the units.
     """
 
     _custom_units_latex[frozenset(kwargs.items())] = latex
 
 
 def _quantity(obj: pint.Quantity) -> ExprLatex | None:
-    """Converter for pint Quantity type object."""
+    """Converter for pint.Quantity object."""
 
     mag = convert_object(obj.magnitude)
 
@@ -52,130 +48,155 @@ def _quantity(obj: pint.Quantity) -> ExprLatex | None:
         return None
 
     if config.use_fif_units and obj.units in ("foot", "inch"):
-        return ExprLatex(_foot_inch_fraction(obj), BELOW_POW_RANK)
+        return _foot_inch_fraction(obj)
     if config.use_dms_units and obj.units == "degree":
-        return ExprLatex(_degree_minute_second(obj), BELOW_POW_RANK)
+        return _degree_minute_second(obj)
 
-    units = frozenset((u, int(p)) for u, p in obj.unit_items())
+    units = frozenset((u, p) for u, p in obj.unit_items())
     units_latex = _custom_units_latex.get(units, f"{obj.units:~L}")
-    units_latex = _reformat_units(units_latex)
+    units_latex = _format_units_latex(units_latex)
 
-    if mag.rank <= BELOW_MULT_RANK:
-        mag_latex = format_delims(mag.latex, (r"\left(", r"\right)"))
+    if mag.rank <= ranks.BELOW_MULT_RANK:
+        prefix, suffix = rules.OPERAND_SYNTAX
+        mag_latex = formatters.format_delims(prefix, mag.latex, suffix)
     else:
         mag_latex = mag.latex
 
     if units_latex == r"\mathrm{deg}":
-        return ExprLatex(rf"{mag_latex}^{{\circ}}", BELOW_POW_RANK)
+        return ExprLatex(rf"{mag_latex}^{{\circ}}", ranks.BELOW_POW_RANK)
     if units_latex:
-        return ExprLatex(rf"{mag_latex}\ {units_latex}", BELOW_MULT_RANK)
-    return convert_num(obj.magnitude)
+        return ExprLatex(rf"{mag_latex}\ {units_latex}", ranks.BELOW_MULT_RANK)
+    return mag
+
+
+def _format_units_latex(latex: str) -> str:
+    if config.use_contextual_mult:
+        latex = latex.replace(r" \cdot ", r"\,")
+
+    if not config.use_inline_units:
+        return latex
+
+    match = re.match(r"\\frac{(.*)}{(.*)}", latex)
+    if not match:
+        return latex
+
+    numerator, denominator = match.groups()
+    denominators = re.findall(r"(\\mathrm{[^}]+}(?:\^\{\d+\})?)", denominator)
+
+    if len(denominators) == 1 and numerator != "1":
+        # use a solidus for single-term denominators
+        return f"{numerator} / {denominator}"
+
+    units = []
+    if numerator != 1:
+        units.append(numerator)
+
+    for d in denominators:
+        if "^" not in d:
+            units.append(d + "^{-1}")
+        else:
+            d = re.sub(
+                r"\^\{(\d+)\}", lambda m: "^{-" + f"{int(m.group(1))}" + "}", d
+            )
+            units.append(d)
+
+    op = r"\," if config.use_contextual_mult else r" \cdot "
+    return op.join(units)
+
+
+def _foot_inch_fraction(obj: pint.Quantity) -> ExprLatex:
+    """Convert foot or inch pint.Quantity to foot-inch-fraction format
+    LaTeX, e.g., 5’ 3 1/2”.
+    """
+
+    total_inches = obj.to("inch").magnitude
+
+    feet = 0
+    if obj.units == "foot":
+        feet = int(total_inches // 12)
+        total_inches -= feet * 12
+
+    whole_inches = int(total_inches)
+    fractional_inches = Fraction(
+        round((total_inches - whole_inches) * config.fif_prec), config.fif_prec
+    )
+
+    if fractional_inches == 1:
+        whole_inches += 1
+        fractional_inches = Fraction(0, config.fif_prec)
+    if obj.units == "foot" and whole_inches == 12:
+        feet += 1
+        whole_inches = 0
+
+    parts = []
+
+    if feet:
+        parts.append(str(feet) + r"\text{{’}}")
+    if whole_inches or fractional_inches:
+        inch_parts = []
+        if whole_inches:
+            inch_parts.append(str(whole_inches))
+        if fractional_inches:
+            inch_parts.append(str(fractional_inches))
+        parts.append(r"\ ".join(inch_parts) + r"\text{”}")
+
+    latex = r"\ ".join(parts)
+    if not latex:
+        if obj.units == "foot":
+            latex = r"0\text{’}"
+        else:
+            latex = r"0\text{”}"
+
+    rank = ranks.BELOW_POW_RANK
+
+    return ExprLatex(latex, rank)
+
+
+def _degree_minute_second(obj: pint.Quantity) -> ExprLatex:
+    """Convert angle pint.Quantity to degree-minute-second format."""
+
+    total = obj.to("degree").magnitude
+
+    degrees = int(total)
+    minutes = int((total - degrees) * 60)
+    seconds = (total - degrees - minutes / 60) * 3600
+
+    if seconds == 60:
+        minutes += 1
+        seconds = 0
+    if minutes == 60:
+        degrees += 1
+        minutes = 0
+
+    parts = []
+
+    if degrees:
+        parts.append(str(degrees) + r"^{\circ}")
+    if minutes:
+        parts.append(str(minutes) + r"\text{{’}}")
+    if seconds:
+        parts.append(f"{seconds:.{config.float_prec}f}" + r"\text{”}")
+
+    latex = r"\ ".join(parts)
+    if not latex:
+        latex = r"0^{\circ}"
+
+    rank = ranks.BELOW_POW_RANK
+
+    return ExprLatex(latex, rank)
 
 
 def _unit(obj: pint.Unit) -> ExprLatex:
     """Converter for pint Quantity type object."""
 
     # pylint: disable-next=protected-access
-    units = frozenset((u, int(p)) for u, p in dict(obj._units).items())
-    units_latex = _custom_units_latex.get(units, f"{obj:~L}")
-    units_latex = _reformat_units(units_latex)
-    return ExprLatex(units_latex, BELOW_MULT_RANK)
+    units = frozenset((u, p) for u, p in dict(obj._units).items())
+    latex = _custom_units_latex.get(units, f"{obj:~L}")
 
+    latex = _format_units_latex(latex)
+    rank = ranks.BELOW_MULT_RANK
 
-def _reformat_units(units_latex: str) -> str:
-    """Make the latex for the unit compact."""
-
-    if config.use_contextual_mult:
-        units_latex = units_latex.replace(r" \cdot ", r"\,")
-
-    if not config.use_inline_units:
-        return units_latex
-
-    match = re.match(r"\\frac{(.*)}{(.*)}", units_latex)
-    if not match:
-        return units_latex
-
-    num_str, den_str = match.groups()
-    dens = re.findall(r"(\\mathrm{[^}]+}(?:\^\{\d+\})?)", den_str)
-
-    if len(dens) == 1 and num_str != "1":
-        # Use a solidus for single-term denominators
-        return f"{num_str} / {den_str}"
-
-    units = []
-    if num_str != "1":
-        units.append(num_str)
-    for den in dens:
-        if "^" not in den:
-            units.append(den + "^{-1}")
-        else:
-            den = re.sub(
-                r"\^\{(\d+)\}",
-                lambda m: "^{-" + f"{int(m.group(1))}" + "}",
-                den,
-            )
-            units.append(den)
-
-    op = r"\," if config.use_contextual_mult else r" \cdot "
-    return op.join(units)
-
-
-def _foot_inch_fraction(length: pint.Quantity) -> str:
-    """Change foot or inch quantity display to foot-inch-fraction format
-    e.g., 5’ 3 1/2”.
-    """
-
-    inches = length.to("inch").magnitude
-
-    # Round the fractional part to the nearest `config.fif_prec`-th
-    in_whole = int(inches)
-    frac = round((inches - in_whole) * config.fif_prec) / config.fif_prec
-
-    # Simplify the fraction
-    if frac:
-        frac = Fraction(
-            int(frac * config.fif_prec), config.fif_prec
-        ).limit_denominator(config.fif_prec)
-        frac_str = rf"\ {frac.numerator}/{frac.denominator}"
-    else:
-        frac_str = ""
-
-    if length.units == "foot":
-        ft = int(inches // 12)
-        in_rem = in_whole % 12
-        if in_rem or frac_str:
-            return rf"{ft}\text{{’}}\ {in_rem}{frac_str}\text{{”}}"
-        return rf"{ft}\text{{”}}"
-
-    return rf"{in_whole}{frac_str}\text{{”}}"
-
-
-def _degree_minute_second(angle: pint.Quantity) -> str:
-    """Change angle quantity display to degree-minute-second format."""
-
-    angle = angle.to("degree").magnitude
-
-    degrees = int(angle)
-    minutes = int((angle - degrees) * 60)
-    seconds = round(
-        (angle - degrees - minutes / 60) * 3600, config.num_format_prec
-    )
-
-    # Handle rounding that may push seconds to 60
-    if seconds == 60:
-        seconds = 0
-        minutes += 1
-    if minutes == 60:
-        minutes = 0
-        degrees += 1
-
-    deg_str = rf"{degrees}^{{\circ}}"
-    min_str = rf"\ {minutes}\text{{’}}" if minutes else ""
-    sec_str = (
-        rf"\ {seconds:.{config.num_format_prec}f}\text{{”}}" if seconds else ""
-    )
-
-    return f"{deg_str}{min_str}{sec_str}"
+    return ExprLatex(latex, rank)
 
 
 # fmt: off

@@ -3,7 +3,6 @@
 import re
 import xml.etree.ElementTree as etree
 
-from markdown import Markdown
 from markdown.extensions import Extension
 from markdown.blockprocessors import BlockQuoteProcessor
 
@@ -87,7 +86,7 @@ class AlertProcessor(BlockQuoteProcessor):
 class Alert(Extension):
     """Markdown extension to convert Github-style alerts."""
 
-    def extendMarkdown(self, md: Markdown) -> None:
+    def extendMarkdown(self, md) -> None:
         md.parser.blockprocessors.register(
             AlertProcessor(md.parser), "alert", 75
         )

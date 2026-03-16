@@ -1,0 +1,182 @@
+---
+title: Rubberize
+page-layout: custom
+css: index.css
+sidebar: false
+toc: false
+section-divs: false
+---
+
+
+::::::::: {.grid .px-4 .py-5 .text-center}
+
+:::::: {.g-col-12 .pt-5 .display-1}
+Turn Python calculations into clear, typeset mathematics.
+::::::
+
+:::::: {.g-col-12 .g-col-lg-8 .g-start-lg-3 .pb-1 .fs-1}
+Rubberize renders Python calculations as readable mathematical steps, making notebooks easier to review, explain, and document.
+::::::
+
+:::::: {.g-col-12 .g-col-lg-8 .g-start-lg-3 .pb-5 .d-grid .gap-2 .d-sm-flex .justify-content-sm-center}
+
+::: {.px-3}
+[Get Started []{.bi .bi-arrow-right}](get_started.qmd){.btn .btn-primary .btn-lg .fs-3}
+:::
+
+::: {.px-3}
+[See Examples](rendering/index.qmd){.btn .btn-outline-primary .btn-lg .fs-3}
+:::
+
+::::::
+
+:::::::::
+
+---
+
+:::::::::::: {.grid .gap-3 .px-4 .py-5}
+
+::::::::: {.g-col-12 .g-col-xl-4 .g-col-xxl-3 .g-start-xxl-2 .px-3 .py-3}
+
+:::::: {.display-6 .pb-3}
+Usage is very simple: Just `%%tap` the cell.
+::::::
+
+:::::: {.fs-3}
+Instead of leaving results hidden inside code execution, each step of the calculation appears as readable math.
+
+The result is easier to follow, easier to verify, and easier to share with others.
+::::::
+
+:::::::::
+
+::::::::: {.g-col-12 .g-col-xl-8 .g-col-xxl-7 .px-3 .fs-3 .d-flex .flex-column}
+
+:::::: {.grid}
+
+::: {.g-col-1 .pt-4 .me-2}
+\[1\]&nbsp;:
+:::
+
+::: {.g-col-11}
+
+```{python}
+%reload_ext rubberize
+import pint
+
+ureg = pint.UnitRegistry()
+```
+
+:::
+
+::::::
+
+:::::: {.grid .gap-3}
+
+::: {.g-col-1 .pt-4 .me-2}
+\[2\]&nbsp;:
+:::
+
+::: {.g-col-11}
+
+```{python}
+%%tap
+w = 10.0 * (ureg.kN / ureg.m)  # Load intensity
+L = 8.0 * ureg.m               # Beam span
+
+M_max = w * L**2 / 8           # Maximum moment @stack
+```
+
+:::
+
+::::::
+
+:::::::::
+
+::::::::::::
+
+---
+
+:::::::::::: {.grid .px-4 .py-5 .fs-3}
+
+::::::::: {.bg-primary .g-col-12 .g-col-sm-6 .g-col-xl-3 .card}
+
+:::::: {.card-body .d-flex .flex-column}
+
+::: {.card-title}
+[]{.bi .bi-rocket-takeoff-fill} Get Started
+:::
+
+::: {.card-text}
+Install Rubberize, load the notebook extension, and render your first calculation.
+:::
+
+::: {.mt-auto}
+[Start here []{.bi .bi-arrow-right}](get_started.qmd){.btn .btn-light}
+:::
+
+::::::
+
+:::::::::
+
+::::::::: {.g-col-12 .g-col-sm-6 .g-col-xl-3 .card}
+
+:::::: {.card-body .d-flex .flex-column}
+
+::: {.card-title}
+[]{.bi .bi-magic} Rendering Python
+:::
+
+::: {.card-text}
+See how Python expressions and statements appear when Rubberize renders them.
+:::
+
+::: {.mt-auto}
+[See examples []{.bi .bi-arrow-right}](rendering/index.qmd){.btn .btn-primary}
+:::
+
+::::::
+
+:::::::::
+
+::::::::: {.g-col-12 .g-col-sm-6 .g-col-xl-3 .card}
+
+:::::: {.card-body .d-flex .flex-column}
+
+::: {.card-title}
+[]{.bi .bi-code-square} Custom Converters
+:::
+
+::: {.card-text}
+Define how Rubberize renders your own functions, classes, and objects.
+:::
+
+::: {.mt-auto}
+[Explore []{.bi .bi-arrow-right}](advanced/custom_converters.qmd){.btn .btn-primary}
+:::
+
+::::::
+
+:::::::::
+
+::::::::: {.g-col-12 .g-col-sm-6 .g-col-xl-3 .card}
+
+:::::: {.card-body .d-flex .flex-column}
+
+::: {.card-title}
+[]{.bi .bi-sliders} Config Reference
+:::
+
+::: {.card-text}
+Complete reference for all Rubberize configuration options and defaults.
+:::
+
+::: {.mt-auto}
+[Browse options []{.bi .bi-arrow-right}](config_reference.qmd){.btn .btn-primary}
+:::
+
+::::::
+
+:::::::::
+
+::::::::::::

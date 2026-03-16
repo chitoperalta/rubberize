@@ -1,44 +1,48 @@
-"""Converters for Numpy objects."""
+"""Converters for NumPy objects."""
 
-from typing import Any, Optional
+from __future__ import annotations
 
 import numpy as np
 
+from rubberize.latexer import formatters, ranks
 from rubberize.latexer.expr_latex import ExprLatex
-from rubberize.latexer.formatters import format_array
 from rubberize.latexer.objects.convert_object import (
     register_object_converter,
     convert_object,
 )
 
 
-def _ndarray(obj: np.ndarray) -> Optional[ExprLatex]:
-    """Converter for `numpy.ndarray` type object."""
+def _ndarray(obj: np.ndarray) -> ExprLatex | None:
+    """Converter for np.ndarray."""
 
-    data = obj.tolist()
+    def build(arr: np.ndarray):
+        if arr.ndim == 1:
+            parts: list = []
 
-    def _process(elt: Any) -> str | list | None:
-        if isinstance(elt, list):
-            converted_list = []
-            for e in elt:
-                converted = _process(e)
-                if converted is None:
+            for a in arr:
+                elt = convert_object(a)
+                if elt is None:
                     return None
-                converted_list.append(converted)
-            return converted_list
-        converted_obj = convert_object(elt)
-        return converted_obj.latex if converted_obj else None
 
-    processed_data = _process(data)
-    if processed_data is None:
+                parts.append(elt.latex)
+
+            return parts
+
+        return [build(sub) for sub in arr]
+
+    arr = build(obj)
+    if arr is None:
         return None
 
-    return ExprLatex(format_array(processed_data))
+    latex = formatters.format_array(arr)
+    rank = ranks.COLLECTIONS_RANK
+
+    return ExprLatex(latex, rank)
 
 
-def _generic(obj: np.generic) -> Optional[ExprLatex]:
-    """Converter for `numpy.generic` type object, which is the base
-    class for all numpy scalars.
+def _generic(obj: np.generic) -> ExprLatex | None:
+    """Converter for np.generic, which is the base class for all NumPy
+    scalars.
     """
 
     return convert_object(obj.item())

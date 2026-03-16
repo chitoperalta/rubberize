@@ -1,0 +1,163 @@
+---
+title: Annotations
+toc: true
+---
+
+```{python}
+%reload_ext rubberize
+
+import pint
+
+ureg = pint.UnitRegistry()
+```
+
+Annotations allow explanatory text to appear alongside rendered calculations.
+
+Inside `%%tap` cells, comments are treated as annotations rather than ignored code. When the cell is rendered, these comments appear as explanatory text in the calculation sheet.
+
+```{python}
+%%tap
+# Beam span
+L = 6 * ureg.m
+
+# Uniform load
+w = 12 * (ureg.kN / ureg.m)
+
+# Maximum moment
+M = w * L**2 / 8
+```
+
+Comments written on their own line appear as explanatory text associated with the calculation that follows.
+
+Inline comments behave slightly differently. When a comment appears on the same line as a calculation, it is rendered alongside the resulting expression.
+
+```{python}
+%%tap
+L = 6 * ureg.m               # Beam span
+w = 12 * (ureg.kN / ureg.m)  # Uniform load
+M = w * L**2 / 8             # Maximum moment
+```
+
+In this case, the annotation is displayed side by side with the rendered mathematics.
+
+## Config Options
+
+Comments that contain options and shortcuts (those starting with `@`) are interpreted as configuration directives and are not rendered as annotations.
+
+The rules for how these options are applied&mdash;whether inline on a line of code or as line comments affecting subsequent lines&mdash;are described in [Customizing Rubberize](../get_started.qmd#customizing-rubberize) and in the [Config Reference](../config_reference.qmd).
+
+## Markdown
+
+Annotation text can be formatted using Markdown. Rubberize uses [Python-Markdown](https://python-markdown.github.io) to render Markdown content.
+
+This allows standard formatting such as headings, emphasis, lists, links, and other common Markdown features to be used within annotations.
+
+Rubberize provides additional formatting features for annotation text. These features can be used within any annotation and may be combined with standard Markdown formatting.
+
+## Smaller Text
+
+Text enclosed in carets is rendered in a smaller style.
+
+```{python}
+%%tap
+# The value is approximate ^rounded to three significant figures^.
+```
+
+## Inline Line Breaks
+
+A double backslash can be used to insert an inline line break within annotation text.
+
+This is especially useful for inline annotations, where a longer explanation may need to be split across multiple lines when rendered.
+
+```{python}
+%%tap
+a = 420  # First line of text. \\ Second line of text.
+```
+
+## Inline Rubberize
+
+Annotations may include inline Rubberize expressions using double curly braces.
+
+Any expression placed inside <code>{{ \... }}</code> is parsed and rendered using Rubberize, allowing mathematical expressions to appear directly within annotation text.
+
+```{python}
+%%tap
+a = 2
+b = 5
+
+# The sum is {{ a + b  # @nodef }}.
+```
+
+## Tables
+
+The built-in `tables` extension of Python-Markdown in enabled, which allows simple tables to be constructed.
+
+```{python}
+%%tap @res
+a, b, c = (2, 5, 7)
+
+# | Name  | Value |
+# |-------|-------|
+# | a     | {{a}} |
+# | b     | {{b}} |
+# | c     | {{c}} |
+```
+
+## Alert Boxes
+
+Rubberize also supports four GitHub-style alert boxes.
+
+```{python}
+%%tap
+# > [!NOTE]
+# > This is a **NOTE** alert box
+
+# > [!WARNING]
+# > This is a **WARNING** alert box
+
+# > [!PASS]
+# > This is a **WARNING** alert box
+
+# > [!FAIL]
+# > This is a **WARNING** alert box
+```
+
+Alert boxes can be used to highlight important notes, warnings, or additional information in the calculation sheet.
+
+A second form is available for alerts that should appear only in the interactive document but not in printed output. When the marker begins with `?` instead of `!`, the alert box is hidden when the document is printed (for example, when exporting to PDF).
+
+```{python}
+%%tap
+# > [?NOTE]
+# > This is a **NOTE** alert box
+```
+
+This can be useful for including internal reminders, notes, or other information that should not appear in a printed report.
+
+## Math Markings
+
+Rubberize provides markings that visually emphasize rendered mathematical expressions. `!mark` for adding a vertical marker beside the expression, and `!hi`, `!rhi`, `!yhi`, `!ghi`, or `!bhi` for highlighting the expression.
+
+They are included in inline comments.
+
+```{python}
+%%tap
+L = 6 * ureg.m                # !mark Length of the span
+w = 12 * (ureg.kN / ureg.m)   # !hi Uniform load intensity
+R = w * L / 2                 # !rhi Reaction at each support
+M = w * L**2 / 8              # !yhi Maximum bending moment
+S = 150e3 * ureg.mm**3        # !ghi Section modulus of member
+sigma = M / S                 # !bhi Resulting bending stress
+```
+
+Similar to alert boxes, when the marker begins with `?` instead of `!`, the markings are hidden when the document is printed.
+
+```{python}
+%%tap
+L = 6 * ureg.m                # ?mark Length of the span
+w = 12 * (ureg.kN / ureg.m)   # ?hi Uniform load intensity
+R = w * L / 2                 # ?rhi Reaction at each support
+M = w * L**2 / 8              # ?yhi Maximum bending moment
+S = 150e3 * ureg.mm**3        # ?ghi Section modulus of member
+sigma = M / S                 # ?bhi Resulting bending stress
+```

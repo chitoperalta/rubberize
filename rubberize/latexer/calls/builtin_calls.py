@@ -1,240 +1,282 @@
-"""Converters for builtin functions and functions from the Standard
-Library.
-"""
+"""Converters for calls to builtin functions."""
+
+from __future__ import annotations
 
 import ast
-from copy import copy
-from typing import Optional, TYPE_CHECKING
+import decimal
+import fractions
+import math
+from typing import TYPE_CHECKING
 
 from rubberize.config import config
-from rubberize.latexer.calls.common import (
-    get_result_and_convert,
-    rename,
-    unary,
-    wrap,
-)
-from rubberize.latexer.calls.convert_call import register_call_converter
+from rubberize.latexer import formatters, helpers, ranks, rules
+from rubberize.latexer.calls import common, register_call_converter
 from rubberize.latexer.expr_latex import ExprLatex
-from rubberize.latexer.expr_rules import COLLECTIONS_COL, COLLECTIONS_ROW
-from rubberize.latexer.formatters import format_elts
-from rubberize.latexer.node_helpers import get_id, get_object
-from rubberize.latexer.ranks import (
-    get_rank,
-    BELOW_POW_RANK,
-    BELOW_MULT_RANK,
-    BELOW_ADD_RANK,
-)
 
 if TYPE_CHECKING:
-    from rubberize.latexer.node_visitors import ExprVisitor
+    from rubberize.latexer.visitors import ExprVisitor
 
 
 # pylint: disable-next=too-many-locals
-def _range(visitor: "ExprVisitor", call: ast.Call) -> Optional[ExprLatex]:
-    """Convert a `range` call."""
+def _range(visitor: ExprVisitor, node: ast.Call) -> ExprLatex:
+    """Convert a range call"""
 
-    assert get_id(call.func) == "range"
+    visitor = common.no_substitution(visitor)
+    start, stop, step = _get_range_args(node)
 
-    start, stop, step = _get_range_args(call)
+    start_val = helpers.get_object(start, None)  # None if not a constant
+    stop_val = helpers.get_object(stop, None)
+    step_val = helpers.get_object(step, None)
 
-    start_value = get_object(start, None)  # None if not a Constant.
-    stop_value = get_object(stop, None)
-    step_value = get_object(step, None)
-    dots = r"\vdots" if config.show_list_as_col else r"\cdots"
-
-    if (
-        start_value is not None
-        and step_value is not None
-        and stop_value is not None
-    ):
-        obj = range(start_value, stop_value, step_value)
-        if len(obj) <= 3:
-            elts_latex = [str(o) for o in obj]
+    if start_val is not None and step_val is not None and stop_val is not None:
+        obj = range(start_val, stop_val, step_val)
+        if len(obj) <= 4:
+            elts = [str(o) for o in obj]
         else:
-            elts_latex = [str(obj[0]), str(obj[1]), dots, str(obj[-1])]
+            elts = [str(obj[0]), str(obj[1]), "\ue000", str(obj[-1])]
 
     else:
         start_latex = visitor.visit(start).latex
         stop_latex = visitor.visit(stop).latex
         step_latex = visitor.visit(step).latex
 
-        elts_latex = [start_latex]
+        elts = [start_latex]
 
-        if start_value is not None and step_value is not None:
-            elts_latex.append(f"{start_value + step_value}")
-        elif step_value and step_value < 0:
-            elts_latex.append(start_latex + f" - {abs(step_value)}")
+        if start_val is not None and step_val is not None:
+            elts.append(f"{start_val + step_val}")
+        elif step_val and step_val < 0:
+            elts.append(start_latex + f" - {abs(step_val)}")
         else:
-            elts_latex.append(start_latex + f" + {step_latex}")
+            elts.append(start_latex + f" + {step_latex}")
 
-        elts_latex.append(dots)
+        elts.append("\ue000")
 
-        if step_value and step_value < 0:
-            elts_latex.append("> " + stop_latex)
-        elif step_value and step_value > 0:
-            elts_latex.append("< " + stop_latex)
+        if step_val and step_val < 0:
+            elts.append(r"\ge " + stop_latex + " + 1")
+        elif step_val and step_val > 0:
+            elts.append(r"\le " + stop_latex + " - 1")
         else:
-            elts_latex.append(r"\sim " + stop_latex)
+            elts.append(r"\sim " + stop_latex)
 
-    if config.show_list_as_col:
-        syntax = COLLECTIONS_COL[list]
+    if len(elts) > config.max_inline_elts:
+        prefix, sep, suffix = rules.TUPLE_COL_SYNTAX
+        dots = r"\vdots"
     else:
-        syntax = COLLECTIONS_ROW[list]
-    latex = format_elts(elts_latex, *(syntax))
+        prefix, sep, suffix = rules.TUPLE_ROW_SYNTAX
+        dots = r"\cdots"
 
-    return ExprLatex(latex)
+    latex = formatters.format_delims(
+        prefix, sep.join(elts).replace("\ue000", dots), suffix
+    )
+    rank = ranks.COLLECTIONS_RANK
 
-
-def _get_range_args(call: ast.Call) -> tuple[ast.expr, ast.expr, ast.expr]:
-    """Collect start, stop, and step expression nodes of a `range()`
-    call node.
-    """
-
-    if len(call.args) == 1:
-        return ast.Constant(value=0), call.args[0], ast.Constant(value=1)
-    if len(call.args) == 2:
-        return call.args[0], call.args[1], ast.Constant(value=1)
-    return call.args[0], call.args[1], call.args[2]
+    return ExprLatex(latex, rank)
 
 
-def _exp(visitor: "ExprVisitor", call: ast.Call) -> Optional[ExprLatex]:
-    """Convert an `exp` call."""
+def _get_range_args(node: ast.Call) -> tuple[ast.expr, ast.expr, ast.expr]:
+    """Collect the range arguments"""
 
-    rank = BELOW_POW_RANK
-    assert get_id(call.func) == "exp"
-
-    if isinstance(call.args[0], ast.BinOp) and isinstance(
-        call.args[0].op, ast.Div
-    ):
-        return rename(visitor, call, r"\exp ")
-
-    return wrap(visitor, call, "e^{", "}", rank=rank)
+    if len(node.args) == 1:
+        return ast.Constant(0), node.args[0], ast.Constant(1)
+    if len(node.args) == 2:
+        return node.args[0], node.args[1], ast.Constant(1)
+    return node.args[0], node.args[1], node.args[2]
 
 
-def _log(visitor: "ExprVisitor", call: ast.Call) -> ExprLatex:
-    """Convert a `log` call."""
+def _sum(visitor: ExprVisitor, node: ast.Call) -> ExprLatex | None:
+    """Convert a sum or math.fsum call."""
 
-    assert get_id(call.func) == "log"
+    iterable_node = helpers.get_arg_node(node, 0, None, required=True)
+    start_node = helpers.get_arg_node(node, 1, "start") or ast.Constant(0)
 
-    if len(call.args) == 1:
-        return unary(visitor, call, r"\ln ")
-    if isinstance(call.args[1], ast.Constant) and call.args[1].value == 10:
-        return unary(visitor, call, r"\log ")
-    if get_id(call.args[1]) == "e":
-        return unary(visitor, call, r"\ln ")
+    op_symbol = r"\sum"
 
-    base = visitor.visit(call.args[1])
-    return unary(visitor, call, r"\log_{" + base.latex + "} ")
+    return _sum_prod_common(visitor, op_symbol, iterable_node, start_node)
+
+
+def _prod(visitor: ExprVisitor, node: ast.Call) -> ExprLatex | None:
+    """Convert a math.prod call."""
+
+    iterable_node = helpers.get_arg_node(node, 0, None, required=True)
+    start_node = helpers.get_arg_node(node, 1, "start") or ast.Constant(1)
+
+    op_symbol = r"\prod"
+
+    return _sum_prod_common(visitor, op_symbol, iterable_node, start_node)
 
 
 # pylint: disable-next=too-many-locals
-def _sum_prod(visitor: "ExprVisitor", call: ast.Call) -> Optional[ExprLatex]:
-    """Convert a `sum`, `fsum`, or `prod` call."""
+def _sum_prod_common(
+    visitor: ExprVisitor,
+    op_symbol: str,
+    iterable_node: ast.expr,
+    start_node: ast.expr,
+) -> ExprLatex | None:
+    gen_visitor = common.no_substitution(visitor)
 
-    rank = BELOW_MULT_RANK
-    with_initial_rank = BELOW_ADD_RANK
-
-    name = get_id(call.func)
-    assert name in ("sum", "fsum", "prod")
-
-    if visitor.namespace is not None:
-        # Prevent substitution
-        visitor = copy(visitor)
-        visitor.namespace = None
-
-    if not isinstance(call.args[0], ast.GeneratorExp):
-        opd = visitor.visit_opd(call.args[0], rank)
-        op_latex = "\\" + name
+    if not isinstance(iterable_node, ast.GeneratorExp):
+        op_rank = ranks.BELOW_MULT_RANK
+        operand_node = iterable_node
+        op = op_symbol
     else:
-        opd = visitor.visit_opd(call.args[0].elt, get_rank(call.args[0]))
-        ops = []
-        for comp in call.args[0].generators:
+        op_rank = ranks.get_rank(iterable_node)
+        operand_node = iterable_node.elt
+
+        ops: list[str] = []
+
+        for g in iterable_node.generators:
+            # iterated over range(stop) or range(start, stop)
             if (
-                isinstance(comp.iter, ast.Call)
-                and get_id(comp.iter.func) == "range"
-                and len(comp.iter.args) < 3
+                isinstance(g.iter, ast.Call)
+                and helpers.get_func_id(g.iter, visitor.ns) == "range"
+                and len(g.iter.args) < 3
             ):
-                # Iterated over range(b) or range(a, b)
-                var = visitor.visit(comp.target)
-                start, stop, _ = _get_range_args(comp.iter)
+                var = gen_visitor.visit(g.target).latex
+                sta, sto, _ = _get_range_args(g.iter)
 
-                sub = var.latex + " = " + visitor.visit(start).latex
-                stop_value = get_object(stop, None)  # None if not a Constant
-                if stop_value is not None:
-                    sup = str(stop_value - 1)
+                sub = f"{var} = {gen_visitor.visit(sta).latex}"
+
+                if isinstance(sto, ast.Constant) and isinstance(sto.value, int):
+                    sup = str(sto.value - 1)
                 else:
-                    sup = visitor.visit(stop).latex + "- 1"
+                    sup_node = ast.BinOp(sto, ast.Sub(), ast.Constant(1))
+                    sup = visitor.visit(sup_node).latex
 
-                ops.append("\\" + name + "_{" + sub + "}^{" + sup + "}")
+                ops.append(op_symbol + "_{" + sub + "}^{" + sup + "}")
+
+            # element-wise operation
             else:
-                # Element-wise operation on a list or a collection
-                ops.append("\\" + name + "_{" + visitor.visit(comp).latex + "}")
-        op_latex = r"\,".join(ops)
+                comp = gen_visitor.visit(g).latex
+                ops.append(op_symbol + "_{" + comp + "}")
 
-    if len(call.args) == 2:
-        init = visitor.visit_opd(call.args[1], with_initial_rank)
-        latex = init.latex + " + " + op_latex + " " + opd.latex
-        return ExprLatex(latex, BELOW_ADD_RANK)
+        op = r"\,".join(ops)
 
-    latex = op_latex + " " + opd.latex
-    return ExprLatex(latex, BELOW_MULT_RANK)
+    operand = gen_visitor.visit_operand(operand_node, op_rank).latex
 
+    start_default, start_op, start_rank = {
+        r"\sum": (0, " + ", ranks.BELOW_ADD_RANK),
+        r"\prod": (1, r" \cdot ", ranks.BELOW_MULT_RANK),
+    }[op_symbol]
+
+    if helpers.get_object(start_node, visitor.ns) != start_default:
+        start = visitor.visit_operand(start_node, ranks.BELOW_ADD_RANK).latex
+        latex = f"{start}{start_op}{op} {operand}"
+        rank = start_rank
+    else:
+        latex = f"{op} {operand}"
+        rank = ranks.BELOW_MULT_RANK
+
+    return ExprLatex(latex, rank)
+
+
+def _exp(visitor: ExprVisitor, node: ast.Call) -> ExprLatex:
+    """Convert an math.exp call."""
+
+    x_node = helpers.get_arg_node(node, 0, None, required=True)
+
+    if any(isinstance(n, ast.Div) for n in ast.walk(x_node)):
+        return common.rename(visitor, node, r"\exp")
+
+    return common.wrap(visitor, node, "e^{", "}", rank=ranks.BELOW_POW_RANK)
+
+
+def _log(visitor: ExprVisitor, node: ast.Call) -> ExprLatex:
+    """Convert a math.log call."""
+
+    base_node = helpers.get_arg_node(node, 1, "base")
+
+    if base_node is None:
+        return common.unary(visitor, node, r"\ln ")
+    if isinstance(base_node, ast.Constant) and base_node.value == 10:
+        return common.unary(visitor, node, r"\log ")
+    if helpers.get_id(base_node) == "e":
+        return common.unary(visitor, node, r"\ln ")
+
+    base = visitor.visit(base_node).latex
+
+    return common.unary(visitor, node, r"\log_{" + base + "} ")
+
+
+def _isclose(visitor: ExprVisitor, node: ast.Call) -> ExprLatex:
+    """Convert a math.isclose call"""
+
+    a_node = helpers.get_arg_node(node, 0, "a", required=True)
+    b_node = helpers.get_arg_node(node, 1, "b", required=True)
+
+    rank = ranks.BELOW_COMPARE_RANK
+    a = visitor.visit_operand(a_node, rank).latex
+    b = visitor.visit_operand(b_node, rank).latex
+
+    latex = rf"{a} \approx {b}"
+
+    return ExprLatex(latex, rank)
+
+
+register_call_converter(int, common.get_result_and_convert)
+register_call_converter(float, common.get_result_and_convert)
+register_call_converter(complex, common.get_result_and_convert)
+register_call_converter(list, common.get_result_and_convert)
+register_call_converter(tuple, common.get_result_and_convert)
+register_call_converter(set, common.get_result_and_convert)
+register_call_converter(dict, common.get_result_and_convert)
+register_call_converter(range, _range)
+register_call_converter(decimal.Decimal, common.get_result_and_convert)
+register_call_converter(fractions.Fraction, common.get_result_and_convert)
 
 # fmt: off
 # pylint: disable=line-too-long
-register_call_converter("int", get_result_and_convert)
-register_call_converter("float", get_result_and_convert)
-register_call_converter("Decimal", get_result_and_convert)
-register_call_converter("Fraction", get_result_and_convert)
-register_call_converter("complex", get_result_and_convert)
-register_call_converter("list", get_result_and_convert)
-register_call_converter("tuple", get_result_and_convert)
-register_call_converter("set", get_result_and_convert)
-register_call_converter("dict", get_result_and_convert)
-register_call_converter("range", _range)
-register_call_converter("abs", lambda v, c: wrap(v, c, r"\left|", r"\right|"))
-register_call_converter("fabs", lambda v, c: wrap(v, c, r"\left|", r"\right|"))
-register_call_converter("ceil", lambda v, c: wrap(v, c, r"\left\lceil", r"\right\rceil"))
-register_call_converter("comb", lambda v, c: rename(v, c, r"\operatorname{C}"))
-register_call_converter("perm", lambda v, c: rename(v, c, r"\operatorname{P}"))
-register_call_converter("exp", _exp)
-register_call_converter("factorial", lambda v, c: unary(v, c, "", "!"))
-register_call_converter("floor", lambda v, c: wrap(v, c, r"\left\lfloor", r"\right\rfloor"))
-register_call_converter("gamma", lambda v, c: rename(v, c, r"\Gamma"))
-register_call_converter("log", _log)
-register_call_converter("log10", lambda v, c: unary(v, c, r"\log"))
-register_call_converter("log1p", lambda v, c: wrap(v, c, r"\ln \left(1 +", r"\right)"))
-register_call_converter("log2", lambda v, c: unary(v, c, r"\log_{2} "))
-register_call_converter("sqrt", lambda v, c: wrap(v, c, r"\sqrt{", "}", rank=BELOW_POW_RANK))
-register_call_converter("cbrt", lambda v, c: wrap(v, c, r"\sqrt[3]{", "}", rank=BELOW_POW_RANK))
-register_call_converter("sum", _sum_prod)
-register_call_converter("fsum", _sum_prod)
-register_call_converter("prod", _sum_prod)
-register_call_converter("sin", lambda v, c: unary(v, c, r"\sin "))
-register_call_converter("cos", lambda v, c: unary(v, c, r"\cos "))
-register_call_converter("tan", lambda v, c: unary(v, c, r"\tan "))
-register_call_converter("csc", lambda v, c: unary(v, c, r"\csc "))
-register_call_converter("sec", lambda v, c: unary(v, c, r"\sec "))
-register_call_converter("cot", lambda v, c: unary(v, c, r"\cot "))
-register_call_converter("sinh", lambda v, c: unary(v, c, r"\sinh "))
-register_call_converter("cosh", lambda v, c: unary(v, c, r"\cosh "))
-register_call_converter("tanh", lambda v, c: unary(v, c, r"\tanh "))
-register_call_converter("csch", lambda v, c: unary(v, c, r"\operatorname{csch} "))
-register_call_converter("sech", lambda v, c: unary(v, c, r"\operatorname{sech} "))
-register_call_converter("coth", lambda v, c: unary(v, c, r"\coth "))
-register_call_converter("asin", lambda v, c: unary(v, c, r"\arcsin "))
-register_call_converter("arcsin", lambda v, c: unary(v, c, r"\arcsin "))
-register_call_converter("acos", lambda v, c: unary(v, c, r"\arccos "))
-register_call_converter("arccos", lambda v, c: unary(v, c, r"\arccos "))
-register_call_converter("atan", lambda v, c: unary(v, c, r"\arctan "))
-register_call_converter("atan2", lambda v, c: unary(v, c, r"\arctan "))
-register_call_converter("arctan", lambda v, c: unary(v, c, r"\arctan "))
-register_call_converter("arccsc", lambda v, c: unary(v, c, r"\arccsc "))
-register_call_converter("arcsec", lambda v, c: unary(v, c, r"\arcsec "))
-register_call_converter("arccot", lambda v, c: unary(v, c, r"\arccot "))
-register_call_converter("arsinh", lambda v, c: unary(v, c, r"\operatorname{arsinh} "))
-register_call_converter("arcosh", lambda v, c: unary(v, c, r"\operatorname{arcosh} "))
-register_call_converter("artanh", lambda v, c: unary(v, c, r"\operatorname{artanh} "))
-register_call_converter("arcsch", lambda v, c: unary(v, c, r"\operatorname{arcsch} "))
-register_call_converter("arsech", lambda v, c: unary(v, c, r"\operatorname{arsech} "))
-register_call_converter("arcoth", lambda v, c: unary(v, c, r"\operatorname{arcoth} "))
+register_call_converter(max, lambda v, n: common.rename(v, n, r"\max"))
+register_call_converter(min, lambda v, n: common.rename(v, n, r"\min"))
+register_call_converter(abs, lambda v, n: common.wrap(v, n, r"\left|", r"\right|"))
+register_call_converter(sum, _sum)
+
+register_call_converter(math.fabs, lambda v, n: common.wrap(v, n, r"\left|", r"\right|"))
+register_call_converter(math.fsum, _sum)
+register_call_converter(math.prod, _prod)
+register_call_converter(math.ceil, lambda v, n: common.wrap(v, n, r"\left\lceil", r"\right\rceil"))
+register_call_converter(math.floor, lambda v, n: common.wrap(v, n, r"\left\lfloor", r"\right\rfloor"))
+register_call_converter(math.comb, lambda v, n: common.rename(v, n, r"\operatorname{C}"))
+register_call_converter(math.perm, lambda v, n: common.rename(v, n, r"\operatorname{P}"))
+register_call_converter(math.factorial, lambda v, n: common.unary(v, n, "", "!"))
+register_call_converter(math.gamma, lambda v, n: common.rename(v, n, r"\Gamma"))
+
+register_call_converter(math.exp, _exp)
+register_call_converter(math.log, _log)
+register_call_converter(math.log10, lambda v, n: common.unary(v, n, r"\log "))
+register_call_converter(math.log1p, lambda v, n: common.wrap(v, n, r"\ln \left(1 +", r"\right)"))
+register_call_converter(math.log2, lambda v, n: common.unary(v, n, r"\log_{2} "))
+register_call_converter(math.sqrt, lambda v, n: common.wrap(v, n, r"\sqrt{", "}", rank=ranks.BELOW_POW_RANK))
+register_call_converter(math.cbrt, lambda v, n: common.wrap(v, n, r"\sqrt[3]{", "}", rank=ranks.BELOW_POW_RANK))
+register_call_converter(math.isclose, _isclose)
+
+register_call_converter(math.sin, lambda v, n: common.unary(v, n, r"\sin "))
+register_call_converter(math.cos, lambda v, n: common.unary(v, n, r"\cos "))
+register_call_converter(math.tan, lambda v, n: common.unary(v, n, r"\tan "))
+register_call_converter("csc", lambda v, n: common.unary(v, n, r"\csc "))
+register_call_converter("sec", lambda v, n: common.unary(v, n, r"\sec "))
+register_call_converter("cot", lambda v, n: common.unary(v, n, r"\cot "))
+register_call_converter(math.sinh, lambda v, n: common.unary(v, n, r"\sinh "))
+register_call_converter(math.cosh, lambda v, n: common.unary(v, n, r"\cosh "))
+register_call_converter(math.tanh, lambda v, n: common.unary(v, n, r"\tanh "))
+register_call_converter("csch", lambda v, n: common.unary(v, n, r"\operatorname{csch} "))
+register_call_converter("sech", lambda v, n: common.unary(v, n, r"\operatorname{sech} "))
+register_call_converter("coth", lambda v, n: common.unary(v, n, r"\coth "))
+register_call_converter(math.asin, lambda v, n: common.unary(v, n, r"\arcsin "))
+register_call_converter("arcsin", lambda v, n: common.unary(v, n, r"\arcsin "))
+register_call_converter(math.acos, lambda v, n: common.unary(v, n, r"\arccos "))
+register_call_converter("arccos", lambda v, n: common.unary(v, n, r"\arccos "))
+register_call_converter(math.atan, lambda v, n: common.unary(v, n, r"\arctan "))
+register_call_converter(math.atan2, lambda v, n: common.unary(v, n, r"\arctan "))
+register_call_converter("arctan", lambda v, n: common.unary(v, n, r"\arctan "))
+register_call_converter("arccsc", lambda v, n: common.unary(v, n, r"\arccsc "))
+register_call_converter("arcsec", lambda v, n: common.unary(v, n, r"\arcsec "))
+register_call_converter("arccot", lambda v, n: common.unary(v, n, r"\arccot "))
+register_call_converter(math.asinh, lambda v, n: common.unary(v, n, r"\operatorname{arsinh} "))
+register_call_converter("arsinh", lambda v, n: common.unary(v, n, r"\operatorname{arsinh} "))
+register_call_converter(math.acosh, lambda v, n: common.unary(v, n, r"\operatorname{arcosh} "))
+register_call_converter("arcosh", lambda v, n: common.unary(v, n, r"\operatorname{arcosh} "))
+register_call_converter(math.atanh, lambda v, n: common.unary(v, n, r"\operatorname{artanh} "))
+register_call_converter("artanh", lambda v, n: common.unary(v, n, r"\operatorname{artanh} "))
+register_call_converter("arcsch", lambda v, n: common.unary(v, n, r"\operatorname{arcsch} "))
+register_call_converter("arsech", lambda v, n: common.unary(v, n, r"\operatorname{arsech} "))
+register_call_converter("arcoth", lambda v, n: common.unary(v, n, r"\operatorname{arcoth} "))

@@ -1,0 +1,229 @@
+---
+title: Get Started
+toc: true
+---
+
+Rubberize helps present Python calculations as clear, typeset mathematics.
+
+Instead of leaving calculations buried inside code, Rubberize renders them as readable mathematical steps. This makes computational work easier to review, explain, and document—especially in engineering and scientific workflows.
+
+In practice, this means notebooks and scripts can serve not only as executable code, but also as **clear calculation records**.
+
+Rubberize is particularly useful when calculations need to be read, reviewed, or shared, such as in:
+
+- Engineering calculation sheets
+- Scientific notebooks
+- Technical documentation
+- Educational materials
+
+Examples of how Python expressions are converted into mathematical notation can be found in the [Rendering Code](rendering/index.qmd) chapter.
+
+## Installation
+
+Install Rubberize using pip:
+
+```sh
+pip install rubberize
+```
+
+If you plan to use Rubberize in Jupyter notebooks (recommended for `%%tap`):
+
+```sh
+pip install rubberize[jupyter]
+```
+
+The `jupyter` extra installs the components required for notebook rendernig and exporting.
+
+## Using Rubberize in Jupyter
+
+Rubberize is commonly used inside Jupyter notebooks.
+
+Load the extension using the `%(re)load_ext` magic:
+
+```{python}
+%reload_ext rubberize
+```
+
+When the extension loads, Rubberize:
+
+- Enables the `%%tap` magic
+- Registers other notebook magics
+- Injects the required CSS for rendering
+
+## Your First Calculation
+
+The `%%tap` cell magic renders the contents of a code cell as typeset mathematics.
+
+```{python}
+%%tap
+import math
+
+# **The Pythagorean theorem**
+a = 3  # Length of first leg
+b = 4  # Length of second leg
+
+c = math.sqrt(a**2 + b**2)  # Length of the hypotenuse
+```
+
+When executed, the expressions are evaluated and displayed as formatted mathematical steps.
+
+Several things happen automatically:
+
+- Code statements like `import` are ignored.
+- Comments support Markdown and render as text annotations.
+- The expression `math.sqrt(a**2 + b**2)` appears in mathematical notation, showing substitution of known values and the final result.
+
+Detailed examples of how individual Python constructs are rendered are provided in the [Rendering](rendering/index.qmd) chapter.
+
+## Grid Mode
+
+Use the `--grid` (`-g`) option to display statements in an grid layout.
+
+This is useful when presenting groups of related values, such as calculation parameters, compactly.
+
+::: {.callout-note}
+Comments are ignored in this mode.
+:::
+
+```{python}
+%%tap --grid
+d = 0; e = 1; f = 2; g = 3
+h = 4; i = 5; j = 6; k = 7
+```
+
+## Dead Mode
+
+The `--dead` (`-d`) option renders the cell without execution.
+
+This allows Rubberize to convert symbolic expressions or incomplete (but valid) code into mathematical notation.
+
+```{python}
+%%tap --dead
+y = m * x + b  # Slope-intercept form of a linear equation
+```
+
+## Getting the Output Source
+
+Use the `--html` (`-h`) option to get the HTML source instead of the rendered output.
+
+This can be useful when copying the generated markup into other documents or tools.
+
+```{python}
+%%tap --html
+a + b
+```
+
+## Annotations
+
+Comments inside `%%tap` cells are rendered as text annotations. Rubberize supports Markdown formatting in comments.
+
+```{python}
+%%tap
+# **bold**
+# *italic*
+# <del>deleted</del>
+```
+
+Rubberize also provides additional annotation syntax, including:
+
+- Inline rendered expressions
+- Smaller text markers
+- Multi-line annotations
+- Alert boxes
+
+See [Annotations](rendering/annotations.qmd) for full examples and syntax.
+
+## Units
+
+Rubberize integrates well with Pint to support physical quantities.
+
+```{python}
+import pint
+
+ureg = pint.UnitRegistry()
+```
+
+```{python}
+%%tap
+import numpy as np
+
+# **The Pythagorean theorem**
+a = 3.0 * ureg.cm  # Length of first leg
+b = 4.0 * ureg.cm  # Length of second leg
+c = np.sqrt(a**2 + b**2)  # Length of the hypotenuse
+```
+
+See [Physical Quantities](rendering/pint.qmd) for more examples.
+
+## Calculation Sheets
+
+Rubberize also provides tools for structuring engineering calculation reports.
+
+The `CalcSheet` class organizes metadata, calculation headings, and design checks.
+
+```{python}
+%%tap
+from rubberize import CalcSheet
+sheet = CalcSheet(
+    "1.01",
+    "beam",
+    project="ACME Building, Baguio City",
+    system="General Framing System",
+    calc_type="load capacity analysis",
+    material="steel",
+    references=[
+        "ANSI/AISC 360-16. *Specification for Structural Steel Buildings*.",
+    ]
+)
+```
+
+Checks can then be recorded during the calculation:
+
+```{python}
+%%tap
+phi_b = 0.90 # Resistance factor
+M_n = 5.96 * (ureg.kN * ureg.m) # Nominal flexural strength
+M_r = 3.97 * (ureg.kN * ureg.m) # Required flexural strength
+sheet.check("flexural strength", M_r, phi_b * M_n)
+```
+
+And a final conclusion can be generated automatically.
+
+```{python}
+%%tap
+sheet.conclude(each_check=True)
+```
+
+See [Calculation Sheets](rendering/calcsheet.qmd) for more information on usage.
+
+## Customizing Rubberize
+
+Rubberize’s behavior can be customized using **options** and **shortcuts**, which are applied to `config`. Options modify how expressions are rendered by taking values, while shortcuts provide convenient presets to these options.
+
+Options and shortcuts are typically written with an `@` prefix when used inside a `%%tap` cell.
+
+```{python}
+%%tap @use_subscripts=False
+a_1 = 3.0 * ureg.cm
+b_1 = 4.0 * ureg.cm
+c_1 = np.sqrt(a**2 + b**2)  # @use_subscripts=True @nosub
+```
+
+Options and shortcuts can also be applied as comments within the code. When included in an inline comment, the specified configuration only apply to that line and override any cell configuration.
+
+See [Config Reference](config_reference.qmd) for the full list of options and a detailed explanation of how configuration is applied.
+
+
+## Exporting Notebooks
+
+Notebooks using Rubberize can be exported to PDF using `nbconvert`.
+
+Additionally, Rubberize ships its own HTML and PDF exporter which supports batch exporting of notebooks in a directory. It can be called using the `%export` line magic.
+
+::: {.callout-note}
+PDF export requires the Chromium dependency of [Playwright](https://playwright.dev), which can be installed it using `playwright install chromium`.
+:::
+
+::: {.callout-note}
+**Windows limitation:** `%export` behaves unexpectedly in Windows. As an alternative, use the function `rubberize.export_notebook()`
+:::

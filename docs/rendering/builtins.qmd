@@ -1,0 +1,74 @@
+---
+title: Built-in Types
+toc: true
+---
+
+```{python}
+%reload_ext rubberize
+from rubberize.config import config
+```
+
+Built-in Python types other than [numbers](numbers.qmd) and [collections](collections.qmd) are rendered like so:
+
+## Strings
+
+The font style for strings can be changed using `@str_font`:
+
+```{python}
+config.str_font
+```
+
+It can be changed to any of these values:
+
+| Font style | Value  | Rendered Output                         |
+|------------|--------|-----------------------------------------|
+| None       | `""`   | $\displaystyle \text{“Hello world!”}$   |
+| Boldface   | `"bf"` | $\displaystyle \textbf{“Hello world!”}$ |
+| Italics    | `"it"` | $\displaystyle \textit{“Hello world!”}$ |
+| Roman      | `"rm"` | $\displaystyle \textrm{“Hello world!”}$ |
+| Sans serif | `"sf"` | $\displaystyle \textsf{“Hello world!”}$ |
+| Typewriter | `"tt"` | $\displaystyle \texttt{“Hello world!”}$ |
+
+Additionally, string quotes can also be changed using `@str_quotes`:
+
+```{python}
+config.str_quotes
+```
+
+It can be changed to any of these values:
+
+| Quotation Marks | Value | Rendered Output                       |
+|-----------------|-------|---------------------------------------|
+| None            | `""`  | $\displaystyle \text{Hello world!}$   |
+| Single          | `"'"` | $\displaystyle \text{‘Hello world!’}$ |
+| Double          | `'"'` | $\displaystyle \text{“Hello world!”}$ |
+
+## Boolean
+
+```{python}
+%%tap --grid
+True
+False
+```
+
+## None Type
+
+```{python}
+%%tap
+None
+```
+
+# Range
+
+```{python}
+%%tap --dead
+range(25)
+range(x, y, 2)
+```
+
+# Ellipsis Type
+
+```{python}
+%%tap
+(...)
+```

@@ -1,0 +1,185 @@
+---
+title: Calls
+toc: true
+---
+
+```{python}
+%reload_ext rubberize
+from rubberize.config import config
+```
+
+## Built-in Class Calls
+
+Class calls to instantiate built-in types are rendered as the resulting object:
+
+```{python}
+%%tap --grid
+from decimal import Decimal
+from fractions import Fraction
+
+int(42.3042)
+float(69)
+Decimal('0.00004291')
+Fraction(0.3125)
+```
+
+```{python}
+%%tap --grid
+list((3, 5, 6))
+tuple([3, 5, 6])
+set([3, 5, 6])
+```
+
+```{python}
+%%tap --grid
+dict([("a", 1), ("b", 2)])
+complex(3, 4)
+range(25)
+```
+
+## Built-in Functions
+
+Most mathematical functions built into Python are rendered in math notation:
+
+```{python}
+%%tap --grid
+import math
+
+abs(-40)
+math.fabs(-42.0)
+math.ceil(8008.135)
+math.floor(8008.135)
+```
+
+```{python}
+%%tap --grid
+math.comb(5, 3)
+math.perm(5, 3)
+math.exp(5)
+math.exp(5/2)
+```
+
+```{python}
+%%tap --grid
+math.gamma(5)
+math.factorial(10)
+math.sqrt(3**2 + 4**2)
+math.cbrt(3**2 + 4**2)
+```
+
+### Trigonometric Functions
+
+Trigonometric functions are rendered as unary functions. If its argument is a single value and not an expression, it is not wrapped in parentheses.
+
+```{python}
+%%tap --grid
+import pint
+
+ureg = pint.UnitRegistry()  # @hide
+
+math.sin(1.309)
+math.sin(75 * ureg.deg)
+math.sin(math.pi / 4 + math.pi / 6)
+```
+
+### Logarithmic Functions
+
+Rubberize follows the convention of using $\displaystyle \log x$ for the common logarithm (base 10) and $\displaystyle \ln x$ for the natural logarithm.
+
+```{python}
+%%tap --grid
+math.log(3)
+math.log(3, 2)
+math.log(3, math.e)
+math.log(3, 10)
+```
+
+```{python}
+%%tap --grid
+math.log10(3)
+math.log1p(2)
+math.log2(3)
+```
+
+### Summation
+
+The following summations are rendered in standard mathematical notation:
+
+- Summation of elements of an iterable
+- Summation using a generator expression for an iterable
+- Summation using a generator expression over a range
+
+```{python}
+%%tap
+A_vec = [12, 32, 18]
+B_vec = [1, 8, 2]
+
+sum(A_vec)  # Sum of elements
+sum(3 * x for x in A_vec)  # Sum using a generator expression
+sum(x + 1 for x in range(1, 6))  # Sum over a range
+sum(x * y for x in A_vec for y in B_vec)  # Using two lists
+sum((x**2 for x in range(5)), start=50) * 2  # With a start value
+```
+
+### Pi Product
+
+The same rendering rules also apply to pi products:
+
+```{python}
+%%tap
+A_vec = [12, 32, 18]
+B_vec = [1, 8, 2]
+
+math.prod(A_vec)  # Product of elements
+math.prod(3 * x for x in A_vec)  # Product using a generator expression
+math.prod(x + 1 for x in range(1, 6))  # Product over a range
+math.prod(x - y for x in A_vec if x < 15 for y in B_vec)  # Using two lists
+math.prod((x for x in range(1, 5)), start=50) + 2  # With a start value
+```
+
+## Aliased Functions
+
+Function call transformations are resolved through a registry of converter functions registered with Rubberize. The registry is first consulted using the function object itself; if no match is found, the function name is used as a fallback. As a result, aliased functions are handled correctly:
+
+```{python}
+%%tap
+foo = max
+foo(A_vec)
+```
+
+## Unknown Functions
+
+If a function has no registered converter, the general form is used:
+
+```{python}
+def max_a_b(a, *, b=10):
+    return a if a > b else b
+
+def foo(a, /, b, *args, **kwargs):
+    return None
+```
+
+```{python}
+%%tap
+max_a_b(3)
+max_a_b(3, b=9)
+foo(1, 2, *(3, 4), **{"a": 5})
+```
+
+If needed, `register_call_converter()` can be used to define how Rubberize renders a specific function call. For a guide on creating a custom call converter, see the [Custom Converters](../advanced/custom_converters.qmd) guide.
+
+## Suppressing Conversion
+
+`@convert_special_calls` controls whether Rubberize applies special conversion rules to class and function calls:
+
+```{python}
+config.convert_special_calls
+```
+
+When set to `False`, calls are rendered using the general form.
+
+```{python}
+%%tap
+math.exp(5)
+math.exp(5)  # @convert_special_calls=False
+```

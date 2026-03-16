@@ -1,0 +1,228 @@
+---
+title: Variables
+toc: true
+---
+
+```{python}
+%reload_ext rubberize
+from rubberize.config import config
+```
+
+Python variables are rendered considering the following rules:
+
+- **Single letters** are rendered in italics
+- **Words** (i.e., a chain of multiple letters) appear roman.
+
+```{python}
+%%tap --dead --grid
+a; b; x; y; apple; boy; xylophone; yoyo
+```
+
+Depending on the Config Options, additional rendering rules are applied.
+
+## Subscripts
+
+`@use_subscripts` controls whether subscript rules will be applied to variables:
+
+```{python}
+config.use_subscripts
+```
+
+When it is set to `True`, the following rules apply:
+
+### Names with Underscores
+
+The first underscore is treated as a subscript marker. The left part is rendered as the base name of the variable, and the right part is rendered as the variable subscript.
+
+Subsequent underscores are rendered as commas within the subscript part.
+
+```{python}
+%%tap --dead --grid
+f_o; I_x_male; foo_bulous; foo_a_bravo_c_d
+```
+
+Two or more consecutive underscores are rendered as a single literal underscore rather than indicating a subscript.
+
+```{python}
+%%tap --dead --grid
+f__o; I__x_male; I_x__male; foo__a_bravo_c__d
+```
+
+### Leading and Trailing Underscores
+
+Leading and trailing underscores are not converted to subscripts. If the variable name includes subscripts, the leading and trailing underscores are attached to the base part and not on the subscript.
+
+```{python}
+%%tap --dead --grid
+_private; __very__private; __dunder__; __base_subscript__
+```
+
+### Disabling Subscripts
+
+When `@use_subscripts=False`, all underscores are shown as literal underscores, and variables will be rendered exactly as they are written but using a Roman font.
+
+```{python}
+%%tap --dead --grid @use_subscripts=False
+I_x_male; I__x_male; foo__a_bravo_c__d; __base_subscript__
+```
+
+## Math Symbols
+
+`@use_symbols` controls whether certain words will be transformed to symbols in variables:
+
+```{python}
+config.use_symbols
+```
+
+When it is set to `True`, Greek letters, accents, and modifier keywords are rendered with their proper math symbols.
+
+### Greek Letters
+
+Python variable name parts that match Greek or Hebrew letter names are replaced with their corresponding symbols. For example, `alpha` becomes $\alpha$, and `Omega` becomes $\Omega$.
+
+```{python}
+%%tap --dead --grid
+x_gamma; Omega_b_o; delta_max; phiR_n
+```
+
+These are all the Greek letter names that are converted when used:
+
+```{python}
+%%tap --dead --grid
+alpha; beta; (Gamma, gamma); (Delta, delta)
+(epsilon, varepsilon); zeta; eta; (Theta, theta, vartheta)
+iota; (kappa, varkappa); (Lambda, lambda_); mu
+nu; (Xi, xi); omicron; (Pi, pi, varpi)
+(rho, varrho); (Sigma, sigma, varsigma); tau; (Upsilon, upsilon)
+(Phi, phi, varphi); chi; (Psi, psi); (Omega, omega)
+```
+
+Due to name conflict with the Python `lambda` statement, `lambda_` is used to render a standalone $\lambda$.
+
+::: {.callout-note}
+Capital Greek letters that resemble Latin letters (A, B, E, Z, H, K, I, M, N, O, R, T, and X) are excluded to avoid ambiguity.
+:::
+
+In addition, these Hebrew letter names are also converted:
+
+```{python}
+%%tap --dead --grid
+digamma; aleph; beth; gimel
+```
+
+### Starting Greek Letter
+
+If the base part of a variable starts with certain Greek letters, it will be rendered as a symbol alongside the rest of the base part.
+
+```{python}
+%%tap --dead --grid
+DeltaT; psiR_k
+```
+
+These Greek letter keywords that are defined in `@greek_starts`:
+
+```{python}
+config.greek_starts
+```
+
+To add or remove Greek letters that should be rendered when it appears in the beginning of the base name part, use the `config` methods `add_greek_start()` or `remove_greek_start()`, respectively.
+
+For example:
+
+```{python}
+config.add_greek_start("Sigma", "Pi")
+config.remove_greek_start("gamma", "phi", "psi")
+
+config.greek_starts
+```
+
+```{python}
+%%tap --dead --grid
+Sigmaboy; phiF_y
+```
+
+### Accents and Modifiers
+
+Variable names with specific keywords after an underscore (e.g., `_hat`, `_bar`) are rendered with the corresponding accent or modifier.
+
+```{python}
+%%tap --dead --grid
+x_bar; k_hat; f_prime; L_star_a
+```
+
+These are all the accents and modifiers that can be converted:
+
+```{python}
+%%tap --dead --grid
+foo_hat; foo_widehat; foo_bar; foo_widebar
+foo_tilde; foo_widetilde; foo_dot; foo_ddot
+foo_dddot; foo_ddddot; foo_breve; foo_check
+foo_acute; foo_grave; foo_ring; foo_mat
+foo_vec; foo_vec2; foo_widevec2; foo_prime
+foo_star; foo_sstar; foo_ssstar; foo_sssstar
+foo_plus; foo_minus; foo_oplus; foo_ominus
+foo_plusminus
+```
+
+::: {.callout-tip}
+`foo_mat` and `foo_vec` will render similarly. To avoid confusion, they are not recommended to be used together on a single notebook.
+:::
+
+### Disabling Symbols
+
+When `@use_symbols=False`, all greek, accent, and modifier keywords will be rendered exactly as they are typed but using a Roman font.
+
+```{python}
+%%tap --dead --grid @use_symbols=False
+alpha_widebar
+```
+
+## Attributes
+
+Attribute access is rendered the same as you would write it in Python.
+
+```{python}
+class Foo:
+    def __init__(self):
+        self.bar = 42  # Instance attribute
+```
+
+```{python}
+%%tap
+foo = Foo()
+foo.bar  # Attribute access
+```
+
+### Hidden Modules
+
+Some module names, such as `math`, are not rendered, leaving only its attributes:
+
+```{python}
+%%tap
+import math
+
+math.pi  # Hidden module name
+```
+
+This is controlled by the `@hidden_modules`:
+
+```{python}
+config.hidden_modules
+```
+
+To add or remove module names that should be hidden when the attribute is rendered, use the `config` methods `add_hidden_module()` or `remove_hidden_module()`, respectively.
+
+For example:
+
+```{python}
+config.add_hidden_module("scipy", "foo")
+config.remove_hidden_module("math")
+
+config.hidden_modules
+```
+
+```{python}
+%%tap
+foo.bar  # `foo` now hidden
+math.pi  # `math` now shown
+```

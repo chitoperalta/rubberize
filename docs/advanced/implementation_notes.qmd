@@ -1,0 +1,43 @@
+---
+title: Implementation Notes
+toc: true
+---
+
+First, the code inside a `%%tap` cell is parsed into an abstract syntax tree (AST) using a custom parser. Unlike Python’s standard `ast` module, this parser preserves comments by including them as new nodes in the tree.
+
+Rubberize then walks the syntax tree using its `latexer` and translates Python expressions into $LaTeX$ based on predefined rules, and stores the comments as annotation. Additionally, variable values are retrieved from the execution and substituted into expressions as auxillary representations.
+
+Finally, Rubberize provides HTML layout and styling using its `render`(er), and in notebooks generated LaTeX is rendered using MathJax.
+
+In simplified form, the process looks like this:
+
+```{mermaid}
+flowchart TD
+
+    A[Cell]
+    B[Python Code]
+    C[AST with Comments]
+    D[Comment Nodes]
+    E[Latexer]
+    F[Render]
+    H[Python Nodes]
+    G[HTML + Mathjax]
+    I[Execute]
+
+
+    A --> B
+    B --> C
+    C --> D
+    D --> E
+    E --> F
+    F --> G
+
+    C --> H
+    H --> E
+    I --> E
+    B --> I
+```
+
+Rubberize does not change how Python executes. The original code still runs normally, and variables remain available for later cells. Rendering simply provides a mathematical view of the code.
+
+The sections in this chapter describe how different parts of Python code are translated into mathematical notation.

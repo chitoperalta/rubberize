@@ -1,0 +1,266 @@
+---
+title: Config Reference
+toc: true
+tbl-colwidths: [25,25,50]
+---
+
+```{python}
+%reload_ext rubberize
+```
+
+Rubberize's behavior is controlled through **options** and **shortcuts**. Options take values and adjust specific aspects of how expressions are rendered, while shortcuts provide convenient presets for these options.
+
+Rubberize maintains a global configuration object, `config`, that applies for the duration of the session. However, configuration can also be overridden at the `%%tap` cell or code level.
+
+When multiple configuration sources are present, the most specific one takes precedence. From lowest to highest precedence:
+
+- JSON loaded by `config.load`
+- Options passed to `config.path`
+- `%%tap` cell option and shortcut arguments
+- Options and shortcuts included in line comments
+- Options and shortcuts included in inline comments
+
+Options applied closer to the code they affect override those defined at broader scopes.
+
+## Applying Configuration
+
+The following sections describe the different ways configuration can be applied.
+
+### Inline Comments
+
+Options and shortcuts included in inline comments provide the most specific form of configuration. They apply only to the **expression on that line** and override any options defined elsewhere.
+
+Configuration is prefixed with an `@` symbol to indicate that it is an option or a shortcut.
+
+The rest of the inline comment is still rendered as annotation.
+
+```{python}
+%%tap
+omega_b = 1.67  # Safety factor
+phi_b = 0.90    # @use_subscripts=False Load resistance factor
+```
+
+In this example, the option applies only to the second line.
+
+### Line Comments
+
+Options and shortcuts written in a line comment apply to **all subsequent lines** in the cell until another line comment is encountered.
+
+Similar to inline comments, configuration is prefixed with an `@` symbol.
+
+The rest of the line comment is still rendered as annotation.
+
+```{python}
+%%tap
+# @use_subscripts=False **Variables are not subscripted**
+p_a = 1
+p_b = (2, 3)  # @use_subscripts=True Inline comment overrides line comment
+
+# **Config is reset after a new line comment**
+p_c = [4, 5, 6]
+p_d = 7
+```
+
+### `%%tap` Cell Arguments
+
+Options and shortcuts can be provided as arguments to the `%%tap` cell. These options apply to **all lines within the cell** unless overridden by line or inline comments.
+
+```{python}
+%%tap @use_subscripts=False
+omega_b = 1.67
+phi_b = 0.90  # @use_subscripts=True Inline comment overrides `%%tap` args
+```
+
+::: {.callout-important}
+For options that take sequences, use lists without spaces to avoid syntax errors.
+:::
+
+```{python}
+%%tap @greek_starts=["pi","nu"]
+piQ_a = 0
+```
+
+### Global Configuration
+
+The global configuration can be modified directly using the `config` object. Changes made this way apply to the **entire notebook session**.
+
+```{python}
+from rubberize import config
+
+config.set(multiline=True, use_symbols=False)
+```
+
+Unlike cell-level configuration, options are passed as arguments and shortcuts are not supported.
+
+```{python}
+%%tap
+import math
+
+theta = math.pi / 3  # @multiline=False Inline comment overrides config
+H = 5
+O = H * math.sin(theta)
+```
+
+To restore the default values for modified options:
+
+```{python}
+config.reset("multiline", "use_symbols")
+```
+
+### Configuration Files
+
+The global configuration can be initialized from default values or from a JSON file using `config.load()`.
+
+```{python}
+config.load()
+```
+
+When called without arguments, this restores the default configuration. This is equivalent co calling `config.reset()`.
+
+A JSON file can also be used to define custom defaults. The JSON file does not need to define every option. Any options that are not specified in the file continue to use their built-in default values. In effect, the file only overrides the options it contains.
+
+For example:
+
+```{.json filename="sample_config.json"}
+{
+    "multiline": true,
+    "use_symbols": false,
+    "greek_starts": ["pi", "nu"]
+}
+```
+
+This file changes only those three options while leaving all other configuration values unchanged.
+
+Use the `path` keyword argument to load the JSON file:
+
+```{python}
+config.load(path="sample_config.json")
+```
+
+```{python}
+print(config.multiline)
+print(config.use_symbols)
+print(config.greek_starts)
+```
+
+If specific option names are provided, only those options are updated:
+
+```{python}
+config.reset()
+
+config.load("multiline", "greek_starts", path="sample_config.json")
+```
+
+```{python}
+print(config.multiline)
+print(config.use_symbols)
+print(config.greek_starts)
+```
+
+Configuration loaded in this way forms the **base configuration** for the session. More specific configuration sources&mdash;such as `config.set`, `%%tap` arguments, and comment inclusions&mdash;can override these values.
+
+## Options
+
+Configuration options are name-value pairs.
+
+### Name Rendering
+
+| Option            | Type       | Description                                                                                                                                                                                      |
+| ----------------- | ---------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `@use_subscripts` | `bool`     | Convert the first underscore (`_`) in variables to subscripts when rendered, and the succeeding underscores as comma delimiters. See [subscripts rendering](rendering/variables.qmd#subscripts). |
+| `@use_symbols`    | `bool`     | Convert Greek letter names, accents, and modifier syntax to proper mathematical symbols. See [symbols rendering](rendering/variables.qmd#math-symbols).                                          |
+| `@greek_starts`   | `set[str]` | Greek letters that will still be converted when it appears in the beginning of the base name. See [greek starts rendering](rendering/variables.qmd#starting-greek-letter).                       |
+| `@hidden_modules` | `set[str]` | Names found in this set will be skipped from being rendered when accessed as an attribute. See [hidden modules rendering](rendering/variables.qmd#hidden-modules).                               |
+
+### String Rendering
+
+| Option        | Type                                            | Description                                                                                                            |
+| ------------- | ----------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------- |
+| `@str_font`   | `""`, `"bf"`, `"it"`, `"rm"`, `"sf"`, or `"tt"` | Set the LaTeX font style for `str` types. See [string rendering](rendering/builtins.qmd#strings).                      |
+| `@str_quotes` | `""`, `"'"`, or `'"'`                           | Set the quotation marks in the rendered LaTeX for `str` types. See [string rendering](rendering/builtins.qmd#strings). |
+
+### Number Rendering
+
+| Option                  | Type                                  | Description                                                                                                                                                                                                            |
+| ----------------------- | ------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `@float_format`         | `"FIX"`, `"SCI"`, `"GEN"`, or `"ENG"` | Set the format used to render floats. See [float rendering format](rendering/numbers.qmd#formats).                                                                                                                     |
+| `@float_prec`           | `int`                                 | If `@num_format="FIX"`, set the **number of decimal digits** to be rendered. Otherwise, it is the **number of significant figures** to be rendered.                                                                    |
+| `@float_max_digits`     | `int`                                 | Only works when `@num_format="FIX"`. Floats with more digits than this value will automatically switch to `"SCI"` format for readability. See [large and small floats](rendering/numbers.qmd#large-and-small-numbers). |
+| `@use_e_not`            | `bool`                                | Show scientific notation as [E notation](https://en.wikipedia.org/wiki/Scientific_notation#E_notation). See [E notation rendering](rendering/numbers.qmd#e-notation).                                                  |
+| `@thousands_separator`  | `""`, `" "`, `","`, `"."`, or `"'"`   | Set the thousands separator for numbers. See [thousands separator rendering](rendering/numbers.qmd#thousands-separator).                                                                                               |
+| `@decimal_marker`       | `"."` or `","`                        | Set the decimal marker for numbers, See [decimal marker rendering](rendering/numbers.qmd#decimal-marker).                                                                                                              |
+| `@zero_float_threshold` | `float`                               | If the absolute value of the number is less than this value, it will be rendered as zero. See [large and small floats](rendering/numbers.qmd#large-and-small-numbers).                                                 |
+| `@use_polar`            | `bool`                                | Display `complex` types in polar form. See [polar rendering](rendering/numbers.qmd#polar-form).                                                                                                                        |
+| `@use_polar_deg`        | `bool`                                | Only works when `@use_polar=True`. Render degrees for phase angles of complex numbers instead of radians.                                                                                                              |
+
+### Collection Rendering
+
+| Option                 | Type                       | Description                                                                                                                                                                                                    |
+| ---------------------- | -------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `@max_inline_elts`     | `int`                      | Maximum number of inline elements before a vertical layout for the collection is forced. See [list vertical alignment rendering](rendering/collections.qmd#aligning-vertically), among other collection types. |
+| `@show_list_as_array`  | `bool`                     | Display lists as arrays, if possible. See [list array rendering](rendering/collections.qmd#as-an-array).                                                                                                       |
+| `@show_tuple_as_array` | `bool`                     | Display tuples as arrays, if possible. See [tuple array rendering](rendering/collections.qmd#as-an-array-1).                                                                                                   |
+| `@show_1d_as_col`      | `bool`                     | Display 1D arrays vertically as columns. See [1D array rendering](rendering/numpy.qmd#as-an-array).                                                                                                            |
+| `@array_delimiter`     | `"pmatrix"` or `"bmatrix"` | Delimiters to use in arrays. See [array delimiter rendering](rendering/collections.qmd#as-an-array).                                                                                                           |
+
+### Expression Rendering
+
+| Option                   | Type   | Description                                                                                                                                                                                           |
+| ------------------------ | ------ | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `@wrap_indices`          | `bool` | Enclose element index and dictionary key access in parentheses. See [list element access rendering](rendering/collections.qmd#list-element-access), among other collection types.                     |
+| `@convert_special_calls` | `bool` | If false, prevent the rendering of calls using a defined converter function. See [calls rendering](rendering/calls.qmd#suppressing-conversion).                                                       |
+| `@use_contextual_mult`   | `bool` | Use a multiplication symbol appropriate to the operands being multiplied. Also see [contextual mult rendering](rendering/operations.qmd#contextual-multiplication-symbol).                            |
+| `@max_inline_bool`       | `int`  | Maximum number of similar inline boolean operators before they are collected and rendered vertically in braces. Also see [logical operations rendering](rendering/operations.qmd#logical-operations). |
+
+### Display Modes
+
+| Option               | Type       | Description                                                                                                                                                        |
+| -------------------- | ---------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `@show_definition`   | `bool`     | Show the base form of the expression, before specific values have been substituted. See [display modes rendering](rendering/expressions.qmd#display-modes).        |
+| `@show_substitution` | `bool`     | Show the expression after substituting numerical values to variables. See [display modes rendering](rendering/expressions.qmd#display-modes).                      |
+| `@show_result`       | `bool`     | Show the final calculated value for the expression. See [display modes rendering](rendering/expressions.qmd#display-modes).                                        |
+| `@multiline`         | `bool`     | Arrange display modes such that each mode is on its own line. See [multiline rendering](rendering/expressions.qmd#multiline).                                      |
+| `@math_constants`    | `set[str]` | Symbol names found in this set will not be substituted in the substitution display mode. See [math constants rendering](rendering/expressions.qmd#math-constants). |
+
+### Pint Physical Quantity Rendering
+
+| Option              | Type   | Description                                                                                                                             |
+| ------------------- | ------ | --------------------------------------------------------------------------------------------------------------------------------------- |
+| `@use_inline_units` | `bool` | Display units inline. See [inline units rendering](rendering/pint.qmd#inline-units).                                                    |
+| `@use_dms_units`    | `bool` | Display angle quantities in degree-minute-second (DMS) format. See [DMS angle rendering](rendering/pint.qmd#degree-minute-second).      |
+| `@use_fif_units`    | `bool` | Display length quantities in foot-inch-fraction (FIF) format. See [FIF length rendering](rendering/pint.qmd#foot-inch-fraction).        |
+| `@fif_prec`         | `int`  | Set the precision of the fractional part in FIF units, e.g., `16` for 1/16 of an inch precision. Only works when `@use_fif_units=True`. |
+
+### NumPy Array Rendering
+
+The [collection rendering](#collection-rendering) options `@show_1d_as_col` and `@array_delimiter` are also used to control the appearance of NumPy arrays.
+
+## Shortcuts
+
+Shortcuts are presets that represent one or more options.
+
+| Shortcut   | Equivalent options                                                   | Description                                                              |
+| ---------- | -------------------------------------------------------------------- | ------------------------------------------------------------------------ |
+| `@hide`    | N/A                                                                  | Suppress any rendering for the line or subsequent lines.                 |
+| `@endhide` | N/A                                                                  | Used with line comment `@hide` to end suppression of rendering of lines. |
+| `@none`    | `@show_definition=False @show_substitution=False @show_result=False` | Hide all display modes.                                                  |
+| `@all`     | `@show_definition=True @show_substitution=True @show_result=True`    | Show all display modes.                                                  |
+| `@def`     | `@show_definition=True @show_substitution=False @show_result=False`  | Show only the definition display mode.                                   |
+| `@sub`     | `@show_definition=False @show_substitution=True @show_result=False`  | Show only the substitution display mode.                                 |
+| `@res`     | `@show_definition=False @show_substitution=False @show_result=True`  | Show only the results display mode.                                      |
+| `@nodef`   | `@show_definition=False @show_substitution=True @show_result=True`   | Show all display modes except the definition.                            |
+| `@nosub`   | `@show_definition=True @show_substitution=False @show_result=True`   | Show all display modes except the substitution.                          |
+| `@nores`   | `@show_definition=True @show_substitution=True @show_result=False`   | Show all display modes except the result.                                |
+| `@line`    | `@multiline=False`                                                   | Arrange display modes on a line.                                         |
+| `@stack`   | `@multiline=True`                                                    | Stack the display modes.                                                 |
+| `@fix`     | `@float_format="FIX"`                                                | Use a fixed-point decimal notation number format.                        |
+| `@sci`     | `@float_format="SCI"`                                                | Use a scientific notation number format.                                 |
+| `@gen`     | `@float_format="GEN"`                                                | Use a general notation number format.                                    |
+| `@eng`     | `@float_format="ENG"`                                                | Use an engineering notation number format.                               |
+| `@0`       | `@float_prec=0`                                                      |                                                                          |
+| `@1`       | `@float_prec=1`                                                      |                                                                          |
+| `@2`       | `@float_prec=2`                                                      |                                                                          |
+| `@3`       | `@float_prec=3`                                                      |                                                                          |
+| `@4`       | `@float_prec=4`                                                      |                                                                          |
+| `@5`       | `@float_prec=5`                                                      |                                                                          |
+| `@6`       | `@float_prec=6`                                                      |                                                                          |

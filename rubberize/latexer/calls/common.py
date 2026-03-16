@@ -1,127 +1,180 @@
-"""Useful converters."""
+"""Useful non-specific call converters."""
+
+from __future__ import annotations
 
 import ast
-from typing import Optional, TYPE_CHECKING
+import copy
+from typing import TYPE_CHECKING
 
+from rubberize.latexer import formatters, helpers, ranks, rules
 from rubberize.latexer.expr_latex import ExprLatex
-from rubberize.latexer.formatters import format_delims, format_elts
-from rubberize.latexer.node_helpers import get_id, get_object, is_method
 from rubberize.latexer.objects import convert_object
-from rubberize.latexer.ranks import BELOW_POW_RANK, VALUE_RANK
 
 if TYPE_CHECKING:
-    from rubberize.latexer.node_visitors import ExprVisitor
+    from rubberize.latexer.visitors import ExprVisitor
+
+
+def no_substitution(visitor: ExprVisitor) -> ExprVisitor:
+    """Return a copy of the visitor without a namespace to suppress
+    generating a substitution display mode.
+    """
+
+    if visitor.ns is not None:
+        visitor = copy.copy(visitor)
+        visitor.ns = None
+
+    return visitor
 
 
 def get_result_and_convert(
-    visitor: "ExprVisitor", call: ast.Call
-) -> Optional[ExprLatex]:
-    """Common converter that gets the resulting object of a call node's
-    call, and then converts the resulting object to latex."""
+    visitor: ExprVisitor, node: ast.Call
+) -> ExprLatex | None:
+    """Get the resulting object of an ast.Call node, and then convert
+    the object to latex."""
 
-    obj = get_object(call, visitor.namespace)
+    obj = helpers.get_object(node, visitor.ns)
+
     if obj is None:
         return None
+
     return convert_object(obj)
 
 
 # pylint: disable-next=too-many-arguments
 def wrap(
-    visitor: "ExprVisitor",
-    call: ast.Call,
+    visitor: ExprVisitor,
+    node: ast.Call,
     prefix: str,
     suffix: str,
     sep: str = r",\, ",
     *,
-    rank: int = VALUE_RANK,
+    rank: int = ranks.VALUE_RANK,
 ) -> ExprLatex:
-    """Common converter that adds prefix, suffix, and separator to args."""
+    """Remove the name and wrap prefix, suffix, and separator to args."""
 
-    args_latex = [visitor.visit(a).latex for a in call.args]
-    latex = format_elts(args_latex, sep, (prefix, suffix))
+    args = [visitor.visit(a).latex for a in node.args]
+
+    for kw in node.keywords:
+        val = visitor.visit(kw.value).latex
+        if kw.arg is None:
+            args.append("{**}" + val)
+        else:
+            kwarg = formatters.format_name(kw.arg)
+            args.append(f"{kwarg}{rules.KWARG_ASSIGN}{val}")
+
+    latex = formatters.format_delims(prefix, sep.join(args), suffix)
 
     return ExprLatex(latex, rank)
 
 
 # pylint: disable-next=too-many-arguments
 def wrap_method(
-    visitor: "ExprVisitor",
-    call: ast.Call,
+    visitor: ExprVisitor,
+    node: ast.Call,
     prefix: str,
     suffix: str,
-    sep: str = r",\, ",
+    sep: str = rules.CALL_ARGS_SYNTAX[1],
     *,
-    rank: int = VALUE_RANK,
-) -> ExprLatex:
-    """Common converter that adds prefix, suffix, and separator to
-    attribute value and args."""
+    rank: int = ranks.VALUE_RANK,
+) -> ExprLatex | None:
+    """Remove the name, add the object of the method call as the first
+    argument, and wrap prefix, suffix, and separator to args.
 
-    assert isinstance(call.func, ast.Attribute)
+    foo.bar(a, b) -> (foo, a, b)
+    """
 
-    args_latex = [visitor.visit(call.func.value).latex]
-    for arg in call.args:
-        args_latex.append(visitor.visit(arg).latex)
-    latex = format_elts(args_latex, sep, (prefix, suffix))
+    if not isinstance(node.func, ast.Attribute):
+        return None
+
+    args = [visitor.visit(node.func.value).latex]
+
+    for a in node.args:
+        args.append(visitor.visit(a).latex)
+
+    for kw in node.keywords:
+        val = visitor.visit(kw.value).latex
+        if kw.arg is None:
+            args.append("{**}" + val)
+        else:
+            kwarg = formatters.format_name(kw.arg)
+            args.append(f"{kwarg}{rules.KWARG_ASSIGN}{val}")
+
+    latex = formatters.format_delims(prefix, sep.join(args), suffix)
 
     return ExprLatex(latex, rank)
 
 
 def rename(
-    visitor: "ExprVisitor", call: ast.Call, name: str, *, rank: int = VALUE_RANK
+    visitor: ExprVisitor,
+    node: ast.Call,
+    name: str,
+    *,
+    rank: int = ranks.CALL_RANK,
 ) -> ExprLatex:
-    """Common converter that only changes the operator name."""
+    """Change the operator name and retain the default call syntax."""
 
-    args_latex = [visitor.visit(a).latex for a in call.args]
-    latex = name + format_elts(args_latex, r",\, ", (r"\left(", r"\right)"))
+    prefix, sep, suffix = rules.CALL_ARGS_SYNTAX
+    prefix = f"{name} {prefix}"
 
-    return ExprLatex(latex, rank)
+    return wrap(visitor, node, prefix, suffix, sep, rank=rank)
+
+
+def rename_method(
+    visitor: ExprVisitor,
+    node: ast.Call,
+    name: str,
+    *,
+    rank: int = ranks.CALL_RANK,
+) -> ExprLatex | None:
+    """Change the operator name, add the object of the method call as
+    the first argument, and retain the default call syntax.
+    """
+
+    prefix, sep, suffix = rules.CALL_ARGS_SYNTAX
+    prefix = f"{name} {prefix}"
+
+    return wrap_method(visitor, node, prefix, suffix, sep, rank=rank)
 
 
 def unary(
-    visitor: "ExprVisitor", call: ast.Call, prefix: str, suffix: str = ""
+    visitor: ExprVisitor,
+    node: ast.Call,
+    prefix: str,
+    suffix: str = "",
+    *,
+    rank: int = ranks.BELOW_POW_RANK,
 ) -> ExprLatex:
-    """Common converter for math functions that notationally take only
-    one argument.
-    """
+    """Math function that notationally take only one argument."""
 
-    rank = BELOW_POW_RANK
+    iden = helpers.get_id(node.func)
+    arg = node.args[0]
 
-    name = get_id(call.func)
-    call_arg = call.args[0]
-
-    is_fac_arg = isinstance(call_arg, ast.Call) and (
-        name == "factorial" or get_id(call_arg) == "factorial"
+    # special cases: arg is factorial or exponentiation
+    is_fac = isinstance(arg, ast.Call) and (
+        iden == "factorial" or helpers.get_id(arg) == "factorial"
     )
-    is_pow_arg = isinstance(call_arg, ast.BinOp) and isinstance(
-        call_arg.op, ast.Pow
-    )
+    is_pow = isinstance(arg, ast.BinOp) and isinstance(arg.op, ast.Pow)
 
-    arg = visitor.visit_opd(call_arg, rank, force=is_fac_arg or is_pow_arg)
-    latex = format_delims(arg.latex, (prefix, suffix))
+    arg = visitor.visit_operand(arg, rank, force=is_fac or is_pow).latex
+    latex = formatters.format_delims(prefix, arg, suffix)
 
     return ExprLatex(latex, rank)
 
 
-def first_arg(visitor: "ExprVisitor", call: ast.Call) -> ExprLatex:
-    """Common converter that only returns the converted first argument
-    of the call, effectively hiding the call on the first arg.
+def first_arg(visitor: ExprVisitor, node: ast.Call) -> ExprLatex:
+    """Visit and return LaTeX for the first argument only, effectively
+    hiding the call on the argument.
     """
 
-    return visitor.visit(call.args[0])
+    return visitor.visit(node.args[0])
 
 
-def hide_method(
-    visitor: "ExprVisitor", call: ast.Call, cls: type
-) -> Optional[ExprLatex]:
-    """Common converter that visits the parent object of a method
-    call and hides the method call and its arguments.
+def hide_method(visitor: ExprVisitor, node: ast.Call) -> ExprLatex | None:
+    """Visit and return LaTeX of the parent object of a method call,
+    effectively hiding the call itself and its arguments.
     """
 
-    method = get_id(call.func)
-    assert method is not None
-
-    if not is_method(call, cls, method, visitor.namespace):
+    if not isinstance(node.func, ast.Attribute):
         return None
 
-    assert isinstance(call.func, ast.Attribute)
-    return visitor.visit(call.func.value)
+    return visitor.visit(node.func.value)

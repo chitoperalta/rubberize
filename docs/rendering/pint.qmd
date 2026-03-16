@@ -1,0 +1,163 @@
+---
+title: Physical Quantities
+toc: true
+---
+
+```{python}
+%reload_ext rubberize
+from rubberize.config import config
+```
+
+Rubberize integrates well with [Pint](https://github.com/hgrecco/pint) to support physical quantities:
+
+::: {.callout-note}
+Pint is not a core Rubberize dependency. You will need to install it separately.
+:::
+
+`pint.Quantity` objects, which encapsulate numbers with units, are fully integrated into Rubberize. This guide demonstrates how Rubberize renders these quantities.
+
+```{python}
+import pint
+
+# instantiate a unit registry
+ureg = pint.UnitRegistry()
+```
+
+## Creating Quantities
+
+Rubberize recognizes when the user intends to create physical quantities by applying units:
+
+```{python}
+%%tap
+v_1 = 0.0                       # Final velocity of the car
+v_0 = 25.0 * (ureg.m / ureg.s)  # Initial velocity of the car
+Deltat = 0.2 * ureg.s           # Time for the change in velocity
+
+a = (v_1 - v_0) / Deltat  # Deceleration of the car
+m = 1_500.0 * ureg.kg     # Mass of the car
+F = (m * a).to(ureg.kN)   # Average force experienced by the car in the crash
+```
+
+Unit assignments are rendered with a small space between the quantity value and the unit symbols. All unit symbols are in upright Roman font, in accordance with CGPM.[^1]
+
+[^1]: CGPM, "Resolution 10 of the 22nd General Conference on Weights and Measures (2003)," Bureau International des Poids et Mesures (BIPM). Available: https://www.bipm.org/en/committees/cg/cgpm/22-2003/resolution-10
+
+When quantities are multiplied, they are wrapped in parentheses, following the recommendation of SI Brochure.[^2]
+
+[^2]: BIPM, "The International System of Units (SI)," 9th edition, Section 5.4.6, Bureau International des Poids et Mesures, 2019. Available: https://www.bipm.org/en/publications/si-brochure
+
+## Unit Conversions
+
+A `pint.Quantity` object's `to()` or `ito()` methods calls are hidden by Rubberize.
+
+```{python}
+%%tap
+F = (m * a).to(ureg.kN)
+F.to(ureg.kip)
+```
+
+## Contextual Multiplication
+
+Multiplication of compound units matches Rubberize's config for `@use_contextual_mult`.
+
+```{python}
+%%tap
+50.0 * (ureg.kN * ureg.m)  # @use_contextual_mult=True
+50.0 * (ureg.kN * ureg.m)  # @use_contextual_mult=False
+```
+
+
+## Inline Units
+
+`@use_inline_units` controls whether units will be shown inline using a solidus ($a/b$) or using a fraction ($\frac{a}{b}$).
+
+```{python}
+config.use_inline_units
+```
+
+```{python}
+%%tap --grid
+12.0 * (ureg.kN / ureg.m)  # @use_inline_units=True
+12.0 * (ureg.kN / ureg.m)  # @use_inline_units=False
+```
+
+If units are inline and the fraction has multiple denominator terms, negative exponents will be used instead of a solidus.
+
+```{python}
+%%tap --grid
+1.1 * (ureg.W / (ureg.m**2 * ureg.K))  # @use_inline_units=True
+1.1 * (ureg.W / (ureg.m**2 * ureg.K))  # @use_inline_units=False
+```
+
+## Angular Degrees
+
+Angular degree units are rendered with $x^{\circ}$ instead of $x\,\deg$.
+
+```{python}
+%%tap
+45.0 * ureg.deg
+```
+
+## Foot-Inch-Fraction
+
+`@use_fif_units` controls whether to render inch and foot quantities in foot-inch-fraction (FIF) format:
+
+```{python}
+config.use_fif_units
+```
+
+This feature is particularly useful for applications in US construction and other fields where fractional inch measurements are standard. You can also specify the displayed precision of the fractional part using the `@fif_prec` option. By default, this is set to `16`, representing sixteenths of an inch. 
+
+::: {.callout-note}
+Only the rendering is affected in the conversion. The value still contains the full precision of the inch or foot quantity.
+:::
+
+```{python}
+%%tap @use_fif_units=True
+height = 8.41 * ureg.ft
+width = 42.1875 * ureg.inch
+```
+
+## Degree-Minute-Second
+
+Similar to FIF format, Rubberize supports rendering angle measurements as degree-minute-second (DMS) format using the `@use_dms_units` option.
+
+```{python}
+config.use_dms_units
+```
+
+```{python}
+%%tap @use_dms_units=True
+42.6969 * ureg.deg
+```
+
+## Custom Unit LaTeX
+
+Rubberize allows definition of custom LaTeX representations for specific unit combinations using `register_units_latex()`.
+
+For example, to register custom LaTeX for bending moment (structural engineering), ensuring that the units are displayed as $x\,\mathrm{N}\,\mathrm{m}$ instead of $x\,\mathrm{m}\,\mathrm{N}$:
+
+```{python}
+from rubberize import register_units_latex
+
+# Register a custom LaTeX representation for bending moment
+register_units_latex(r"\mathrm{N} \cdot \mathrm{m}", meter=1, newton=1)
+```
+
+```{python}
+%%tap
+42.0 * (ureg.N * ureg.m)
+```
+
+The same process can be done for defining LaTeX representations of custom units:
+
+```{python}
+ureg.define("boop = 3 newton")
+register_units_latex(r"\mathrm{_{b}oO^{P}!}", boop=1)
+```
+
+```{python}
+%%tap
+a = 84.42 * ureg.boop
+a.to(ureg.N)
+```

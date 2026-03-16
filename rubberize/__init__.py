@@ -1,39 +1,32 @@
-"""Rubberize turns Python calculations into well-formatted, math-rich
-documents.
-"""
+"""Turn Python calculations into well-formatted, math-rich documents."""
 
-__version__ = "0.3.3"
+__version__ = "0.4.0"
 
 from rubberize.config import config
 
 from rubberize.latexer import (
     latexer,
-    CalcSheet,
     ExprLatex,
     StmtLatex,
+    register_block_converter,
     register_call_converter,
     register_object_converter,
 )
 
-try:
-    # If Pint is installed:
-    from rubberize.latexer import register_units_latex
-except ImportError:
-    pass
-
 from rubberize.render import render
 
+from rubberize.calcsheet import CalcSheet
+
+from rubberize.jupyter.export_notebook import export_notebook
+
 try:
-    # If IPython is installed:
-    from rubberize.load_ipython_extension import load_ipython_extension
+    # requires Jupyter
+    from rubberize.jupyter.ipython_extension import load_ipython_extension
 except ImportError:
     pass
 
 try:
-    # If exporter deps are installed:
-    from rubberize.export_notebook import (
-        export_notebook_to_html,
-        export_notebook_to_pdf,
-    )
+    # requires Pint
+    from rubberize.latexer import register_units_latex
 except ImportError:
     pass

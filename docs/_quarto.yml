@@ -1,0 +1,66 @@
+project:
+  type: website
+  resources:
+    -assets/
+
+website:
+  title: Rubberize
+
+  navbar:
+    search: true
+    left:
+      - text: "Home"
+        href: index.qmd
+      - get_started.qmd
+      - rendering/index.qmd
+      - advanced/custom_converters.qmd
+      - config_reference.qmd
+    tools:
+      - icon: github
+        href:  https://github.com/chitoperalta/rubberize
+
+  sidebar:
+    style: "docked"
+    contents:
+      - get_started.qmd
+      - section:
+        href: rendering/index.qmd
+        contents:
+          - section: Expressions
+            contents:
+            - rendering/variables.qmd
+            - rendering/numbers.qmd
+            - rendering/collections.qmd
+            - rendering/builtins.qmd
+            - rendering/calls.qmd
+            - rendering/pint.qmd
+            - rendering/numpy.qmd
+            - rendering/operations.qmd
+          - section: Statements
+            contents:
+            - rendering/expressions.qmd
+            - rendering/assignments.qmd
+            - rendering/conditionals.qmd
+            - rendering/funcdefs.qmd
+          - section: Miscellaneous
+            contents:
+            - rendering/calcsheet.qmd
+            - rendering/annotations.qmd
+      - section: Advanced Topics
+        contents:
+          - advanced/implementation_notes.qmd
+          - advanced/custom_converters.qmd
+      - config_reference.qmd
+
+  page-footer: |
+    &copy; 2025-2026 Chito Peralta. Rubberize licensed [MIT](https://github.com/chitoperalta/rubberize/blob/main/LICENSE). Docs licensed [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/).
+
+format:
+  html:
+    theme:
+      light: flatly
+      dark: darkly
+    css: styles.css
+    math: mathjax
+    code-block-border-left: true
+    code-block-bg: true

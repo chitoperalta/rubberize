@@ -1,0 +1,124 @@
+---
+title: Function Definitions
+toc: true
+---
+
+```{python}
+%reload_ext rubberize
+from rubberize import config
+```
+
+A simple function definition is rendered by Rubberize like so:
+
+```{python}
+%%tap
+def z(x, y):
+    return x**2 + y**2
+```
+
+## Multiple-statement Functions
+
+If the function definition has multiple statements within its block:
+
+```{python}
+%%tap
+a = 0
+Z = 101
+
+def f(x, y):  # This is my function
+    """This function does something amaZing."""
+    
+    a = x**2 * Z
+    if Z > 100:
+        b = y**2 * Z
+    else:
+        b = y**2
+    return a + b
+
+f(3, 5)
+```
+
+As seen from the example, Rubberize ignores function docstrings. Similar to a basic function definition, the return statement is placed on the introductory expression as equal to the function signature. However, this time it will be followed by the text "where".
+
+Rubberize can only handle function definitions **with a single return statement as the last line** of the block, or **[piecewise functions](#piecewise-functions)**.
+
+Variables within the scope of the function definition (`x`, `y`, `a`, and `b`) are not substituted, even if `a` already has a value in the global scope. `Z` however, is substituted since it is only referenced from the global scope.
+
+## Functions that Return `None`
+
+If there is no last `return` statement or `return None` is explicitly written, Rubberize will show that the function is equal to an *empty set* ($\emptyset$).
+
+```{python}
+%%tap
+def g(x, y):
+    a = x**2
+    b = y**2
+    c = a + b
+```
+
+## Piecewise Functions
+
+Multiple `return` statements are only allowed by Rubberize when the function definition follows a piecewise format, which is a function definition that only contains **at least one** conditional ladder and an optional last return statement. The following formats are accepted:
+
+<table class="table">
+<tr style="vertical-align:middle;">
+<td style="width:50%"> Recommended format. </td>
+<td style="width:50%">
+
+```python
+%%tap
+def a(x):
+    if x < 0:
+        return 1
+    if 0 < x <= 1:
+        return 2
+    return 3
+```
+
+</td>
+</tr>
+<tr style="vertical-align:middle;">
+<td> Without a final return is also acceptable. Just make sure that all conditions are covered so that the function doesn't return <code>None</code>. </td>
+<td>
+    
+```python
+%%tap
+def a(x):
+    if x < 0:
+        return 1
+    if 0 < x <= 1:
+        return 2
+    if x > 1:
+        return 3
+```
+
+</td>
+</tr>
+<tr style="vertical-align:middle;">
+<td> Also acceptable, but note that <code>elif</code> and <code>else</code> are unnecessary. See <a href="https://pylint.readthedocs.io/en/latest/user_guide/messages/refactor/no-else-return.html">this Pylint message</a>. </td>
+<td>
+
+```python
+%%tap
+def a(x):
+    if x < 0:
+        return 1
+    elif 0 < x <= 1:
+        return 2
+    else:
+        return 3
+```
+
+</td>
+</tr>
+</table> 
+
+```{python}
+%%tap
+def a(x):
+    if x < 0:
+        return 1
+    if 0 < x <= 1:
+        return 2
+    return 3
+```
