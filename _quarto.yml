@@ -1,0 +1,71 @@
+project:
+  type: website
+  render:
+    - docs/**/*.qmd
+  output-dir: _site
+
+website:
+  title: Rubberize
+
+  navbar:
+    search: true
+    left:
+      - text: "Home"
+        href: docs/index.qmd
+      - docs/get_started.qmd
+      - docs/rendering/index.qmd
+      - docs/advanced/custom_converters.qmd
+      - docs/config_reference.qmd
+    tools:
+      - icon: github
+        href:  https://github.com/chitoperalta/rubberize
+
+  sidebar:
+    style: "docked"
+    contents:
+      - docs/get_started.qmd
+      - section:
+        href: docs/rendering/index.qmd
+        contents:
+          - section: Expressions
+            contents:
+            - docs/rendering/variables.qmd
+            - docs/rendering/numbers.qmd
+            - docs/rendering/collections.qmd
+            - docs/rendering/builtins.qmd
+            - docs/rendering/calls.qmd
+            - docs/rendering/pint.qmd
+            - docs/rendering/numpy.qmd
+            - docs/rendering/operations.qmd
+          - section: Statements
+            contents:
+            - docs/rendering/expressions.qmd
+            - docs/rendering/assignments.qmd
+            - docs/rendering/conditionals.qmd
+            - docs/rendering/funcdefs.qmd
+          - section: Miscellaneous
+            contents:
+            - docs/rendering/calcsheet.qmd
+            - docs/rendering/annotations.qmd
+      - section: Advanced Topics
+        contents:
+          - docs/advanced/implementation_notes.qmd
+          - docs/advanced/custom_converters.qmd
+      - docs/config_reference.qmd
+
+  page-footer: |
+    &copy; 2025-2026 Chito Peralta. Rubberize licensed [MIT](https://github.com/chitoperalta/rubberize/blob/main/LICENSE). Docs licensed [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/).
+
+format:
+  html:
+    theme:
+      light: flatly
+      dark: darkly
+    css: docs/styles.css
+    math: mathjax
+    code-block-border-left: true
+    code-block-bg: true
+
+execute:
+  python: .venv/bin/python
+  restart: true

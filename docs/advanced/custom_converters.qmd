@@ -1,0 +1,213 @@
+---
+title: Custom Converters
+toc: true
+---
+
+```{python}
+%reload_ext rubberize
+```
+
+Rubberize uses registries of converter functions for calls and objects for rendering. If Rubberize encounters a call or an object that it doesn't have a converter for, it won't try to render any mathematical representation. Instead, it will simply render the [default call syntax](../rendering/calls.qmd#unknown-functions) if it is a call, or the variable name if it is an object reference.
+
+For example, if a `Point` class is defined as:
+
+```{python}
+class Point:
+    def __init__(self, x, y):
+        self.x = x
+        self.y = y
+
+    def distance_to(self, other):
+        return ((self.x - other.x) ** 2 + (self.y - other.y) ** 2) ** 0.5
+```
+
+Rubberize will not know how to convert a `Point` instance, so it will just output the default call syntax and the variable name:
+
+```{python}
+%%tap
+P_1 = Point(1, 2)
+P_1
+```
+
+## Creating an Object Converter
+
+To handle custom objects, a converter function can be created and registered to Rubberize using `register_object_converter()`. This allows Rubberize to recognize and properly transform the object.
+
+The function takes two arguments:
+
+| Keyword | Type                                | Description                               |
+| ------- | ----------------------------------- | ----------------------------------------- |
+| `cls`   | `type`                              | The object type the converter applies to. |
+| `func`  | `Callable[[Any], ExprLatex | None]` | The converter function.                   |
+
+The converter function must be defined to take at an object of type `cls` (which is the object to convert) and return an `ExprLatex` instance, which contains the LaTeX representation of the object, or `None` if the object is considered unconvertible.
+
+Internally, registering the converter maps `cls` to `func`, so that when an instance of `cls` is encountered, Rubberize can look up the correct converter and apply it.
+
+Continuing the example, we define a converter `convert_point()` and register it as an object converter:
+
+```{python}
+from rubberize.latexer import ExprLatex, ranks, register_object_converter
+
+def convert_point(obj: Point) -> ExprLatex:
+    latex = rf"\langle {obj.x}, {obj.y} \rangle"
+    rank = ranks.COLLECTIONS_RANK
+
+    return ExprLatex(latex, rank)
+
+# register the converter
+register_object_converter(Point, convert_point)
+```
+
+Now, when we try to render the object, it will be rendered correctly:
+
+```{python}
+%%tap
+P_1
+```
+
+## Expression Ranks
+
+When creating an `ExprLatex`, you can specify a `rank` to indicate the precedence of an expression. **A higher rank means a higher precedence**.
+
+This rank determines whether Rubberize will apply parentheses around the expression when used as an operand in a larger mathematical expression. If the rank is higher than the operation's rank, then no parentheses will be applied.
+
+For example, the rank for multiplication (`130`) is higher than that for addition (`120`). Thus, when an addition expression is used as an operand for a multiplication operation, the addition expression is wrapped in parentheses, following PEMDAS rules.
+
+`rubberize.latexer.ranks` provides commonly used self-explanatory helper rank constants:
+
+```python
+VALUE_RANK = 9_001
+COLLECTIONS_RANK = 180
+CALL_RANK = 170
+POW_RANK = 150
+SIGNED_RANK = 140
+MULT_RANK = DIV_RANK = 130
+ADD_RANK = SUB_RANK = 120
+COMPARE_RANK = 70
+
+BELOW_POW_RANK = POW_RANK - 1
+BELOW_MULT_RANK = MULT_RANK - 1
+BELOW_ADD_RANK = ADD_RANK - 1
+BELOW_COMPARE_RANK = COMPARE_RANK - 1
+```
+
+If no explicit `rank` is provided to `ExprLatex`, it is assigned a rank of `VALUE_RANK`, which means it will never be wrapped in parentheses whenever used as an operand.
+
+## Creating a Call Converter
+
+Continuing the example, if we try to render calls to `Point` and its method:
+
+```{python}
+%%tap
+P_2 = Point(3, 3)
+P_1.distance_to(P_2)
+```
+
+They will be rendered using only the default syntax.
+
+To handle custom calls, converter functions can similarly be created and registered to Rubberize using `register_call_converter()`.
+
+The function takes three arguments:
+
+| Keyword     | Type                                                  | Description                                                                                          |
+| ----------- | ----------------------------------------------------- | ---------------------------------------------------------------------------------------------------- |
+| `call`      | `Callable | str`                                      | The callable object the converter applies to, or a string representing an undefined callable object. |
+| `func`      | `Callable[[ExprVisitor, ast.Call], ExprLatex | None]` | The converter function.                                                                              |
+| `syntactic` | `bool`                                                | If True, also register the call for string lookup, when the callable is undefined.                   |
+
+The converter function can be one of the predefined common call converters from `rubberize.latexer.calls.common`, or a fully custom one.
+
+### Using a Common Call Converter
+
+The table below lists Rubberize's common converters. They all have at least two arguments which `register_call_converter()` requires:
+
+- `visitor`: the `ExprVisitor` object that will be used in the function for converting sub-nodes of `node`.
+- `node`: the `ast.Call` node of the function call.
+
+| Converter                | Description                                                                                                                                                                                 |
+| ------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `get_result_and_convert` | Get the resulting object of the call and then convert the object.                                                                                                                           |
+| `wrap`                   | Remove the name, convert and join the arguments with `sep`, and wrap `prefix` and `suffix` around the arguments. Optionally assign `rank`.                                                  |
+| `wrap_method`            | Remove the name, include the object of the method call as the first argument, join the arguments with `sep`, and wrap `prefix` and `suffix` around the arguments. Optionally assign `rank`. |
+| `rename`                 | Change the operator name to `name` and retain the default call syntax. Optionally assign `rank`.                                                                                            |
+| `rename_method`          | Change the operator name to `name`, include the object of the method call as the first argument, and retain the default call syntax. Optionally assign `rank`.                              |
+| `unary`                  | Convert to a math function that notationally takes only one argument and with a `prefix` and `suffix`. Optionally assign `rank`.                                                            |
+| `first_arg`              | Convert the first argument, effectively hiding the call on the argument.                                                                                                                    |
+| `hide_method`            | Convert the object of the method call, effectively hiding the call itself and its arguments.                                                                                                |
+
+If the function takes more than `visitor` and `node`, a `lambda` expression can be used when registering the converter.
+
+Continuing the example, we register converters for `Point()` and `distance_to()` using the common converters:
+
+```{python}
+from rubberize.latexer import ranks, register_call_converter
+from rubberize.latexer.calls import common
+
+register_call_converter(Point, common.get_result_and_convert)
+register_call_converter(
+    call=Point.distance_to,
+    func=lambda v, n: common.wrap_method(
+        v, n, "", "", r" \longleftrightarrow ", rank=ranks.BELOW_ADD_RANK
+    ),
+)
+```
+
+Now when we try to render:
+
+```{python}
+%%tap
+P_2 = Point(3, 3)
+P_1.distance_to(P_2)
+```
+
+### Custom Call Converter
+
+If more control on rendering is needed, a fully custom converter function can be defined. However, this requires more familiarity with Rubberize's `rubberize.latexer.visitors.ExprVIsitor` AST node visitor and `rubberize.latexer.helpers` functions, as well as Python's `ast` library.
+
+A custom converter function must be defined to take at least two arguments:
+
+- An `ExprVisitor` that can be used within the converter to convert expressions.
+- An `ast.Call` node, which is the `ast` node of the call.
+
+The converter must return an `ExprLatex` instance, or `None` if the call node should be considered unconvertible.
+
+Continuing the example, we can define a custom converter for `distance_to`:
+
+```{python}
+%%capture
+import ast
+
+from rubberize.latexer import ExprLatex, helpers, ranks, register_call_converter
+from rubberize.latexer.visitors import ExprVisitor
+from rubberize.latexer.objects import convert_object
+
+def convert_point_distance_to(visitor: ExprVisitor, node: ast.Call) -> ExprLatex:
+    if not isinstance(node.func, ast.Attribute):
+        return None
+
+    other_node = helpers.get_arg_node(node, 0, "other", required=True)
+
+    self: Point = helpers.get_object(node.func.value, visitor.ns)
+    other: Point = helpers.get_object(other_node, visitor.ns)
+
+    x0 = convert_object(self.x).latex
+    y0 = convert_object(self.y).latex
+    x1 = convert_object(other.x).latex
+    y1 = convert_object(other.y).latex
+
+    latex = rf"\sqrt{{({x0} - {x1})^{{2}} + ({y0} - {y1})^{{2}}}}"
+    rank = ranks.BELOW_POW_RANK
+
+    return ExprLatex(latex, rank)
+
+# register the converter
+register_call_converter(Point.distance_to, convert_point_distance_to)
+```
+
+Now, the method call will be rendered like so:
+
+```{python}
+%%tap
+P_1.distance_to(P_2)
+```

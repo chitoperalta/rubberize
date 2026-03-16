@@ -1,0 +1,159 @@
+---
+title: Rendering Code
+toc: true
+---
+
+::: {.callout-note}
+Documentation pages are generated using actual notebook cells, so in the succeeding pages you will see setup cells like these:
+:::
+
+```{python}
+%reload_ext rubberize
+from rubberize import config
+```
+
+---
+
+When a `%%tap` cell is executed, Rubberize analyzes the Python code and generates an equivalent mathematical notation for each statement or expression it finds.
+
+```{python}
+%%tap
+import math
+
+r = 10            # Radius
+A = math.pi * r**2  # Area
+```
+
+Rubberize does not change how Python executes. The original code still runs normally, and variables remain available for later cells. Rendering simply provides a mathematical view of the code.
+
+## Topics in this Chapter
+
+The following sections in this chapter describe how specific Python constructs are rendered.
+
+::: {layout-ncol=3}
+
+### Expressions
+
+- [Variables](variables.qmd)
+- [Numbers](numbers.qmd)
+- [Collections](collections.qmd)
+- [Built-in Types](builtins.qmd)
+- [Calls](calls.qmd)
+- [Physical Quantities](pint.qmd)
+- [Arrays](numpy.qmd)
+- [Operations](operations.qmd)
+
+### Statements
+
+- [Expressions](expressions.qmd)
+- [Assignments](assignments.qmd)
+- [Conditionals](conditionals.qmd)
+- [Function Definitions](funcdefs.qmd)
+
+### Miscellaneous
+
+- [Calc Sheet](calcsheet.qmd)
+- [Annotations](annotations.qmd)
+
+:::
+
+## Supported Features
+
+The table below summarizes Python constructs that are supported by Rubberize.
+
+### Expressions
+
+::: {layout-ncol=2}
+| Feature                  | Support                                          |
+| ------------------------ | ------------------------------------------------ |
+| Identifier names         | [Yes](variables.qmd)                             |
+| Attribute access         | [Yes](variables.qmd#attributes)                  |
+| `int`                    | [Yes](numbers.qmd#integers)                      |
+| `float`                  | [Yes](numbers.qmd#floats)                        |
+| `complex`                | [Yes](numbers.qmd#complex-numbers)               |
+| `list`                   | [Yes](collections.qmd#lists)                     |
+| `list` comprehensions    | [Yes](collections.qmd#list-comprehensions)       |
+| `list` subscript access  | [Yes](collections.qmd#list-element-access)       |
+| `list` slices            | [Yes](collections.qmd#list-element-access)       |
+| `tuple`                  | [Yes](collections.qmd#tuples)                    |
+| `tuple` subscript access | [Yes](collections.qmd#tuple-element-access)      |
+| `tuple` slices           | [Yes](collections.qmd#tuple-element-access)      |
+| `set`                    | [Yes](collections.qmd#sets)                      |
+| `set` comprehensions     | [Yes](collections.qmd#set-comprehensions)        |
+| `dict`                   | [Yes](collections.qmd#dictionaries)              |
+| `dict` comprehensions    | [Yes](collections.qmd#dictionary-comprehensions) |
+| `dict` subscript access  | [Yes](collections.qmd#dictionary-element-acess)  |
+| `str`                    | [Yes](builtins.qmd#strings)                      |
+| f-strings                | No                                               |
+
+| Feature                         | Support                                          |
+| ------------------------------- | ------------------------------------------------ |
+| Formatting field in an f-string | No                                               |
+| Boolean (`True` and `False`)    | [Yes](builtins.qmd#boolean)                      |
+| `None`                          | [Yes](builtins.qmd#none-type)                    |
+| `range`                         | [Yes](builtins.qmd#range)                        |
+| Ellipsis (`...`)                | [Yes](builtins.qmd#ellipsis-type)                |
+| Calls                           | [Yes](calls.qmd)                                 |
+| Binary operations               | [Yes](operations.qmd#arithmetic-operations)      |
+| Unary operations                | [Yes](operations.qmd#unary-operations)           |
+| Comparisons                     | [Yes](operations.qmd#comparisons-and-membership) |
+| Logical operations              | [Yes](operations.qmd#logical-operations)         |
+| Conditional expressions         | [Yes](operations.qmd#conditional-expressions)    |
+| Named expressions               | [Yes](operations.qmd#named-expressions)          |
+| `lambda` functions              | [Yes](operations.qmd#lambda-functions)           |
+| Generator expressions           | [Yes](operations.qmd#generator-expressions)      |
+| Starred expressions             | [Yes](operations.qmd#starred-expressions)        |
+| Await                           | No                                               |
+| Yield                           | No                                               |
+| Yield from                      | No                                               |
+:::
+
+In addition to built-in features, the following constructs from other libraries are also supported
+
+::: {layout-ncol=2}
+| Feature                   | Support                      |
+| ------------------------- | ---------------------------- |
+| `decimal.Decimal` type    | [Yes](numbers.qmd#decimals)  |
+| `fractions.Fraction` type | [Yes](numbers.qmd#fractions) |
+
+| Feature              | Support          |
+| -------------------- | ---------------- |
+| `pint.Quantity` type | [Yes](pint.qmd)  |
+| `numpy.ndarray` type | [Yes](numpy.qmd) |
+:::
+
+### Statements
+
+::: {layout-ncol=2}
+| Feature               | Support                               |
+| --------------------- | ------------------------------------- |
+| Expressions           | [Yes](expressions.qmd)                |
+| Assignments           | [Yes](assignments.qmd)                |
+| Augmented assignments | No                                    |
+| Annotated assignments | [Ignored](assignments.qmd#type-hints) |
+| `if`                  | [Yes](conditionals.qmd)               |
+| `def`                 | [Yes](funcdefs.qmd)                   |
+| `async def`           | No                                    |
+| `class`               | No                                    |
+| `return`              | Partially (see [`def`](funcdefs.qmd)) |
+| `del`                 | No                                    |
+| `type`                | No                                    |
+| `for`                 | No                                    |
+| `async for`           | No                                    |
+
+| Feature               | Support                               |
+| --------------------- | ------------------------------------- |
+| `while`               | No                                    |
+| `with`                | No                                    |
+| `async with`          | No                                    |
+| `match`               | No                                    |
+| `raise`               | No                                    |
+| `try`                 | No                                    |
+| `assert`              | No                                    |
+| `import`              | Ignored                               |
+| `global`              | No                                    |
+| `nonlocal`            | No                                    |
+| `pass`                | No                                    |
+| `break`               | No                                    |
+| `continue`            | No                                    |
+:::

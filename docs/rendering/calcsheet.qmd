@@ -1,0 +1,146 @@
+---
+title: Calculation Sheets
+toc: true
+---
+
+```{python}
+%reload_ext rubberize
+
+import pint
+
+ureg = pint.UnitRegistry()
+```
+
+In engineering documentation, calculations for an analyzed component are typically presented as **calculation sheets**. These documents show how design values were obtained and provide a clear record of the assumptions, references, and checks used in the analysis.
+
+A typical calculation sheet includes:
+
+- Information about the project and the component being analyzed.
+- Reference standards used in the calculations.
+- Step-by-step calculations of the relevant quantities. In structural engineering, these often include the required loads and the load capacity of the component.
+- Checks comparing required values against available capacities.
+- A final design conclusion declaring whether the component satisfies the requirements or not.
+
+Rubberize provides the `CalcSheet` class to help structure this type of document directly within a computational notebook. It organizes metadata, checks, and conclusions so the rendered output reads like a conventional calculation report.
+
+Because the calculations are still written in Python, results remain reproducible while the presentation follows familiar engineering documentation practices.
+
+## Creating a Calculation Sheet
+
+A calculation sheet begins by creating a `CalcSheet` object. This defines the identifying information for the calculation and initializes the structure used throughout the document.
+
+When the instantiation is done in a `%%tap` cell, Rubberize renders a title block.
+
+```{python}
+%%tap
+from rubberize import CalcSheet
+
+sheet = CalcSheet(
+    section="1.01",
+    name="beam",
+    project="ACME Building, Baguio City",
+    system="General Framing System",
+    calc_type="load capacity analysis",
+    material="steel",
+    references=[
+        "ANSI/AISC 360-16. *Specification for Structural Steel Buildings*.",
+    ]
+)
+```
+
+The `CalcSheet` takes the following arguments:
+
+| Keyword      | Type             | Description                                              |
+| ------------ | ---------------- | -------------------------------------------------------- |
+| `section`    | `str`            | Section label.                                           |
+| `name`       | `str`            | Name of the component analyzed in the calculation sheet. |
+| `project`    | `str` \| `None`  | Project name.                                            |
+| `system`     | `str` \| `None`  | System of which the calculation sheet is part of.        |
+| `calc_type`  | `str` \| `None`  | Type of calculation being carried out.                   |
+| `group`      | `str` \| `None`  | Group of which the component is part of.                 |
+| `material`   | `str` \| `None`  | Material of the component.                               |
+| `notes`      | `str` \| `None`  | Additional notes to be included in the title.            |
+| `references` | `list[str]`      | Reference standards used in the calculation.             |
+| `extra`      | `dict[str, Any]` | Holder for any extra metadata.                           |
+
+## Recording Design Checks
+
+During the calculation, design checks can be recorded using the `check()` method. Each check compares a **required value** (demand) with an **available capacity**.
+
+```{python}
+%%tap
+%%tap
+phi_b = 0.90 # Resistance factor
+M_n = 5.96 * (ureg.kN * ureg.m) # Nominal flexural strength
+M_r = 3.97 * (ureg.kN * ureg.m) # Required flexural strength
+
+sheet.check("flexural strength", M_r, phi_b * M_n)
+```
+
+When rendered through Rubberize, these comparisons are displayed as formatted block in the calculation sheet instead of plain boolean results.
+
+The arguments are:
+
+| Keyword     | Type    | Description                                                                               |
+| ----------- | ------- | ----------------------------------------------------------------------------------------- |
+| `label`     | `str`   | A unique identifier label for the check.                                                  |
+| `left`      | `Any`   | The left-hand value in the comparison, typically the demand.                              |
+| `right`     | `Any`   | The right-hand value in the comparison, typically the capacity.                           |
+| `max_ratio` | `float` | Keyword argument only. The maximum allowed ratio for the check to pass. Defaults to `1.0` |
+
+Internally, the check evaluates the ratio between the two values and determines whether it is within the allowed limit.
+
+In ordinary Python execution, `check()` simply returns a boolean value indicating whether the requirement is satisfied. The `CalcSheet` object also evaluates to `True` if all recorded checks pass.
+
+```{python}
+sheet.check("shear strength", 390.21 * ureg.N, 500.23 * ureg.N)
+```
+
+## Forgetting a Design Check
+
+Checks recorded with `check()` are stored on the `CalcSheet` instance. In a notebook environment, cells may be re-run multiple times during the course of a calculation. In some cases, this can result in outdated checks remaining in the sheet.
+
+The `forget()` method allows previously recorded checks to be removed by label.
+
+```python
+sheet.forget("flexural strength")
+```
+
+Multiple checks can be removed at once:
+
+```python
+sheet.forget("flexural strength", "shear strength")
+```
+
+Removing a check deletes it from the sheet’s internal record. This means it will no longer appear in summaries or affect the overall result of the calculation.
+
+## Generating a Conclusion
+
+After the checks have been performed, a conclusion can be generated using the `conclude()` method.
+
+```{python}
+%%tap
+sheet.conclude()
+```
+
+When rendered through Rubberize, this produces a formatted summary indicating whether the design requirements are satisfied. When `each_check=True` is used, the conclusion lists the result of every recorded check.
+
+```{python}
+%%tap
+sheet.conclude(each_check=True)
+```
+
+In ordinary Python execution, `conclude()` returns a boolean value representing the overall result of the calculation sheet. This is equivalent to evaluating the `CalcSheet` object as a boolean.
+
+```{python}
+print(sheet.conclude())
+print(bool(sheet))
+```
+
+Both return `True` only if all recorded checks pass.
+
+If `each_check=True` is supplied, the method instead returns a list of boolean values corresponding to the result of each recorded check.
+
+```{python}
+sheet.conclude(each_check=True)
+```

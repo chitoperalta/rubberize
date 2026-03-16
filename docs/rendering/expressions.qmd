@@ -1,0 +1,101 @@
+---
+title: Expressions
+toc: true
+---
+
+```{python}
+%reload_ext rubberize
+from rubberize import config
+```
+
+## Display Modes
+
+When Rubberize renders an expression, it produces one or more mathematical steps. These steps represent different stages of evaluating an expression.
+
+```{python}
+%%tap
+import math
+
+x = 3.0  # @hide
+y = 4.0  # @hide
+
+math.sqrt(x**2 + y**2)
+```
+
+Rubberize distinguishes three main display modes:
+
+| Display mode | Example                                    |
+| ------------ | ------------------------------------------ |
+| Definition   | $\displaystyle \sqrt{x^{2} + y^{2}}$       |
+| Substitution | $\displaystyle \sqrt{3.00^{2} + 4.00^{2}}$ |
+| Result       | $\displaystyle 5.00$                       |
+
+The following options and shortcuts can be used to configure which display modes are included during rendering:
+
+| Display Mode | Option (`bool`)      | Shortcut to show only | Shortcut to hide only |
+| ------------ | -------------------- | --------------------- | --------------------- |
+| Definition   | `@show_definition`   | `@def`                | `@nodef`              |
+| Substitution | `@show_substitution` | `@sub`                | `@nosub`              |
+| Result       | `@show_result`       | `@res`                | `@nosub`              |
+
+Additionally, the shortcut `@none` hides all display modes, while `@all` shows all the display modes.
+
+```{python}
+%%tap
+math.sqrt(x**2 + y**2)  # @show_definition=False
+math.sqrt(x**2 + y**2)  # @nosub
+math.sqrt(x**2 + y**2)  # @res
+math.sqrt(x**2 + y**2)  # @none
+```
+
+## Multiline
+
+`@multiline` controls if display modes should be stacked vertically when rendered or be shown as equalities on a single line.
+
+This is useful for ensuring that very long equations don't get cut off from the page.
+
+```{python}
+config.multiline
+```
+
+`@stack` and `@line` can be used as a shortcuts to `@multiline=True` and `@multiline=False`, respectively.
+
+```{python}
+%%tap @stack
+math.sqrt(x**2 + y**2)
+```
+
+## Math Constants
+
+Rubberize preserves the names for mathematical constants defined in `@math_constants` during substitution.
+
+```{python}
+config.math_constants
+```
+
+```{python}
+%%tap @float_prec=0
+import math
+math.e**(1j * math.pi) + 1
+```
+
+In the example above, since math constant names are preserved, the rendered substitution is the same as the rendered definition so only one is shown.
+
+To add or remove constants that should be preserved in substitution, use the `config` methods `add_math_constant()` or `remove_math_constant()`, respectively.
+
+For example:
+
+```{python}
+config.add_math_constant("euler")
+config.remove_math_constant("e")
+
+config.greek_starts
+```
+
+```{python}
+%%tap
+math.e**(1j * math.pi) + 1  # `e` is substituted
+
+euler= math.e
+euler**(1j * math.pi) + 1  # `euler` is not substituted
+```

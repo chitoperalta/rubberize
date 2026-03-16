@@ -1,0 +1,85 @@
+---
+title: Assignments
+toc: true
+---
+
+```{python}
+%reload_ext rubberize
+```
+
+Assignments are rendered with the expression on the right-hand side using the same display modes.
+
+```{python}
+%%tap
+import math
+
+x = 3.0
+y = 4.0
+
+z = math.sqrt(x**2 + y**2)
+```
+
+The expression `math.sqrt(x**2 + y**2)` is evaluated using the same definition, substitution, and result stages described in the [expressions section](expressions.qmd).
+
+## Hiding Assignments
+
+The special shortcut `@hide` prevents the rendering of the whole assignment.
+
+::: {.callout-note}
+`@hide` is a special shortcut. It has no equivalent set of config options.
+:::
+
+```{python}
+%%tap
+x = 3.0  # @hide
+y = 4.0  # @hide
+
+z = math.sqrt(x**2 + y**2)
+```
+
+The code is still executed normally. The hidden assignments can still be accessed in subsequent cells.
+
+## Hiding Multiple Statements
+
+To hide multiple statements, use the `@hide` shortcut as a **line comment**. Subsequent lines are hidden until the `@endhide` shortcut is used as a line comment.
+
+::: {.callout-note}
+`@endhide` is also a special shortcut.
+:::
+
+```{python}
+%%tap
+a_1 = 3
+a_2 = 8
+
+# @hide
+total = a_1 + a_2
+difference = a_1 - a_2
+product = a_1 * a_2
+quotient = a_1 / a_2
+# @endhide
+
+total, difference, product, quotient
+```
+
+## Multiple Targets
+
+Assignment to multiple targets is supported.
+
+```{python}
+%%tap
+a_1, a_2 = b = (3, 8)
+
+a_1
+a_2
+b
+```
+
+## Type Hints
+
+Type hints are ignored.
+
+```python
+%%tap
+a_1: int = 3
+```

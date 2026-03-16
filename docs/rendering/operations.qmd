@@ -1,0 +1,209 @@
+---
+title: Operations
+toc: true
+---
+
+```{python}
+%reload_ext rubberize
+from rubberize.config import config
+```
+
+## Operator Precedence
+
+Rubberize follows Python's standard operator precedence rules[^1] when deciding how to properly render an expression. when an operation already naturally follows the operator precedence, Rubberize renders it without any extra parentheses:
+
+[^1]: Python Software Foundation, *The Python Language Reference, Section 6.16: Operator Precedence*, Python 3 Documentation. Available: [https://docs.python.org/3/reference/expressions.html#operator-precedence](https://docs.python.org/3/reference/expressions.html#operator-precedence)
+
+```{python}
+%%tap
+2 + 3 * 4
+2 + (3 * 4)  # Unnecessary parentheses are not rendered
+```
+
+Because multiplication has higher precedence than addition, no parentheses are needed. However, when an operation requires explicit grouping, Rubberize includes parentheses:
+
+```{python}
+%%tap
+(2 + 3) * 4
+```
+
+## Arithmetic Operations
+
+Arithmetic operations are rendered by Rubberize in mathematical notation:
+
+```{python}
+%%tap
+a = 5  # @hide
+b = 3  # @hide
+
+a + b   # Addition
+a - b   # Subtraction
+a * b   # Multiplication
+a / b   # Division
+a // b  # Floor division
+a % b   # Modulo
+a ** 3  # Exponentiation
+```
+
+### Contextual Multiplication Symbol
+
+`@use_contextual_mult` controls which multiplication symbol to show.
+
+```{python}
+config.use_contextual_mult
+```
+
+If set to `True`, Rubberize infers which symbol to use for multiplication based on how the operands are rendered. The multiplication symbol ($a \times b$), a dot ($a \cdot b$), or implicit multiplication ($a\,b$) is used depending on readability and convention.
+
+The following table shows how the appropriate multiplication symbol is determined. Rows are the left operand types, and columns are right operand types. The intersection specifies the symbol used.
+
+| L \\ R | N        | -N       | L       | -L      | W       | -W      | C       | -C      | B       | -B      | ?       | -?      |
+| -----: | :------: | :------: | :-----: | :-----: | :-----: | :-----: | :-----: | :-----: | :-----: | :-----: | :-----: | :-----: |
+| **N**  | $\times$ | $\times$ | $\,$    | $\cdot$ | $\,$    | $\cdot$ | $\,$    | $\cdot$ | $\,$    | $\cdot$ | $\cdot$ | $\cdot$ |
+| **-N** | $\times$ | $\times$ | $\,$    | $\cdot$ | $\,$    | $\cdot$ | $\,$    | $\cdot$ | $\,$    | $\cdot$ | $\cdot$ | $\cdot$ |
+| **L**  | $\cdot$  | $\cdot$  | $\,$    | $\cdot$ | $\cdot$ | $\cdot$ | $\cdot$ | $\cdot$ | $\cdot$ | $\cdot$ | $\cdot$ | $\cdot$ |
+| **-L** | $\cdot$  | $\cdot$  | $\,$    | $\cdot$ | $\cdot$ | $\cdot$ | $\cdot$ | $\cdot$ | $\cdot$ | $\cdot$ | $\cdot$ | $\cdot$ |
+| **W**  | $\cdot$  | $\cdot$  | $\cdot$ | $\cdot$ | $\cdot$ | $\cdot$ | $\cdot$ | $\cdot$ | $\cdot$ | $\cdot$ | $\cdot$ | $\cdot$ |
+| **-W** | $\cdot$  | $\cdot$  | $\cdot$ | $\cdot$ | $\cdot$ | $\cdot$ | $\cdot$ | $\cdot$ | $\cdot$ | $\cdot$ | $\cdot$ | $\cdot$ |
+| **C**  | $\cdot$  | $\cdot$  | $\cdot$ | $\cdot$ | $\cdot$ | $\cdot$ | $\cdot$ | $\cdot$ | $\cdot$ | $\cdot$ | $\cdot$ | $\cdot$ |
+| **-C** | $\cdot$  | $\cdot$  | $\cdot$ | $\cdot$ | $\cdot$ | $\cdot$ | $\cdot$ | $\cdot$ | $\cdot$ | $\cdot$ | $\cdot$ | $\cdot$ |
+| **B**  | $\cdot$  | $\cdot$  | $\,$    | $\cdot$ | $\,$    | $\cdot$ | $\,$    | $\cdot$ | $\,$    | $\cdot$ | $\cdot$ | $\cdot$ |
+| **-B** | $\cdot$  | $\cdot$  | $\,$    | $\cdot$ | $\,$    | $\cdot$ | $\,$    | $\cdot$ | $\,$    | $\cdot$ | $\cdot$ | $\cdot$ |
+| **?**  | $\cdot$  | $\cdot$  | $\cdot$ | $\cdot$ | $\cdot$ | $\cdot$ | $\cdot$ | $\cdot$ | $\cdot$ | $\cdot$ | $\cdot$ | $\cdot$ |
+| **-?** | $\cdot$  | $\cdot$  | $\cdot$ | $\cdot$ | $\cdot$ | $\cdot$ | $\cdot$ | $\cdot$ | $\cdot$ | $\cdot$ | $\cdot$ | $\cdot$ |
+
+: {tbl-colwidths="[10,7.5,7.5,7.5,7.5,7.5,7.5,7.5,7.5,7.5,7.5,7.5,7.5]"}
+
+The operand types are:
+
+- **N**: Numeric values (e.g., $3$, $-2.50$)
+- **L**: Letter variables (a single-character *base name*), including Greek letters, which are rendered in italics (e.g., $x$, $a_{\mathrm{foo}}$, $\epsilon$, $\Delta T$)
+- **W**: Word variables (with multiple characters for *base name*), which are rendered in Roman font (e.g., $\mathrm{foo}$, $\mathrm{var}_{a}$, $\Delta \mathrm{Temp}$)
+- **C**: Function (or class, or method) call. (e.g., $\cos \alpha$, $\mathrm{fcn}(a, b)$ )
+- **B**: Bracketed expressions
+- **?**: Other type not covered
+
+::: {.callout-note}
+Between numeric values, multiplication symbol ($\times$) is preferred over dot ($\cdot$) because the latter is harder to read with decimal numbers (e.g., $6.90 \cdot 4.20$ versus $6.90 \times 4.20$).
+:::
+
+If `@use_contextual_mult=False`, all multiplications will be rendered with a dot ($a \cdot b$).
+
+## Unary Operations
+
+Unary operations are rendered by Rubberize:
+
+```{python}
+%%tap
++a
+-a
+--a
+-a**2
+(-a)**2
+```
+
+## Comparisons and Membership
+
+Comparisons are rendered by Rubberize:
+
+```{python}
+%%tap --dead --grid
+a == b
+a != b
+a < b
+a <= b
+a > b
+a >= b
+a < b <= c
+a >= b > c
+a is None
+a is not None
+a in [3, 4, 5]
+a not in [3, 4, 5]
+```
+
+## Logical Operations
+
+Logical operators `and`, `or`, and `not` are rendered as logical symbols $\land$, $\lor$, and $\lnot$, respectively:
+
+```{python}
+%%tap
+a = b = False
+c = True
+
+not a
+a and b
+a or b
+
+a and b or c
+a and (b or c)
+```
+
+### Grouped Logicals
+
+If the same boolean operation is repeated more times than `@max_inline_bool`, the compared values will be arranged vertically for readability.
+
+```{python}
+config.max_inline_bool
+```
+
+```{python}
+%%tap --dead --grid
+a and b and c and d or e and f
+(a or b or c or d) and (e or f)
+```
+
+## Conditional Expressions
+
+Conditional *expressions* (not statements) are rendered like piecewise expressions:
+
+```{python}
+%%tap
+x = 3
+
+y = 1 if x > 0 else -1 if x < 0 else 0
+```
+
+## Named Expressions
+
+Named expressions, more commonly known as the walrus operator (`:=`) is rendered with an arrow ($a \gets b$) rather than an equality.
+
+```{python}
+%%tap
+(a := 3) > 0
+a
+```
+
+## Lambda Functions
+
+Anonymous `lambda` functions are supported:
+
+```{python}
+%%tap
+a = lambda x, y: x + y
+a(1, 2)
+```
+
+## Generator Expressions
+
+Generator expressions are rendered like so:
+
+```{python}
+%%tap
+a = [1, 2, 3, 4]
+x = 3  # x is shadowed by the comprehension scope
+
+generator = (x**2 for x in a if x % 2 == 0) 
+```
+
+## Starred Expressions
+
+Starred expressions are rendered like so:
+
+```{python}
+%%tap
+a, *b, c = (1, 2, 3, 4, 5)
+b
+```
+
+Also see rendering of starred expressions when used in unpacking context in [collections](collections.qmd).
