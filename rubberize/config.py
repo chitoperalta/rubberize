@@ -173,7 +173,7 @@ config = _Config()
 
 
 # fmt: off
-_KEYWORDS: dict[str, dict[str, bool | int | Iterable[str]]] = {
+_SHORTCUTS: dict[str, dict[str, bool | int | Iterable[str]]] = {
     "none": {"show_definition": False, "show_substitution": False, "show_result": False},
     "all": {"show_definition": True, "show_substitution": True, "show_result": True},
     "def": {"show_definition": True, "show_substitution": False, "show_result": False},
@@ -217,8 +217,8 @@ def parse_modifiers(
         if "=" in m:
             k, v = m.split("=", 1)
             cfg[k] = ast.literal_eval(v)
-        elif m in _KEYWORDS:
-            cfg.update(_KEYWORDS[m])
+        elif m in _SHORTCUTS:
+            cfg.update(_SHORTCUTS[m])
         else:
             raise RubberizeKeyError(f"Unknown keyword: {m}")
 
