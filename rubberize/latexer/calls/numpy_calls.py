@@ -10,8 +10,9 @@ import numpy as np
 from rubberize.config import config
 from rubberize.latexer import formatters, helpers, ranks, rules
 from rubberize.latexer.calls import common
-from rubberize.latexer.expr_latex import ExprLatex
 from rubberize.latexer.calls.convert_call import register_call_converter
+from rubberize.latexer.expr_latex import ExprLatex
+from rubberize.latexer.objects import convert_object
 
 if TYPE_CHECKING:
     from rubberize.latexer.visitors import ExprVisitor
@@ -402,8 +403,11 @@ def _linalg_norm(visitor: ExprVisitor, node: ast.Call) -> ExprLatex | None:
     if array_obj is None:
         return None
 
-    x = visitor.visit(x_node).latex
-    latex = formatters.format_delims(r"\left\|", x, r"\right\|")
+    if visitor.ns and visitor.is_subst:
+        latex = _array_in_env(visitor, x_node, "Vmatrix")
+    else:
+        x = visitor.visit(x_node).latex
+        latex = formatters.format_delims(r"\left\|", x, r"\right\|")
 
     ord_obj = helpers.get_object(ord_node, visitor.ns)
 
@@ -437,8 +441,11 @@ def _linalg_matrix_norm(
     x_node = helpers.get_arg_node(node, 0, None, required=True)
     ord_node = helpers.get_arg_node(node, None, "ord") or ast.Constant("fro")
 
-    x = visitor.visit(x_node).latex
-    latex = formatters.format_delims(r"\left\|", x, r"\right\|")
+    if visitor.ns and visitor.is_subst:
+        latex = _array_in_env(visitor, x_node, "Vmatrix")
+    else:
+        x = visitor.visit(x_node).latex
+        latex = formatters.format_delims(r"\left\|", x, r"\right\|")
 
     ord_obj = helpers.get_object(ord_node, visitor.ns)
 
@@ -468,8 +475,11 @@ def _linalg_vector_norm(
     x_node = helpers.get_arg_node(node, 0, None, required=True)
     ord_node = helpers.get_arg_node(node, None, "ord") or ast.Constant(2)
 
-    array = visitor.visit(x_node).latex
-    latex = formatters.format_delims(r"\left\|", array, r"\right\|")
+    if visitor.ns and visitor.is_subst:
+        latex = _array_in_env(visitor, x_node, "Vmatrix")
+    else:
+        x = visitor.visit(x_node).latex
+        latex = formatters.format_delims(r"\left\|", x, r"\right\|")
 
     ord_obj = helpers.get_object(ord_node, visitor.ns)
 
@@ -481,6 +491,92 @@ def _linalg_vector_norm(
         latex += "_{" + str(ord_obj) + "}"
 
     return ExprLatex(latex)
+
+
+def _array_in_env(visitor: ExprVisitor, node: ast.expr, env: str) -> str:
+    """Visit and format an array object but the outermost delimeter
+    changed to env.
+    """
+
+    if not visitor.ns or not visitor.is_subst:
+        return visitor.visit(node).latex
+
+    obj = helpers.get_object(node, visitor.ns)
+
+    if obj is None:
+        return visitor.visit(node).latex
+
+    if not isinstance(obj, np.ndarray):
+        return visitor.visit(node).latex
+
+    # custom ndarray object converter for array in custom LaTeX env
+
+    def build(arr: np.ndarray):
+        if arr.ndim == 1:
+            parts: list = []
+
+            for a in arr:
+                elt = convert_object(a)
+                if elt is None:
+                    return None
+
+                parts.append(elt.latex)
+
+            return parts
+
+        return [build(sub) for sub in arr]
+
+    arr = build(obj)
+    if arr is None:
+        return visitor.visit(node).latex
+
+    return formatters.format_array(arr, env=env)
+
+
+def array_func(
+    visitor: ExprVisitor,
+    node: ast.Call,
+    name: str,
+    *,
+    rank: int = ranks.CALL_RANK,
+) -> ExprLatex:
+    """Common converter for a function with an array argument. If more
+    than one argument is supplied, uses common.rename().
+    """
+
+    if len(node.args) == 1:
+        arg = _array_in_env(visitor, node.args[0], "pmatrix")
+
+        if arg.startswith(r"\begin{pmatrix}"):
+            latex = f"{name} {arg}"
+            return ExprLatex(latex, rank)
+
+    return common.rename(visitor, node, name, rank=rank)
+
+
+def array_method(
+    visitor: ExprVisitor,
+    node: ast.Call,
+    name: str,
+    *,
+    rank: int = ranks.CALL_RANK,
+) -> ExprLatex | None:
+    """Common converter for a method of an array that must be formatted
+    like an array_func. If more than one argument is supplied, uses
+    common.rename_method().
+    """
+
+    if not isinstance(node.func, ast.Attribute):
+        return None
+
+    if not node.args:
+        arg = _array_in_env(visitor, node.func.value, "pmatrix")
+
+        if arg.startswith(r"\begin{pmatrix}"):
+            latex = f"{name} {arg}"
+            return ExprLatex(latex, rank)
+
+    return common.rename_method(visitor, node, name, rank=rank)
 
 
 def _linalg_solve(visitor: ExprVisitor, node: ast.Call) -> ExprLatex:
@@ -729,22 +825,22 @@ register_call_converter(np.linalg.matrix_power, _linalg_matrix_power)
 register_call_converter(np.linalg.norm, _linalg_norm)
 register_call_converter(np.linalg.matrix_norm, _linalg_matrix_norm)
 register_call_converter(np.linalg.vector_norm, _linalg_vector_norm)
-register_call_converter(np.linalg.det, lambda v, n: common.rename(v, n, r"\det"))
-register_call_converter(np.linalg.matrix_rank, lambda v, n: common.rename(v, n, r"\operatorname{rank}"))
-register_call_converter(np.trace, lambda v, n: common.rename(v, n, r"\operatorname{Tr}"))
-register_call_converter(np.linalg.trace, lambda v, n: common.rename(v, n, r"\operatorname{Tr}"), syntactic=False)
+register_call_converter(np.linalg.det, lambda v, n: array_func(v, n, r"\det"))
+register_call_converter(np.linalg.matrix_rank, lambda v, n: array_func(v, n, r"\operatorname{rank}"))
+register_call_converter(np.trace, lambda v, n: array_func(v, n, r"\operatorname{Tr}"))
+register_call_converter(np.linalg.trace, lambda v, n: array_func(v, n, r"\operatorname{Tr}"), syntactic=False)
 register_call_converter(np.linalg.solve, _linalg_solve)
-register_call_converter(np.diagonal, lambda v, n: common.rename(v, n, r"\operatorname{diag}"))
-register_call_converter(np.linalg.diagonal, lambda v, n: common.rename(v, n, r"\operatorname{diag}"), syntactic=False)
-register_call_converter(np.ndarray.diagonal, lambda v, n: common.rename_method(v, n, r"\operatorname{diag}"), syntactic=False)
+register_call_converter(np.diagonal, lambda v, n: array_func(v, n, r"\operatorname{diag}"))
+register_call_converter(np.linalg.diagonal, lambda v, n: array_func(v, n, r"\operatorname{diag}"), syntactic=False)
+register_call_converter(np.ndarray.diagonal, lambda v, n: array_method(v, n, r"\operatorname{diag}"), syntactic=False)
 register_call_converter(np.linalg.inv, _linalg_inv)
 register_call_converter(np.linalg.pinv, _linalg_pinv)
 
-register_call_converter(np.amax, lambda v, n: common.rename(v, n, r"\max"))
-register_call_converter(np.ndarray.max, lambda v, n: common.rename_method(v, n, r"\max"), syntactic=False)
-register_call_converter(np.amin, lambda v, n: common.rename(v, n, r"\min"))
-register_call_converter(np.ndarray.min, lambda v, n: common.rename_method(v, n, r"\min"), syntactic=False)
-register_call_converter(np.ndarray.mean, lambda v, n: common.rename_method(v, n, r"\operatorname{mean}"), syntactic=False)
+register_call_converter(np.amax, lambda v, n: array_func(v, n, r"\max"))
+register_call_converter(np.ndarray.max, lambda v, n: array_method(v, n, r"\max"), syntactic=False)
+register_call_converter(np.amin, lambda v, n: array_func(v, n, r"\min"))
+register_call_converter(np.ndarray.min, lambda v, n: array_method(v, n, r"\min"), syntactic=False)
+register_call_converter(np.ndarray.mean, lambda v, n: array_method(v, n, r"\operatorname{mean}"), syntactic=False)
 register_call_converter(np.prod, _prod, syntactic=False)
 register_call_converter(np.ndarray.prod, _ndarray_prod, syntactic=False)
 register_call_converter(np.sum, _sum, syntactic=False)
