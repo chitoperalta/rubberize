@@ -115,12 +115,18 @@ DICT_ROW_SYNTAX = r"\left\{", r",\, ", r"\right\}"
 DICT_ROW_KV_SYNTAX: str = r" \to "
 DICT_COL_SYNTAX = r"\left\{" + "\n" + r"\begin{aligned}", r" \\" + "\n", r"\end{aligned}" + "\n" + r"\right\}"
 DICT_COL_KV_SYNTAX: str = r" &\to "
+# fmt: on
 
 UNPACKING_UNION: str = r" \cup "
 
-ARRAY_ROW_SYNTAX = r"\begin{pmatrix}", r" & ", r"\end{pmatrix}"
-ARRAY_COL_SYNTAX = r"\begin{pmatrix}", r" \\ ", r"\end{pmatrix}"
-# fmt: on
+ARRAY_ROW_SYNTAX: dict[str, tuple[str, str, str]] = {
+    "pmatrix": (r"\begin{pmatrix}", r" & ", r"\end{pmatrix}"),
+    "bmatrix": (r"\begin{bmatrix}", r" & ", r"\end{bmatrix}"),
+}
+ARRAY_COL_SYNTAX: dict[str, tuple[str, str, str]] = {
+    "pmatrix": (r"\begin{pmatrix}", r" \\ ", r"\end{pmatrix}"),
+    "bmatrix": (r"\begin{bmatrix}", r" \\ ", r"\end{bmatrix}"),
+}
 
 COMP_SUCH_THAT = r" \;\middle|\; "
 COMP_ELEMENT_OF = r" \in "

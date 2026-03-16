@@ -55,6 +55,7 @@ class _DefaultConfig:
     show_list_as_array: bool = False
     show_tuple_as_array: bool = False
     show_1d_as_col: bool = False
+    array_delimiter: Literal["pmatrix", "bmatrix"] = "bmatrix"
 
     # expressions
     wrap_indices: bool = True

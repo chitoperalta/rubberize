@@ -195,13 +195,17 @@ def format_equation(
     return eqn
 
 
-def format_array(array: str | list, *, is_elt: bool = False) -> str:
+def format_array(
+    array: str | list, *, is_elt: bool = False, env: str | None = None
+) -> str:
     """Format a nested list of strings into a LaTeX representation of an
     array.
 
     Args:
         array: The array to format.
         is_elt: Whether the input is an element of an array.
+        env: Optional LaTeX environment name. If provided, it replaces
+            the outer delimiters.
     """
 
     if not isinstance(array, list):
@@ -209,19 +213,26 @@ def format_array(array: str | list, *, is_elt: bool = False) -> str:
 
     elts = [format_array(a, is_elt=True) for a in array]
 
+    key = config.array_delimiter
+
     if all(not isinstance(a, list) for a in array):
+        # 1D
         if is_elt:
-            # 1D
-            _, sep, _ = rules.ARRAY_ROW_SYNTAX
+            _, sep, _ = rules.ARRAY_ROW_SYNTAX[key]
             return sep.join(elts)
 
         # 2D
         if config.show_1d_as_col:
-            prefix, sep, suffix = rules.ARRAY_COL_SYNTAX
+            prefix, sep, suffix = rules.ARRAY_COL_SYNTAX[key]
         else:
-            prefix, sep, suffix = rules.ARRAY_ROW_SYNTAX
-        return format_delims(prefix, sep.join(elts), suffix)
+            prefix, sep, suffix = rules.ARRAY_ROW_SYNTAX[key]
 
     # <2D
-    prefix, sep, suffix = rules.ARRAY_COL_SYNTAX
+    else:
+        prefix, sep, suffix = rules.ARRAY_COL_SYNTAX[key]
+
+    if env and not is_elt:
+        prefix = r"\begin{" + env + "}"
+        suffix = r"\end{" + env + "}"
+
     return format_delims(prefix, sep.join(elts), suffix)

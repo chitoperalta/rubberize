@@ -354,7 +354,7 @@ def test_non_list_passthrough(value):
     ],
 )
 def test_1d_row_array_default(array):
-    prefix, sep, suffix = rules.ARRAY_ROW_SYNTAX
+    prefix, sep, suffix = rules.ARRAY_ROW_SYNTAX[config.array_delimiter]
 
     with config.override(show_1d_as_col=False):
         expected = formatters.format_delims(prefix, sep.join(array), suffix)
@@ -369,7 +369,7 @@ def test_1d_row_array_default(array):
     ],
 )
 def test_1d_column_array(array):
-    prefix, sep, suffix = rules.ARRAY_COL_SYNTAX
+    prefix, sep, suffix = rules.ARRAY_COL_SYNTAX[config.array_delimiter]
 
     with config.override(show_1d_as_col=True):
         expected = formatters.format_delims(prefix, sep.join(array), suffix)
@@ -384,11 +384,11 @@ def test_1d_column_array(array):
     ],
 )
 def test_2d_array(array):
-    prefix, sep, suffix = rules.ARRAY_COL_SYNTAX
+    prefix, sep, suffix = rules.ARRAY_COL_SYNTAX[config.array_delimiter]
 
     with config.override(show_1d_as_col=False):
         rows = []
-        _, row_sep, _ = rules.ARRAY_ROW_SYNTAX
+        _, row_sep, _ = rules.ARRAY_ROW_SYNTAX[config.array_delimiter]
         for row in array:
             rows.append(row_sep.join(row))
 
@@ -415,8 +415,8 @@ def test_nested_row_elements_do_not_get_wrapped():
     ],
 )
 def test_irregular_nested_array(array):
-    prefix, sep, suffix = rules.ARRAY_COL_SYNTAX
-    _, row_sep, _ = rules.ARRAY_ROW_SYNTAX
+    prefix, sep, suffix = rules.ARRAY_COL_SYNTAX[config.array_delimiter]
+    _, row_sep, _ = rules.ARRAY_ROW_SYNTAX[config.array_delimiter]
 
     rows = [row_sep.join(r) for r in array]
     expected = formatters.format_delims(prefix, sep.join(rows), suffix)
