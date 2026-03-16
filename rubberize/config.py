@@ -12,8 +12,9 @@ from dataclasses import dataclass, field, asdict
 
 from rubberize._exceptions import (
     RubberizeAttributeError,
-    RubberizeTypeError,
     RubberizeKeyError,
+    RubberizeFileNotFoundError,
+    RubberizeTypeError,
 )
 
 if TYPE_CHECKING:
@@ -51,9 +52,9 @@ class _DefaultConfig:
 
     # collections
     max_inline_elts: int = 5
-    show_1d_as_col: bool = False
     show_list_as_array: bool = False
     show_tuple_as_array: bool = False
+    show_1d_as_col: bool = False
 
     # expressions
     wrap_indices: bool = True
@@ -61,7 +62,7 @@ class _DefaultConfig:
     use_contextual_mult: bool = True
     max_inline_bool: int = 3
 
-    # statement display modes
+    # display modes
     show_definition: bool = True
     show_substitution: bool = True
     show_result: bool = True
@@ -109,8 +110,10 @@ class _Config(_DefaultConfig):
 
         if path is not None:
             path = Path(path)
-            if path.exists():
-                cfg.update(json.loads(path.read_text("utf-8")))
+            if not path.is_file():
+                raise RubberizeFileNotFoundError(f"File not found: {str(path)}")
+
+            cfg.update(json.loads(path.read_text("utf-8")))
 
         if args:
             cfg = {k: cfg[k] for k in args if k in cfg}

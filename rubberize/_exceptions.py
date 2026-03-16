@@ -41,5 +41,9 @@ class RubberizeKeyError(RubberizeError, KeyError):
     """This error is raised when the user uses an unknown mapping key."""
 
 
+class RubberizeFileNotFoundError(RubberizeError, FileNotFoundError):
+    """This error is raised when the given file is not found."""
+
+
 class RubberizeUserWarning(UserWarning):
     """Base warning for Rubberize user code."""
