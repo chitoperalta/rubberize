@@ -53,9 +53,9 @@ dev = [
 ]
 
 [project.urls]
-Homepage = "https://github.com/chitoperalta/rubberize"
+Homepage = "https://chitoperalta.github.io/rubberize/"
 Repository = "https://github.com/chitoperalta/rubberize"
-Documentation = "https://github.com/chitoperalta/rubberize/blob/main/docs/index.md"
+Documentation = "https://chitoperalta.github.io/rubberize/"
 
 [project.scripts]
 rubberize = "rubberize.cli:main"
