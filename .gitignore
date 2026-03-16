@@ -1,12 +1,6 @@
 # Development files
 dev/
 
-# Quarto files
-/.quarto/
-/_site/
-**/*.quarto_ipynb
-**/*.quarto_ipynb*
-
 # The rest are from https://github.com/github/gitignore
 
 # ---------------------- #
