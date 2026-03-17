@@ -82,7 +82,7 @@ The table below summarizes Python constructs that are supported by Rubberize.
 | `set` comprehensions     | [Yes](collections.qmd#set-comprehensions)        |
 | `dict`                   | [Yes](collections.qmd#dictionaries)              |
 | `dict` comprehensions    | [Yes](collections.qmd#dictionary-comprehensions) |
-| `dict` subscript access  | [Yes](collections.qmd#dictionary-element-acess)  |
+| `dict` subscript access  | [Yes](collections.qmd#dictionary-element-access) |
 | `str`                    | [Yes](builtins.qmd#strings)                      |
 | f-strings                | No                                               |
 

@@ -29,10 +29,10 @@ pip install rubberize
 If you plan to use Rubberize in Jupyter notebooks (recommended for `%%tap`):
 
 ```sh
-pip install rubberize[jupyter]
+pip install "rubberize[jupyter]"
 ```
 
-The `jupyter` extra installs the components required for notebook rendernig and exporting.
+The `jupyter` extra installs the components required for notebook rendering and exporting.
 
 ## Using Rubberize in Jupyter
 
@@ -221,7 +221,7 @@ Notebooks using Rubberize can be exported to PDF using `nbconvert`.
 Additionally, Rubberize ships its own HTML and PDF exporter which supports batch exporting of notebooks in a directory. It can be called using the `%export` line magic.
 
 ::: {.callout-note}
-PDF export requires the Chromium dependency of [Playwright](https://playwright.dev), which can be installed it using `playwright install chromium`.
+PDF export requires the Chromium dependency of [Playwright](https://playwright.dev), which can be installed using `playwright install chromium`.
 :::
 
 ::: {.callout-note}

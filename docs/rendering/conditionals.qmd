@@ -137,5 +137,5 @@ If `@show_substitution=False @show_result=True` and the conditional block cannot
 | `@nores` | `True`     | `True`       | `False` | `True` path only.                                                  |
 | `@def`   | `True`     | `False`      | `False` | As piecewise if possible, otherwise all branches.                  |
 | `@sub`   | `False`    | `True`       | `False` | `True` path only.                                                  |
-| `@res`   | `False`    | `False`      | `True`  | Single result if possible, otherise `RubberizeNotImplementedError` |
+| `@res`   | `False`    | `False`      | `True`  | Single result if possible, otherwise `RubberizeNotImplementedError` |
 | `@none`  | `False`    | `False`      | `False` | Single target if possible, otherwise all branches.                 |

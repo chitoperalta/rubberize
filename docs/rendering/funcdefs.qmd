@@ -38,7 +38,7 @@ def f(x, y):  # This is my function
 f(3, 5)
 ```
 
-As seen from the example, Rubberize ignores function docstrings. Similar to a basic function definition, the return statement is placed on the introductory expression as equal to the function signature. However, this time it will be followed by the text "where".
+As seen from the example, Rubberize ignores any function docstring. Similar to a basic function definition, the return statement is placed on the introductory expression as equal to the function signature. However, this time it will be followed by the text "where".
 
 Rubberize can only handle function definitions **with a single return statement as the last line** of the block, or **[piecewise functions](#piecewise-functions)**.
 
