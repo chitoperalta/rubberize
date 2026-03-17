@@ -494,7 +494,7 @@ def _linalg_vector_norm(
 
 
 def _array_in_env(visitor: ExprVisitor, node: ast.expr, env: str) -> str:
-    """Visit and format an array object but the outermost delimeter
+    """Visit and format an array object but the outermost delimiter
     changed to env.
     """
 
