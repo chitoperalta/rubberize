@@ -1,6 +1,6 @@
 """Syntax rules for converting to LaTeX.
 
-This module provides mappings for various expresison elements to their
+This module provides mappings for various expression elements to their
 corresponding LaTeX representations.
 """
 

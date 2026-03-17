@@ -270,7 +270,7 @@ config.max_inline_elts
 {"a": 1, "b": 2, "c": 3, "d": 4, "e": 5, "f": 6}
 ```
 
-### Dictionary Element Acess
+### Dictionary Element Access
 
 The dictionary element access appears as a subscript:
 

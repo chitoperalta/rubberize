@@ -1,5 +1,5 @@
-"""**I**nline **R**u**B**beri**Z**e. Markdown extension to run Python
-code in `{{...}}` through the latexer.
+"""Markdown extension to run Python code in `{{...}}` through the
+latexer.
 """
 
 from typing import Any, Optional

@@ -40,10 +40,12 @@ F = (m * a).to(ureg.kN)   # Average force experienced by the car in the crash
 
 Unit assignments are rendered with a small space between the quantity value and the unit symbols. All unit symbols are in upright Roman font, in accordance with CGPM.[^1]
 
+<!--- cSpell:disable-next-line --->
 [^1]: CGPM, "Resolution 10 of the 22nd General Conference on Weights and Measures (2003)," Bureau International des Poids et Mesures (BIPM). Available: https://www.bipm.org/en/committees/cg/cgpm/22-2003/resolution-10
 
 When quantities are multiplied, they are wrapped in parentheses, following the recommendation of SI Brochure.[^2]
 
+<!--- cSpell:disable-next-line --->
 [^2]: BIPM, "The International System of Units (SI)," 9th edition, Section 5.4.6, Bureau International des Poids et Mesures, 2019. Available: https://www.bipm.org/en/publications/si-brochure
 
 ## Unit Conversions

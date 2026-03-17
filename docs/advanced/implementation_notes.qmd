@@ -5,7 +5,7 @@ toc: true
 
 First, the code inside a `%%tap` cell is parsed into an abstract syntax tree (AST) using a custom parser. Unlike Python’s standard `ast` module, this parser preserves comments by including them as new nodes in the tree.
 
-Rubberize then walks the syntax tree using its `latexer` and translates Python expressions into $LaTeX$ based on predefined rules, and stores the comments as annotation. Additionally, variable values are retrieved from the execution and substituted into expressions as auxillary representations.
+Rubberize then walks the syntax tree using its `latexer` and translates Python expressions into $LaTeX$ based on predefined rules, and stores the comments as annotation. Additionally, variable values are retrieved from the execution and substituted into expressions as auxiliary representations.
 
 Finally, Rubberize provides HTML layout and styling using its `render`(er), and in notebooks generated LaTeX is rendered using MathJax.
 
@@ -21,7 +21,7 @@ flowchart TD
     E[Latexer]
     F[Render]
     H[Python Nodes]
-    G[HTML + Mathjax]
+    G[HTML + MathJax]
     I[Execute]
 
 

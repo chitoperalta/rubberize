@@ -402,7 +402,7 @@ def get_operand_type(node: ast.expr, latex: str, is_left: bool) -> str:
 
     if isinstance(node, ast.UnaryOp):
         if isinstance(node.operand, ast.UnaryOp):
-            return "-B"  # Nested unaries are bracketed (e.g., -(-3))
+            return "-B"  # Nested unary is bracketed (e.g., -(-3))
         return "-" + get_operand_type(
             node.operand, latex.removeprefix("-"), is_left
         )

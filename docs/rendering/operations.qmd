@@ -139,7 +139,7 @@ a and b or c
 a and (b or c)
 ```
 
-### Grouped Logicals
+### Grouped Logical
 
 If the same boolean operation is repeated more times than `@max_inline_bool`, the compared values will be arranged vertically for readability.
 

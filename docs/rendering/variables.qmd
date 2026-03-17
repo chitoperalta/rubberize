@@ -15,7 +15,7 @@ Python variables are rendered considering the following rules:
 
 ```{python}
 %%tap --dead --grid
-a; b; x; y; apple; boy; xylophone; yoyo
+a; b; x; y; apple; boy; xylophone; yellow
 ```
 
 Depending on the Config Options, additional rendering rules are applied.
@@ -38,7 +38,7 @@ Subsequent underscores are rendered as commas within the subscript part.
 
 ```{python}
 %%tap --dead --grid
-f_o; I_x_male; foo_bulous; foo_a_bravo_c_d
+f_o; I_x_male; foo_bar; foo_a_bravo_c_d
 ```
 
 Two or more consecutive underscores are rendered as a single literal underscore rather than indicating a subscript.
@@ -54,7 +54,7 @@ Leading and trailing underscores are not converted to subscripts. If the variabl
 
 ```{python}
 %%tap --dead --grid
-_private; __very__private; __dunder__; __base_subscript__
+_private; __very__private; __init__; __base_subscript__
 ```
 
 ### Disabling Subscripts

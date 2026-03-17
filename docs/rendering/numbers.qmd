@@ -39,6 +39,7 @@ It can be changed to any of these values:
 According to BIPM (1948)[^1], numbers may be divided in groups of three using a thin space to facilitate reading. Other separators are regional conventions.
 :::
 
+<!--- cSpell:disable-next-line --->
 [^1]: CGPM, "Resolution 7 of the 9th General Conference on Weights and Measures (1948)," Bureau International des Poids et Mesures (BIPM). Available: https://www.bipm.org/en/committees/cg/cgpm/9-1948/resolution-7
 
 ## Floats
@@ -99,6 +100,7 @@ In accordance with BIPM (2003)[^3], decimal markers can be:
 | Dot            | `"."` | $\displaystyle 1\,069.42$   |
 | Comma          | `","` | $\displaystyle 1\,069{,}42$ |
 
+<!--- cSpell:disable-next-line --->
 [^3]: CGPM, "Resolution 10 of the 22nd General Conference on Weights and Measures (2003)," Bureau International des Poids et Mesures (BIPM). Available: https://www.bipm.org/en/committees/cg/cgpm/22-2003/resolution-10
 
 ### E notation

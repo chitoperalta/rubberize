@@ -88,7 +88,7 @@ class StmtVisitor(ast.NodeVisitor):
         """Visit a return statement."""
 
         raise RubberizeSyntaxError(
-            "return must only appear at the end of a function definiton "
+            "return must only appear at the end of a function definition "
             "or in a piecewise function definition."
         )
 
@@ -317,7 +317,7 @@ class StmtVisitor(ast.NodeVisitor):
                 return 0
         """
 
-        # only the inline comment on functiondef is used for rendering
+        # only the inline comment on function def is used for rendering
         desc, cfg = helpers.get_desc(node.body[0])
         if "hide" in cfg:
             return StmtLatex(None, desc)
