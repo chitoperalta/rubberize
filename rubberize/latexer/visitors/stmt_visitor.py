@@ -88,7 +88,7 @@ class StmtVisitor(ast.NodeVisitor):
         """Visit a return statement."""
 
         raise RubberizeSyntaxError(
-            "return must only appear at the end of a function definiton "
+            "return must only appear at the end of a function definition "
             "or in a piecewise function definition."
         )
 
