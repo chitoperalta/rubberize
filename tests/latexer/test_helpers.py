@@ -318,7 +318,7 @@ def test_is_class(src, cls, expected):
     assert helpers.is_class(node, cls, _class_ns) == expected
 
 
-def test_is_clas_no_ns():
+def test_is_class_no_ns():
     node = _get_expr_ast("a")
     assert helpers.is_class(node, A, None) == False
 
