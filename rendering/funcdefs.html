@@ -572,7 +572,7 @@ window.Quarto = {
 </header>
 
 
-<div id="1a75178e" class="cell" data-execution_count="1">
+<div id="26f28759" class="cell" data-execution_count="1">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="op">%</span>reload_ext rubberize</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> rubberize <span class="im">import</span> config</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display">
@@ -1040,7 +1040,7 @@ window.Quarto = {
 </div>
 </div>
 <p>A simple function definition is rendered by Rubberize like so:</p>
-<div id="93fc6ed6" class="cell" data-execution_count="2">
+<div id="2969bf0e" class="cell" data-execution_count="2">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="op">%%</span>tap</span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> z(x, y):</span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> x<span class="op">**</span><span class="dv">2</span> <span class="op">+</span> y<span class="op">**</span><span class="dv">2</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
@@ -1051,7 +1051,7 @@ window.Quarto = {
 <section id="multiple-statement-functions" class="level2">
 <h2 class="anchored" data-anchor-id="multiple-statement-functions">Multiple-statement Functions</h2>
 <p>If the function definition has multiple statements within its block:</p>
-<div id="b8d9b879" class="cell" data-execution_count="3">
+<div id="f3265161" class="cell" data-execution_count="3">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="op">%%</span>tap</span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>a <span class="op">=</span> <span class="dv">0</span></span>
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>Z <span class="op">=</span> <span class="dv">101</span></span>
@@ -1083,14 +1083,14 @@ window.Quarto = {
 <div class="rz-line">\( \displaystyle \operatorname{f} \left( 3,\, 5 \right) = 3\,434 \)</div>
 </div>
 </div>
-<p>As seen from the example, Rubberize ignores function docstrings. Similar to a basic function definition, the return statement is placed on the introductory expression as equal to the function signature. However, this time it will be followed by the text “where”.</p>
+<p>As seen from the example, Rubberize ignores any function docstring. Similar to a basic function definition, the return statement is placed on the introductory expression as equal to the function signature. However, this time it will be followed by the text “where”.</p>
 <p>Rubberize can only handle function definitions <strong>with a single return statement as the last line</strong> of the block, or <strong><a href="#piecewise-functions">piecewise functions</a></strong>.</p>
 <p>Variables within the scope of the function definition (<code>x</code>, <code>y</code>, <code>a</code>, and <code>b</code>) are not substituted, even if <code>a</code> already has a value in the global scope. <code>Z</code> however, is substituted since it is only referenced from the global scope.</p>
 </section>
 <section id="functions-that-return-none" class="level2">
 <h2 class="anchored" data-anchor-id="functions-that-return-none">Functions that Return <code>None</code></h2>
 <p>If there is no last <code>return</code> statement or <code>return None</code> is explicitly written, Rubberize will show that the function is equal to an <em>empty set</em> (<span class="math inline">\(\emptyset\)</span>).</p>
-<div id="a7930afc" class="cell" data-execution_count="4">
+<div id="42100b8d" class="cell" data-execution_count="4">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="op">%%</span>tap</span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> g(x, y):</span>
 <span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>    a <span class="op">=</span> x<span class="op">**</span><span class="dv">2</span></span>
@@ -1155,7 +1155,7 @@ Also acceptable, but note that <code>elif</code> and <code>else</code> are unnec
 </td>
 </tr>
 </tbody></table>
-<div id="49c76d49" class="cell" data-execution_count="5">
+<div id="951b4d55" class="cell" data-execution_count="5">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="op">%%</span>tap</span>
 <span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> a(x):</span>
 <span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> x <span class="op">&lt;</span> <span class="dv">0</span>:</span>

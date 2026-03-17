@@ -530,7 +530,7 @@ window.Quarto = {
 
 
 <p>First, the code inside a <code>%%tap</code> cell is parsed into an abstract syntax tree (AST) using a custom parser. Unlike Python’s standard <code>ast</code> module, this parser preserves comments by including them as new nodes in the tree.</p>
-<p>Rubberize then walks the syntax tree using its <code>latexer</code> and translates Python expressions into <span class="math inline">\(LaTeX\)</span> based on predefined rules, and stores the comments as annotation. Additionally, variable values are retrieved from the execution and substituted into expressions as auxillary representations.</p>
+<p>Rubberize then walks the syntax tree using its <code>latexer</code> and translates Python expressions into <span class="math inline">\(LaTeX\)</span> based on predefined rules, and stores the comments as annotation. Additionally, variable values are retrieved from the execution and substituted into expressions as auxiliary representations.</p>
 <p>Finally, Rubberize provides HTML layout and styling using its <code>render</code>(er), and in notebooks generated LaTeX is rendered using MathJax.</p>
 <p>In simplified form, the process looks like this:</p>
 <div class="cell" data-layout-align="default">
@@ -547,7 +547,7 @@ window.Quarto = {
     E[Latexer]
     F[Render]
     H[Python Nodes]
-    G[HTML + Mathjax]
+    G[HTML + MathJax]
     I[Execute]
 
 

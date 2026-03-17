@@ -596,14 +596,14 @@ window.Quarto = {
 <p>Install Rubberize using pip:</p>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode sh code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="ex">pip</span> install rubberize</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p>If you plan to use Rubberize in Jupyter notebooks (recommended for <code>%%tap</code>):</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode sh code-with-copy"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="ex">pip</span> install rubberize<span class="pp">[</span><span class="ss">jupyter</span><span class="pp">]</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<p>The <code>jupyter</code> extra installs the components required for notebook rendernig and exporting.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode sh code-with-copy"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="ex">pip</span> install <span class="st">"rubberize[jupyter]"</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>The <code>jupyter</code> extra installs the components required for notebook rendering and exporting.</p>
 </section>
 <section id="using-rubberize-in-jupyter" class="level2">
 <h2 class="anchored" data-anchor-id="using-rubberize-in-jupyter">Using Rubberize in Jupyter</h2>
 <p>Rubberize is commonly used inside Jupyter notebooks.</p>
 <p>Load the extension using the <code>%(re)load_ext</code> magic:</p>
-<div id="9eb527b6" class="cell" data-execution_count="1">
+<div id="bd5fc743" class="cell" data-execution_count="1">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="op">%</span>reload_ext rubberize</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display">
 <style>:root {
@@ -1079,7 +1079,7 @@ window.Quarto = {
 <section id="your-first-calculation" class="level2">
 <h2 class="anchored" data-anchor-id="your-first-calculation">Your First Calculation</h2>
 <p>The <code>%%tap</code> cell magic renders the contents of a code cell as typeset mathematics.</p>
-<div id="e4dd877d" class="cell" data-execution_count="2">
+<div id="3b7e1bff" class="cell" data-execution_count="2">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="op">%%</span>tap</span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> math</span>
 <span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -1135,7 +1135,7 @@ Note
 <p>Comments are ignored in this mode.</p>
 </div>
 </div>
-<div id="1cf99121" class="cell" data-execution_count="3">
+<div id="180dc91b" class="cell" data-execution_count="3">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="op">%%</span>tap <span class="op">--</span>grid</span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>d <span class="op">=</span> <span class="dv">0</span><span class="op">;</span> e <span class="op">=</span> <span class="dv">1</span><span class="op">;</span> f <span class="op">=</span> <span class="dv">2</span><span class="op">;</span> g <span class="op">=</span> <span class="dv">3</span></span>
 <span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>h <span class="op">=</span> <span class="dv">4</span><span class="op">;</span> i <span class="op">=</span> <span class="dv">5</span><span class="op">;</span> j <span class="op">=</span> <span class="dv">6</span><span class="op">;</span> k <span class="op">=</span> <span class="dv">7</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
@@ -1157,7 +1157,7 @@ Note
 <h2 class="anchored" data-anchor-id="dead-mode">Dead Mode</h2>
 <p>The <code>--dead</code> (<code>-d</code>) option renders the cell without execution.</p>
 <p>This allows Rubberize to convert symbolic expressions or incomplete (but valid) code into mathematical notation.</p>
-<div id="bf88d0d2" class="cell" data-execution_count="4">
+<div id="9692270e" class="cell" data-execution_count="4">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="op">%%</span>tap <span class="op">--</span>dead</span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>y <span class="op">=</span> m <span class="op">*</span> x <span class="op">+</span> b  <span class="co"># Slope-intercept form of a linear equation</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display">
@@ -1172,7 +1172,7 @@ Note
 <h2 class="anchored" data-anchor-id="getting-the-output-source">Getting the Output Source</h2>
 <p>Use the <code>--html</code> (<code>-h</code>) option to get the HTML source instead of the rendered output.</p>
 <p>This can be useful when copying the generated markup into other documents or tools.</p>
-<div id="05a63ab5" class="cell" data-execution_count="5">
+<div id="ebcfb016" class="cell" data-execution_count="5">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="op">%%</span>tap <span class="op">--</span>html</span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>a <span class="op">+</span> b</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
@@ -1184,7 +1184,7 @@ Note
 <section id="annotations" class="level2">
 <h2 class="anchored" data-anchor-id="annotations">Annotations</h2>
 <p>Comments inside <code>%%tap</code> cells are rendered as text annotations. Rubberize supports Markdown formatting in comments.</p>
-<div id="bc1dc988" class="cell" data-execution_count="6">
+<div id="1b2a174e" class="cell" data-execution_count="6">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="op">%%</span>tap</span>
 <span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="co"># **bold**</span></span>
 <span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a><span class="co"># *italic*</span></span>
@@ -1209,12 +1209,12 @@ Note
 <section id="units" class="level2">
 <h2 class="anchored" data-anchor-id="units">Units</h2>
 <p>Rubberize integrates well with Pint to support physical quantities.</p>
-<div id="6b399488" class="cell" data-execution_count="7">
+<div id="f84350af" class="cell" data-execution_count="7">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pint</span>
 <span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>ureg <span class="op">=</span> pint.UnitRegistry()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-<div id="e571eda3" class="cell" data-execution_count="8">
+<div id="0f1ee98d" class="cell" data-execution_count="8">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="op">%%</span>tap</span>
 <span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
 <span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -1247,7 +1247,7 @@ Note
 <h2 class="anchored" data-anchor-id="calculation-sheets">Calculation Sheets</h2>
 <p>Rubberize also provides tools for structuring engineering calculation reports.</p>
 <p>The <code>CalcSheet</code> class organizes metadata, calculation headings, and design checks.</p>
-<div id="d171e3d0" class="cell" data-execution_count="9">
+<div id="328c00b8" class="cell" data-execution_count="9">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="op">%%</span>tap</span>
 <span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> rubberize <span class="im">import</span> CalcSheet</span>
 <span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>sheet <span class="op">=</span> CalcSheet(</span>
@@ -1276,7 +1276,7 @@ Note
 </div>
 </div>
 <p>Checks can then be recorded during the calculation:</p>
-<div id="ff2fde24" class="cell" data-execution_count="10">
+<div id="f44c3874" class="cell" data-execution_count="10">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="op">%%</span>tap</span>
 <span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>phi_b <span class="op">=</span> <span class="fl">0.90</span> <span class="co"># Resistance factor</span></span>
 <span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>M_n <span class="op">=</span> <span class="fl">5.96</span> <span class="op">*</span> (ureg.kN <span class="op">*</span> ureg.m) <span class="co"># Nominal flexural strength</span></span>
@@ -1308,7 +1308,7 @@ Note
 </div>
 </div>
 <p>And a final conclusion can be generated automatically.</p>
-<div id="48c05b9b" class="cell" data-execution_count="11">
+<div id="2bcfd699" class="cell" data-execution_count="11">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="op">%%</span>tap</span>
 <span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>sheet.conclude(each_check<span class="op">=</span><span class="va">True</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display">
@@ -1327,7 +1327,7 @@ Note
 <h2 class="anchored" data-anchor-id="customizing-rubberize">Customizing Rubberize</h2>
 <p>Rubberize’s behavior can be customized using <strong>options</strong> and <strong>shortcuts</strong>, which are applied to <code>config</code>. Options modify how expressions are rendered by taking values, while shortcuts provide convenient presets to these options.</p>
 <p>Options and shortcuts are typically written with an <code>@</code> prefix when used inside a <code>%%tap</code> cell.</p>
-<div id="5bafab53" class="cell" data-execution_count="12">
+<div id="9d984b10" class="cell" data-execution_count="12">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="op">%%</span>tap <span class="op">@</span>use_subscripts<span class="op">=</span><span class="va">False</span></span>
 <span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>a_1 <span class="op">=</span> <span class="fl">3.0</span> <span class="op">*</span> ureg.cm</span>
 <span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>b_1 <span class="op">=</span> <span class="fl">4.0</span> <span class="op">*</span> ureg.cm</span>
@@ -1355,7 +1355,7 @@ Note
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>PDF export requires the Chromium dependency of <a href="https://playwright.dev">Playwright</a>, which can be installed it using <code>playwright install chromium</code>.</p>
+<p>PDF export requires the Chromium dependency of <a href="https://playwright.dev">Playwright</a>, which can be installed using <code>playwright install chromium</code>.</p>
 </div>
 </div>
 <div class="callout callout-style-default callout-note callout-titled">
