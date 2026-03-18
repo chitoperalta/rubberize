@@ -57,10 +57,10 @@ config.show_list_as_array
 [[1, 2], [3, 4]]
 ```
 
-1D list-arrays can be shown as a column vector by setting `@show_1d_as_col=True`
+1D list-arrays can be shown as a row vector by setting `@show_1d_as_col=False`
 
 ```{python}
-%%tap @show_list_as_array=True @show_1d_as_col=True
+%%tap @show_list_as_array=True @show_1d_as_col=False
 [1.23, 4.56, 7.89]
 ```
 
@@ -164,10 +164,10 @@ config.show_tuple_as_array
 ((1, 2), (3, 4))
 ```
 
-1D tuple-arrays can be shown as a column vector by setting `@show_1d_as_col=True`
+1D tuple-arrays can be shown as a row vector by setting `@show_1d_as_col=False`
 
 ```{python}
-%%tap @show_tuple_as_array=True @show_1d_as_col=True
+%%tap @show_tuple_as_array=True @show_1d_as_col=False
 (1.23, 4.56, 7.89)
 ```
 
