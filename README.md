@@ -29,7 +29,7 @@ pip install rubberize
 To include dependencies that allow Rubberize to be used with Jupyter Notebooks:
 
 ```bash
-pip install rubberize[jupyter]
+pip install "rubberize[jupyter]"
 ```
 
 ## Quick Start
