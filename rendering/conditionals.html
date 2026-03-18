@@ -573,7 +573,7 @@ window.Quarto = {
 </header>
 
 
-<div id="6bbfd4b2" class="cell" data-execution_count="1">
+<div id="41a77abd" class="cell" data-execution_count="1">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="op">%</span>reload_ext rubberize</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> rubberize.config <span class="im">import</span> config</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display">
@@ -1042,7 +1042,7 @@ window.Quarto = {
 </div>
 <p>By default, Rubberize renders only the lines within the <code>True</code> path of the conditional ladder, with the condition itself being displayed as an introductory expression.</p>
 <p>The lines within the <code>True</code> path are indented to visually indicate that they belong to this block. The other branches are not rendered.</p>
-<div id="d3c85eb6" class="cell" data-execution_count="2">
+<div id="2ac1a41e" class="cell" data-execution_count="2">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="op">%%</span>tap</span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> <span class="dv">5</span></span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> x <span class="op">&gt;</span> <span class="dv">0</span>:</span>
@@ -1054,7 +1054,7 @@ window.Quarto = {
 </div>
 </div>
 <p>If no conditions are <code>True</code>, nothing in the conditional block will be rendered.</p>
-<div id="5e5688f8" class="cell" data-execution_count="3">
+<div id="16cfd11f" class="cell" data-execution_count="3">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="op">%%</span>tap</span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> <span class="op">-</span><span class="dv">5</span></span>
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> x <span class="op">&gt;</span> <span class="dv">0</span>:</span>
@@ -1064,7 +1064,7 @@ window.Quarto = {
 </div>
 </div>
 <p>However, if an <code>else</code> statement is provided, lines in <code>else</code> will be rendered without any indentation and introductory expression.</p>
-<div id="3b5e5e2d" class="cell" data-execution_count="4">
+<div id="445735d3" class="cell" data-execution_count="4">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="op">%%</span>tap</span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> <span class="op">-</span><span class="dv">5</span></span>
 <span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> x <span class="op">&gt;</span> <span class="dv">0</span>:</span>
@@ -1091,7 +1091,7 @@ Warning
 <p><strong>Gotcha</strong>: Rubberize generates the rendering based on the actual execution of the Python code.</p>
 <p>If a test within the conditional ladder alters the value being tested, Rubberize will use the altered value in generating the rendered output. <strong>This means that if the value is modified within the conditional block, the render may not appear as expected.</strong></p>
 <p>This code will not render properly:</p>
-<div id="aa87214f" class="cell" data-execution_count="5">
+<div id="38c66496" class="cell" data-execution_count="5">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="op">%%</span>tap</span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> <span class="dv">5</span></span>
 <span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> x <span class="op">&gt;</span> <span class="dv">0</span>:</span>
@@ -1107,7 +1107,7 @@ Warning
 <section id="skipping-code-with-pass" class="level2">
 <h2 class="anchored" data-anchor-id="skipping-code-with-pass">Skipping Code with <code>pass</code></h2>
 <p>When Rubberize encounters a conditional ladder where the <code>True</code> path contains only a <code>pass</code> statement, nothing will be rendered.</p>
-<div id="90192042" class="cell" data-execution_count="6">
+<div id="0edf5d58" class="cell" data-execution_count="6">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="op">%%</span>tap</span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> <span class="dv">5</span></span>
 <span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> x <span class="op">&gt;</span> <span class="dv">0</span>:</span>
@@ -1122,7 +1122,7 @@ Warning
 <p>A common usage pattern is when certain calculation lines are needed only when specific conditions are met, and the presentation should remain silent otherwise.</p>
 <p>In this pattern, the <code>if</code> branch contains the <strong>negation of the condition</strong> and uses <code>pass</code> to suppress output. The <code>else</code> branch then contains the calculation that should be rendered when the condition is actually true.</p>
 <p>For example:</p>
-<div id="2012c85a" class="cell" data-execution_count="7">
+<div id="b8cc6580" class="cell" data-execution_count="7">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="op">%%</span>tap</span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>temp_c <span class="op">=</span> <span class="op">-</span><span class="dv">3</span></span>
 <span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -1157,7 +1157,7 @@ Note
 <p>Options and shortcuts applied to the <code>if</code> keyword line applies to the whole <code>if-elif-else</code> ladder.</p>
 </div>
 </div>
-<div id="4dd58926" class="cell" data-execution_count="8">
+<div id="659cc941" class="cell" data-execution_count="8">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="op">%%</span>tap</span>
 <span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> <span class="dv">3</span></span>
 <span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> x <span class="op">&gt;</span> <span class="dv">0</span>:  <span class="co"># @show_substitution=False</span></span>
@@ -1183,7 +1183,7 @@ Note
 <section id="showing-all-conditions" class="level2">
 <h2 class="anchored" data-anchor-id="showing-all-conditions">Showing All Conditions</h2>
 <p>To show all the conditions in a conditional ladder, turn off both the substitution and result display modes by setting <code>@show_substitution=False @show_result=False</code>, or using <code>@def</code>.</p>
-<div id="8af5a5d2" class="cell" data-execution_count="9">
+<div id="1745c314" class="cell" data-execution_count="9">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="op">%%</span>tap</span>
 <span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> <span class="dv">3</span></span>
 <span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> x <span class="op">&gt;</span> <span class="dv">0</span>:  <span class="co"># @def</span></span>

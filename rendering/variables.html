@@ -586,7 +586,7 @@ window.Quarto = {
 </header>
 
 
-<div id="78a5609b" class="cell" data-execution_count="1">
+<div id="d3734f6c" class="cell" data-execution_count="1">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="op">%</span>reload_ext rubberize</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> rubberize.config <span class="im">import</span> config</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display">
@@ -1058,7 +1058,7 @@ window.Quarto = {
 <li><strong>Single letters</strong> are rendered in italics</li>
 <li><strong>Words</strong> (i.e., a chain of multiple letters) appear roman.</li>
 </ul>
-<div id="badb43c9" class="cell" data-execution_count="2">
+<div id="048f7d28" class="cell" data-execution_count="2">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="op">%%</span>tap <span class="op">--</span>dead <span class="op">--</span>grid</span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>a<span class="op">;</span> b<span class="op">;</span> x<span class="op">;</span> y<span class="op">;</span> apple<span class="op">;</span> boy<span class="op">;</span> xylophone<span class="op">;</span> yellow</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display">
@@ -1078,7 +1078,7 @@ window.Quarto = {
 <section id="subscripts" class="level2">
 <h2 class="anchored" data-anchor-id="subscripts">Subscripts</h2>
 <p><code>@use_subscripts</code> controls whether subscript rules will be applied to variables:</p>
-<div id="785d723e" class="cell" data-execution_count="3">
+<div id="9a78dfab" class="cell" data-execution_count="3">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>config.use_subscripts</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display" data-execution_count="3">
 <pre><code>True</code></pre>
@@ -1089,7 +1089,7 @@ window.Quarto = {
 <h3 class="anchored" data-anchor-id="names-with-underscores">Names with Underscores</h3>
 <p>The first underscore is treated as a subscript marker. The left part is rendered as the base name of the variable, and the right part is rendered as the variable subscript.</p>
 <p>Subsequent underscores are rendered as commas within the subscript part.</p>
-<div id="6f35d809" class="cell" data-execution_count="4">
+<div id="b7f4ad1a" class="cell" data-execution_count="4">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="op">%%</span>tap <span class="op">--</span>dead <span class="op">--</span>grid</span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>f_o<span class="op">;</span> I_x_male<span class="op">;</span> foo_bar<span class="op">;</span> foo_a_bravo_c_d</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display">
@@ -1102,7 +1102,7 @@ window.Quarto = {
 </div>
 </div>
 <p>Two or more consecutive underscores are rendered as a single literal underscore rather than indicating a subscript.</p>
-<div id="600ac3c8" class="cell" data-execution_count="5">
+<div id="b5ac7d71" class="cell" data-execution_count="5">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="op">%%</span>tap <span class="op">--</span>dead <span class="op">--</span>grid</span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>f__o<span class="op">;</span> I__x_male<span class="op">;</span> I_x__male<span class="op">;</span> foo__a_bravo_c__d</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display">
@@ -1118,7 +1118,7 @@ window.Quarto = {
 <section id="leading-and-trailing-underscores" class="level3">
 <h3 class="anchored" data-anchor-id="leading-and-trailing-underscores">Leading and Trailing Underscores</h3>
 <p>Leading and trailing underscores are not converted to subscripts. If the variable name includes subscripts, the leading and trailing underscores are attached to the base part and not on the subscript.</p>
-<div id="bbef23c5" class="cell" data-execution_count="6">
+<div id="6f5f4796" class="cell" data-execution_count="6">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="op">%%</span>tap <span class="op">--</span>dead <span class="op">--</span>grid</span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>_private<span class="op">;</span> __very__private<span class="op">;</span> <span class="fu">__init__</span><span class="op">;</span> __base_subscript__</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display">
@@ -1134,7 +1134,7 @@ window.Quarto = {
 <section id="disabling-subscripts" class="level3">
 <h3 class="anchored" data-anchor-id="disabling-subscripts">Disabling Subscripts</h3>
 <p>When <code>@use_subscripts=False</code>, all underscores are shown as literal underscores, and variables will be rendered exactly as they are written but using a Roman font.</p>
-<div id="ba555fba" class="cell" data-execution_count="7">
+<div id="8daf1dd4" class="cell" data-execution_count="7">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="op">%%</span>tap <span class="op">--</span>dead <span class="op">--</span>grid <span class="op">@</span>use_subscripts<span class="op">=</span><span class="va">False</span></span>
 <span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>I_x_male<span class="op">;</span> I__x_male<span class="op">;</span> foo__a_bravo_c__d<span class="op">;</span> __base_subscript__</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display">
@@ -1151,7 +1151,7 @@ window.Quarto = {
 <section id="math-symbols" class="level2">
 <h2 class="anchored" data-anchor-id="math-symbols">Math Symbols</h2>
 <p><code>@use_symbols</code> controls whether certain words will be transformed to symbols in variables:</p>
-<div id="27d1c789" class="cell" data-execution_count="8">
+<div id="644b5b19" class="cell" data-execution_count="8">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>config.use_symbols</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display" data-execution_count="8">
 <pre><code>True</code></pre>
@@ -1161,7 +1161,7 @@ window.Quarto = {
 <section id="greek-letters" class="level3">
 <h3 class="anchored" data-anchor-id="greek-letters">Greek Letters</h3>
 <p>Python variable name parts that match Greek or Hebrew letter names are replaced with their corresponding symbols. For example, <code>alpha</code> becomes <span class="math inline">\(\alpha\)</span>, and <code>Omega</code> becomes <span class="math inline">\(\Omega\)</span>.</p>
-<div id="a9e27df0" class="cell" data-execution_count="9">
+<div id="ca14d25b" class="cell" data-execution_count="9">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="op">%%</span>tap <span class="op">--</span>dead <span class="op">--</span>grid</span>
 <span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>x_gamma<span class="op">;</span> Omega_b_o<span class="op">;</span> delta_max<span class="op">;</span> phiR_n</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display">
@@ -1174,7 +1174,7 @@ window.Quarto = {
 </div>
 </div>
 <p>These are all the Greek letter names that are converted when used:</p>
-<div id="e734f7c6" class="cell" data-execution_count="10">
+<div id="6d0c1617" class="cell" data-execution_count="10">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="op">%%</span>tap <span class="op">--</span>dead <span class="op">--</span>grid</span>
 <span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>alpha<span class="op">;</span> beta<span class="op">;</span> (Gamma, gamma)<span class="op">;</span> (Delta, delta)</span>
 <span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>(epsilon, varepsilon)<span class="op">;</span> zeta<span class="op">;</span> eta<span class="op">;</span> (Theta, theta, vartheta)</span>
@@ -1226,7 +1226,7 @@ Note
 </div>
 </div>
 <p>In addition, these Hebrew letter names are also converted:</p>
-<div id="8c826c39" class="cell" data-execution_count="11">
+<div id="b8fdae01" class="cell" data-execution_count="11">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="op">%%</span>tap <span class="op">--</span>dead <span class="op">--</span>grid</span>
 <span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>digamma<span class="op">;</span> aleph<span class="op">;</span> beth<span class="op">;</span> gimel</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display">
@@ -1242,7 +1242,7 @@ Note
 <section id="starting-greek-letter" class="level3">
 <h3 class="anchored" data-anchor-id="starting-greek-letter">Starting Greek Letter</h3>
 <p>If the base part of a variable starts with certain Greek letters, it will be rendered as a symbol alongside the rest of the base part.</p>
-<div id="912fd04c" class="cell" data-execution_count="12">
+<div id="2df7ac66" class="cell" data-execution_count="12">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="op">%%</span>tap <span class="op">--</span>dead <span class="op">--</span>grid</span>
 <span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>DeltaT<span class="op">;</span> psiR_k</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display">
@@ -1253,7 +1253,7 @@ Note
 </div>
 </div>
 <p>These Greek letter keywords that are defined in <code>@greek_starts</code>:</p>
-<div id="7dc84aa1" class="cell" data-execution_count="13">
+<div id="2c3a8b5c" class="cell" data-execution_count="13">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>config.greek_starts</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display" data-execution_count="13">
 <pre><code>{'Delta', 'gamma', 'phi', 'psi'}</code></pre>
@@ -1261,7 +1261,7 @@ Note
 </div>
 <p>To add or remove Greek letters that should be rendered when it appears in the beginning of the base name part, use the <code>config</code> methods <code>add_greek_start()</code> or <code>remove_greek_start()</code>, respectively.</p>
 <p>For example:</p>
-<div id="1c715182" class="cell" data-execution_count="14">
+<div id="d2cb4df2" class="cell" data-execution_count="14">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>config.add_greek_start(<span class="st">"Sigma"</span>, <span class="st">"Pi"</span>)</span>
 <span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>config.remove_greek_start(<span class="st">"gamma"</span>, <span class="st">"phi"</span>, <span class="st">"psi"</span>)</span>
 <span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -1270,7 +1270,7 @@ Note
 <pre><code>{'Delta', 'Pi', 'Sigma'}</code></pre>
 </div>
 </div>
-<div id="0e27972a" class="cell" data-execution_count="15">
+<div id="a1b4babc" class="cell" data-execution_count="15">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb19"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="op">%%</span>tap <span class="op">--</span>dead <span class="op">--</span>grid</span>
 <span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>Sigmaboy<span class="op">;</span> phiF_y</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display">
@@ -1284,7 +1284,7 @@ Note
 <section id="accents-and-modifiers" class="level3">
 <h3 class="anchored" data-anchor-id="accents-and-modifiers">Accents and Modifiers</h3>
 <p>Variable names with specific keywords after an underscore (e.g., <code>_hat</code>, <code>_bar</code>) are rendered with the corresponding accent or modifier.</p>
-<div id="292b8fce" class="cell" data-execution_count="16">
+<div id="cb91c3a3" class="cell" data-execution_count="16">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb20"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="op">%%</span>tap <span class="op">--</span>dead <span class="op">--</span>grid</span>
 <span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>x_bar<span class="op">;</span> k_hat<span class="op">;</span> f_prime<span class="op">;</span> L_star_a</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display">
@@ -1297,7 +1297,7 @@ Note
 </div>
 </div>
 <p>These are all the accents and modifiers that can be converted:</p>
-<div id="2c0a2692" class="cell" data-execution_count="17">
+<div id="b416a2c0" class="cell" data-execution_count="17">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb21"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="op">%%</span>tap <span class="op">--</span>dead <span class="op">--</span>grid</span>
 <span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>foo_hat<span class="op">;</span> foo_widehat<span class="op">;</span> foo_bar<span class="op">;</span> foo_widebar</span>
 <span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a>foo_tilde<span class="op">;</span> foo_widetilde<span class="op">;</span> foo_dot<span class="op">;</span> foo_ddot</span>
@@ -1358,7 +1358,7 @@ Tip
 <section id="disabling-symbols" class="level3">
 <h3 class="anchored" data-anchor-id="disabling-symbols">Disabling Symbols</h3>
 <p>When <code>@use_symbols=False</code>, all greek, accent, and modifier keywords will be rendered exactly as they are typed but using a Roman font.</p>
-<div id="d09f11bf" class="cell" data-execution_count="18">
+<div id="db3c8454" class="cell" data-execution_count="18">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb22"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="op">%%</span>tap <span class="op">--</span>dead <span class="op">--</span>grid <span class="op">@</span>use_symbols<span class="op">=</span><span class="va">False</span></span>
 <span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>alpha_widebar</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display">
@@ -1370,12 +1370,12 @@ Tip
 <section id="attributes" class="level2">
 <h2 class="anchored" data-anchor-id="attributes">Attributes</h2>
 <p>Attribute access is rendered the same as you would write it in Python.</p>
-<div id="88037c71" class="cell" data-execution_count="19">
+<div id="1e2c8abe" class="cell" data-execution_count="19">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb23"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> Foo:</span>
 <span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> <span class="fu">__init__</span>(<span class="va">self</span>):</span>
 <span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.bar <span class="op">=</span> <span class="dv">42</span>  <span class="co"># Instance attribute</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-<div id="793af729" class="cell" data-execution_count="20">
+<div id="8ab0700a" class="cell" data-execution_count="20">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb24"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="op">%%</span>tap</span>
 <span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>foo <span class="op">=</span> Foo()</span>
 <span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a>foo.bar  <span class="co"># Attribute access</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
@@ -1390,7 +1390,7 @@ Tip
 <section id="hidden-modules" class="level3">
 <h3 class="anchored" data-anchor-id="hidden-modules">Hidden Modules</h3>
 <p>Some module names, such as <code>math</code>, are not rendered, leaving only its attributes:</p>
-<div id="10307154" class="cell" data-execution_count="21">
+<div id="d572900f" class="cell" data-execution_count="21">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb25"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="op">%%</span>tap</span>
 <span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> math</span>
 <span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -1406,7 +1406,7 @@ Tip
 </div>
 </div>
 <p>This is controlled by the <code>@hidden_modules</code>:</p>
-<div id="7ba9e5b8" class="cell" data-execution_count="22">
+<div id="cc6f6a19" class="cell" data-execution_count="22">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb26"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a>config.hidden_modules</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display" data-execution_count="22">
 <pre><code>{'math', 'np', 'sp', 'ureg'}</code></pre>
@@ -1414,7 +1414,7 @@ Tip
 </div>
 <p>To add or remove module names that should be hidden when the attribute is rendered, use the <code>config</code> methods <code>add_hidden_module()</code> or <code>remove_hidden_module()</code>, respectively.</p>
 <p>For example:</p>
-<div id="39992019" class="cell" data-execution_count="23">
+<div id="92c40cbe" class="cell" data-execution_count="23">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb28"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a>config.add_hidden_module(<span class="st">"scipy"</span>, <span class="st">"foo"</span>)</span>
 <span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a>config.remove_hidden_module(<span class="st">"math"</span>)</span>
 <span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -1423,7 +1423,7 @@ Tip
 <pre><code>{'foo', 'np', 'scipy', 'sp', 'ureg'}</code></pre>
 </div>
 </div>
-<div id="1414cdcd" class="cell" data-execution_count="24">
+<div id="8c1a5d4d" class="cell" data-execution_count="24">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb30"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="op">%%</span>tap</span>
 <span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a>foo.bar  <span class="co"># `foo` now hidden</span></span>
 <span id="cb30-3"><a href="#cb30-3" aria-hidden="true" tabindex="-1"></a>math.pi  <span class="co"># `math` now shown</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>

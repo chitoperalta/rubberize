@@ -572,7 +572,7 @@ window.Quarto = {
 </header>
 
 
-<div id="e2d95638" class="cell" data-execution_count="1">
+<div id="a3764090" class="cell" data-execution_count="1">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="op">%</span>reload_ext rubberize</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> rubberize <span class="im">import</span> config</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display">
@@ -1042,7 +1042,7 @@ window.Quarto = {
 <section id="display-modes" class="level2">
 <h2 class="anchored" data-anchor-id="display-modes">Display Modes</h2>
 <p>When Rubberize renders an expression, it produces one or more mathematical steps. These steps represent different stages of evaluating an expression.</p>
-<div id="e77f2c88" class="cell" data-execution_count="2">
+<div id="cc3ce0e0" class="cell" data-execution_count="2">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="op">%%</span>tap</span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> math</span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -1121,7 +1121,7 @@ window.Quarto = {
 </tbody>
 </table>
 <p>Additionally, the shortcut <code>@none</code> hides all display modes, while <code>@all</code> shows all the display modes.</p>
-<div id="cd92d4e2" class="cell" data-execution_count="3">
+<div id="b2df9aa7" class="cell" data-execution_count="3">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="op">%%</span>tap</span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>math.sqrt(x<span class="op">**</span><span class="dv">2</span> <span class="op">+</span> y<span class="op">**</span><span class="dv">2</span>)  <span class="co"># @show_definition=False</span></span>
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>math.sqrt(x<span class="op">**</span><span class="dv">2</span> <span class="op">+</span> y<span class="op">**</span><span class="dv">2</span>)  <span class="co"># @nosub</span></span>
@@ -1138,14 +1138,14 @@ window.Quarto = {
 <h2 class="anchored" data-anchor-id="multiline">Multiline</h2>
 <p><code>@multiline</code> controls if display modes should be stacked vertically when rendered or be shown as equalities on a single line.</p>
 <p>This is useful for ensuring that very long equations don’t get cut off from the page.</p>
-<div id="490d7705" class="cell" data-execution_count="4">
+<div id="25e4eb3a" class="cell" data-execution_count="4">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>config.multiline</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display" data-execution_count="4">
 <pre><code>False</code></pre>
 </div>
 </div>
 <p><code>@stack</code> and <code>@line</code> can be used as a shortcuts to <code>@multiline=True</code> and <code>@multiline=False</code>, respectively.</p>
-<div id="7a143f00" class="cell" data-execution_count="5">
+<div id="acf657ce" class="cell" data-execution_count="5">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="op">%%</span>tap <span class="op">@</span>stack</span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>math.sqrt(x<span class="op">**</span><span class="dv">2</span> <span class="op">+</span> y<span class="op">**</span><span class="dv">2</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display">
@@ -1163,13 +1163,13 @@ window.Quarto = {
 <section id="math-constants" class="level2">
 <h2 class="anchored" data-anchor-id="math-constants">Math Constants</h2>
 <p>Rubberize preserves the names for mathematical constants defined in <code>@math_constants</code> during substitution.</p>
-<div id="35b1e1a4" class="cell" data-execution_count="6">
+<div id="be790307" class="cell" data-execution_count="6">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>config.math_constants</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display" data-execution_count="6">
 <pre><code>{'e', 'phi', 'pi', 'varphi'}</code></pre>
 </div>
 </div>
-<div id="2e7b2640" class="cell" data-execution_count="7">
+<div id="9aeb7347" class="cell" data-execution_count="7">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="op">%%</span>tap <span class="op">@</span>float_prec<span class="op">=</span><span class="dv">0</span></span>
 <span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> math</span>
 <span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>math.e<span class="op">**</span>(<span class="ot">1j</span> <span class="op">*</span> math.pi) <span class="op">+</span> <span class="dv">1</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
@@ -1181,7 +1181,7 @@ window.Quarto = {
 <p>In the example above, since math constant names are preserved, the rendered substitution is the same as the rendered definition so only one is shown.</p>
 <p>To add or remove constants that should be preserved in substitution, use the <code>config</code> methods <code>add_math_constant()</code> or <code>remove_math_constant()</code>, respectively.</p>
 <p>For example:</p>
-<div id="b39fe3de" class="cell" data-execution_count="8">
+<div id="85aaa79b" class="cell" data-execution_count="8">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>config.add_math_constant(<span class="st">"euler"</span>)</span>
 <span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>config.remove_math_constant(<span class="st">"e"</span>)</span>
 <span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -1190,7 +1190,7 @@ window.Quarto = {
 <pre><code>{'Delta', 'gamma', 'phi', 'psi'}</code></pre>
 </div>
 </div>
-<div id="bebbc4d6" class="cell" data-execution_count="9">
+<div id="1c7e2ecd" class="cell" data-execution_count="9">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="op">%%</span>tap</span>
 <span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>math.e<span class="op">**</span>(<span class="ot">1j</span> <span class="op">*</span> math.pi) <span class="op">+</span> <span class="dv">1</span>  <span class="co"># `e` is substituted</span></span>
 <span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a></span>
