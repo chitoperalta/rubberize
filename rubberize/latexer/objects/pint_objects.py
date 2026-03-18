@@ -88,7 +88,7 @@ def _format_units_latex(latex: str) -> str:
         return f"{numerator} / {denominator}"
 
     units = []
-    if numerator != 1:
+    if numerator != "1":
         units.append(numerator)
 
     for d in denominators:
