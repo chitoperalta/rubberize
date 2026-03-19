@@ -1,5 +1,9 @@
 """Magics for rendering."""
 
+from __future__ import annotations
+
+from typing import cast, TYPE_CHECKING
+
 from IPython.core.interactiveshell import InteractiveShell
 from IPython.core.magic import (
     Magics,
@@ -18,8 +22,11 @@ from IPython.utils.capture import capture_output
 import rubberize.vendor.ast_comments as ast_c
 from rubberize._exceptions import RubberizeRuntimeError
 from rubberize.config import config, parse_modifiers
-from rubberize.latexer import latexer
+from rubberize.latexer import latex_from_ast
 from rubberize.render import render
+
+if TYPE_CHECKING:
+    from rubberize.latexer import StmtLatex
 
 
 @magics_class
@@ -71,12 +78,14 @@ class TapMagics(Magics):
         else:
             local_ns = None
 
-        blocks = _split_blocks(cell)
+        tree = cast(ast_c.Module, ast_c.parse(cell, mode="exec"))
+        latexes = latex_from_ast(tree, local_ns)
+        block_starts = _compute_block_starts(cell)
+        blocks = _group_blocks(latexes, tree.body, block_starts)
 
         for b in blocks:
             with config.override(**cfg):
-                latex = latexer(b, local_ns)
-                html = render(latex, local_ns, grid=args.grid)
+                html = render(b, local_ns, grid=args.grid)
 
             if args.html:
                 print(html, "\n")
@@ -138,30 +147,46 @@ class TapMagics(Magics):
             if not run_result.success:
                 return
 
-        blocks = _split_blocks(cell)
+        tree = cast(ast_c.Module, ast_c.parse(cell, mode="exec"))
+        block_starts = _compute_block_starts(cell)
+
+        blocks: list[list[ast_c.stmt]] = []
+        current: list[ast_c.stmt] = []
+
+        for stmt in tree.body:
+            if stmt.lineno - 1 in block_starts and current:
+                blocks.append(current)
+                current = []
+
+            current.append(stmt)
+
+        if current:
+            blocks.append(current)
 
         for b in blocks:
-            tree = ast_c.parse(b)
+            sub_tree = ast_c.Module(body=b, type_ignores=[])
+
             dump = ast_c.dump(
-                tree,
+                sub_tree,
                 annotate_fields=args.annotate_fields,
                 include_attributes=args.include_attributes,
                 indent=args.indent,
                 show_empty=args.show_empty,
             )
+
             print(dump)
 
 
-def _split_blocks(cell: str) -> list[str]:
+def _compute_block_starts(cell: str) -> set[int]:
     lines = cell.splitlines()
 
-    blocks: list[list[str]] = []
-    current: list[str] = []
+    starts: set[int] = set()
+    saw_code = False
     saw_blank = False
 
-    for line in lines:
+    for i, line in enumerate(lines):
         # ignore leading blank lines
-        if not current and line.strip() == "":
+        if not saw_code and line.strip() == "":
             continue
 
         # ignore magics or commented magics
@@ -169,25 +194,39 @@ def _split_blocks(cell: str) -> list[str]:
             continue
 
         if line.strip() == "":
-            current.append(line)
             saw_blank = True
             continue
 
         if (
-            current
+            saw_code
             and saw_blank
             and line == line.lstrip(" ")
             and not line.lstrip().startswith(
                 ("elif ", "else", "except", "finally")
             )
         ):
+            starts.add(i)
+
+        saw_code = True
+        saw_blank = False
+
+    return starts
+
+
+def _group_blocks(
+    latexes: list[StmtLatex], stmts: list[ast_c.stmt], block_starts: set[int]
+) -> list[list[StmtLatex]]:
+    blocks: list[list[StmtLatex]] = []
+    current: list[StmtLatex] = []
+
+    for stmt, latex in zip(stmts, latexes):
+        if stmt.lineno - 1 in block_starts and current:
             blocks.append(current)
             current = []
 
-        current.append(line)
-        saw_blank = False
+        current.append(latex)
 
     if current:
         blocks.append(current)
 
-    return ["\n".join(b) for b in blocks]
+    return blocks
