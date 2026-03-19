@@ -58,7 +58,7 @@ class StmtVisitor(ast.NodeVisitor):
 
         if isinstance(body[0], ast_c.Comment):
             # inline comment is stored as first item in ast.FunctionDef body
-            desc, cfg = helpers.get_desc(node)
+            desc, cfg = helpers.get_desc(body[0])
             if "hide" in cfg:
                 return StmtLatex(None, desc)
 
