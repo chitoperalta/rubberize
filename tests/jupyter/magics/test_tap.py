@@ -1,5 +1,6 @@
 # pylint: disable=all
 
+import types
 from textwrap import dedent
 
 from IPython.core.interactiveshell import InteractiveShell
@@ -31,7 +32,7 @@ class FakeShell(InteractiveShell):
 def test_tap_renders(monkeypatch):
     calls = []
 
-    monkeypatch.setattr(tap, "latexer", lambda block, ns: "LATEX")
+    monkeypatch.setattr(tap, "latex_from_ast", lambda tree, ns: ["LATEX"])
     monkeypatch.setattr(tap, "render", lambda latex, ns, grid=False: "<html>")
     monkeypatch.setattr(
         tap, "display_html", lambda html, raw=True: calls.append(html)
@@ -48,7 +49,7 @@ def test_tap_renders(monkeypatch):
 def test_tap_dead_skips_execution(monkeypatch):
     calls = []
 
-    monkeypatch.setattr(tap, "latexer", lambda block, ns: "LATEX")
+    monkeypatch.setattr(tap, "latex_from_ast", lambda tree, ns: ["LATEX"])
     monkeypatch.setattr(tap, "render", lambda latex, ns, grid=False: "<html>")
     monkeypatch.setattr(
         tap, "display_html", lambda html, raw=True: calls.append(html)
@@ -68,7 +69,7 @@ def test_tap_dead_skips_execution(monkeypatch):
 def test_tap_execution_failure_stops_render(monkeypatch):
     calls = []
 
-    monkeypatch.setattr(tap, "latexer", lambda block, ns: "LATEX")
+    monkeypatch.setattr(tap, "latex_from_ast", lambda tree, ns: ["LATEX"])
     monkeypatch.setattr(tap, "render", lambda latex, ns, grid=False: "<html>")
     monkeypatch.setattr(
         tap, "display_html", lambda html, raw=True: calls.append(html)
@@ -83,7 +84,7 @@ def test_tap_execution_failure_stops_render(monkeypatch):
 
 
 def test_tap_html_flag_prints(monkeypatch, capsys):
-    monkeypatch.setattr(tap, "latexer", lambda block, ns: "LATEX")
+    monkeypatch.setattr(tap, "latex_from_ast", lambda tree, ns: ["LATEX"])
     monkeypatch.setattr(tap, "render", lambda latex, ns, grid=False: "<html>")
     monkeypatch.setattr(tap, "display_html", lambda *args, **kwargs: None)
     monkeypatch.setattr(tap, "parse_modifiers", lambda m: {})
@@ -103,7 +104,7 @@ def test_tap_hide_modifier(monkeypatch):
         nonlocal called
         called = True
 
-    monkeypatch.setattr(tap, "latexer", lambda block, ns: "LATEX")
+    monkeypatch.setattr(tap, "latex_from_ast", lambda tree, ns: ["LATEX"])
     monkeypatch.setattr(tap, "render", fake_render)
     monkeypatch.setattr(tap, "display_html", lambda *a, **k: None)
     monkeypatch.setattr(tap, "parse_modifiers", lambda m: {"hide": True})
@@ -121,7 +122,11 @@ def test_tap_hide_modifier(monkeypatch):
 
 
 def test_ast_dump(monkeypatch, capsys):
-    monkeypatch.setattr(ast_c, "parse", lambda b: "TREE")
+    fake_stmt = types.SimpleNamespace(lineno=1)
+
+    fake_tree = types.SimpleNamespace(body=[fake_stmt])
+
+    monkeypatch.setattr(ast_c, "parse", lambda b, mode="exec": fake_tree)
     monkeypatch.setattr(ast_c, "dump", lambda *args, **kwargs: "AST_DUMP")
 
     m = tap.TapMagics(shell=FakeShell())
@@ -133,7 +138,12 @@ def test_ast_dump(monkeypatch, capsys):
 
 
 def test_ast_dead_skips_execution(monkeypatch, capsys):
-    monkeypatch.setattr(ast_c, "parse", lambda b: "TREE")
+    import types
+
+    fake_stmt = types.SimpleNamespace(lineno=1)
+    fake_tree = types.SimpleNamespace(body=[fake_stmt])
+
+    monkeypatch.setattr(ast_c, "parse", lambda b, mode="exec": fake_tree)
     monkeypatch.setattr(ast_c, "dump", lambda *a, **k: "AST")
 
     shell = FakeShell()
@@ -145,12 +155,12 @@ def test_ast_dead_skips_execution(monkeypatch, capsys):
     assert shell.ran is False
 
 
-# --------------
-# _split_blocks
-# --------------
+# ----------------------
+# _compute_block_starts
+# ----------------------
 
 
-def test_split_blocks_simple():
+def test_compute_block_starts_simple():
     src = dedent(
         """
         a = 1
@@ -159,12 +169,13 @@ def test_split_blocks_simple():
         """
     )
 
-    blocks = tap._split_blocks(src)
+    starts = tap._compute_block_starts(src)
 
-    assert len(blocks) == 2
+    # "b = 2" line index
+    assert starts == {3}
 
 
-def test_split_blocks_top_level_only():
+def test_compute_block_starts_top_level_only():
     src = dedent(
         """
         if True:
@@ -174,14 +185,13 @@ def test_split_blocks_top_level_only():
         """
     )
 
-    blocks = tap._split_blocks(src)
+    starts = tap._compute_block_starts(src)
 
-    assert len(blocks) == 2
-    assert "if True:" in blocks[0]
-    assert "b = 2" in blocks[1]
+    # only "b = 2" starts a new block
+    assert starts == {4}
 
 
-def test_split_blocks_elif_not_split():
+def test_compute_block_starts_elif_not_split():
     src = dedent(
         """
         if x:
@@ -192,12 +202,12 @@ def test_split_blocks_elif_not_split():
         """
     )
 
-    blocks = tap._split_blocks(src)
+    starts = tap._compute_block_starts(src)
 
-    assert len(blocks) == 1
+    assert starts == set()
 
 
-def test_split_blocks_magic_lines_removed():
+def test_compute_block_starts_magic_lines_removed():
     src = dedent(
         """\
         %time
@@ -208,7 +218,7 @@ def test_split_blocks_magic_lines_removed():
         """
     )
 
-    blocks = tap._split_blocks(src)
+    starts = tap._compute_block_starts(src)
 
-    assert len(blocks) == 2
-    assert "%time" not in blocks[0]
+    # only split before "b = 2"
+    assert starts == {4}
