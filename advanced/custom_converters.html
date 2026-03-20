@@ -576,7 +576,7 @@ window.Quarto = {
 </header>
 
 
-<div id="290cc93c" class="cell" data-execution_count="1">
+<div id="710d0ecb" class="cell" data-execution_count="1">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="op">%</span>reload_ext rubberize</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display">
 <style>:root {
@@ -1044,7 +1044,7 @@ window.Quarto = {
 </div>
 <p>Rubberize uses registries of converter functions for calls and objects for rendering. If Rubberize encounters a call or an object that it doesn’t have a converter for, it won’t try to render any mathematical representation. Instead, it will simply render the <a href="../rendering/calls.html#unknown-functions">default call syntax</a> if it is a call, or the variable name if it is an object reference.</p>
 <p>For example, if a <code>Point</code> class is defined as:</p>
-<div id="4c6d4055" class="cell" data-execution_count="2">
+<div id="91b15570" class="cell" data-execution_count="2">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> Point:</span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> <span class="fu">__init__</span>(<span class="va">self</span>, x, y):</span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.x <span class="op">=</span> x</span>
@@ -1054,7 +1054,7 @@ window.Quarto = {
 <span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> ((<span class="va">self</span>.x <span class="op">-</span> other.x) <span class="op">**</span> <span class="dv">2</span> <span class="op">+</span> (<span class="va">self</span>.y <span class="op">-</span> other.y) <span class="op">**</span> <span class="dv">2</span>) <span class="op">**</span> <span class="fl">0.5</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>Rubberize will not know how to convert a <code>Point</code> instance, so it will just output the default call syntax and the variable name:</p>
-<div id="5f2dcbfb" class="cell" data-execution_count="3">
+<div id="1932732c" class="cell" data-execution_count="3">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="op">%%</span>tap</span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>P_1 <span class="op">=</span> Point(<span class="dv">1</span>, <span class="dv">2</span>)</span>
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>P_1</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
@@ -1096,7 +1096,7 @@ window.Quarto = {
 <p>The converter function must be defined to take at an object of type <code>cls</code> (which is the object to convert) and return an <code>ExprLatex</code> instance, which contains the LaTeX representation of the object, or <code>None</code> if the object is considered unconvertible.</p>
 <p>Internally, registering the converter maps <code>cls</code> to <code>func</code>, so that when an instance of <code>cls</code> is encountered, Rubberize can look up the correct converter and apply it.</p>
 <p>Continuing the example, we define a converter <code>convert_point()</code> and register it as an object converter:</p>
-<div id="f3a80062" class="cell" data-execution_count="4">
+<div id="ade8d41a" class="cell" data-execution_count="4">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> rubberize.latexer <span class="im">import</span> ExprLatex, ranks, register_object_converter</span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> convert_point(obj: Point) <span class="op">-&gt;</span> ExprLatex:</span>
@@ -1109,7 +1109,7 @@ window.Quarto = {
 <span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>register_object_converter(Point, convert_point)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>Now, when we try to render the object, it will be rendered correctly:</p>
-<div id="5b2ccb70" class="cell" data-execution_count="5">
+<div id="5d234baf" class="cell" data-execution_count="5">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="op">%%</span>tap</span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>P_1</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display">
@@ -1141,7 +1141,7 @@ window.Quarto = {
 <section id="creating-a-call-converter" class="level2">
 <h2 class="anchored" data-anchor-id="creating-a-call-converter">Creating a Call Converter</h2>
 <p>Continuing the example, if we try to render calls to <code>Point</code> and its method:</p>
-<div id="cc5d3c88" class="cell" data-execution_count="6">
+<div id="888b1417" class="cell" data-execution_count="6">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="op">%%</span>tap</span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>P_2 <span class="op">=</span> Point(<span class="dv">3</span>, <span class="dv">3</span>)</span>
 <span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>P_1.distance_to(P_2)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
@@ -1240,7 +1240,7 @@ window.Quarto = {
 </table>
 <p>If the function takes more than <code>visitor</code> and <code>node</code>, a <code>lambda</code> expression can be used when registering the converter.</p>
 <p>Continuing the example, we register converters for <code>Point()</code> and <code>distance_to()</code> using the common converters:</p>
-<div id="e07740ab" class="cell" data-execution_count="7">
+<div id="4a7103d5" class="cell" data-execution_count="7">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> rubberize.latexer <span class="im">import</span> ranks, register_call_converter</span>
 <span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> rubberize.latexer.calls <span class="im">import</span> common</span>
 <span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -1253,7 +1253,7 @@ window.Quarto = {
 <span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>Now when we try to render:</p>
-<div id="63a70c7f" class="cell" data-execution_count="8">
+<div id="404b076f" class="cell" data-execution_count="8">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="op">%%</span>tap</span>
 <span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>P_2 <span class="op">=</span> Point(<span class="dv">3</span>, <span class="dv">3</span>)</span>
 <span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>P_1.distance_to(P_2)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
@@ -1273,7 +1273,7 @@ window.Quarto = {
 </ul>
 <p>The converter must return an <code>ExprLatex</code> instance, or <code>None</code> if the call node should be considered unconvertible.</p>
 <p>Continuing the example, we can define a custom converter for <code>distance_to</code>:</p>
-<div id="d4dfe0d0" class="cell" data-execution_count="9">
+<div id="8bb1db2b" class="cell" data-execution_count="9">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="op">%%</span>capture</span>
 <span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> ast</span>
 <span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -1304,7 +1304,7 @@ window.Quarto = {
 <span id="cb10-28"><a href="#cb10-28" aria-hidden="true" tabindex="-1"></a>register_call_converter(Point.distance_to, convert_point_distance_to)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>Now, the method call will be rendered like so:</p>
-<div id="1b441ac8" class="cell" data-execution_count="10">
+<div id="28d7fc3b" class="cell" data-execution_count="10">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="op">%%</span>tap</span>
 <span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>P_1.distance_to(P_2)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display">

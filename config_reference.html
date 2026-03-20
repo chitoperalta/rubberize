@@ -589,7 +589,7 @@ window.Quarto = {
 </header>
 
 
-<div id="bab972b3" class="cell" data-execution_count="1">
+<div id="dee0cf62" class="cell" data-execution_count="1">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="op">%</span>reload_ext rubberize</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display">
 <style>:root {
@@ -1074,7 +1074,7 @@ window.Quarto = {
 <p>Options and shortcuts included in inline comments provide the most specific form of configuration. They apply only to the <strong>expression on that line</strong> and override any options defined elsewhere.</p>
 <p>Configuration is prefixed with an <code>@</code> symbol to indicate that it is an option or a shortcut.</p>
 <p>The rest of the inline comment is still rendered as annotation.</p>
-<div id="c618bcb6" class="cell" data-execution_count="2">
+<div id="f5704831" class="cell" data-execution_count="2">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="op">%%</span>tap</span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>omega_b <span class="op">=</span> <span class="fl">1.67</span>  <span class="co"># Safety factor</span></span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>phi_b <span class="op">=</span> <span class="fl">0.90</span>    <span class="co"># @use_subscripts=False Load resistance factor</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
@@ -1096,7 +1096,7 @@ window.Quarto = {
 <p>Options and shortcuts written in a line comment apply to <strong>all subsequent lines</strong> in the cell until another line comment is encountered.</p>
 <p>Similar to inline comments, configuration is prefixed with an <code>@</code> symbol.</p>
 <p>The rest of the line comment is still rendered as annotation.</p>
-<div id="a93c7d4a" class="cell" data-execution_count="3">
+<div id="40be16ff" class="cell" data-execution_count="3">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="op">%%</span>tap</span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="co"># @use_subscripts=False **Variables are not subscripted**</span></span>
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>p_a <span class="op">=</span> <span class="dv">1</span></span>
@@ -1123,7 +1123,7 @@ window.Quarto = {
 <section id="tap-cell-arguments" class="level3">
 <h3 class="anchored" data-anchor-id="tap-cell-arguments"><code>%%tap</code> Cell Arguments</h3>
 <p>Options and shortcuts can be provided as arguments to the <code>%%tap</code> cell. These options apply to <strong>all lines within the cell</strong> unless overridden by line or inline comments.</p>
-<div id="e3a9e835" class="cell" data-execution_count="4">
+<div id="598b5248" class="cell" data-execution_count="4">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="op">%%</span>tap <span class="op">@</span>use_subscripts<span class="op">=</span><span class="va">False</span></span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>omega_b <span class="op">=</span> <span class="fl">1.67</span></span>
 <span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>phi_b <span class="op">=</span> <span class="fl">0.90</span>  <span class="co"># @use_subscripts=True Inline comment overrides `%%tap` args</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
@@ -1148,7 +1148,7 @@ Important
 <p>For options that take sequences, use lists without spaces to avoid syntax errors.</p>
 </div>
 </div>
-<div id="441dbaba" class="cell" data-execution_count="5">
+<div id="b1d549a6" class="cell" data-execution_count="5">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="op">%%</span>tap <span class="op">@</span>greek_starts<span class="op">=</span>[<span class="st">"pi"</span>,<span class="st">"nu"</span>]</span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>piQ_a <span class="op">=</span> <span class="dv">0</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display">
@@ -1159,13 +1159,13 @@ Important
 <section id="global-configuration" class="level3">
 <h3 class="anchored" data-anchor-id="global-configuration">Global Configuration</h3>
 <p>The global configuration can be modified directly using the <code>config</code> object. Changes made this way apply to the <strong>entire notebook session</strong>.</p>
-<div id="6c21fa0b" class="cell" data-execution_count="6">
+<div id="6efce2d8" class="cell" data-execution_count="6">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> rubberize <span class="im">import</span> config</span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>config.<span class="bu">set</span>(multiline<span class="op">=</span><span class="va">True</span>, use_symbols<span class="op">=</span><span class="va">False</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>Unlike cell-level configuration, options are passed as arguments and shortcuts are not supported.</p>
-<div id="24878ba2" class="cell" data-execution_count="7">
+<div id="6b752544" class="cell" data-execution_count="7">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="op">%%</span>tap</span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> math</span>
 <span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -1193,14 +1193,14 @@ Important
 </div>
 </div>
 <p>To restore the default values for modified options:</p>
-<div id="034bd07d" class="cell" data-execution_count="8">
+<div id="f69cf2b3" class="cell" data-execution_count="8">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>config.reset(<span class="st">"multiline"</span>, <span class="st">"use_symbols"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </section>
 <section id="configuration-files" class="level3">
 <h3 class="anchored" data-anchor-id="configuration-files">Configuration Files</h3>
 <p>The global configuration can be initialized from default values or from a JSON file using <code>config.load()</code>.</p>
-<div id="9da95ad0" class="cell" data-execution_count="9">
+<div id="2c1781ea" class="cell" data-execution_count="9">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>config.load()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>When called without arguments, this restores the default configuration. This is equivalent co calling <code>config.reset()</code>.</p>
@@ -1218,33 +1218,33 @@ Important
 </div>
 <p>This file changes only those three options while leaving all other configuration values unchanged.</p>
 <p>Use the <code>path</code> keyword argument to load the JSON file:</p>
-<div id="dbf458c6" class="cell" data-execution_count="10">
+<div id="d78165b3" class="cell" data-execution_count="10">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>config.load(path<span class="op">=</span><span class="st">"sample_config.json"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-<div id="a4792d30" class="cell" data-execution_count="11">
+<div id="aeef3ada" class="cell" data-execution_count="11">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(config.multiline)</span>
 <span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(config.use_symbols)</span>
 <span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(config.greek_starts)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>True
 False
-{'pi', 'nu'}</code></pre>
+{'nu', 'pi'}</code></pre>
 </div>
 </div>
 <p>If specific option names are provided, only those options are updated:</p>
-<div id="0b1d4171" class="cell" data-execution_count="12">
+<div id="555a1f11" class="cell" data-execution_count="12">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>config.reset()</span>
 <span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>config.load(<span class="st">"multiline"</span>, <span class="st">"greek_starts"</span>, path<span class="op">=</span><span class="st">"sample_config.json"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-<div id="cbec943a" class="cell" data-execution_count="13">
+<div id="dc397673" class="cell" data-execution_count="13">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(config.multiline)</span>
 <span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(config.use_symbols)</span>
 <span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(config.greek_starts)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>True
 True
-{'pi', 'nu'}</code></pre>
+{'nu', 'pi'}</code></pre>
 </div>
 </div>
 <p>Configuration loaded in this way forms the <strong>base configuration</strong> for the session. More specific configuration sources—such as <code>config.set</code>, <code>%%tap</code> arguments, and comment inclusions—can override these values.</p>
