@@ -577,7 +577,7 @@ window.Quarto = {
 </header>
 
 
-<div id="46f490f5" class="cell" data-execution_count="1">
+<div id="e91e088f" class="cell" data-execution_count="1">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="op">%</span>reload_ext rubberize</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> rubberize.config <span class="im">import</span> config</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display">
@@ -1059,7 +1059,7 @@ Note
 </div>
 </div>
 <p><code>pint.Quantity</code> objects, which encapsulate numbers with units, are fully integrated into Rubberize. This guide demonstrates how Rubberize renders these quantities.</p>
-<div id="1355f93c" class="cell" data-execution_count="2">
+<div id="125c3156" class="cell" data-execution_count="2">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pint</span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="co"># instantiate a unit registry</span></span>
@@ -1068,7 +1068,7 @@ Note
 <section id="creating-quantities" class="level2">
 <h2 class="anchored" data-anchor-id="creating-quantities">Creating Quantities</h2>
 <p>Rubberize recognizes when the user intends to create physical quantities by applying units:</p>
-<div id="efa1c80a" class="cell" data-execution_count="3">
+<div id="d1cdbf41" class="cell" data-execution_count="3">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="op">%%</span>tap</span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>v_1 <span class="op">=</span> <span class="fl">0.0</span>                       <span class="co"># Final velocity of the car</span></span>
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>v_0 <span class="op">=</span> <span class="fl">25.0</span> <span class="op">*</span> (ureg.m <span class="op">/</span> ureg.s)  <span class="co"># Initial velocity of the car</span></span>
@@ -1114,7 +1114,7 @@ Note
 <section id="unit-conversions" class="level2">
 <h2 class="anchored" data-anchor-id="unit-conversions">Unit Conversions</h2>
 <p>A <code>pint.Quantity</code> object’s <code>to()</code> or <code>ito()</code> methods calls are hidden by Rubberize.</p>
-<div id="236cb966" class="cell" data-execution_count="4">
+<div id="d8edbe38" class="cell" data-execution_count="4">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="op">%%</span>tap</span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>F <span class="op">=</span> (m <span class="op">*</span> a).to(ureg.kN)</span>
 <span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>F.to(ureg.kip)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
@@ -1127,7 +1127,7 @@ Note
 <section id="contextual-multiplication" class="level2">
 <h2 class="anchored" data-anchor-id="contextual-multiplication">Contextual Multiplication</h2>
 <p>Multiplication of compound units matches Rubberize’s config for <code>@use_contextual_mult</code>.</p>
-<div id="abecc9be" class="cell" data-execution_count="5">
+<div id="cf684041" class="cell" data-execution_count="5">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="op">%%</span>tap</span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="fl">50.0</span> <span class="op">*</span> (ureg.kN <span class="op">*</span> ureg.m)  <span class="co"># @use_contextual_mult=True</span></span>
 <span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="fl">50.0</span> <span class="op">*</span> (ureg.kN <span class="op">*</span> ureg.m)  <span class="co"># @use_contextual_mult=False</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
@@ -1140,13 +1140,13 @@ Note
 <section id="inline-units" class="level2">
 <h2 class="anchored" data-anchor-id="inline-units">Inline Units</h2>
 <p><code>@use_inline_units</code> controls whether units will be shown inline using a solidus (<span class="math inline">\(a/b\)</span>) or using a fraction (<span class="math inline">\(\frac{a}{b}\)</span>).</p>
-<div id="19bf7e21" class="cell" data-execution_count="6">
+<div id="8220e422" class="cell" data-execution_count="6">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>config.use_inline_units</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display" data-execution_count="6">
 <pre><code>True</code></pre>
 </div>
 </div>
-<div id="95a4f586" class="cell" data-execution_count="7">
+<div id="b575879c" class="cell" data-execution_count="7">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="op">%%</span>tap <span class="op">--</span>grid</span>
 <span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="fl">12.0</span> <span class="op">*</span> (ureg.kN <span class="op">/</span> ureg.m)  <span class="co"># @use_inline_units=True</span></span>
 <span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="fl">12.0</span> <span class="op">*</span> (ureg.kN <span class="op">/</span> ureg.m)  <span class="co"># @use_inline_units=False</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
@@ -1158,7 +1158,7 @@ Note
 </div>
 </div>
 <p>If units are inline and the fraction has multiple denominator terms, negative exponents will be used instead of a solidus.</p>
-<div id="0de359e8" class="cell" data-execution_count="8">
+<div id="9a06619a" class="cell" data-execution_count="8">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="op">%%</span>tap <span class="op">--</span>grid</span>
 <span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="fl">1.1</span> <span class="op">*</span> (ureg.W <span class="op">/</span> (ureg.m<span class="op">**</span><span class="dv">2</span> <span class="op">*</span> ureg.K))  <span class="co"># @use_inline_units=True</span></span>
 <span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a><span class="fl">1.1</span> <span class="op">*</span> (ureg.W <span class="op">/</span> (ureg.m<span class="op">**</span><span class="dv">2</span> <span class="op">*</span> ureg.K))  <span class="co"># @use_inline_units=False</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
@@ -1173,7 +1173,7 @@ Note
 <section id="angular-degrees" class="level2">
 <h2 class="anchored" data-anchor-id="angular-degrees">Angular Degrees</h2>
 <p>Angular degree units are rendered with <span class="math inline">\(x^{\circ}\)</span> instead of <span class="math inline">\(x\,\deg\)</span>.</p>
-<div id="723af8dd" class="cell" data-execution_count="9">
+<div id="5ca1ec36" class="cell" data-execution_count="9">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="op">%%</span>tap</span>
 <span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="fl">45.0</span> <span class="op">*</span> ureg.deg</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display">
@@ -1184,7 +1184,7 @@ Note
 <section id="foot-inch-fraction" class="level2">
 <h2 class="anchored" data-anchor-id="foot-inch-fraction">Foot-Inch-Fraction</h2>
 <p><code>@use_fif_units</code> controls whether to render inch and foot quantities in foot-inch-fraction (FIF) format:</p>
-<div id="cf9cc147" class="cell" data-execution_count="10">
+<div id="40414df6" class="cell" data-execution_count="10">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>config.use_fif_units</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display" data-execution_count="10">
 <pre><code>False</code></pre>
@@ -1204,30 +1204,30 @@ Note
 <p>Only the rendering is affected in the conversion. The value still contains the full precision of the inch or foot quantity.</p>
 </div>
 </div>
-<div id="72356612" class="cell" data-execution_count="11">
+<div id="83b48afd" class="cell" data-execution_count="11">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="op">%%</span>tap <span class="op">@</span>use_fif_units<span class="op">=</span><span class="va">True</span></span>
 <span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>height <span class="op">=</span> <span class="fl">8.41</span> <span class="op">*</span> ureg.ft</span>
 <span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>width <span class="op">=</span> <span class="fl">42.1875</span> <span class="op">*</span> ureg.inch</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display">
-<div class="rz-line">\( \displaystyle \mathrm{height} = 8.41\ \mathrm{ft} = 8\text{{’}}\ 4\ 15/16\text{”} \)</div>
-<div class="rz-line">\( \displaystyle \mathrm{width} = 42.19\ \mathrm{in} = 42\ 3/16\text{”} \)</div>
+<div class="rz-line">\( \displaystyle \mathrm{height} = 8.41\ \mathrm{ft} \)</div>
+<div class="rz-line">\( \displaystyle \mathrm{width} = 42.19\ \mathrm{in} \)</div>
 </div>
 </div>
 </section>
 <section id="degree-minute-second" class="level2">
 <h2 class="anchored" data-anchor-id="degree-minute-second">Degree-Minute-Second</h2>
 <p>Similar to FIF format, Rubberize supports rendering angle measurements as degree-minute-second (DMS) format using the <code>@use_dms_units</code> option.</p>
-<div id="ac4782aa" class="cell" data-execution_count="12">
+<div id="57f7dab9" class="cell" data-execution_count="12">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>config.use_dms_units</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display" data-execution_count="12">
 <pre><code>False</code></pre>
 </div>
 </div>
-<div id="0ea3fdbb" class="cell" data-execution_count="13">
+<div id="b1d885ed" class="cell" data-execution_count="13">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="op">%%</span>tap <span class="op">@</span>use_dms_units<span class="op">=</span><span class="va">True</span></span>
 <span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a><span class="fl">42.6969</span> <span class="op">*</span> ureg.deg</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display">
-<div class="rz-line">\( \displaystyle 42.70^{\circ} = 42^{\circ}\ 41\text{{’}}\ 48.84\text{”} \)</div>
+<div class="rz-line">\( \displaystyle 42.70^{\circ} \)</div>
 </div>
 </div>
 </section>
@@ -1235,13 +1235,13 @@ Note
 <h2 class="anchored" data-anchor-id="custom-unit-latex">Custom Unit LaTeX</h2>
 <p>Rubberize allows definition of custom LaTeX representations for specific unit combinations using <code>register_units_latex()</code>.</p>
 <p>For example, to register custom LaTeX for bending moment (structural engineering), ensuring that the units are displayed as <span class="math inline">\(x\,\mathrm{N}\,\mathrm{m}\)</span> instead of <span class="math inline">\(x\,\mathrm{m}\,\mathrm{N}\)</span>:</p>
-<div id="31df0869" class="cell" data-execution_count="14">
+<div id="fa2b958e" class="cell" data-execution_count="14">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> rubberize <span class="im">import</span> register_units_latex</span>
 <span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Register a custom LaTeX representation for bending moment</span></span>
 <span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a>register_units_latex(<span class="vs">r"</span><span class="dv">\m</span><span class="vs">athrm{N} </span><span class="er">\</span><span class="vs">cdot </span><span class="dv">\m</span><span class="vs">athrm{m}"</span>, meter<span class="op">=</span><span class="dv">1</span>, newton<span class="op">=</span><span class="dv">1</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-<div id="d53e8ad2" class="cell" data-execution_count="15">
+<div id="aaadc5fd" class="cell" data-execution_count="15">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb18"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="op">%%</span>tap</span>
 <span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a><span class="fl">42.0</span> <span class="op">*</span> (ureg.N <span class="op">*</span> ureg.m)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display">
@@ -1249,11 +1249,11 @@ Note
 </div>
 </div>
 <p>The same process can be done for defining LaTeX representations of custom units:</p>
-<div id="5d8683b8" class="cell" data-execution_count="16">
+<div id="9eaa12d3" class="cell" data-execution_count="16">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb19"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>ureg.define(<span class="st">"boop = 3 newton"</span>)</span>
 <span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>register_units_latex(<span class="vs">r"</span><span class="dv">\m</span><span class="vs">athrm{_{b}oO</span><span class="dv">^</span><span class="vs">{P}!}"</span>, boop<span class="op">=</span><span class="dv">1</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-<div id="e8e1e4f7" class="cell" data-execution_count="17">
+<div id="59f37976" class="cell" data-execution_count="17">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb20"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="op">%%</span>tap</span>
 <span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>a <span class="op">=</span> <span class="fl">84.42</span> <span class="op">*</span> ureg.boop</span>
 <span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a>a.to(ureg.N)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>

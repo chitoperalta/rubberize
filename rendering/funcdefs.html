@@ -572,7 +572,7 @@ window.Quarto = {
 </header>
 
 
-<div id="bddf4a38" class="cell" data-execution_count="1">
+<div id="519b513e" class="cell" data-execution_count="1">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="op">%</span>reload_ext rubberize</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> rubberize <span class="im">import</span> config</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display">
@@ -1040,7 +1040,7 @@ window.Quarto = {
 </div>
 </div>
 <p>A simple function definition is rendered by Rubberize like so:</p>
-<div id="6693d652" class="cell" data-execution_count="2">
+<div id="a09e2492" class="cell" data-execution_count="2">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="op">%%</span>tap</span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> z(x, y):</span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> x<span class="op">**</span><span class="dv">2</span> <span class="op">+</span> y<span class="op">**</span><span class="dv">2</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
@@ -1051,7 +1051,7 @@ window.Quarto = {
 <section id="multiple-statement-functions" class="level2">
 <h2 class="anchored" data-anchor-id="multiple-statement-functions">Multiple-statement Functions</h2>
 <p>If the function definition has multiple statements within its block:</p>
-<div id="1fc24463" class="cell" data-execution_count="3">
+<div id="538c8e29" class="cell" data-execution_count="3">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="op">%%</span>tap</span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>a <span class="op">=</span> <span class="dv">0</span></span>
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>Z <span class="op">=</span> <span class="dv">101</span></span>
@@ -1072,7 +1072,10 @@ window.Quarto = {
 <div class="rz-line">\( \displaystyle Z = 101 \)</div>
 </div>
 <div class="cell-output cell-output-display">
-<div class="rz-line">\( \displaystyle \operatorname{f} \left( x,\, y \right) = a + b\ \text{where:} \)</div>
+<div class="rz-line">
+    <div class="rz-line__main">\( \displaystyle \operatorname{f} \left( x,\, y \right) = a + b\ \text{where:} \)</div>
+    <div class="rz-line__desc">This is my function</div>
+</div>
 <div class="rz-body">
     <div class="rz-line">\( \displaystyle a = x^{2}\,Z = x^{2} \cdot 101 \)</div>
     <div class="rz-line">\( \displaystyle \text{Since}\ Z &gt; 100\ \to\ 101 &gt; 100 \text{:} \)</div>
@@ -1090,7 +1093,7 @@ window.Quarto = {
 <section id="functions-that-return-none" class="level2">
 <h2 class="anchored" data-anchor-id="functions-that-return-none">Functions that Return <code>None</code></h2>
 <p>If there is no last <code>return</code> statement or <code>return None</code> is explicitly written, Rubberize will show that the function is equal to an <em>empty set</em> (<span class="math inline">\(\emptyset\)</span>).</p>
-<div id="76ffa015" class="cell" data-execution_count="4">
+<div id="c062aa3a" class="cell" data-execution_count="4">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="op">%%</span>tap</span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> g(x, y):</span>
 <span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>    a <span class="op">=</span> x<span class="op">**</span><span class="dv">2</span></span>
@@ -1155,7 +1158,7 @@ Also acceptable, but note that <code>elif</code> and <code>else</code> are unnec
 </td>
 </tr>
 </tbody></table>
-<div id="eaf7f716" class="cell" data-execution_count="5">
+<div id="aa3d8db0" class="cell" data-execution_count="5">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="op">%%</span>tap</span>
 <span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> a(x):</span>
 <span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> x <span class="op">&lt;</span> <span class="dv">0</span>:</span>

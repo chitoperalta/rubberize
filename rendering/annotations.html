@@ -577,7 +577,7 @@ window.Quarto = {
 </header>
 
 
-<div id="b3a3ab6f" class="cell" data-execution_count="1">
+<div id="635e71ed" class="cell" data-execution_count="1">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="op">%</span>reload_ext rubberize</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pint</span>
@@ -1049,7 +1049,7 @@ window.Quarto = {
 </div>
 <p>Annotations allow explanatory text to appear alongside rendered calculations.</p>
 <p>Inside <code>%%tap</code> cells, comments are treated as annotations rather than ignored code. When the cell is rendered, these comments appear as explanatory text in the calculation sheet.</p>
-<div id="20e8c6a2" class="cell" data-execution_count="2">
+<div id="bdefe261" class="cell" data-execution_count="2">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="op">%%</span>tap</span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Beam span</span></span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>L <span class="op">=</span> <span class="dv">6</span> <span class="op">*</span> ureg.m</span>
@@ -1074,7 +1074,7 @@ window.Quarto = {
 </div>
 <p>Comments written on their own line appear as explanatory text associated with the calculation that follows.</p>
 <p>Inline comments behave slightly differently. When a comment appears on the same line as a calculation, it is rendered alongside the resulting expression.</p>
-<div id="d019faf3" class="cell" data-execution_count="3">
+<div id="4333aeda" class="cell" data-execution_count="3">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="op">%%</span>tap</span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>L <span class="op">=</span> <span class="dv">6</span> <span class="op">*</span> ureg.m               <span class="co"># Beam span</span></span>
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>w <span class="op">=</span> <span class="dv">12</span> <span class="op">*</span> (ureg.kN <span class="op">/</span> ureg.m)  <span class="co"># Uniform load</span></span>
@@ -1109,7 +1109,7 @@ window.Quarto = {
 <section id="smaller-text" class="level2">
 <h2 class="anchored" data-anchor-id="smaller-text">Smaller Text</h2>
 <p>Text enclosed in carets is rendered in a smaller style.</p>
-<div id="f27eefcf" class="cell" data-execution_count="4">
+<div id="7b1321be" class="cell" data-execution_count="4">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="op">%%</span>tap</span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="co"># The value is approximate ^rounded to three significant figures^.</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display">
@@ -1121,7 +1121,7 @@ window.Quarto = {
 <h2 class="anchored" data-anchor-id="inline-line-breaks">Inline Line Breaks</h2>
 <p>A double backslash can be used to insert an inline line break within annotation text.</p>
 <p>This is especially useful for inline annotations, where a longer explanation may need to be split across multiple lines when rendered.</p>
-<div id="db8e9114" class="cell" data-execution_count="5">
+<div id="a3c929ce" class="cell" data-execution_count="5">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="op">%%</span>tap</span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>a <span class="op">=</span> <span class="dv">420</span>  <span class="co"># First line of text. \\ Second line of text.</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display">
@@ -1136,7 +1136,7 @@ window.Quarto = {
 <h2 class="anchored" data-anchor-id="inline-rubberize">Inline Rubberize</h2>
 <p>Annotations may include inline Rubberize expressions using double curly braces.</p>
 <p>Any expression placed inside <code>{{ ... }}</code> is parsed and rendered using Rubberize, allowing mathematical expressions to appear directly within annotation text.</p>
-<div id="eca8b144" class="cell" data-execution_count="6">
+<div id="e56487b6" class="cell" data-execution_count="6">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="op">%%</span>tap</span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>a <span class="op">=</span> <span class="dv">2</span></span>
 <span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>b <span class="op">=</span> <span class="dv">5</span></span>
@@ -1154,7 +1154,7 @@ window.Quarto = {
 <section id="tables" class="level2">
 <h2 class="anchored" data-anchor-id="tables">Tables</h2>
 <p>The built-in <code>tables</code> extension of Python-Markdown in enabled, which allows simple tables to be constructed.</p>
-<div id="24df92b7" class="cell" data-execution_count="7">
+<div id="a07d7471" class="cell" data-execution_count="7">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="op">%%</span>tap <span class="op">@</span>res</span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>a, b, c <span class="op">=</span> (<span class="dv">2</span>, <span class="dv">5</span>, <span class="dv">7</span>)</span>
 <span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -1199,7 +1199,7 @@ window.Quarto = {
 <section id="alert-boxes" class="level2">
 <h2 class="anchored" data-anchor-id="alert-boxes">Alert Boxes</h2>
 <p>Rubberize also supports four GitHub-style alert boxes.</p>
-<div id="01b37930" class="cell" data-execution_count="8">
+<div id="4ec89dc5" class="cell" data-execution_count="8">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="op">%%</span>tap</span>
 <span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="co"># &gt; [!</span><span class="al">NOTE</span><span class="co">]</span></span>
 <span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="co"># &gt; This is a **</span><span class="al">NOTE</span><span class="co">** alert box</span></span>
@@ -1216,34 +1216,13 @@ window.Quarto = {
 <div class="rz-line">
     <div class="rz-alert rz-alert--note">
     <div class="rz-alert__content">
-    <p>This is a <strong>NOTE</strong> alert box</p>
-    </div>
-    </div>
-</div>
-</div>
-<div class="cell-output cell-output-display">
-<div class="rz-line">
-    <div class="rz-alert rz-alert--warning">
-    <div class="rz-alert__content">
-    <p>This is a <strong>WARNING</strong> alert box</p>
-    </div>
-    </div>
-</div>
-</div>
-<div class="cell-output cell-output-display">
-<div class="rz-line">
-    <div class="rz-alert rz-alert--pass">
-    <div class="rz-alert__content">
-    <p>This is a <strong>WARNING</strong> alert box</p>
-    </div>
-    </div>
-</div>
-</div>
-<div class="cell-output cell-output-display">
-<div class="rz-line">
-    <div class="rz-alert rz-alert--fail">
-    <div class="rz-alert__content">
-    <p>This is a <strong>WARNING</strong> alert box</p>
+    <p>This is a <strong>NOTE</strong> alert box
+    [!WARNING]
+    This is a <strong>WARNING</strong> alert box
+    [!PASS]
+    This is a <strong>WARNING</strong> alert box
+    [!FAIL]
+    This is a <strong>WARNING</strong> alert box</p>
     </div>
     </div>
 </div>
@@ -1251,7 +1230,7 @@ window.Quarto = {
 </div>
 <p>Alert boxes can be used to highlight important notes, warnings, or additional information in the calculation sheet.</p>
 <p>A second form is available for alerts that should appear only in the interactive document but not in printed output. When the marker begins with <code>?</code> instead of <code>!</code>, the alert box is hidden when the document is printed (for example, when exporting to PDF).</p>
-<div id="871796ce" class="cell" data-execution_count="9">
+<div id="4165831e" class="cell" data-execution_count="9">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="op">%%</span>tap</span>
 <span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="co"># &gt; [?</span><span class="al">NOTE</span><span class="co">]</span></span>
 <span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a><span class="co"># &gt; This is a **</span><span class="al">NOTE</span><span class="co">** alert box</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
@@ -1271,7 +1250,7 @@ window.Quarto = {
 <h2 class="anchored" data-anchor-id="math-markings">Math Markings</h2>
 <p>Rubberize provides markings that visually emphasize rendered mathematical expressions. <code>!mark</code> for adding a vertical marker beside the expression, and <code>!hi</code>, <code>!rhi</code>, <code>!yhi</code>, <code>!ghi</code>, or <code>!bhi</code> for highlighting the expression.</p>
 <p>They are included in inline comments.</p>
-<div id="92e6882c" class="cell" data-execution_count="10">
+<div id="e8bc7e9a" class="cell" data-execution_count="10">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="op">%%</span>tap</span>
 <span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>L <span class="op">=</span> <span class="dv">6</span> <span class="op">*</span> ureg.m                <span class="co"># !mark Length of the span</span></span>
 <span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>w <span class="op">=</span> <span class="dv">12</span> <span class="op">*</span> (ureg.kN <span class="op">/</span> ureg.m)   <span class="co"># !hi Uniform load intensity</span></span>
@@ -1307,7 +1286,7 @@ window.Quarto = {
 </div>
 </div>
 <p>Similar to alert boxes, when the marker begins with <code>?</code> instead of <code>!</code>, the markings are hidden when the document is printed.</p>
-<div id="452a2c75" class="cell" data-execution_count="11">
+<div id="410cbcad" class="cell" data-execution_count="11">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="op">%%</span>tap</span>
 <span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>L <span class="op">=</span> <span class="dv">6</span> <span class="op">*</span> ureg.m                <span class="co"># ?mark Length of the span</span></span>
 <span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>w <span class="op">=</span> <span class="dv">12</span> <span class="op">*</span> (ureg.kN <span class="op">/</span> ureg.m)   <span class="co"># ?hi Uniform load intensity</span></span>

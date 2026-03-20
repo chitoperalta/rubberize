@@ -593,7 +593,7 @@ window.Quarto = {
 </header>
 
 
-<div id="07f9c405" class="cell" data-execution_count="1">
+<div id="b131343b" class="cell" data-execution_count="1">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="op">%</span>reload_ext rubberize</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> rubberize.config <span class="im">import</span> config</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display">
@@ -1063,7 +1063,7 @@ window.Quarto = {
 <section id="lists" class="level2">
 <h2 class="anchored" data-anchor-id="lists">Lists</h2>
 <p>Lists are rendered with Python syntax:</p>
-<div id="aa4a9b29" class="cell" data-execution_count="2">
+<div id="b64b16c7" class="cell" data-execution_count="2">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="op">%%</span>tap</span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>[]</span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>[<span class="fl">1.23</span>, <span class="fl">4.56</span>, <span class="fl">7.89</span>]</span>
@@ -1075,7 +1075,7 @@ window.Quarto = {
 </div>
 </div>
 <p>Unpacking is rendered as a union:</p>
-<div id="9bc11a01" class="cell" data-execution_count="3">
+<div id="d885911c" class="cell" data-execution_count="3">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="op">%%</span>tap</span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>a <span class="op">=</span> [<span class="dv">1</span>, <span class="dv">2</span>]</span>
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>[<span class="dv">4</span>, <span class="dv">5</span>, <span class="op">*</span>a]</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
@@ -1087,13 +1087,13 @@ window.Quarto = {
 <section id="aligning-vertically" class="level3">
 <h3 class="anchored" data-anchor-id="aligning-vertically">Aligning Vertically</h3>
 <p>If the list is longer than <code>@max_inline_elts</code>, it will be arranged vertically for readability.</p>
-<div id="b745cfd4" class="cell" data-execution_count="4">
+<div id="721c1dbc" class="cell" data-execution_count="4">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>config.max_inline_elts</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display" data-execution_count="4">
 <pre><code>5</code></pre>
 </div>
 </div>
-<div id="71c45cdf" class="cell" data-execution_count="5">
+<div id="de419057" class="cell" data-execution_count="5">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="op">%%</span>tap</span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>[<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">4</span>, <span class="dv">5</span>, <span class="dv">6</span>]</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display">
@@ -1112,79 +1112,55 @@ window.Quarto = {
 <section id="as-an-array" class="level3">
 <h3 class="anchored" data-anchor-id="as-an-array">As an Array</h3>
 <p><code>@show_list_as_array</code> controls the rendering style:</p>
-<div id="1cd59632" class="cell" data-execution_count="6">
+<div id="9dd123e4" class="cell" data-execution_count="6">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>config.show_list_as_array</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display" data-execution_count="6">
 <pre><code>False</code></pre>
 </div>
 </div>
 <p>If set to <code>True</code>, lists will be rendered to look like an array, if possible:</p>
-<div id="bc8efe80" class="cell" data-execution_count="7">
+<div id="f7c2bde7" class="cell" data-execution_count="7">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="op">%%</span>tap <span class="op">@</span>show_list_as_array<span class="op">=</span><span class="va">True</span></span>
 <span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>[]</span>
 <span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>[<span class="fl">1.23</span>, <span class="fl">4.56</span>, <span class="fl">7.89</span>]</span>
 <span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>[[<span class="dv">1</span>, <span class="dv">2</span>], [<span class="dv">3</span>, <span class="dv">4</span>]]</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display">
-<div class="rz-line">\( \displaystyle \begin{bmatrix}\end{bmatrix} \)</div>
-<div class="rz-line">
-    \( \displaystyle 
-        \begin{bmatrix}
-            1.23 \\ 4.56 \\ 7.89
-        \end{bmatrix}
-     \)
-</div>
-<div class="rz-line">
-    \( \displaystyle 
-        \begin{bmatrix}
-            1 &amp; 2 \\ 3 &amp; 4
-        \end{bmatrix}
-     \)
-</div>
+<div class="rz-line">\( \displaystyle \left[\right] \)</div>
+<div class="rz-line">\( \displaystyle \left[ 1.23,\, 4.56,\, 7.89 \right] \)</div>
+<div class="rz-line">\( \displaystyle \left[ \left[ 1,\, 2 \right],\, \left[ 3,\, 4 \right] \right] \)</div>
 </div>
 </div>
 <p>1D list-arrays can be shown as a row vector by setting <code>@show_1d_as_col=False</code></p>
-<div id="9ba57e99" class="cell" data-execution_count="8">
+<div id="6a823279" class="cell" data-execution_count="8">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="op">%%</span>tap <span class="op">@</span>show_list_as_array<span class="op">=</span><span class="va">True</span> <span class="op">@</span>show_1d_as_col<span class="op">=</span><span class="va">False</span></span>
 <span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>[<span class="fl">1.23</span>, <span class="fl">4.56</span>, <span class="fl">7.89</span>]</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display">
-<div class="rz-line">\( \displaystyle \begin{bmatrix} 1.23 &amp; 4.56 &amp; 7.89 \end{bmatrix} \)</div>
+<div class="rz-line">\( \displaystyle \left[ 1.23,\, 4.56,\, 7.89 \right] \)</div>
 </div>
 </div>
 <p><code>@array_delimiter</code> controls the appearance of delimiters used in a list-array. Use <code>"pmatrix"</code> for parentheses and <code>"bmatrix"</code> for square brackets.</p>
-<div id="4632015c" class="cell" data-execution_count="9">
+<div id="15f472fd" class="cell" data-execution_count="9">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>config.array_delimiter</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display" data-execution_count="9">
 <pre><code>'bmatrix'</code></pre>
 </div>
 </div>
-<div id="44d0ac69" class="cell" data-execution_count="10">
+<div id="e284e70a" class="cell" data-execution_count="10">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="op">%%</span>tap <span class="op">@</span>show_list_as_array<span class="op">=</span><span class="va">True</span> <span class="op">@</span>array_delimiter<span class="op">=</span><span class="st">"pmatrix"</span></span>
 <span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>[]</span>
 <span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>[<span class="fl">1.23</span>, <span class="fl">4.56</span>, <span class="fl">7.89</span>]</span>
 <span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>[[<span class="dv">1</span>, <span class="dv">2</span>], [<span class="dv">3</span>, <span class="dv">4</span>]]</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display">
-<div class="rz-line">\( \displaystyle \begin{pmatrix}\end{pmatrix} \)</div>
-<div class="rz-line">
-    \( \displaystyle 
-        \begin{pmatrix}
-            1.23 \\ 4.56 \\ 7.89
-        \end{pmatrix}
-     \)
-</div>
-<div class="rz-line">
-    \( \displaystyle 
-        \begin{pmatrix}
-            1 &amp; 2 \\ 3 &amp; 4
-        \end{pmatrix}
-     \)
-</div>
+<div class="rz-line">\( \displaystyle \left[\right] \)</div>
+<div class="rz-line">\( \displaystyle \left[ 1.23,\, 4.56,\, 7.89 \right] \)</div>
+<div class="rz-line">\( \displaystyle \left[ \left[ 1,\, 2 \right],\, \left[ 3,\, 4 \right] \right] \)</div>
 </div>
 </div>
 </section>
 <section id="list-element-access" class="level3">
 <h3 class="anchored" data-anchor-id="list-element-access">List Element Access</h3>
 <p>List element access appears as a subscript:</p>
-<div id="a35e1a00" class="cell" data-execution_count="11">
+<div id="b705b7ab" class="cell" data-execution_count="11">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="op">%%</span>tap</span>
 <span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>v <span class="op">=</span> [<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">4</span>]</span>
 <span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -1205,13 +1181,13 @@ window.Quarto = {
 </div>
 </div>
 <p>Whether or not the subscript is enclosed in parentheses is controlled by <code>@wrap_indices</code>:</p>
-<div id="999a80fc" class="cell" data-execution_count="12">
+<div id="9d1313f4" class="cell" data-execution_count="12">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>config.wrap_indices</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display" data-execution_count="12">
 <pre><code>True</code></pre>
 </div>
 </div>
-<div id="74f5609b" class="cell" data-execution_count="13">
+<div id="5c5331ba" class="cell" data-execution_count="13">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="op">%%</span>tap <span class="op">@</span>wrap_indices<span class="op">=</span><span class="va">False</span></span>
 <span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>v <span class="op">=</span> [<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">4</span>]</span>
 <span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -1222,11 +1198,11 @@ window.Quarto = {
 </div>
 <div class="cell-output cell-output-display">
 <div class="rz-line">
-    <div class="rz-line__main">\( \displaystyle v_{0} = 1 \)</div>
+    <div class="rz-line__main">\( \displaystyle v_{\left( 0 \right)} = 1 \)</div>
     <div class="rz-line__desc">Single element access</div>
 </div>
 <div class="rz-line">
-    <div class="rz-line__main">\( \displaystyle v_{ : 2} = \left[ 1,\, 2 \right] \)</div>
+    <div class="rz-line__main">\( \displaystyle v_{\left(  : 2 \right)} = \left[ 1,\, 2 \right] \)</div>
     <div class="rz-line__desc">Slice access</div>
 </div>
 </div>
@@ -1236,7 +1212,7 @@ window.Quarto = {
 <section id="list-comprehensions" class="level2">
 <h2 class="anchored" data-anchor-id="list-comprehensions">List Comprehensions</h2>
 <p>List comprehensions are rendered like so:</p>
-<div id="00191642" class="cell" data-execution_count="14">
+<div id="9c716f9b" class="cell" data-execution_count="14">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb18"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="op">%%</span>tap</span>
 <span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>a <span class="op">=</span> [<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">4</span>]</span>
 <span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> <span class="dv">3</span>  <span class="co"># x is shadowed by the comprehension scope</span></span>
@@ -1257,7 +1233,7 @@ window.Quarto = {
 <section id="tuples" class="level2">
 <h2 class="anchored" data-anchor-id="tuples">Tuples</h2>
 <p>Tuples are rendered with Python syntax:</p>
-<div id="2c2ba874" class="cell" data-execution_count="15">
+<div id="8d43444e" class="cell" data-execution_count="15">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb19"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="op">%%</span>tap</span>
 <span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>()</span>
 <span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>(<span class="fl">1.23</span>, <span class="fl">4.56</span>, <span class="fl">7.89</span>)</span>
@@ -1269,7 +1245,7 @@ window.Quarto = {
 </div>
 </div>
 <p>Unpacking is rendered as a union:</p>
-<div id="d48750c1" class="cell" data-execution_count="16">
+<div id="083c4bcf" class="cell" data-execution_count="16">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb20"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="op">%%</span>tap</span>
 <span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>a <span class="op">=</span> (<span class="dv">1</span>, <span class="dv">2</span>)</span>
 <span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a>(<span class="dv">4</span>, <span class="dv">5</span>, <span class="op">*</span>a)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
@@ -1281,13 +1257,13 @@ window.Quarto = {
 <section id="aligning-vertically-1" class="level3">
 <h3 class="anchored" data-anchor-id="aligning-vertically-1">Aligning Vertically</h3>
 <p>If the tuple is longer than <code>@max_inline_elts</code>, it will be arranged vertically for readability.</p>
-<div id="450fc1a4" class="cell" data-execution_count="17">
+<div id="018f24f6" class="cell" data-execution_count="17">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb21"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>config.max_inline_elts</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display" data-execution_count="17">
 <pre><code>5</code></pre>
 </div>
 </div>
-<div id="2ab54a4b" class="cell" data-execution_count="18">
+<div id="4f29e580" class="cell" data-execution_count="18">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb23"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="op">%%</span>tap</span>
 <span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">4</span>, <span class="dv">5</span>, <span class="dv">6</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display">
@@ -1306,42 +1282,30 @@ window.Quarto = {
 <section id="as-an-array-1" class="level3">
 <h3 class="anchored" data-anchor-id="as-an-array-1">As an Array</h3>
 <p><code>@show_tuple_as_array</code> controls the rendering style:</p>
-<div id="4fbb4316" class="cell" data-execution_count="19">
+<div id="5765d5d5" class="cell" data-execution_count="19">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb24"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>config.show_tuple_as_array</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display" data-execution_count="19">
 <pre><code>False</code></pre>
 </div>
 </div>
 <p>If set to <code>True</code>, tuples will be rendered to look like an array, if possible:</p>
-<div id="4b82f382" class="cell" data-execution_count="20">
+<div id="8bc0a524" class="cell" data-execution_count="20">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb26"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="op">%%</span>tap <span class="op">@</span>show_tuple_as_array<span class="op">=</span><span class="va">True</span></span>
 <span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a>()</span>
 <span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a>(<span class="fl">1.23</span>, <span class="fl">4.56</span>, <span class="fl">7.89</span>)</span>
 <span id="cb26-4"><a href="#cb26-4" aria-hidden="true" tabindex="-1"></a>((<span class="dv">1</span>, <span class="dv">2</span>), (<span class="dv">3</span>, <span class="dv">4</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display">
-<div class="rz-line">\( \displaystyle \begin{bmatrix}\end{bmatrix} \)</div>
-<div class="rz-line">
-    \( \displaystyle 
-        \begin{bmatrix}
-            1.23 \\ 4.56 \\ 7.89
-        \end{bmatrix}
-     \)
-</div>
-<div class="rz-line">
-    \( \displaystyle 
-        \begin{bmatrix}
-            1 &amp; 2 \\ 3 &amp; 4
-        \end{bmatrix}
-     \)
-</div>
+<div class="rz-line">\( \displaystyle \left(\right) \)</div>
+<div class="rz-line">\( \displaystyle \left( 1.23,\, 4.56,\, 7.89 \right) \)</div>
+<div class="rz-line">\( \displaystyle \left( \left( 1,\, 2 \right),\, \left( 3,\, 4 \right) \right) \)</div>
 </div>
 </div>
 <p>1D tuple-arrays can be shown as a row vector by setting <code>@show_1d_as_col=False</code></p>
-<div id="d4088ef2" class="cell" data-execution_count="21">
+<div id="854662b3" class="cell" data-execution_count="21">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb27"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="op">%%</span>tap <span class="op">@</span>show_tuple_as_array<span class="op">=</span><span class="va">True</span> <span class="op">@</span>show_1d_as_col<span class="op">=</span><span class="va">False</span></span>
 <span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a>(<span class="fl">1.23</span>, <span class="fl">4.56</span>, <span class="fl">7.89</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display">
-<div class="rz-line">\( \displaystyle \begin{bmatrix} 1.23 &amp; 4.56 &amp; 7.89 \end{bmatrix} \)</div>
+<div class="rz-line">\( \displaystyle \left( 1.23,\, 4.56,\, 7.89 \right) \)</div>
 </div>
 </div>
 <p><code>@array_delimiter</code> also controls the appearance of delimiters used in a tuple-array. Use <code>"pmatrix"</code> for parentheses and <code>"bmatrix"</code> for square brackets.</p>
@@ -1349,7 +1313,7 @@ window.Quarto = {
 <section id="tuple-element-access" class="level3">
 <h3 class="anchored" data-anchor-id="tuple-element-access">Tuple Element Access</h3>
 <p>Tuple element access appears as a subscript:</p>
-<div id="8fdf5faf" class="cell" data-execution_count="22">
+<div id="61b0ea70" class="cell" data-execution_count="22">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb28"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="op">%%</span>tap</span>
 <span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a>v <span class="op">=</span> (<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">4</span>)</span>
 <span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -1370,7 +1334,7 @@ window.Quarto = {
 </div>
 </div>
 <p>Whether or not the subscript is enclosed in parentheses is controlled by <code>@wrap_indices</code>.</p>
-<div id="338e4598" class="cell" data-execution_count="23">
+<div id="f2c51504" class="cell" data-execution_count="23">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb29"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="op">%%</span>tap <span class="op">@</span>wrap_indices<span class="op">=</span><span class="va">False</span></span>
 <span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a>v <span class="op">=</span> (<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">4</span>)</span>
 <span id="cb29-3"><a href="#cb29-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -1381,11 +1345,11 @@ window.Quarto = {
 </div>
 <div class="cell-output cell-output-display">
 <div class="rz-line">
-    <div class="rz-line__main">\( \displaystyle v_{-1} = 4 \)</div>
+    <div class="rz-line__main">\( \displaystyle v_{\left( -1 \right)} = 4 \)</div>
     <div class="rz-line__desc">Single element access</div>
 </div>
 <div class="rz-line">
-    <div class="rz-line__main">\( \displaystyle v_{1 : 3} = \left( 2,\, 3 \right) \)</div>
+    <div class="rz-line__main">\( \displaystyle v_{\left( 1 : 3 \right)} = \left( 2,\, 3 \right) \)</div>
     <div class="rz-line__desc">Slice access</div>
 </div>
 </div>
@@ -1395,7 +1359,7 @@ window.Quarto = {
 <section id="sets" class="level2">
 <h2 class="anchored" data-anchor-id="sets">Sets</h2>
 <p>Sets are rendered with Python syntax:</p>
-<div id="62cd1846" class="cell" data-execution_count="24">
+<div id="30a5c107" class="cell" data-execution_count="24">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb30"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="op">%%</span>tap</span>
 <span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a><span class="bu">set</span>()</span>
 <span id="cb30-3"><a href="#cb30-3" aria-hidden="true" tabindex="-1"></a>{<span class="fl">1.23</span>, <span class="fl">4.56</span>, <span class="fl">7.89</span>}</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
@@ -1405,7 +1369,7 @@ window.Quarto = {
 </div>
 </div>
 <p>Unpacking is rendered as a union:</p>
-<div id="6f294747" class="cell" data-execution_count="25">
+<div id="6416f46c" class="cell" data-execution_count="25">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb31"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="op">%%</span>tap</span>
 <span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a>a <span class="op">=</span> {<span class="dv">1</span>, <span class="dv">2</span>}</span>
 <span id="cb31-3"><a href="#cb31-3" aria-hidden="true" tabindex="-1"></a>{<span class="dv">4</span>, <span class="dv">5</span>, <span class="op">*</span>a}</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
@@ -1417,13 +1381,13 @@ window.Quarto = {
 <section id="aligning-vertically-2" class="level3">
 <h3 class="anchored" data-anchor-id="aligning-vertically-2">Aligning Vertically</h3>
 <p>If the set is longer than <code>@max_inline_elts</code>, it will be arranged vertically for readability.</p>
-<div id="db4c3cf8" class="cell" data-execution_count="26">
+<div id="40097c02" class="cell" data-execution_count="26">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb32"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a>config.max_inline_elts</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display" data-execution_count="26">
 <pre><code>5</code></pre>
 </div>
 </div>
-<div id="adb5c593" class="cell" data-execution_count="27">
+<div id="6cf73932" class="cell" data-execution_count="27">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb34"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a><span class="op">%%</span>tap</span>
 <span id="cb34-2"><a href="#cb34-2" aria-hidden="true" tabindex="-1"></a>{<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">4</span>, <span class="dv">5</span>, <span class="dv">6</span>}</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display">
@@ -1443,7 +1407,7 @@ window.Quarto = {
 <section id="set-comprehensions" class="level2">
 <h2 class="anchored" data-anchor-id="set-comprehensions">Set Comprehensions</h2>
 <p>Set comprehensions are rendered like so:</p>
-<div id="4d2a659e" class="cell" data-execution_count="28">
+<div id="8baf500e" class="cell" data-execution_count="28">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb35"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a><span class="op">%%</span>tap</span>
 <span id="cb35-2"><a href="#cb35-2" aria-hidden="true" tabindex="-1"></a>a <span class="op">=</span> {<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">4</span>}</span>
 <span id="cb35-3"><a href="#cb35-3" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> <span class="dv">3</span>  <span class="co"># x is shadowed by the comprehension scope</span></span>
@@ -1464,7 +1428,7 @@ window.Quarto = {
 <section id="dictionaries" class="level2">
 <h2 class="anchored" data-anchor-id="dictionaries">Dictionaries</h2>
 <p>Dictionary objects are rendered like so:</p>
-<div id="6e57ca5e" class="cell" data-execution_count="29">
+<div id="76a3ab19" class="cell" data-execution_count="29">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb36"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a><span class="op">%%</span>tap</span>
 <span id="cb36-2"><a href="#cb36-2" aria-hidden="true" tabindex="-1"></a>{}</span>
 <span id="cb36-3"><a href="#cb36-3" aria-hidden="true" tabindex="-1"></a>{<span class="st">"a"</span>: <span class="dv">1</span>, <span class="st">"b"</span>: <span class="dv">2</span>, <span class="st">"c"</span>: <span class="dv">3</span>}</span>
@@ -1476,32 +1440,25 @@ window.Quarto = {
 </div>
 </div>
 <p>Unpacking is rendered as a union:</p>
-<div id="64123eb2" class="cell" data-execution_count="30">
+<div id="ccd0ccc0" class="cell" data-execution_count="30">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb37"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a><span class="op">%%</span>tap <span class="op">@</span>stack</span>
 <span id="cb37-2"><a href="#cb37-2" aria-hidden="true" tabindex="-1"></a>b <span class="op">=</span> {<span class="st">"c"</span>: <span class="dv">3</span>}</span>
 <span id="cb37-3"><a href="#cb37-3" aria-hidden="true" tabindex="-1"></a>{<span class="st">"a"</span>: <span class="dv">1</span>, <span class="st">"b"</span>: <span class="dv">2</span>, <span class="op">**</span>b}</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display">
 <div class="rz-line">\( \displaystyle b = \left\{ \text{“c”} \to 3 \right\} \)</div>
-<div class="rz-line">
-    \( \displaystyle 
-        \begin{aligned}
-            \left\{ \text{“a”} \to 1,\, \text{“b”} \to 2 \right\} \cup b &amp;= \left\{ \text{“a”} \to 1,\, \text{“b”} \to 2 \right\} \cup \left\{ \text{“c”} \to 3 \right\} \\
-            &amp;= \left\{ \text{“a”} \to 1,\, \text{“b”} \to 2,\, \text{“c”} \to 3 \right\}
-        \end{aligned}
-     \)
-</div>
+<div class="rz-line">\( \displaystyle \left\{ \text{“a”} \to 1,\, \text{“b”} \to 2 \right\} \cup b = \left\{ \text{“a”} \to 1,\, \text{“b”} \to 2 \right\} \cup \left\{ \text{“c”} \to 3 \right\} = \left\{ \text{“a”} \to 1,\, \text{“b”} \to 2,\, \text{“c”} \to 3 \right\} \)</div>
 </div>
 </div>
 <section id="aligning-vertically-3" class="level3">
 <h3 class="anchored" data-anchor-id="aligning-vertically-3">Aligning Vertically</h3>
 <p>If the dictionary is longer than <code>@max_inline_elts</code>, it will be arranged vertically for readability.</p>
-<div id="f45c34a7" class="cell" data-execution_count="31">
+<div id="72ec895b" class="cell" data-execution_count="31">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb38"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a>config.max_inline_elts</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display" data-execution_count="31">
 <pre><code>5</code></pre>
 </div>
 </div>
-<div id="2a8547c6" class="cell" data-execution_count="32">
+<div id="ec96a658" class="cell" data-execution_count="32">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb40"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a><span class="op">%%</span>tap</span>
 <span id="cb40-2"><a href="#cb40-2" aria-hidden="true" tabindex="-1"></a>{<span class="st">"a"</span>: <span class="dv">1</span>, <span class="st">"b"</span>: <span class="dv">2</span>, <span class="st">"c"</span>: <span class="dv">3</span>, <span class="st">"d"</span>: <span class="dv">4</span>, <span class="st">"e"</span>: <span class="dv">5</span>, <span class="st">"f"</span>: <span class="dv">6</span>}</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display">
@@ -1525,7 +1482,7 @@ window.Quarto = {
 <section id="dictionary-element-access" class="level3">
 <h3 class="anchored" data-anchor-id="dictionary-element-access">Dictionary Element Access</h3>
 <p>The dictionary element access appears as a subscript:</p>
-<div id="08009914" class="cell" data-execution_count="33">
+<div id="b2c80d7d" class="cell" data-execution_count="33">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb41"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a><span class="op">%%</span>tap</span>
 <span id="cb41-2"><a href="#cb41-2" aria-hidden="true" tabindex="-1"></a>dct <span class="op">=</span> {<span class="st">"a"</span>: <span class="dv">1</span>, <span class="st">"b"</span>: <span class="dv">2</span>, <span class="st">"c"</span>: <span class="dv">3</span>}</span>
 <span id="cb41-3"><a href="#cb41-3" aria-hidden="true" tabindex="-1"></a>dct[<span class="st">"a"</span>]</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
@@ -1535,13 +1492,13 @@ window.Quarto = {
 </div>
 </div>
 <p>Whether or not the subscript is enclosed in parentheses is controlled by <code>@wrap_indices</code>.</p>
-<div id="22538b8a" class="cell" data-execution_count="34">
+<div id="6b69899c" class="cell" data-execution_count="34">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb42"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a><span class="op">%%</span>tap <span class="op">@</span>wrap_indices<span class="op">=</span><span class="va">False</span></span>
 <span id="cb42-2"><a href="#cb42-2" aria-hidden="true" tabindex="-1"></a>dct <span class="op">=</span> {<span class="st">"a"</span>: <span class="dv">1</span>, <span class="st">"b"</span>: <span class="dv">2</span>, <span class="st">"c"</span>: <span class="dv">3</span>}</span>
 <span id="cb42-3"><a href="#cb42-3" aria-hidden="true" tabindex="-1"></a>dct[<span class="st">"a"</span>]</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display">
 <div class="rz-line">\( \displaystyle \mathrm{dct} = \left\{ \text{“a”} \to 1,\, \text{“b”} \to 2,\, \text{“c”} \to 3 \right\} \)</div>
-<div class="rz-line">\( \displaystyle \mathrm{dct}_{\text{“a”}} = 1 \)</div>
+<div class="rz-line">\( \displaystyle \mathrm{dct}_{\left( \text{“a”} \right)} = 1 \)</div>
 </div>
 </div>
 </section>
@@ -1549,7 +1506,7 @@ window.Quarto = {
 <section id="dictionary-comprehensions" class="level2">
 <h2 class="anchored" data-anchor-id="dictionary-comprehensions">Dictionary Comprehensions</h2>
 <p>Dictionary comprehensions are rendered like so:</p>
-<div id="859e1f4b" class="cell" data-execution_count="35">
+<div id="fbf908bd" class="cell" data-execution_count="35">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb43"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb43-1"><a href="#cb43-1" aria-hidden="true" tabindex="-1"></a><span class="op">%%</span>tap</span>
 <span id="cb43-2"><a href="#cb43-2" aria-hidden="true" tabindex="-1"></a>a <span class="op">=</span> [<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">4</span>]</span>
 <span id="cb43-3"><a href="#cb43-3" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> <span class="dv">3</span>  <span class="co"># x is shadowed by the comprehension scope</span></span>
