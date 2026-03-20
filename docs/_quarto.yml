@@ -2,6 +2,7 @@ project:
   type: website
   resources:
     -assets/
+    -googleaa037bcee5ec56ad.html
 
 website:
   title: Rubberize
