@@ -206,7 +206,7 @@ Options and shortcuts are typically written with an `@` prefix when used inside 
 %%tap @use_subscripts=False
 a_1 = 3.0 * ureg.cm
 b_1 = 4.0 * ureg.cm
-c_1 = np.sqrt(a**2 + b**2)  # @use_subscripts=True @nosub
+c_1 = np.sqrt(a_1**2 + b_1**2)  # @use_subscripts=True @nosub
 ```
 
 Options and shortcuts can also be applied as comments within the code. When included in an inline comment, the specified configuration only apply to that line and override any cell configuration.

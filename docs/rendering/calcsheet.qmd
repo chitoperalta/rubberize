@@ -69,7 +69,6 @@ During the calculation, design checks can be recorded using the `check()` method
 
 ```{python}
 %%tap
-%%tap
 phi_b = 0.90 # Resistance factor
 M_n = 5.96 * (ureg.kN * ureg.m) # Nominal flexural strength
 M_r = 3.97 * (ureg.kN * ureg.m) # Required flexural strength
