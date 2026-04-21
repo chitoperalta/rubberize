@@ -1,6 +1,6 @@
 """Turn Python calculations into well-formatted, math-rich documents."""
 
-__version__ = "0.4.2.post1"
+__version__ = "0.4.3"
 
 from rubberize.config import config
 
