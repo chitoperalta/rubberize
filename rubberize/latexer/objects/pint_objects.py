@@ -194,7 +194,7 @@ def _unit(obj: pint.Unit) -> ExprLatex:
     latex = _custom_units_latex.get(units, f"{obj:~L}")
 
     latex = _format_units_latex(latex)
-    rank = ranks.BELOW_MULT_RANK
+    rank = ranks.VALUE_RANK
 
     return ExprLatex(latex, rank)
 
