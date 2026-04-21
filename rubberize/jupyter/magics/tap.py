@@ -79,13 +79,13 @@ class TapMagics(Magics):
             local_ns = None
 
         tree = cast(ast_c.Module, ast_c.parse(cell, mode="exec"))
-        latexes = latex_from_ast(tree, local_ns)
+        with config.override(**cfg):
+            latexes = latex_from_ast(tree, local_ns)
         block_starts = _compute_block_starts(cell)
         blocks = _group_blocks(latexes, tree.body, block_starts)
 
         for b in blocks:
-            with config.override(**cfg):
-                html = render(b, local_ns, grid=args.grid)
+            html = render(b, local_ns, grid=args.grid)
 
             if args.html:
                 print(html, "\n")
@@ -127,12 +127,6 @@ class TapMagics(Magics):
             "for compact output."
         ),
     )
-    @argument(
-        "-e",
-        "--show-empty",
-        action="store_true",
-        help="If included, show empty fields in output.",
-    )
     @cell_magic
     def ast(self, line: str, cell: str) -> None:
         """Run the cell and dump its AST."""
@@ -171,7 +165,6 @@ class TapMagics(Magics):
                 annotate_fields=args.annotate_fields,
                 include_attributes=args.include_attributes,
                 indent=args.indent,
-                show_empty=args.show_empty,
             )
 
             print(dump)

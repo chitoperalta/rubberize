@@ -255,7 +255,7 @@ def is_unit_assignment(node: ast.BinOp, ns: dict[str, object] | None) -> bool:
 def is_ndarray(node: ast.expr, ns: dict[str, object] | None) -> bool:
     """Check if the ast.expr node references a NumPy ndarray.
 
-    If Pint is not installed, returns False.
+    If NumPy is not installed, returns False.
 
     Args:
         node: The ast.expr node to investigate.

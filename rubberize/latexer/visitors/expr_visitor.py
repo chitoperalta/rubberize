@@ -402,13 +402,14 @@ class ExprVisitor(ast.NodeVisitor):
         ):
             return ExprLatex(attr, rank)
 
-        value_rank = ranks.get_rank(node.value)
-        value = self.visit_operand(node.value, value_rank).latex
+        value = self.visit_operand(node.value, rank).latex
 
-        if self.ns and helpers.is_ndarray(node, self.ns):
+        if self.ns and helpers.is_ndarray(node, self.ns) and node.attr == "T":
             latex = value + r"^{\intercal}"
-        else:
-            latex = f"{value}.{attr}"
+            rank = ranks.BELOW_POW_RANK
+            return ExprLatex(latex, rank)
+
+        latex = f"{value}.{attr}"
 
         return ExprLatex(latex, rank)
 
